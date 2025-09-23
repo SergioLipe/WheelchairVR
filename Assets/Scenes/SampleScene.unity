@@ -225,7 +225,7 @@ Transform:
   m_GameObject: {fileID: 396967637}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -348,15 +348,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensibilidadeMouse: 2
   limiteVertical: 60
-  modoControlo: 0
-  ativarBalancoCabeca: 1
-  intensidadeBalanco: 0.02
-  velocidadeBalanco: 5
-  fovDinamico: 1
-  fovNormal: 60
-  fovVelocidade: 65
+  limiteHorizontal: 90
+  suavizarMovimento: 1
+  velocidadeSuavizacao: 10
   rotacaoX: 0
-  podeControlar: 1
+  rotacaoY: 0
 --- !u!1 &400162839
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,11 +776,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &925258788 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -1095646412948170729, guid: 9f8468283e6724d44b1bc79d65f4d1e0, type: 3}
-  m_PrefabInstance: {fileID: 1935365375}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1071323152
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,7 +787,7 @@ GameObject:
   - component: {fileID: 1071323154}
   - component: {fileID: 1071323153}
   - component: {fileID: 1071323155}
-  - component: {fileID: 1071323156}
+  - component: {fileID: 1071323159}
   m_Layer: 0
   m_Name: Wheelchair
   m_TagString: Untagged
@@ -875,7 +866,8 @@ MonoBehaviour:
   velocidadeAtual: 0
   velocidadeDesejada: 0
   travaoDeEmergencia: 0
---- !u!114 &1071323156
+  tipoDirecaoAtual: Frontal
+--- !u!114 &1071323159
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -884,20 +876,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1071323152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a672b82d34fc4408b64d395f179e7b, type: 3}
+  m_Script: {fileID: 11500000, guid: 973da83c6a9851c41a697d609b9dece0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rodaEsquerda: {fileID: 925258788}
-  rodaDireita: {fileID: 1120514395}
-  rodasFrente: []
-  diametroRodas: 0.6
+  joint4_ViragemFrontal: {fileID: 0}
+  joint5_ViragemTraseira: {fileID: 0}
+  joint6_RodaFrontalEsquerda: {fileID: 0}
+  joint7_RodaFrontalDireita: {fileID: 0}
+  joint8_RodaTraseiraEsquerda: {fileID: 0}
+  joint9_RodaTraseiraDireita: {fileID: 0}
+  tipoDirecao: 0
+  teclaAlternarDirecao: 116
+  velocidadeMaximaKmH: 6
+  diametroRodasTraseiras: 0.6
+  diametroRodasFrontais: 0.15
   multiplicadorVelocidade: 1
-  rotacaoAtual: 0
---- !u!4 &1120514395 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2273017786723585619, guid: 9f8468283e6724d44b1bc79d65f4d1e0, type: 3}
-  m_PrefabInstance: {fileID: 1935365375}
-  m_PrefabAsset: {fileID: 0}
+  anguloMaximoViragem: 30
+  velocidadeViragem: 5
+  rotacaoDiferencial: 1
+  intensidadeDiferencial: 0.5
+  inverterRotacao: 0
+  rotacaoRodaFrontalEsq: 0
+  rotacaoRodaFrontalDir: 0
+  rotacaoRodaTraseiraEsq: 0
+  rotacaoRodaTraseiraDir: 0
+  anguloViragemAtual: 0
+  velocidadeAtual: 0
+  inputViragem: 0
+  estaEmMovimento: 0
 --- !u!1 &1470990607
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,7 +1040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 374d4302967ba89469f7e56dba9945e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.03
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 374d4302967ba89469f7e56dba9945e7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1042,7 +1048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 374d4302967ba89469f7e56dba9945e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.05
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 374d4302967ba89469f7e56dba9945e7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1075,6 +1081,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 374d4302967ba89469f7e56dba9945e7, type: 3}
       propertyPath: m_Name
       value: Sitting Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7021014693780275094, guid: 374d4302967ba89469f7e56dba9945e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1132,6 +1142,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9f8468283e6724d44b1bc79d65f4d1e0, type: 3}
       propertyPath: m_Name
       value: Silla de ruedas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5936984441700495000, guid: 9f8468283e6724d44b1bc79d65f4d1e0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

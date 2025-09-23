@@ -19,24 +19,16 @@ public class WheelchairFreeLookCamera : MonoBehaviour
     [Tooltip("Velocidade de suavização")]
     public float velocidadeSuavizacao = 10f;
     
-    [Header("=== Efeitos Realistas ===")]
-    [Tooltip("Retornar ao centro quando não está a mover o rato")]
-    public bool retornarAoCentro = false;
-    
-    [Tooltip("Velocidade de retorno ao centro")]
-    public float velocidadeRetorno = 1f;
-    
     [Header("=== Debug ===")]
     [SerializeField] private float rotacaoX = 0f;  // Cima/Baixo
     [SerializeField] private float rotacaoY = 0f;  // Esquerda/Direita
     
     // Variáveis internas
     private Quaternion rotacaoAlvo;
-    private float tempoSemInput = 0f;
     
     void Start()
     {
-        // Bloquear cursor no centro
+        // Bloquear cursor no centro da tela
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         
@@ -50,7 +42,7 @@ public class WheelchairFreeLookCamera : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * sensibilidadeMouse;
         float mouseY = Input.GetAxis("Mouse Y") * sensibilidadeMouse;
         
-        // Aplicar rotações
+        // Aplicar rotações apenas se houver movimento do rato
         if (Mathf.Abs(mouseX) > 0.01f || Mathf.Abs(mouseY) > 0.01f)
         {
             // Rotação horizontal (virar cabeça esquerda/direita)
@@ -60,21 +52,6 @@ public class WheelchairFreeLookCamera : MonoBehaviour
             // Rotação vertical (olhar cima/baixo)
             rotacaoX -= mouseY;
             rotacaoX = Mathf.Clamp(rotacaoX, -limiteVertical, limiteVertical);
-            
-            // Reset do tempo sem input
-            tempoSemInput = 0f;
-        }
-        else
-        {
-            // Contar tempo sem movimento do rato
-            tempoSemInput += Time.deltaTime;
-            
-            // Retornar ao centro após algum tempo sem input (opcional)
-            if (retornarAoCentro && tempoSemInput > 2f)
-            {
-                rotacaoY = Mathf.Lerp(rotacaoY, 0f, velocidadeRetorno * Time.deltaTime);
-                rotacaoX = Mathf.Lerp(rotacaoX, 0f, velocidadeRetorno * Time.deltaTime);
-            }
         }
         
         // Criar a rotação final
@@ -83,6 +60,7 @@ public class WheelchairFreeLookCamera : MonoBehaviour
         // Aplicar rotação (com ou sem suavização)
         if (suavizarMovimento)
         {
+            // Aplicar rotação suave usando interpolação esférica
             transform.localRotation = Quaternion.Slerp(
                 transform.localRotation, 
                 rotacaoAlvo, 
@@ -91,10 +69,11 @@ public class WheelchairFreeLookCamera : MonoBehaviour
         }
         else
         {
+            // Aplicar rotação direta sem suavização
             transform.localRotation = rotacaoAlvo;
         }
         
-        // TAB para mostrar/esconder cursor (útil para menus)
+        // TAB para mostrar/esconder cursor (útil para aceder a menus)
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             AlternarCursor();
@@ -107,53 +86,40 @@ public class WheelchairFreeLookCamera : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Alterna entre cursor bloqueado/desbloqueado
+    /// Útil para aceder a menus ou interface
+    /// </summary>
     void AlternarCursor()
     {
         if (Cursor.lockState == CursorLockMode.Locked)
         {
+            // Desbloquear cursor e torná-lo visível
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
         else
         {
+            // Bloquear cursor e escondê-lo
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
     }
     
+    /// <summary>
+    /// Centra a vista na posição frontal
+    /// Simula voltar a olhar em frente
+    /// </summary>
     void CentrarVista()
     {
+        // Reset das rotações para zero
         rotacaoX = 0f;
         rotacaoY = 0f;
+        
+        // Aplicar rotação neutra imediatamente
         transform.localRotation = Quaternion.identity;
+        
+        // Feedback no console
         Debug.Log("Vista centrada!");
-    }
-    
-    // Método público para obter direção do olhar (útil para interações)
-    public Vector3 GetDirecaoOlhar()
-    {
-        return transform.forward;
-    }
-    
-    // Método para verificar se está a olhar para algo
-    public bool EstaAOlharPara(Transform alvo, float anguloMaximo = 30f)
-    {
-        Vector3 direcaoParaAlvo = (alvo.position - transform.position).normalized;
-        float angulo = Vector3.Angle(transform.forward, direcaoParaAlvo);
-        return angulo <= anguloMaximo;
-    }
-    
-    // Método para limitar temporariamente o olhar (útil em cutscenes ou ao falar com NPCs)
-    public void DefinirLimites(float limiteH, float limiteV)
-    {
-        limiteHorizontal = limiteH;
-        limiteVertical = limiteV;
-    }
-    
-    // Restaurar limites padrão
-    public void RestaurarLimites()
-    {
-        limiteHorizontal = 90f;
-        limiteVertical = 80f;
     }
 }

@@ -41,10 +41,12 @@ public class WheelchairRealisticMovement : MonoBehaviour
     [SerializeField] private float velocidadeAtual = 0f;
     [SerializeField] private float velocidadeDesejada = 0f;
     [SerializeField] private bool travaoDeEmergencia = false;
+    [SerializeField] private string tipoDirecaoAtual = "Frontal";
     
     // Componentes
     private CharacterController controller;
     private Vector3 movimentoVelocidade;
+    private WheelchairWheelController wheelController;
     
     // Sistema de input suavizado
     private float inputVerticalSuavizado = 0f;
@@ -71,6 +73,9 @@ public class WheelchairRealisticMovement : MonoBehaviour
             controller.center = new Vector3(0, 0.7f, 0);  // Centro de massa
         }
         
+        // Obter referência ao wheel controller
+        wheelController = GetComponent<WheelchairWheelController>();
+        
         // Converter km/h para m/s
         velocidadeMaximaNormal = velocidadeMaximaNormal / 3.6f;
         velocidadeMaximaLenta = velocidadeMaximaLenta / 3.6f;
@@ -79,6 +84,12 @@ public class WheelchairRealisticMovement : MonoBehaviour
     
     void Update()
     {
+        // Atualizar tipo de direção para debug
+        if (wheelController != null)
+        {
+            tipoDirecaoAtual = wheelController.GetTipoDirecao().ToString();
+        }
+        
         // Mudar modos com teclas numéricas
         GerirModos();
         
@@ -104,22 +115,22 @@ public class WheelchairRealisticMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             modoAtual = ModosVelocidade.Lento;
-            Debug.Log("Modo: LENTO (Interior)");
+            Debug.Log("Modo: LENTO (Interior) - 3 km/h");
         }
         // Tecla 2: Modo Normal
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             modoAtual = ModosVelocidade.Normal;
-            Debug.Log("Modo: NORMAL");
+            Debug.Log("Modo: NORMAL - 6 km/h");
         }
         // Espaço: Travão de emergência
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             modoAtual = ModosVelocidade.Desligado;
             travaoDeEmergencia = true;
-            Debug.Log("TRAVÃO DE EMERGÊNCIA!");
+            Debug.Log("TRAVÃO DE EMERGÊNCIA ATIVADO!");
         }
-        // Soltar espaço: Voltar ao modo anterior
+        // Soltar espaço: Voltar ao modo normal
         else if (Input.GetKeyUp(KeyCode.Space))
         {
             modoAtual = ModosVelocidade.Normal;
@@ -171,19 +182,28 @@ public class WheelchairRealisticMovement : MonoBehaviour
     
     void ProcessarRotacao(float inputHorizontal)
     {
-        // Cadeiras elétricas podem rodar no lugar ou enquanto se movem
         float multiplicadorRotacao = 1f;
         
-        // Se estiver parado, rotação total
+        // Se o wheelController existir, verificar tipo de direção
+        if (wheelController != null)
+        {
+            // Direção traseira é mais ágil
+            if (wheelController.GetTipoDirecao() == WheelchairWheelController.TipoDirecao.DirecaoTraseira)
+            {
+                multiplicadorRotacao = 1.3f;  // 30% mais ágil
+            }
+        }
+        
+        // Se estiver parado, rotação pode ser mais rápida
         if (rotacaoNoLugar && Mathf.Abs(velocidadeAtual) < 0.1f)
         {
-            multiplicadorRotacao = 1.2f;  // Rotação ligeiramente mais rápida quando parado
+            multiplicadorRotacao *= 1.2f;
         }
         // Se estiver em movimento, rotação proporcional à velocidade
         else if (Mathf.Abs(velocidadeAtual) > 0.1f)
         {
-            // Quanto mais rápido, menos rotação (mais realista)
-            multiplicadorRotacao = 1f - (Mathf.Abs(velocidadeAtual) / velocidadeMaximaNormal * 0.5f);
+            // Quanto mais rápido, menos rotação agressiva
+            multiplicadorRotacao *= (1f - (Mathf.Abs(velocidadeAtual) / velocidadeMaximaNormal * 0.3f));
         }
         
         // Aplicar rotação
@@ -253,17 +273,55 @@ public class WheelchairRealisticMovement : MonoBehaviour
         Vector3 movimentoResidual = transform.forward * velocidadeAtual;
         movimentoResidual.y = movimentoVelocidade.y;
         controller.Move(movimentoResidual * Time.deltaTime);
+        
+        // Parar as rodas também quando totalmente parado
+        if (wheelController != null && velocidadeAtual < 0.01f)
+        {
+            wheelController.PararRodas();
+        }
     }
     
-    // Método para feedback visual (opcional - para as rodas)
+    // Método para feedback visual (para as rodas)
     public float GetVelocidadeNormalizada()
     {
         return velocidadeAtual / velocidadeMaximaNormal;
     }
     
-    // Método para sons do motor (opcional)
+    // Método para sons do motor
     public bool EstaEmMovimento()
     {
         return Mathf.Abs(velocidadeAtual) > 0.1f;
+    }
+    
+    // GUI de debug
+    void OnGUI()
+    {
+        if (!Application.isEditor) return;
+        
+        // Info de movimento
+        GUI.color = new Color(0, 0, 0, 0.7f);
+        GUI.Box(new Rect(10, 100, 220, 120), "");
+        
+        GUI.color = Color.white;
+        GUI.Label(new Rect(15, 105, 210, 20), "=== MOVIMENTO ===");
+        GUI.Label(new Rect(15, 125, 210, 20), $"Modo: {modoAtual}");
+        GUI.Label(new Rect(15, 145, 210, 20), $"Velocidade: {(velocidadeAtual * 3.6f):F1} / {(modoAtual == ModosVelocidade.Lento ? 3 : 6)} km/h");
+        GUI.Label(new Rect(15, 165, 210, 20), $"Direção: {tipoDirecaoAtual}");
+        GUI.Label(new Rect(15, 185, 210, 20), $"Inclinação Max: {inclinacaoMaxima:F0}°");
+        
+        if (travaoDeEmergencia)
+        {
+            GUI.color = Color.red;
+            GUI.Label(new Rect(15, 205, 210, 20), "TRAVÃO ATIVO!");
+        }
+        
+        // Controlos
+        GUI.color = Color.yellow;
+        GUI.Box(new Rect(10, 230, 220, 80), "");
+        GUI.Label(new Rect(15, 235, 210, 20), "=== CONTROLOS ===");
+        GUI.color = Color.white;
+        GUI.Label(new Rect(15, 255, 210, 20), "1/2 - Modo Lento/Normal");
+        GUI.Label(new Rect(15, 270, 210, 20), "T - Alternar Direção");
+        GUI.Label(new Rect(15, 285, 210, 20), "Espaço - Travão");
     }
 }
