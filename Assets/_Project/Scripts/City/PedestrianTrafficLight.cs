@@ -2,8 +2,8 @@ using UnityEngine;
 
 /// <summary>
 /// Controls a pedestrian traffic light system.
-/// Switches between Red and Green states, toggles associated hazards, and controls cars.
-/// Allows for a unique duration on the very first light cycle.
+/// Switches between Red and Green states and toggles associated hazards on the road.
+/// This script DOES NOT control cars.
 /// </summary>
 public class PedestrianTrafficLight : MonoBehaviour
 {
@@ -18,22 +18,11 @@ public class PedestrianTrafficLight : MonoBehaviour
     [Tooltip("List of hazard objects (e.g., triggers on the road) to enable during Red light.")]
     public GameObject[] hazardObjects;
 
-    [Header("=== Car Management ===")]
-    [Tooltip("List of cars that should move ONLY when the pedestrian light is Red.")]
-    public CarMovement[] cars;
-
-    [Header("=== Initial Timing Settings ===")]
-    [Tooltip("Duration in seconds for the VERY FIRST Red light phase.")]
-    public float initialRedDuration = 10.0f;
-    
-    [Tooltip("Duration in seconds for the VERY FIRST Green light phase.")]
-    public float initialGreenDuration = 10.0f;
-
-    [Header("=== Normal Loop Timing Settings ===")]
-    [Tooltip("Duration in seconds for all subsequent Red light phases.")]
+    [Header("=== Timing Settings ===")]
+    [Tooltip("Duration in seconds for the Red light phases.")]
     public float redDuration = 5.0f;
     
-    [Tooltip("Duration in seconds for all subsequent Green light phases.")]
+    [Tooltip("Duration in seconds for the Green light phases.")]
     public float greenDuration = 5.0f;
 
     [Tooltip("If true, the cycle starts with the Green light. Otherwise, starts with Red.")]
@@ -42,10 +31,6 @@ public class PedestrianTrafficLight : MonoBehaviour
     // Internal state tracking
     private float timer;
     private bool isRed;
-    
-    // Track if it is the first time running each phase
-    private bool isFirstRed = true;
-    private bool isFirstGreen = true;
 
     void Start()
     {
@@ -80,61 +65,35 @@ public class PedestrianTrafficLight : MonoBehaviour
     }
 
     /// <summary>
-    /// Activates the Red light, enables hazards, and allows cars to move.
+    /// Activates the Red light and enables hazards (road is dangerous).
     /// </summary>
     private void SetRedLight()
     {
         isRed = true;
+        timer = redDuration;
         
         // Visuals
         if (redLightObject != null) redLightObject.SetActive(true);
         if (greenLightObject != null) greenLightObject.SetActive(false);
         
-        // Logic: Enable hazards (Road is dangerous for pedestrians)
+        // Logic: Enable hazards because cars might be passing
         ToggleHazards(true);
-        
-        // Logic: Allow cars to move (Green for cars)
-        ToggleCars(true);
-
-        // Apply initial duration if it's the first time, otherwise use normal duration
-        if (isFirstRed)
-        {
-            timer = initialRedDuration;
-            isFirstRed = false; // Never use the initial time again
-        }
-        else
-        {
-            timer = redDuration;
-        }
     }
 
     /// <summary>
-    /// Activates the Green light, disables hazards, and forces cars to stop.
+    /// Activates the Green light and disables hazards (road is safe).
     /// </summary>
     private void SetGreenLight()
     {
         isRed = false;
+        timer = greenDuration;
         
         // Visuals
         if (redLightObject != null) redLightObject.SetActive(false);
         if (greenLightObject != null) greenLightObject.SetActive(true);
         
-        // Logic: Disable hazards (Road is safe for pedestrians)
+        // Logic: Disable hazards so the wheelchair can cross
         ToggleHazards(false);
-        
-        // Logic: Force cars to stop (Red for cars)
-        ToggleCars(false);
-
-        // Apply initial duration if it's the first time, otherwise use normal duration
-        if (isFirstGreen)
-        {
-            timer = initialGreenDuration;
-            isFirstGreen = false; // Never use the initial time again
-        }
-        else
-        {
-            timer = greenDuration;
-        }
     }
 
     /// <summary>
@@ -149,22 +108,6 @@ public class PedestrianTrafficLight : MonoBehaviour
             if (hazard != null)
             {
                 hazard.SetActive(activeState);
-            }
-        }
-    }
-
-    /// <summary>
-    /// Helper method to tell all assigned cars whether they can move or not.
-    /// </summary>
-    private void ToggleCars(bool canMoveState)
-    {
-        if (cars == null) return;
-
-        foreach (CarMovement car in cars)
-        {
-            if (car != null)
-            {
-                car.canMove = canMoveState;
             }
         }
     }
