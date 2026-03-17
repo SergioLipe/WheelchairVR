@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 /// <summary>
 /// Controls an invisible Stop Zone acting as a traffic light for cars.
-/// It automatically toggles the "canMove" variable of any CarMovement scripts inside it.
-/// Allows for a unique duration on the very first light cycle.
+/// It automatically toggles the "canMove" variable of any CarCityMovement scripts inside it.
+/// Allows for a unique duration on the very first light cycle to sync intersections perfectly.
 /// </summary>
 [RequireComponent(typeof(Collider))]
 public class TrafficLightController : MonoBehaviour
@@ -27,20 +27,20 @@ public class TrafficLightController : MonoBehaviour
     [Tooltip("Check this if you want the lane to start Green when the game plays.")]
     public bool isGreen = true;
 
-    // Internal timers and state tracking
+    // --- Internal Timers and State Tracking ---
     private float timer = 0f;
     private bool isFirstGreen = true;
     private bool isFirstRed = true;
 
     // List to remember which cars are currently waiting inside this specific Stop Zone
-    private List<CarMovement> carsInZone = new List<CarMovement>();
+    private List<CarCityMovement> carsInZone = new List<CarCityMovement>();
 
     void Update()
     {
         // 1. Advance the timer
         timer += Time.deltaTime;
 
-        // 2. Determine the current time limit based on state and whether it's the first cycle
+        // 2. Determine the current time limit based on the state and whether it's the first cycle
         float currentLimit;
         if (isGreen)
         {
@@ -54,16 +54,23 @@ public class TrafficLightController : MonoBehaviour
         // 3. Swap the light state if the timer reaches the limit
         if (timer >= currentLimit)
         {
+            // Reset the timer for the next phase
             timer = 0f;
 
             // Mark the current initial phase as completed so it uses normal durations next time
-            if (isGreen) isFirstGreen = false;
-            else isFirstRed = false;
+            if (isGreen) 
+            {
+                isFirstGreen = false;
+            }
+            else 
+            {
+                isFirstRed = false;
+            }
 
-            // Toggle between true/false
+            // Toggle between true and false (Green to Red, or Red to Green)
             isGreen = !isGreen;
 
-            // Immediately update all cars waiting in the zone
+            // Immediately update all cars that are waiting in the zone
             UpdateWaitingCars();
         }
     }
@@ -73,16 +80,18 @@ public class TrafficLightController : MonoBehaviour
     /// </summary>
     private void OnTriggerEnter(Collider other)
     {
-        CarMovement car = other.GetComponentInParent<CarMovement>();
+        // Look for the CarCityMovement script on the object that entered the trigger
+        CarCityMovement car = other.GetComponentInParent<CarCityMovement>();
 
         if (car != null)
         {
+            // If the car isn't already in our list, add it
             if (!carsInZone.Contains(car))
             {
                 carsInZone.Add(car);
             }
 
-            // Tell the car if it can keep moving or if it must stop
+            // Tell the car if it can keep moving (Green) or if it must stop (Red)
             car.canMove = isGreen;
         }
     }
@@ -92,16 +101,17 @@ public class TrafficLightController : MonoBehaviour
     /// </summary>
     private void OnTriggerExit(Collider other)
     {
-        CarMovement car = other.GetComponentInParent<CarMovement>();
+        CarCityMovement car = other.GetComponentInParent<CarCityMovement>();
 
         if (car != null)
         {
+            // Remove the car from our waiting list
             if (carsInZone.Contains(car))
             {
                 carsInZone.Remove(car);
             }
 
-            // Once the car leaves the intersection entirely, it is free to drive normally
+            // Once the car leaves the intersection entirely, it is free to drive normally again
             car.canMove = true;
         }
     }
@@ -111,11 +121,12 @@ public class TrafficLightController : MonoBehaviour
     /// </summary>
     private void UpdateWaitingCars()
     {
-        // Safety check: Remove any cars from the list that might have been deleted/destroyed
+        // Safety check: Remove any cars from the list that might have been deleted/destroyed 
+        // (e.g., if a car fell off the map while waiting at a red light)
         carsInZone.RemoveAll(item => item == null);
 
-        // Update the 'canMove' boolean for every car waiting
-        foreach (CarMovement car in carsInZone)
+        // Update the 'canMove' boolean for every car waiting in this intersection
+        foreach (CarCityMovement car in carsInZone)
         {
             car.canMove = isGreen;
         }
