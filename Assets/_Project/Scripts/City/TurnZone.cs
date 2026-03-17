@@ -32,13 +32,18 @@ public class ConditionalTurnZone : MonoBehaviour
     public float specialSpeedDuringTurn = 2.5f;
 
     private int carCounter = 0;
+    
+    // Memory lock to prevent multiple colliders on the same car from triggering the counter multiple times
+    private CarCityMovement lastProcessedCar;
 
     private void OnTriggerEnter(Collider other)
     {
         CarCityMovement car = other.GetComponentInParent<CarCityMovement>();
 
-        if (car != null)
+        // Only process if it's a car AND it is NOT the exact same car we just processed a millisecond ago
+        if (car != null && car != lastProcessedCar)
         {
+            lastProcessedCar = car; // Lock onto this car so we ignore its rear wheels
             carCounter++;
 
             if (carCounter > carsTakingDefaultRoute)
