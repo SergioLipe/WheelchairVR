@@ -184,35 +184,48 @@ public class CarCityMovement : MonoBehaviour
         obliqueBlocked = outerLeftHit || outerRightHit;
     }
     /// <summary>
-    /// Helper method to fire a single raycast. Ignores trigger zones, looks for Cars and Players.
-    /// Features advanced root-checking to ensure it detects complex player prefabs (like wheelchairs).
+    /// Helper method to fire a single raycast. Ignores trigger zones.
+    /// In normal roads, stops for Cars and Players. 
+    /// Inside a CrosswalkZone, ONLY stops for Players and ignores other cars.
     /// </summary>
     private bool CheckSingleRay(Vector3 startPos, Vector3 direction, float length)
     {
-        // Ignore Triggers (like stop zones and turn zones) so sensors only hit physical objects
         RaycastHit[] hits = Physics.RaycastAll(startPos, direction, length, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
 
         foreach (RaycastHit hit in hits)
         {
-            CarCityMovement otherCar = hit.collider.GetComponentInParent<CarCityMovement>();
-
-            // THE FIX: Checks if the specific object hit has the "Player" tag, 
-            // OR if the highest parent object in the hierarchy has the "Player" tag.
-            // This ensures it detects the wheelchair even if the laser hits a tiny wheel or armrest.
+            // 1. CHECK FOR THE PLAYER (DEEP SEARCH)
+            // We do this first because the Player is the absolute priority.
             bool isPlayer = hit.collider.CompareTag("Player") || hit.collider.transform.root.CompareTag("Player");
-
-            // Stop if it's ANOTHER car or if it is the PLAYER
-            if ((otherCar != null && otherCar.gameObject != this.gameObject) || isPlayer)
+            if (isPlayer)
             {
+                // ALWAYS trigger the emergency brakes for the player, no matter where the car is!
                 Debug.DrawRay(startPos, direction * hit.distance, Color.red);
-                return true; // Obstacle detected
+                return true; 
+            }
+
+            // 2. CHECK FOR OTHER CARS
+            CarCityMovement otherCar = hit.collider.GetComponentInParent<CarCityMovement>();
+            if (otherCar != null && otherCar.gameObject != this.gameObject)
+            {
+                // If we are in the middle of the intersection (CrosswalkZone), IGNORE the other car!
+                if (isInNeverStopZone)
+                {
+                    continue; // Skip this hit and let the laser keep going through the car
+                }
+                else
+                {
+                    // If we are on a normal road, stop for the car ahead normally
+                    Debug.DrawRay(startPos, direction * hit.distance, Color.red);
+                    return true; 
+                }
             }
         }
 
+        // If we hit nothing important, keep the laser green and the path clear
         Debug.DrawRay(startPos, direction * length, Color.green);
-        return false; // Path clear
+        return false; 
     }
-
     // --- TRIGGER EVENTS FOR ZONES ---
 
     private void OnTriggerEnter(Collider other)
