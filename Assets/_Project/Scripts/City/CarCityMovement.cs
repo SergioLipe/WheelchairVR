@@ -68,13 +68,15 @@ public class CarCityMovement : MonoBehaviour
             wantsToMove = true;
         }
 
+        //DEBUG CAR STOPPED STATES
+        Debug.Log($"Car: {gameObject.name} | GreenLight/NoStopZone: {wantsToMove} | Front Blocked: {centerBlocked} | Side Blocked: {obliqueBlocked}");
         // 4. SAFETY SENSOR & FAILSAFE LOGIC
         if (centerBlocked)
         {
             // A car or player is directly in front. Halt movement immediately.
             stuckTimer = 0f;
             ignoreObliqueCars = false;
-            return; 
+            return;
         }
         else if (obliqueBlocked && !ignoreObliqueCars)
         {
@@ -88,7 +90,7 @@ public class CarCityMovement : MonoBehaviour
                     ignoreObliqueCars = true;
                 }
             }
-            return; 
+            return;
         }
         else if (!centerBlocked && !obliqueBlocked)
         {
@@ -122,7 +124,7 @@ public class CarCityMovement : MonoBehaviour
             if (degreesTurned + step >= currentTargetAngle)
             {
                 step = currentTargetAngle - degreesTurned;
-                isTurning = false; 
+                isTurning = false;
             }
 
             // Apply rotation 
@@ -184,7 +186,7 @@ public class CarCityMovement : MonoBehaviour
             if (isPlayer)
             {
                 Debug.DrawRay(startPos, direction * hit.distance, Color.red);
-                return true; 
+                return true;
             }
 
             // 2. CHECK FOR OTHER CARS
@@ -194,19 +196,19 @@ public class CarCityMovement : MonoBehaviour
                 if (isInNeverStopZone)
                 {
                     // Ignore cars while in an intersection
-                    continue; 
+                    continue;
                 }
                 else
                 {
                     // Stop for cars on regular roads
                     Debug.DrawRay(startPos, direction * hit.distance, Color.red);
-                    return true; 
+                    return true;
                 }
             }
         }
 
         Debug.DrawRay(startPos, direction * length, Color.green);
-        return false; 
+        return false;
     }
 
     // --- TRIGGER EVENTS FOR ZONES ---
@@ -246,7 +248,7 @@ public class CarCityMovement : MonoBehaviour
             degreesTurned = 0f;
             currentTargetAngle = Mathf.Abs(customAngle);
             turnDirection = Mathf.Sign(customAngle);
-            
+
             currentTurnSpeed = customTurnSpeed;
             currentSpeedDuringTurn = customSpeedDuringTurn;
         }
