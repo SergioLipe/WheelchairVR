@@ -21,8 +21,10 @@ public class CarCityMovement : MonoBehaviour
     public string neverStopZoneTag = "NonStopZone";
 
     [Header("=== Collision Sensor Settings ===")]
+    [Tooltip("Pushes the sensor origin forward to the front bumper so the car doesn't overlap before stopping.")]
+    public float sensorFrontOffset = 1.8f;
     [Tooltip("How far the main forward sensor looks ahead (in meters).")]
-    public float frontSensorLength = 8f;
+    public float frontSensorLength = 6f;
 
     [Tooltip("How far the oblique (angled) sensors look ahead.")]
     public float obliqueSensorLength = 5f;
@@ -32,6 +34,9 @@ public class CarCityMovement : MonoBehaviour
 
     [Header("=== Stuck Failsafe Settings ===")]
     [Tooltip("How many seconds to wait behind a side obstacle before ignoring it.")]
+
+    
+    
     public float maxWaitTime = 7f;
 
     // --- Internal State Tracking ---
@@ -68,8 +73,6 @@ public class CarCityMovement : MonoBehaviour
             wantsToMove = true;
         }
 
-        //DEBUG CAR STOPPED STATES
-        Debug.Log($"Car: {gameObject.name} | GreenLight/NoStopZone: {wantsToMove} | Front Blocked: {centerBlocked} | Side Blocked: {obliqueBlocked}");
         // 4. SAFETY SENSOR & FAILSAFE LOGIC
         if (centerBlocked)
         {
@@ -143,7 +146,7 @@ public class CarCityMovement : MonoBehaviour
     private void CheckSensors(out bool centerBlocked, out bool obliqueBlocked)
     {
         // Slightly elevate the sensor so it doesn't hit the physical road
-        Vector3 sensorStartPos = transform.position + new Vector3(0, 0.5f, 0);
+        Vector3 sensorStartPos = transform.position + (transform.forward * sensorFrontOffset) + new Vector3(0, 0.5f, 0);
 
         Vector3 forwardDir = transform.forward;
 
