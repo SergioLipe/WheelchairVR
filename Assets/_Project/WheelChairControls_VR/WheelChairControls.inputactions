@@ -1,0 +1,85 @@
+{
+    "version": 1,
+    "name": "WheelChairControls",
+    "maps": [
+        {
+            "name": "Driving",
+            "id": "8064eccb-ba9d-4145-b191-c703edaa0477",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "b383341f-5847-46eb-a104-f4779d5bb9ba",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "88ac2b90-e06d-47e9-9948-8ff9706c3e38",
+                    "path": "<XRController>{LeftHand}/thumbstick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "781085fd-ef39-44dc-baea-55095f3ed7ad",
+                    "path": "<XRController>{RightHand}/thumbstick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "ToggleSpeed",
+            "id": "bd6b5aa1-647a-4b58-812d-183a85e90e50",
+            "actions": [
+                {
+                    "name": "SpeedMode",
+                    "type": "Button",
+                    "id": "92c1f52b-db6c-4d06-93b8-40fe09d2e0cd",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "db249b49-cc17-41ca-9076-80e1eedc07d9",
+                    "path": "<XRController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpeedMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d72a4607-7722-4a44-8b38-a4ca40525166",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpeedMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
