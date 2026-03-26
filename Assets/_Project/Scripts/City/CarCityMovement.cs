@@ -24,10 +24,10 @@ public class CarCityMovement : MonoBehaviour
     [Tooltip("Pushes the sensor origin forward to the front bumper so the car doesn't overlap before stopping.")]
     public float sensorFrontOffset = 1.8f;
     [Tooltip("How far the main forward sensor looks ahead (in meters).")]
-    public float frontSensorLength = 5f;
+    public float frontSensorLength = 4.5f;
 
     [Tooltip("How far the oblique (angled) sensors look ahead.")]
-    public float obliqueSensorLength = 4.5f;
+    public float obliqueSensorLength = 4f;
 
     [Tooltip("The angle (in degrees) for the oblique sensors to point left and right.")]
     public float obliqueSensorAngle = 25f;
