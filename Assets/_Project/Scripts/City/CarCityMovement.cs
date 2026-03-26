@@ -46,7 +46,7 @@ public class CarCityMovement : MonoBehaviour
     public bool isYielding = false; // True when waiting for a player at a crosswalk
 
     // --- Turning Logic Tracking ---
-    private bool isTurning = false;
+    [HideInInspector] public bool isTurning = false;
     private float degreesTurned = 0f;
     private float currentTargetAngle = 0f;
     private float turnDirection = 1f;

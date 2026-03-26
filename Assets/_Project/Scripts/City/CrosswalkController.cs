@@ -20,7 +20,6 @@ public class CrosswalkController : MonoBehaviour
     {
         if (playerZone == null || carZone == null)
         {
-            Debug.LogWarning("CrosswalkController is missing its zone references!");
             return;
         }
 

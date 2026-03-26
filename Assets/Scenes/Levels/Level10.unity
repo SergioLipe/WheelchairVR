@@ -5707,11 +5707,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &40631211
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12195,11 +12196,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &84869153
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14389,7 +14391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -59.62
+      value: -54.65
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.y
@@ -16031,7 +16033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484704, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -64.53
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 484704, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_LocalPosition.y
@@ -16379,11 +16381,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1 &117159025
 GameObject:
   m_ObjectHideFlags: 0
@@ -17804,11 +17807,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &126262396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18968,11 +18972,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &133299050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24288,11 +24293,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &169522744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24401,6 +24407,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 485062, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
   m_PrefabInstance: {fileID: 169635993}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &169733724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 169733725}
+  - component: {fileID: 169733729}
+  - component: {fileID: 169733728}
+  - component: {fileID: 169733727}
+  - component: {fileID: 169733726}
+  m_Layer: 0
+  m_Name: Lane (13)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &169733725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169733724}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -13.7, y: 0.86, z: 117.6}
+  m_LocalScale: {x: 4.587169, y: 1, z: 75.15108}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &169733726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169733724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &169733727
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169733724}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &169733728
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169733724}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &169733729
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169733724}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &170176420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31728,11 +31861,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &222224969
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33571,11 +33705,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &234643172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35228,11 +35363,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &248156554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40661,11 +40797,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &280564700
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -40855,6 +40992,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 455922, guid: 33b36afb51822b442b3a3f8accf3c199, type: 3}
   m_PrefabInstance: {fileID: 281076673}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &281166535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 281166536}
+  - component: {fileID: 281166540}
+  - component: {fileID: 281166539}
+  - component: {fileID: 281166538}
+  - component: {fileID: 281166537}
+  m_Layer: 0
+  m_Name: Lane (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &281166536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281166535}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -18.91, y: 0.86, z: -12}
+  m_LocalScale: {x: 4.587169, y: 1, z: 164.47052}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &281166537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281166535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &281166538
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281166535}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &281166539
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281166535}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &281166540
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281166535}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &281555787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41804,6 +42068,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
   m_PrefabInstance: {fileID: 288881996}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &289236188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 289236189}
+  - component: {fileID: 289236193}
+  - component: {fileID: 289236192}
+  - component: {fileID: 289236191}
+  - component: {fileID: 289236190}
+  m_Layer: 0
+  m_Name: Lane (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &289236189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289236188}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -178.1, y: 0.86, z: -37.7}
+  m_LocalScale: {x: 4.9824, y: 1, z: 164.47052}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &289236190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289236188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &289236191
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289236188}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &289236192
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289236188}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &289236193
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289236188}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &290304599
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42554,11 +42945,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &294286752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44971,11 +45363,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &309716169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48121,11 +48514,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 421600, guid: f9c5e344bb1131f4f83e34b3f8cae927, type: 3}
   m_PrefabInstance: {fileID: 329314004}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &329339388 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 130278, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
-  m_PrefabInstance: {fileID: 1190592293}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &330300189
 GameObject:
@@ -51444,11 +51832,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &352284867
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52177,11 +52566,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &357536978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53451,11 +53841,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &367756413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61546,11 +61937,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &414563134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66168,11 +66560,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &444667618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70782,11 +71175,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &477366686
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -71249,11 +71643,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &478896279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71876,11 +72271,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &481557460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75489,11 +75885,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &504798053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75723,11 +76120,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &505748360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82745,11 +83143,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &553752731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82880,11 +83279,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &555724885
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -87133,7 +87533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -59.62
+      value: -66.2
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.y
@@ -87141,7 +87541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 153.31277
+      value: 154.2
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.w
@@ -87621,6 +88021,133 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841307e9d48c6ee4fb7a7b35ef657548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+--- !u!1 &588013843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 588013844}
+  - component: {fileID: 588013848}
+  - component: {fileID: 588013847}
+  - component: {fileID: 588013846}
+  - component: {fileID: 588013845}
+  m_Layer: 0
+  m_Name: Lane (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &588013844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588013843}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -167, y: 0.86, z: 2.82}
+  m_LocalScale: {x: 4.9824, y: 1, z: 527.7302}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &588013845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588013843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &588013846
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588013843}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &588013847
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588013843}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &588013848
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588013843}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &588257129
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -88652,11 +89179,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &596514497
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -94212,11 +94740,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &634677352
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -95146,11 +95675,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &639894857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100560,11 +101090,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &678943223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104371,11 +104902,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &706591258
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -108894,6 +109426,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 413058, guid: ae7b8255185ace64ca379cb1ca3b24e6, type: 3}
   m_PrefabInstance: {fileID: 738094160}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &738397179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 738397180}
+  m_Layer: 0
+  m_Name: LaneMagnets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &738397180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738397179}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 111.28135, y: 0, z: -10.38362}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1571233100}
+  - {fileID: 588013844}
+  - {fileID: 1751402261}
+  - {fileID: 1431543016}
+  - {fileID: 744512580}
+  - {fileID: 1451350476}
+  - {fileID: 1651595346}
+  - {fileID: 1613232873}
+  - {fileID: 289236189}
+  - {fileID: 1967665550}
+  - {fileID: 281166536}
+  - {fileID: 1473566693}
+  - {fileID: 1120197299}
+  - {fileID: 169733725}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &738570034
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109978,6 +110555,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 459158, guid: 530c04ec7ccbeec44b8c9e6f3c681679, type: 3}
   m_PrefabInstance: {fileID: 743801281}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &744512579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 744512580}
+  - component: {fileID: 744512584}
+  - component: {fileID: 744512583}
+  - component: {fileID: 744512582}
+  - component: {fileID: 744512581}
+  m_Layer: 0
+  m_Name: Lane (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &744512580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744512579}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -167, y: 0.86, z: -67.8}
+  m_LocalScale: {x: 4.9824, y: 1, z: 527.7302}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &744512581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744512579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &744512582
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744512579}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &744512583
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744512579}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &744512584
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744512579}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &745418114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113016,11 +113720,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &763906382
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -113217,11 +113922,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &766420537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113802,11 +114508,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &772596354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114646,11 +115353,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &777773469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -118152,11 +118860,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &803654987
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -127173,11 +127882,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &861186496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -127543,11 +128253,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &866187227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129704,7 +130415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -64.53
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalPosition.y
@@ -129830,11 +130541,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &880727644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131549,11 +132261,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &892760354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -136239,11 +136952,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &921107789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -136857,11 +137571,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1 &923836520
 GameObject:
   m_ObjectHideFlags: 0
@@ -140757,11 +141472,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &951887143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -143117,7 +143833,7 @@ Transform:
   m_GameObject: {fileID: 969550724}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -80.13, y: -0.41999996, z: -7.540002}
+  m_LocalPosition: {x: -75.89, y: -0.41999996, z: -7.540002}
   m_LocalScale: {x: 1, y: 1, z: 4.0894}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -143141,7 +143857,7 @@ MonoBehaviour:
   carsTakingDefaultRoute: 1
   specialTurnAngle: 90
   specialTurnSpeed: 60
-  specialSpeedDuringTurn: 9
+  specialSpeedDuringTurn: 10
 --- !u!65 &969550727
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -151400,11 +152116,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1035472327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153132,11 +153849,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1050842545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153155,7 +153873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -64.53
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -153293,11 +154011,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1051101807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153770,11 +154489,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1056652777
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155190,11 +155910,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1067150565
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156367,11 +157088,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1073538223
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161228,11 +161950,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1106335458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -161327,11 +162050,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1106335465
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -163311,6 +164035,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 489384, guid: 1ac8b9099f0c47e41a84ef1f2e41988c, type: 3}
   m_PrefabInstance: {fileID: 1119934048}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1120197298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1120197299}
+  - component: {fileID: 1120197303}
+  - component: {fileID: 1120197302}
+  - component: {fileID: 1120197301}
+  - component: {fileID: 1120197300}
+  m_Layer: 0
+  m_Name: Lane (12)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1120197299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120197298}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.51, y: 0.86, z: 100.1}
+  m_LocalScale: {x: 4.587169, y: 1, z: 112.663956}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1120197300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120197298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1120197301
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120197298}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1120197302
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120197298}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1120197303
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120197298}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1120652948
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165108,11 +165959,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1131088345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -168545,11 +169397,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1152443095
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -172672,11 +173525,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1178710561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -172922,11 +173776,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1180797403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174013,115 +174868,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 421212, guid: a0f542ba0461f8c4cbb89acbe6331cf5, type: 3}
   m_PrefabInstance: {fileID: 1190437435}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1190592293
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1522007317}
-    m_Modifications:
-    - target: {fileID: 130278, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
-      propertyPath: m_Name
-      value: SM_Veh_Car_Van_09
-      objectReference: {fileID: 0}
-    - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -59.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 119.01278
-      objectReference: {fileID: 0}
-    - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.7077323
-      objectReference: {fileID: 0}
-    - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7064807
-      objectReference: {fileID: 0}
-    - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 130278, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1190592299}
-    - targetCorrespondingSourceObject: {fileID: 130278, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1190592298}
-  m_SourcePrefab: {fileID: 100100000, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
---- !u!4 &1190592294 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
-  m_PrefabInstance: {fileID: 1190592293}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1190592298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 329339388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4fe860f6ac77614cae9735b27c3568b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
-  speed: 10
-  canMove: 1
-  targetStopZoneTag: StopZone
-  neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
-  obliqueSensorAngle: 25
-  maxWaitTime: 9999
-  isYielding: 0
---- !u!54 &1190592299
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 329339388}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &1190823119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -175527,11 +176273,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1 &1202026667 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 127632, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
@@ -178877,11 +179624,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1 &1228728859
 GameObject:
   m_ObjectHideFlags: 0
@@ -180583,11 +181331,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1241450654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -181996,11 +182745,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1251203778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -183403,11 +184153,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1260381144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -184349,11 +185100,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1268085144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -186318,11 +187070,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1283407608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188741,11 +189494,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1296387585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -189129,11 +189883,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1299203056
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -191439,11 +192194,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1 &1316253138 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 157676, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
@@ -191655,11 +192411,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1317187029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -193162,11 +193919,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1328095139
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -198607,11 +199365,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1367240881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -198863,11 +199622,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1368699855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -200676,11 +201436,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1379670808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -201978,11 +202739,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1388528843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -208076,11 +208838,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1 &1428040325
 GameObject:
   m_ObjectHideFlags: 0
@@ -208643,6 +209406,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 413522, guid: e2b1e7ce58c743c4d8d59a66eec6422b, type: 3}
   m_PrefabInstance: {fileID: 1431463702}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1431543015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1431543016}
+  - component: {fileID: 1431543020}
+  - component: {fileID: 1431543019}
+  - component: {fileID: 1431543018}
+  - component: {fileID: 1431543017}
+  m_Layer: 0
+  m_Name: Lane (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1431543016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431543015}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -114.06, y: 0.86, z: 2.82}
+  m_LocalScale: {x: 4.9824, y: 1, z: 527.7302}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1431543017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431543015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1431543018
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431543015}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1431543019
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431543015}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1431543020
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431543015}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1431901725
 GameObject:
   m_ObjectHideFlags: 0
@@ -209448,11 +210338,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1437113093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -211683,6 +212574,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 454224, guid: 015249c005381134e896458eb3ed0bb1, type: 3}
   m_PrefabInstance: {fileID: 1450460516}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1451350475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1451350476}
+  - component: {fileID: 1451350480}
+  - component: {fileID: 1451350479}
+  - component: {fileID: 1451350478}
+  - component: {fileID: 1451350477}
+  m_Layer: 0
+  m_Name: Lane (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1451350476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451350475}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -167, y: 0.86, z: -61.8}
+  m_LocalScale: {x: 4.9824, y: 1, z: 527.7302}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1451350477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451350475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1451350478
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451350475}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1451350479
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451350475}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1451350480
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451350475}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1451583868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -212110,11 +213128,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1454442903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213217,11 +214236,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1460041943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -215109,6 +216129,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 485062, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
   m_PrefabInstance: {fileID: 1472806037}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1473566692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1473566693}
+  - component: {fileID: 1473566697}
+  - component: {fileID: 1473566696}
+  - component: {fileID: 1473566695}
+  - component: {fileID: 1473566694}
+  m_Layer: 0
+  m_Name: Lane (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1473566693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473566692}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.72, y: 0.86, z: -17.5}
+  m_LocalScale: {x: 4.587169, y: 1, z: 164.47052}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1473566694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473566692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1473566695
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473566692}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1473566696
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473566692}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1473566697
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473566692}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1473876472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218091,11 +219238,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1497004196
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -219930,11 +221078,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1515701104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -220582,11 +221731,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1519553223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -220958,7 +222108,6 @@ Transform:
   - {fileID: 1906086318}
   - {fileID: 1368509730}
   - {fileID: 812109275}
-  - {fileID: 1190592294}
   - {fileID: 1233875227}
   - {fileID: 584764942}
   m_Father: {fileID: 472059080}
@@ -224458,11 +225607,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1545770059
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -224821,11 +225971,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1548073297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -226634,11 +227785,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1562094046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -227411,11 +228563,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1566050914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -229018,6 +230171,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 471968, guid: 250e247fdf48b2848817c62bc224a029, type: 3}
   m_PrefabInstance: {fileID: 1570822711}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1571233099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1571233100}
+  - component: {fileID: 1571233104}
+  - component: {fileID: 1571233103}
+  - component: {fileID: 1571233102}
+  - component: {fileID: 1571233101}
+  m_Layer: 0
+  m_Name: Lane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1571233100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571233099}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -167, y: 0.86, z: 8}
+  m_LocalScale: {x: 4.9824, y: 1, z: 527.7302}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1571233101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571233099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1571233102
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571233099}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1571233103
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571233099}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1571233104
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571233099}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1571252805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -230291,11 +231571,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1578058499
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -234566,6 +235847,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 478286, guid: 64b839200fb1c394abe8b5e1693c5cf4, type: 3}
   m_PrefabInstance: {fileID: 1613009434}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1613232872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1613232873}
+  - component: {fileID: 1613232877}
+  - component: {fileID: 1613232876}
+  - component: {fileID: 1613232875}
+  - component: {fileID: 1613232874}
+  m_Layer: 0
+  m_Name: Lane (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1613232873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613232872}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -82.8, y: 0.86, z: -107.4}
+  m_LocalScale: {x: 4.9824, y: 1, z: 211.5565}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1613232874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613232872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1613232875
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613232872}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1613232876
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613232872}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1613232877
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613232872}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1613333527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -235415,11 +236823,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1618915128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -235628,11 +237037,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1619440723
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -237608,11 +239018,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1632859248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -238109,11 +239520,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1636645368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -238267,11 +239679,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1 &1637896095 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 141870, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
@@ -238294,11 +239707,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1637896100
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -239599,11 +241013,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1647111106
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -240326,6 +241741,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 489384, guid: 1ac8b9099f0c47e41a84ef1f2e41988c, type: 3}
   m_PrefabInstance: {fileID: 1651318529}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1651595345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1651595346}
+  - component: {fileID: 1651595350}
+  - component: {fileID: 1651595349}
+  - component: {fileID: 1651595348}
+  - component: {fileID: 1651595347}
+  m_Layer: 0
+  m_Name: Lane (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1651595346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651595345}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -88, y: 0.86, z: -101.6}
+  m_LocalScale: {x: 4.9824, y: 1, z: -198.84346}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1651595347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651595345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1651595348
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651595345}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1651595349
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651595345}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1651595350
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651595345}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1651633062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -242538,11 +244080,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1667003056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -243106,11 +244649,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1671425441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246720,11 +248264,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1695753995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -249620,11 +251165,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1 &1714834493 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
@@ -249674,11 +251220,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1715181717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -250283,11 +251830,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1718166468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -252977,11 +254525,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1734980986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -255786,6 +257335,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 485062, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
   m_PrefabInstance: {fileID: 1751379598}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1751402260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1751402261}
+  - component: {fileID: 1751402265}
+  - component: {fileID: 1751402264}
+  - component: {fileID: 1751402263}
+  - component: {fileID: 1751402262}
+  m_Layer: 0
+  m_Name: Lane (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1751402261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751402260}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -108.53, y: 0.86, z: 2.82}
+  m_LocalScale: {x: 4.9824, y: 1, z: 527.7302}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1751402262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751402260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1751402263
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751402260}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1751402264
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751402260}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1751402265
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751402260}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1751607954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -257562,11 +259238,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1764785370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -261433,11 +263110,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1788987743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -262752,11 +264430,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1798967208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -262964,11 +264643,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1800350756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -263288,11 +264968,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1802238486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -264959,11 +266640,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1811166114
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -266643,11 +268325,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1820875292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267744,11 +269427,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1829421670
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -272918,11 +274602,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1863801275
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -274577,11 +276262,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1877364534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275276,11 +276962,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &1885700116
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -277893,11 +279580,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1905579099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -278246,11 +279934,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1906290229
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -287675,11 +289364,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1951064660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -287788,11 +289478,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1951178302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -288208,7 +289899,7 @@ Transform:
   m_GameObject: {fileID: 1954524269}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -64.2, y: -0.38, z: -10.14}
+  m_LocalPosition: {x: -64.2, y: -0.38, z: -13.32}
   m_LocalScale: {x: 1, y: 1, z: 4.0894}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -288227,7 +289918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ConditionalTurnZone
   defaultTurnAngle: 90
-  defaultTurnSpeed: 100
+  defaultTurnSpeed: 60
   defaultSpeedDuringTurn: 10
   carsTakingDefaultRoute: 99999
   specialTurnAngle: -90
@@ -291116,6 +292807,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 462674, guid: 2ecc0b496791eed43906204037035d18, type: 3}
   m_PrefabInstance: {fileID: 1967638531}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1967665549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1967665550}
+  - component: {fileID: 1967665554}
+  - component: {fileID: 1967665553}
+  - component: {fileID: 1967665552}
+  - component: {fileID: 1967665551}
+  m_Layer: 0
+  m_Name: Lane (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1967665550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967665549}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -184.26, y: 0.86, z: -37.7}
+  m_LocalScale: {x: 4.9824, y: 1, z: 164.47052}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1967665551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967665549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1967665552
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967665549}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1967665553
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967665549}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1967665554
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967665549}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1968051731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -291447,11 +293265,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1972560139
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -292645,11 +294464,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1981289052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294495,11 +296315,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1 &1995290744 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
@@ -294549,11 +296370,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &1995307136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -295688,11 +297510,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &2002843204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -298125,11 +299948,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &2020719501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -298669,11 +300493,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &2022877448
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -299131,11 +300956,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &2026038473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -303150,11 +304976,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &2054173459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -307863,11 +309690,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1 &2089676640 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 141870, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
@@ -307917,11 +309745,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &2090231081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -309658,11 +311487,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &2100540324
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -309948,11 +311778,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &2104079350
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -310333,11 +312164,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &2105804040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -311154,11 +312986,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &2111611571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -313471,11 +315304,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &2128152437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -313849,11 +315683,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!1001 &2129930425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -315614,11 +317449,12 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
-  frontSensorLength: 5
-  obliqueSensorLength: 4.5
+  frontSensorLength: 4.5
+  obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
   isYielding: 0
+  isTurning: 0
 --- !u!54 &2142879085
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -316486,3 +318322,4 @@ SceneRoots:
   - {fileID: 724992408}
   - {fileID: 688064047}
   - {fileID: 1403441907}
+  - {fileID: 738397180}
