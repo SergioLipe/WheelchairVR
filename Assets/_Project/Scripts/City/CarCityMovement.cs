@@ -17,6 +17,9 @@ public class CarCityMovement : MonoBehaviour
     [Tooltip("The Tag this car looks for to stop at red lights.")]
     public string targetStopZoneTag = "StopZone";
 
+    [Tooltip("The Tag for pedestrian crosswalks without traffic lights.")]
+    public string crosswalkStopZoneTag = "StopZone_NoLight";
+
     [Tooltip("The Tag for areas where the car MUST NOT stop for red lights, like the middle of an intersection.")]
     public string neverStopZoneTag = "NonStopZone";
 
@@ -35,8 +38,8 @@ public class CarCityMovement : MonoBehaviour
     [Header("=== Stuck Failsafe Settings ===")]
     [Tooltip("How many seconds to wait behind a side obstacle before ignoring it.")]
 
-    
-    
+
+
     public float maxWaitTime = 7f;
 
     // --- Internal State Tracking ---
@@ -218,7 +221,7 @@ public class CarCityMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(targetStopZoneTag))
+        if (other.CompareTag(targetStopZoneTag) || other.CompareTag(crosswalkStopZoneTag))
         {
             isInStopZone = true;
         }
@@ -230,13 +233,13 @@ public class CarCityMovement : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag(targetStopZoneTag)) isInStopZone = true;
+        if (other.CompareTag(targetStopZoneTag) || other.CompareTag(crosswalkStopZoneTag)) isInStopZone = true;
         else if (other.CompareTag(neverStopZoneTag)) isInNeverStopZone = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(targetStopZoneTag)) isInStopZone = false;
+        if (other.CompareTag(targetStopZoneTag) || other.CompareTag(crosswalkStopZoneTag)) isInStopZone = false;
         else if (other.CompareTag(neverStopZoneTag)) isInNeverStopZone = false;
     }
 
