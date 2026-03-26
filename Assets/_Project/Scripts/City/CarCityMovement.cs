@@ -2,7 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// Controls city traffic with straight-line driving and curve-turning at intersections.
-/// Features: Stop Zones, NonStop Zones, Player Detection, Failsafes, and External Trigger-based Turning.
+/// Features: Stop Zones, NonStop Zones, Player Detection, Failsafes, Crosswalk Yielding, and External Trigger-based Turning.
 /// </summary>
 public class CarCityMovement : MonoBehaviour
 {
@@ -24,24 +24,26 @@ public class CarCityMovement : MonoBehaviour
     [Tooltip("Pushes the sensor origin forward to the front bumper so the car doesn't overlap before stopping.")]
     public float sensorFrontOffset = 1.8f;
     [Tooltip("How far the main forward sensor looks ahead (in meters).")]
-    public float frontSensorLength = 6f;
+    public float frontSensorLength = 5f;
 
     [Tooltip("How far the oblique (angled) sensors look ahead.")]
-    public float obliqueSensorLength = 5f;
+    public float obliqueSensorLength = 4.5f;
 
     [Tooltip("The angle (in degrees) for the oblique sensors to point left and right.")]
     public float obliqueSensorAngle = 25f;
 
     [Header("=== Stuck Failsafe Settings ===")]
     [Tooltip("How many seconds to wait behind a side obstacle before ignoring it.")]
-    public float maxWaitTime = 7f;
+    public float maxWaitTime = 5f;
 
     // --- Internal State Tracking ---
     private bool isInStopZone = false;
     private bool isInNeverStopZone = false;
     private float stuckTimer = 0f;
     private bool ignoreObliqueCars = false;
-    [HideInInspector] public bool isYielding = false; // True when waiting for a player at a crosswalk
+    
+    [HideInInspector] 
+    public bool isYielding = false; // True when waiting for a player at a crosswalk
 
     // --- Turning Logic Tracking ---
     private bool isTurning = false;
@@ -68,7 +70,7 @@ public class CarCityMovement : MonoBehaviour
         if (isInNeverStopZone)
         {
             // Force the car to ignore Red Lights to clear the intersection.
-            // But STILL respect the crosswalk if yielding.
+            // Sensors remain active to prevent hitting the player.
             wantsToMove = !isYielding;
         }
 
@@ -202,6 +204,22 @@ public class CarCityMovement : MonoBehaviour
                 }
                 else
                 {
+                    // --- TIE-BREAKER FOR PILED UP CARS ---
+                    // If cars got stacked in the intersection, they unstack one by one based on ID.
+                    float distance = Vector3.Distance(transform.position, otherCar.transform.position);
+                    if (distance < 3.5f) 
+                    {
+                        if (this.gameObject.GetInstanceID() > otherCar.gameObject.GetInstanceID())
+                        {
+                            Debug.DrawRay(startPos, direction * hit.distance, Color.red);
+                            return true; // Higher ID waits
+                        }
+                        else
+                        {
+                            continue; // Lower ID drives off
+                        }
+                    }
+
                     // Stop for cars on regular roads
                     Debug.DrawRay(startPos, direction * hit.distance, Color.red);
                     return true;
