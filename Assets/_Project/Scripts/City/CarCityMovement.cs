@@ -17,9 +17,6 @@ public class CarCityMovement : MonoBehaviour
     [Tooltip("The Tag this car looks for to stop at red lights.")]
     public string targetStopZoneTag = "StopZone";
 
-    [Tooltip("The Tag for pedestrian crosswalks without traffic lights.")]
-    public string crosswalkStopZoneTag = "StopZone_NoLight";
-
     [Tooltip("The Tag for areas where the car MUST NOT stop for red lights, like the middle of an intersection.")]
     public string neverStopZoneTag = "NonStopZone";
 
@@ -37,9 +34,6 @@ public class CarCityMovement : MonoBehaviour
 
     [Header("=== Stuck Failsafe Settings ===")]
     [Tooltip("How many seconds to wait behind a side obstacle before ignoring it.")]
-
-
-
     public float maxWaitTime = 7f;
 
     // --- Internal State Tracking ---
@@ -47,6 +41,7 @@ public class CarCityMovement : MonoBehaviour
     private bool isInNeverStopZone = false;
     private float stuckTimer = 0f;
     private bool ignoreObliqueCars = false;
+    [HideInInspector] public bool isYielding = false; // True when waiting for a player at a crosswalk
 
     // --- Turning Logic Tracking ---
     private bool isTurning = false;
@@ -66,14 +61,15 @@ public class CarCityMovement : MonoBehaviour
         CheckSensors(out centerBlocked, out obliqueBlocked);
 
         // 2. Check legal movement (green light OR outside of a red light stop zone)
-        bool wantsToMove = canMove || !isInStopZone;
+        // AND ensure the car is not yielding to a pedestrian.
+        bool wantsToMove = (canMove || !isInStopZone) && !isYielding;
 
         // 3. NON-STOP ZONE OVERRIDE
         if (isInNeverStopZone)
         {
             // Force the car to ignore Red Lights to clear the intersection.
-            // Sensors remain active to prevent hitting the player.
-            wantsToMove = true;
+            // But STILL respect the crosswalk if yielding.
+            wantsToMove = !isYielding;
         }
 
         // 4. SAFETY SENSOR & FAILSAFE LOGIC
@@ -221,7 +217,7 @@ public class CarCityMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(targetStopZoneTag) || other.CompareTag(crosswalkStopZoneTag))
+        if (other.CompareTag(targetStopZoneTag))
         {
             isInStopZone = true;
         }
@@ -233,13 +229,13 @@ public class CarCityMovement : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag(targetStopZoneTag) || other.CompareTag(crosswalkStopZoneTag)) isInStopZone = true;
+        if (other.CompareTag(targetStopZoneTag)) isInStopZone = true;
         else if (other.CompareTag(neverStopZoneTag)) isInNeverStopZone = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(targetStopZoneTag) || other.CompareTag(crosswalkStopZoneTag)) isInStopZone = false;
+        if (other.CompareTag(targetStopZoneTag)) isInStopZone = false;
         else if (other.CompareTag(neverStopZoneTag)) isInNeverStopZone = false;
     }
 

@@ -5705,13 +5705,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &40631211
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12193,13 +12193,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &84869153
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16377,13 +16377,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1 &117159025
 GameObject:
   m_ObjectHideFlags: 0
@@ -17802,13 +17802,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &126262396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18966,13 +18966,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &133299050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24286,13 +24286,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &169522744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31726,13 +31726,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &222224969
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33569,13 +33569,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &234643172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35226,13 +35226,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &248156554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36258,8 +36258,9 @@ GameObject:
   - component: {fileID: 253147066}
   - component: {fileID: 253147065}
   - component: {fileID: 253147064}
+  - component: {fileID: 253147068}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: PlayerZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36293,7 +36294,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253147063}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -36351,13 +36352,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253147063}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.79, y: 0.82, z: 1.68}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.8373413, y: 0.82, z: 2.66922}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1403441907}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &253147068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253147063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b18273e0a606af409a5ae4013e6dcb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrosswalkController
+  playerZone: {fileID: 0}
+  carZone: {fileID: 0}
 --- !u!1001 &253216840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40644,13 +40659,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &280564700
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42537,13 +42552,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &294286752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44954,13 +44969,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &309716169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51423,13 +51438,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &352284867
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52156,13 +52171,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &357536978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53430,13 +53445,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &367756413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61525,13 +61540,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &414563134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66147,13 +66162,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &444667618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70761,13 +70776,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &477366686
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -71228,13 +71243,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &478896279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71855,13 +71870,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &481557460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75468,13 +75483,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &504798053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75702,13 +75717,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &505748360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82724,13 +82739,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &553752731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82859,13 +82874,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &555724885
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -88631,13 +88646,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &596514497
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -94191,13 +94206,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &634677352
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -95125,13 +95140,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &639894857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100539,13 +100554,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &678943223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104350,13 +104365,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &706591258
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -112995,13 +113010,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &763906382
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -113196,13 +113211,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &766420537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113781,13 +113796,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &772596354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114625,13 +114640,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &777773469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -118131,13 +118146,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &803654987
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -127148,13 +127163,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &861186496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -127518,13 +127533,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &866187227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129805,13 +129820,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &880727644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131524,13 +131539,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &892760354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -136214,13 +136229,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &921107789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -136832,13 +136847,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1 &923836520
 GameObject:
   m_ObjectHideFlags: 0
@@ -140728,13 +140743,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &951887143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -151371,13 +151386,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1035472327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153103,13 +153118,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1050842545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153264,13 +153279,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1051101807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153741,13 +153756,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1056652777
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155161,13 +155176,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1067150565
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156338,13 +156353,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1073538223
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161199,13 +161214,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1106335458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -161298,13 +161313,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1106335465
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -165079,13 +165094,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1131088345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -168516,13 +168531,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1152443095
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -172643,13 +172658,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1178710561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -172893,13 +172908,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1180797403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174061,13 +174076,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1190592299
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -175498,13 +175513,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1 &1202026667 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 127632, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
@@ -178848,13 +178863,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1 &1228728859
 GameObject:
   m_ObjectHideFlags: 0
@@ -180554,13 +180569,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1241450654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -181967,13 +181982,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1251203778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -183374,13 +183389,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1260381144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -184320,13 +184335,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1268085144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -186289,13 +186304,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1283407608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188708,13 +188723,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1296387585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -189096,13 +189111,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1299203056
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -191406,13 +191421,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1 &1316253138 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 157676, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
@@ -191622,13 +191637,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1317187029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -193129,13 +193144,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1328095139
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -198574,13 +198589,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1367240881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -198830,13 +198845,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1368699855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -200511,13 +200526,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1379670808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -201814,13 +201829,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1388528843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -204199,6 +204214,54 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 464886, guid: 4290c366a38253b4f87a53b8a3654483, type: 3}
   m_PrefabInstance: {fileID: 1403371582}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1403441905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1403441907}
+  - component: {fileID: 1403441906}
+  m_Layer: 0
+  m_Name: CrosswalkSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1403441906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403441905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b18273e0a606af409a5ae4013e6dcb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CrosswalkController
+  playerZone: {fileID: 253147064}
+  carZone: {fileID: 1868668322}
+--- !u!4 &1403441907
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403441905}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.95266, y: -0, z: -0.98922}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 253147067}
+  - {fileID: 1868668325}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1403559834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -207864,13 +207927,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1 &1428040325
 GameObject:
   m_ObjectHideFlags: 0
@@ -209232,13 +209295,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1437113093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -211894,13 +211957,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1454442903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213001,13 +213064,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1460041943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -217875,13 +217938,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1497004196
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -219714,13 +219777,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1515701104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -220366,13 +220429,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1519553223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -224242,13 +224305,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1545770059
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -224605,13 +224668,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1548073297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -226418,13 +226481,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1562094046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -227133,6 +227196,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 64222710617219654, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -227191,13 +227258,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1566050914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -230071,13 +230138,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1578058499
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -235195,13 +235262,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1618915128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -235408,13 +235475,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1619440723
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -237388,13 +237455,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1632859248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -237889,13 +237956,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1636645368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -238047,13 +238114,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1 &1637896095 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 141870, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
@@ -238074,13 +238141,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1637896100
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -239379,13 +239446,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1647111106
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -242318,13 +242385,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1667003056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -242886,13 +242953,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1671425441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246500,13 +246567,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1695753995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -249400,13 +249467,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1 &1714834493 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
@@ -249454,13 +249521,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1715181717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -250063,13 +250130,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1718166468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -252757,13 +252824,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1734980986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -257342,13 +257409,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1764785370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -261213,13 +261280,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1788987743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -262532,13 +262599,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1798967208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -262744,13 +262811,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1800350756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -263068,13 +263135,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1802238486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -264739,13 +264806,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1811166114
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -266423,13 +266490,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1820875292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267524,13 +267591,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1829421670
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -272698,13 +272765,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1863801275
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -273247,7 +273314,7 @@ GameObject:
   - component: {fileID: 1868668323}
   - component: {fileID: 1868668322}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: CarZone
   m_TagString: StopZone_NoLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273339,12 +273406,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1868668321}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.79, y: 0.82, z: -2.82}
-  m_LocalScale: {x: 1, y: 1, z: 3.5546}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.1, y: 0.82, z: -1.8307799}
+  m_LocalScale: {x: 1.4857, y: 1, z: 3.5546}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1403441907}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1869965855
 PrefabInstance:
@@ -274357,13 +274424,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1877364534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275056,13 +275123,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &1885700116
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -277673,13 +277740,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1905579099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -278026,13 +278093,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1906290229
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -287455,13 +287522,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1951064660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -287568,13 +287635,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1951178302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -291227,13 +291294,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1972560139
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -292425,13 +292492,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1981289052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294275,13 +294342,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1 &1995290744 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
@@ -294329,13 +294396,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &1995307136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -295468,13 +295535,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &2002843204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -297905,13 +297972,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &2020719501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -298449,13 +298516,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &2022877448
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -298911,13 +298978,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &2026038473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -302930,13 +302997,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &2054173459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -307643,13 +307710,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1 &2089676640 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 141870, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
@@ -307697,13 +307764,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &2090231081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -309438,13 +309505,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &2100540324
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -309728,13 +309795,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &2104079350
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -310113,13 +310180,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &2105804040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -310934,13 +311001,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &2111611571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -313251,13 +313318,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &2128152437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -313629,13 +313696,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!1001 &2129930425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -315394,13 +315461,13 @@ MonoBehaviour:
   speed: 10
   canMove: 1
   targetStopZoneTag: StopZone
-  crosswalkStopZoneTag: StopZone_NoLight
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.8
   frontSensorLength: 6
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  isYielding: 0
 --- !u!54 &2142879085
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -316261,5 +316328,4 @@ SceneRoots:
   - {fileID: 104356266}
   - {fileID: 724992408}
   - {fileID: 688064047}
-  - {fileID: 253147067}
-  - {fileID: 1868668325}
+  - {fileID: 1403441907}
