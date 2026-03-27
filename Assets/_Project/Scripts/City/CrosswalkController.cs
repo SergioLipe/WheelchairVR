@@ -2,76 +2,92 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
-/// A single controller that manages both the player waiting area and the car stopping area.
+/// A single controller that manages multiple player waiting areas and multiple car stopping areas.
+/// Perfect for multi-lane roads and two-way crosswalks.
 /// </summary>
 public class CrosswalkController : MonoBehaviour
 {
     [Header("=== Zone Setup ===")]
-    [Tooltip("The BoxCollider on the sidewalk where the wheelchair waits.")]
-    public BoxCollider playerZone;
+    [Tooltip("The BoxColliders on the sidewalks where the wheelchair waits.")]
+    public BoxCollider[] playerZones;
 
-    [Tooltip("The BoxCollider on the road where the cars must stop.")]
-    public BoxCollider carZone;
+    [Tooltip("The BoxColliders on the roads where the cars must stop.")]
+    public BoxCollider[] carZones;
 
     // Keeps track of cars we have stopped, just in case they slide out of the zone
     private List<CarCityMovement> yieldingCars = new List<CarCityMovement>();
 
     void Update()
     {
-        if (playerZone == null || carZone == null)
+        // Safety check: Don't run if no zones are assigned
+        if (playerZones == null || carZones == null || playerZones.Length == 0 || carZones.Length == 0)
         {
             return;
         }
 
-        // 1. Check if the player is currently inside the Player Zone
+        // 1. Check if the player is currently inside ANY of the Player Zones
         bool playerIsWaiting = CheckForPlayer();
 
-        // 2. Control the cars in the Car Zone based on the player's presence
+        // 2. Control the cars in ALL Car Zones based on the player's presence
         ControlCars(playerIsWaiting);
     }
 
     /// <summary>
-    /// Scans the player zone collider to see if the wheelchair is inside.
+    /// Scans all player zone colliders to see if the wheelchair is inside any of them.
     /// </summary>
     private bool CheckForPlayer()
     {
-        Collider[] hits = Physics.OverlapBox(playerZone.bounds.center, playerZone.bounds.extents, playerZone.transform.rotation);
-        
-        foreach (Collider hit in hits)
+        foreach (BoxCollider pZone in playerZones)
         {
-            if (hit.CompareTag("Player") || hit.transform.root.CompareTag("Player"))
+            if (pZone == null) continue;
+
+            Collider[] hits = Physics.OverlapBox(pZone.bounds.center, pZone.bounds.extents, pZone.transform.rotation);
+            
+            foreach (Collider hit in hits)
             {
-                return true;
+                if (hit.CompareTag("Player") || hit.transform.root.CompareTag("Player"))
+                {
+                    // If the player is in ANY zone, return true immediately
+                    return true;
+                }
             }
         }
         return false;
     }
 
     /// <summary>
-    /// Scans the car zone collider and updates the yielding state of any cars inside.
+    /// Scans all car zone colliders and updates the yielding state of any cars inside them.
     /// </summary>
     private void ControlCars(bool shouldStop)
     {
-        Collider[] hits = Physics.OverlapBox(carZone.bounds.center, carZone.bounds.extents, carZone.transform.rotation);
-        
         List<CarCityMovement> carsCurrentlyInZone = new List<CarCityMovement>();
 
-        foreach (Collider hit in hits)
+        // Loop through every car zone you assigned in the inspector
+        foreach (BoxCollider cZone in carZones)
         {
-            CarCityMovement car = hit.GetComponentInParent<CarCityMovement>();
-            if (car != null)
+            if (cZone == null) continue;
+
+            Collider[] hits = Physics.OverlapBox(cZone.bounds.center, cZone.bounds.extents, cZone.transform.rotation);
+            
+            foreach (Collider hit in hits)
             {
-                carsCurrentlyInZone.Add(car);
-                car.isYielding = shouldStop;
+                CarCityMovement car = hit.GetComponentInParent<CarCityMovement>();
                 
-                if (shouldStop && !yieldingCars.Contains(car))
+                // If it's a car, and we haven't already processed it in another zone
+                if (car != null && !carsCurrentlyInZone.Contains(car))
                 {
-                    yieldingCars.Add(car);
+                    carsCurrentlyInZone.Add(car);
+                    car.isYielding = shouldStop;
+                    
+                    if (shouldStop && !yieldingCars.Contains(car))
+                    {
+                        yieldingCars.Add(car);
+                    }
                 }
             }
         }
 
-        // Free any cars that are no longer in the zone so they don't get stuck forever
+        // Free any cars that are no longer in ANY zone so they don't get stuck forever
         for (int i = yieldingCars.Count - 1; i >= 0; i--)
         {
             CarCityMovement pastCar = yieldingCars[i];
