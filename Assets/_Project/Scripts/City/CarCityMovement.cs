@@ -2,7 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// Controls city traffic with straight-line driving and curve-turning at intersections.
-/// Features: Stop Zones, NonStop Zones, Player Detection, Failsafes, Crosswalk Yielding, and External Trigger-based Turning.
+/// Features: Stop Zones, NonStop Zones, Player Detection, Failsafes, Auto-Teleport Recovery, Stationary Failsafe, and External Trigger-based Turning.
 /// </summary>
 public class CarCityMovement : MonoBehaviour
 {
@@ -22,7 +22,7 @@ public class CarCityMovement : MonoBehaviour
 
     [Header("=== Collision Sensor Settings ===")]
     [Tooltip("Pushes the sensor origin forward to the front bumper so the car doesn't overlap before stopping.")]
-    public float sensorFrontOffset = 1.8f;
+    public float sensorFrontOffset = 1.4f;
     [Tooltip("How far the main forward sensor looks ahead (in meters).")]
     public float frontSensorLength = 4.5f;
 
@@ -36,14 +36,29 @@ public class CarCityMovement : MonoBehaviour
     [Tooltip("How many seconds to wait behind a side obstacle before ignoring it.")]
     public float maxWaitTime = 5f;
 
+    [Header("=== Teleport Recovery Settings ===")]
+    [Tooltip("How many seconds the car can be off a magnet before it respawns.")]
+    public float maxTimeOffMagnet = 5f;
+
+    [Tooltip("How many seconds the car can be completely stationary/blocked before it respawns.")]
+    public float maxStationaryTime = 15f;
+
+    [HideInInspector] 
+    public float timeOffMagnet = 0f; // Tracked by RoadLaneAligner
+    
     // --- Internal State Tracking ---
     private bool isInStopZone = false;
     private bool isInNeverStopZone = false;
     private float stuckTimer = 0f;
     private bool ignoreObliqueCars = false;
+    private float recoveryTimer = 0f;
     
     [HideInInspector] 
     public bool isYielding = false; // True when waiting for a player at a crosswalk
+
+    // --- Stationary Failsafe Tracking ---
+    private float stationaryTimer = 0f;
+    private Vector3 lastPosition;
 
     // --- Turning Logic Tracking ---
     [HideInInspector] public bool isTurning = false;
@@ -54,6 +69,12 @@ public class CarCityMovement : MonoBehaviour
     // Variables provided by the external ConditionalTurnZone
     private float currentTurnSpeed = 120f;
     private float currentSpeedDuringTurn = 3f;
+
+    void Start()
+    {
+        // Store the initial position as soon as the game starts
+        lastPosition = transform.position;
+    }
 
     void Update()
     {
@@ -74,12 +95,60 @@ public class CarCityMovement : MonoBehaviour
             wantsToMove = !isYielding;
         }
 
-        // 4. SAFETY SENSOR & FAILSAFE LOGIC
+        // --- 4. TELEPORT FAILSAFE TIMER (Off Magnet) ---
+        // We pause the timer if the car is legally waiting at a red light or crosswalk
+        if (isInStopZone || !canMove || isYielding)
+        {
+            timeOffMagnet = 0f; 
+        }
+        else
+        {
+            timeOffMagnet += Time.deltaTime;
+            if (timeOffMagnet >= maxTimeOffMagnet)
+            {
+                TeleportToNextSpawn();
+                return; // Stop running code for this frame
+            }
+        }
+
+        // --- 5. STATIONARY FAILSAFE TIMER (15 Seconds Blocked) ---
+        // Check if the distance the car moved since the last frame is practically zero
+        if (Vector3.Distance(transform.position, lastPosition) < 0.01f)
+        {
+            // The car is physically stopped.
+            // Only start the timer if it is NOT legally waiting at a red light or crosswalk.
+            bool isLegallyWaiting = (isInStopZone && !canMove) || isYielding;
+            
+            if (!isLegallyWaiting)
+            {
+                stationaryTimer += Time.deltaTime;
+                if (stationaryTimer >= maxStationaryTime)
+                {
+                    Debug.Log($"[Traffic System] Car blocked for {maxStationaryTime}s! Teleporting...");
+                    TeleportToNextSpawn();
+                    return; // Stop running code for this frame
+                }
+            }
+            else
+            {
+                stationaryTimer = 0f; // Reset because it is legally waiting
+            }
+        }
+        else
+        {
+            stationaryTimer = 0f; // Reset because the car moved
+        }
+        
+        // Store current position to compare in the next frame
+        lastPosition = transform.position;
+
+        // --- 6. SAFETY SENSOR & OBSTACLES LOGIC ---
         if (centerBlocked)
         {
             // A car or player is directly in front. Halt movement immediately.
             stuckTimer = 0f;
             ignoreObliqueCars = false;
+            recoveryTimer = 0f;
             return;
         }
         else if (obliqueBlocked && !ignoreObliqueCars)
@@ -92,6 +161,7 @@ public class CarCityMovement : MonoBehaviour
                 {
                     // Timer reached: ignore the side obstacle so traffic can flow.
                     ignoreObliqueCars = true;
+                    recoveryTimer = 0f;
                 }
             }
             return;
@@ -101,9 +171,23 @@ public class CarCityMovement : MonoBehaviour
             // The path is clear. Reset timer and flags.
             stuckTimer = 0f;
             ignoreObliqueCars = false;
+            recoveryTimer = 0f;
         }
 
-        // 5. APPLY MOVEMENT AND TURNING
+        // --- 7. SENSOR RECOVERY ---
+        // Reset side sensors after bypassing an obstacle for 2 seconds
+        if (ignoreObliqueCars && wantsToMove)
+        {
+            recoveryTimer += Time.deltaTime;
+            if (recoveryTimer >= 2.0f) 
+            {
+                ignoreObliqueCars = false;
+                stuckTimer = 0f;
+                recoveryTimer = 0f;
+            }
+        }
+
+        // --- 8. APPLY MOVEMENT AND TURNING ---
         if (wantsToMove)
         {
             ApplyMovementAndTurning();
@@ -113,6 +197,7 @@ public class CarCityMovement : MonoBehaviour
     /// <summary>
     /// Handles driving straight and smoothly curving when forced to turn.
     /// Uses a slower forward speed during the turn to ensure the curve is tight enough.
+    /// Includes Anti-Drift Snapping.
     /// </summary>
     private void ApplyMovementAndTurning()
     {
@@ -121,19 +206,28 @@ public class CarCityMovement : MonoBehaviour
         if (isTurning)
         {
             currentForwardSpeed = currentSpeedDuringTurn;
-
             float step = currentTurnSpeed * Time.deltaTime;
 
             // Prevent the car from over-turning past the exact target angle
             if (degreesTurned + step >= currentTargetAngle)
             {
                 step = currentTargetAngle - degreesTurned;
+                transform.Rotate(Vector3.up, step * turnDirection);
                 isTurning = false;
-            }
 
-            // Apply rotation 
-            transform.Rotate(Vector3.up, step * turnDirection);
-            degreesTurned += step;
+                // --- ANTI-DRIFT ANGLE SNAPPING ---
+                // Unity's math leaves tiny micro-decimals. We round the Y axis 
+                // to the nearest whole number so the car drives perfectly straight forever.
+                Vector3 cleanRotation = transform.eulerAngles;
+                cleanRotation.y = Mathf.Round(cleanRotation.y);
+                transform.eulerAngles = cleanRotation;
+            }
+            else
+            {
+                // Apply rotation 
+                transform.Rotate(Vector3.up, step * turnDirection);
+                degreesTurned += step;
+            }
         }
 
         // Apply forward movement
@@ -235,14 +329,8 @@ public class CarCityMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(targetStopZoneTag))
-        {
-            isInStopZone = true;
-        }
-        else if (other.CompareTag(neverStopZoneTag))
-        {
-            isInNeverStopZone = true;
-        }
+        if (other.CompareTag(targetStopZoneTag)) isInStopZone = true;
+        else if (other.CompareTag(neverStopZoneTag)) isInNeverStopZone = true;
     }
 
     private void OnTriggerStay(Collider other)
@@ -272,5 +360,39 @@ public class CarCityMovement : MonoBehaviour
             currentTurnSpeed = customTurnSpeed;
             currentSpeedDuringTurn = customSpeedDuringTurn;
         }
+    }
+
+    /// <summary>
+    /// Resets the car's state and moves it to a random TrafficSpawnZone.
+    /// </summary>
+    private void TeleportToNextSpawn()
+    {
+        // Safety check: ensure you actually placed spawn zones in the map!
+        if (TrafficSpawnZone.allSpawnZones.Count == 0)
+        {
+            Debug.LogWarning("[Traffic System] No TrafficSpawnZones found! Please add them to the map.");
+            timeOffMagnet = 0f; // Reset timer so it doesn't spam errors
+            return;
+        }
+
+        // Pick a completely random spawn zone from the master list
+        int randomIndex = Random.Range(0, TrafficSpawnZone.allSpawnZones.Count);
+        TrafficSpawnZone chosenSpawn = TrafficSpawnZone.allSpawnZones[randomIndex];
+
+        // 1. Apply the position from the Spawn object
+        transform.position = chosenSpawn.transform.position;
+        
+        // 2. Apply the MANUAL rotation you typed in the inspector of that Spawn
+        transform.rotation = Quaternion.Euler(chosenSpawn.customCarRotation);
+
+        // 3. Reset ALL timers and error states
+        timeOffMagnet = 0f;
+        stationaryTimer = 0f;
+        lastPosition = transform.position; // Prevent the car from thinking it's stuck at the new location
+        isTurning = false;
+        ignoreObliqueCars = false;
+        stuckTimer = 0f;
+        
+        Debug.Log($"[Traffic System] A lost car was teleported to {chosenSpawn.gameObject.name}.");
     }
 }

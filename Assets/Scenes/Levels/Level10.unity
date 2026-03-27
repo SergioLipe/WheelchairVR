@@ -5706,11 +5706,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &40631211
@@ -12195,11 +12198,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &84869153
@@ -16380,11 +16386,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1 &117159025
@@ -17806,11 +17815,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &126262396
@@ -18287,7 +18299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -37.06722
+      value: -18.16
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18419,6 +18431,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 444930, guid: b319c45f7bb0a5f49a903d4b26bdcd4b, type: 3}
   m_PrefabInstance: {fileID: 129775848}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &129986668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 129986669}
+  - component: {fileID: 129986673}
+  - component: {fileID: 129986672}
+  - component: {fileID: 129986671}
+  - component: {fileID: 129986670}
+  m_Layer: 0
+  m_Name: Lane (26)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &129986669
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129986668}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -72.83, y: 0, z: 107.74}
+  m_LocalScale: {x: 4.587169, y: 1, z: 63.20117}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &129986670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129986668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &129986671
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129986668}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &129986672
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129986668}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &129986673
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129986668}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &130167646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18971,11 +19110,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &133299050
@@ -19884,6 +20026,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 413058, guid: ae7b8255185ace64ca379cb1ca3b24e6, type: 3}
   m_PrefabInstance: {fileID: 141553437}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &141712042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 141712043}
+  - component: {fileID: 141712047}
+  - component: {fileID: 141712046}
+  - component: {fileID: 141712045}
+  - component: {fileID: 141712044}
+  m_Layer: 0
+  m_Name: Lane (24)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &141712043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141712042}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -67.84, y: 1, z: 152.61}
+  m_LocalScale: {x: 4.587169, y: 1, z: 93.86325}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &141712044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141712042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &141712045
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141712042}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &141712046
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141712042}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &141712047
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141712042}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &141742403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22484,7 +22753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -154.55
+      value: -296.36
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -22492,23 +22761,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 126.31278
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2311848, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -24292,11 +24565,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &169522744
@@ -24435,12 +24711,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169733724}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -13.7, y: 0.86, z: 117.6}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -13.699997, y: 0.86, z: 117.6}
   m_LocalScale: {x: 4.587169, y: 1, z: 75.15108}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &169733726
 MonoBehaviour:
@@ -31860,11 +32136,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &222224969
@@ -33704,11 +33983,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &234643172
@@ -35362,11 +35644,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &248156554
@@ -40693,7 +40978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 131.68
+      value: 14.12999
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalPosition.y
@@ -40701,7 +40986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.12278
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalRotation.w
@@ -40796,11 +41081,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &280564700
@@ -41020,12 +41308,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281166535}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -18.91, y: 0.86, z: -12}
-  m_LocalScale: {x: 4.587169, y: 1, z: 164.47052}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -18.909996, y: 0.86, z: -3}
+  m_LocalScale: {x: 4.587169, y: 1, z: 135.06447}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &281166537
 MonoBehaviour:
@@ -42096,12 +42384,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289236188}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -178.1, y: 0.86, z: -37.7}
-  m_LocalScale: {x: 4.9824, y: 1, z: 164.47052}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -178.1, y: 0.86, z: -48.7}
+  m_LocalScale: {x: 4.9824, y: 1, z: 122.484344}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &289236190
 MonoBehaviour:
@@ -42944,13 +43232,61 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
+--- !u!1 &294174813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 294174814}
+  - component: {fileID: 294174815}
+  m_Layer: 0
+  m_Name: SpawnZoneB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &294174814
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294174813}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 80.85, y: 0, z: 8}
+  m_LocalScale: {x: 1.4031, y: 1.4031, z: 1.4031}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1123868136}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &294174815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294174813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ce515d2c3aeee41acb822144a4c97f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrafficSpawnZone
+  customCarRotation: {x: 0, y: -90, z: 0}
 --- !u!1001 &294286752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45362,11 +45698,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &309716169
@@ -49965,6 +50304,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 485062, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
   m_PrefabInstance: {fileID: 342517295}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &342991880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 342991881}
+  - component: {fileID: 342991885}
+  - component: {fileID: 342991884}
+  - component: {fileID: 342991883}
+  - component: {fileID: 342991882}
+  m_Layer: 0
+  m_Name: Lane (29)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &342991881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342991880}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -24.08, y: 0, z: 118.06}
+  m_LocalScale: {x: 4.587169, y: 1, z: 13.49837}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &342991882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342991880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &342991883
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342991880}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &342991884
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342991880}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &342991885
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342991880}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &343181575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51831,11 +52297,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &352284867
@@ -52565,11 +53034,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &357536978
@@ -53840,11 +54312,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &367756413
@@ -57823,6 +58298,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 413058, guid: ae7b8255185ace64ca379cb1ca3b24e6, type: 3}
   m_PrefabInstance: {fileID: 394719254}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &394823737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 394823738}
+  - component: {fileID: 394823742}
+  - component: {fileID: 394823741}
+  - component: {fileID: 394823740}
+  - component: {fileID: 394823739}
+  m_Layer: 0
+  m_Name: Lane (21)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &394823738
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394823737}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -93.13, y: 0, z: 47.87}
+  m_LocalScale: {x: 4.587169, y: 1, z: 23.883408}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &394823739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394823737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &394823740
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394823737}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &394823741
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394823737}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &394823742
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394823737}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &394828096 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 141870, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
@@ -58396,6 +58998,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
   m_PrefabInstance: {fileID: 397638415}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &397859727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 397859728}
+  - component: {fileID: 397859732}
+  - component: {fileID: 397859731}
+  - component: {fileID: 397859730}
+  - component: {fileID: 397859729}
+  m_Layer: 0
+  m_Name: Lane (19)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &397859728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397859727}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -49.06, y: 0, z: 18.82}
+  m_LocalScale: {x: 4.587169, y: 1, z: 16.352942}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &397859729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397859727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &397859730
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397859727}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &397859731
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397859727}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &397859732
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397859727}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &398217600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59073,6 +59802,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 489384, guid: 1ac8b9099f0c47e41a84ef1f2e41988c, type: 3}
   m_PrefabInstance: {fileID: 399607783}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &400169984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400169985}
+  - component: {fileID: 400169989}
+  - component: {fileID: 400169988}
+  - component: {fileID: 400169987}
+  - component: {fileID: 400169986}
+  m_Layer: 0
+  m_Name: Lane (28)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400169985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400169984}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -24.39, y: 0, z: 112.95}
+  m_LocalScale: {x: 4.587169, y: 1, z: 13.120442}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &400169986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400169984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &400169987
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400169984}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &400169988
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400169984}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &400169989
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400169984}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &400192756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61936,11 +62792,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &414563134
@@ -64896,7 +65755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.8
+      value: 31.86
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.y
@@ -66559,11 +67418,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &444667618
@@ -71107,7 +71969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 107.79001
+      value: -9.76
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.y
@@ -71115,7 +71977,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.5227804
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.w
@@ -71174,11 +72036,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &477366686
@@ -71642,11 +72507,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &478896279
@@ -72270,11 +73138,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &481557460
@@ -75884,11 +76755,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &504798053
@@ -76119,11 +76993,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &505748360
@@ -83142,11 +84019,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &553752731
@@ -83278,11 +84158,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &555724885
@@ -88049,12 +88932,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588013843}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -167, y: 0.86, z: 2.82}
-  m_LocalScale: {x: 4.9824, y: 1, z: 527.7302}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -90.3, y: 0.86, z: 2.8000002}
+  m_LocalScale: {x: 4.9824, y: 1, z: 368.6302}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &588013845
 MonoBehaviour:
@@ -89178,11 +90061,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &596514497
@@ -94739,11 +95625,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &634677352
@@ -95674,11 +96563,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &639894857
@@ -101089,11 +101981,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &678943223
@@ -104901,11 +105796,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &706591258
@@ -109436,7 +110334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 738397180}
   m_Layer: 0
-  m_Name: LaneMagnets
+  m_Name: LaneLimiter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109455,20 +110353,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1571233100}
-  - {fileID: 588013844}
-  - {fileID: 1751402261}
-  - {fileID: 1431543016}
-  - {fileID: 744512580}
-  - {fileID: 1451350476}
-  - {fileID: 1651595346}
-  - {fileID: 1613232873}
-  - {fileID: 289236189}
-  - {fileID: 1967665550}
-  - {fileID: 281166536}
-  - {fileID: 1473566693}
-  - {fileID: 1120197299}
-  - {fileID: 169733725}
+  - {fileID: 1123868136}
+  - {fileID: 1091523034}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &738570034
@@ -110583,12 +111469,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744512579}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -167, y: 0.86, z: -67.8}
-  m_LocalScale: {x: 4.9824, y: 1, z: 527.7302}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -99.1, y: 0.86, z: -67.8}
+  m_LocalScale: {x: 4.9824, y: 1, z: 196.72269}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &744512581
 MonoBehaviour:
@@ -113719,11 +114605,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &763906382
@@ -113921,11 +114810,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &766420537
@@ -114507,11 +115399,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &772596354
@@ -115078,6 +115973,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 413058, guid: ae7b8255185ace64ca379cb1ca3b24e6, type: 3}
   m_PrefabInstance: {fileID: 776218716}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &776357687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 776357688}
+  - component: {fileID: 776357692}
+  - component: {fileID: 776357691}
+  - component: {fileID: 776357690}
+  - component: {fileID: 776357689}
+  m_Layer: 0
+  m_Name: Lane (23)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &776357688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776357687}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -67.84, y: 1, z: 148.41176}
+  m_LocalScale: {x: 4.587169, y: 1, z: 93.86325}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &776357689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776357687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &776357690
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776357687}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &776357691
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776357687}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &776357692
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776357687}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &776362416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115352,11 +116374,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &777773469
@@ -118859,11 +119884,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &803654987
@@ -127881,11 +128909,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &861186496
@@ -128252,11 +129283,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &866187227
@@ -130540,11 +131574,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &880727644
@@ -132260,11 +133297,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &892760354
@@ -136951,11 +137991,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &921107789
@@ -137570,11 +138613,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1 &923836520
@@ -141471,11 +142517,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &951887143
@@ -141943,6 +142992,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 485062, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
   m_PrefabInstance: {fileID: 955535230}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &955541146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 955541147}
+  - component: {fileID: 955541151}
+  - component: {fileID: 955541150}
+  - component: {fileID: 955541149}
+  - component: {fileID: 955541148}
+  m_Layer: 0
+  m_Name: Lane (18)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &955541147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955541146}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -127.86, y: 0, z: -36.94}
+  m_LocalScale: {x: 4.587169, y: 1, z: 20.529495}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &955541148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955541146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &955541149
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955541146}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &955541150
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955541146}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &955541151
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955541146}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &957522212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -152115,11 +153291,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1035472327
@@ -153010,7 +154189,6 @@ Transform:
   - {fileID: 397638416}
   - {fileID: 678725134}
   - {fileID: 803156984}
-  - {fileID: 1734722433}
   - {fileID: 201241006}
   - {fileID: 639805579}
   - {fileID: 431678515}
@@ -153848,11 +155026,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1050842545
@@ -154010,11 +155191,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1051101807
@@ -154488,11 +155672,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1056652777
@@ -155909,11 +157096,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1067150565
@@ -157087,11 +158277,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1073538223
@@ -160003,6 +161196,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 413058, guid: ae7b8255185ace64ca379cb1ca3b24e6, type: 3}
   m_PrefabInstance: {fileID: 1091251993}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1091523033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1091523034}
+  m_Layer: 0
+  m_Name: Lanes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1091523034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091523033}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1571233100}
+  - {fileID: 588013844}
+  - {fileID: 1751402261}
+  - {fileID: 1431543016}
+  - {fileID: 744512580}
+  - {fileID: 1451350476}
+  - {fileID: 1651595346}
+  - {fileID: 1613232873}
+  - {fileID: 289236189}
+  - {fileID: 1967665550}
+  - {fileID: 281166536}
+  - {fileID: 1473566693}
+  - {fileID: 1120197299}
+  - {fileID: 169733725}
+  - {fileID: 1392807584}
+  - {fileID: 1214247353}
+  - {fileID: 1771316647}
+  - {fileID: 1810819326}
+  - {fileID: 955541147}
+  - {fileID: 397859728}
+  - {fileID: 1690097807}
+  - {fileID: 394823738}
+  - {fileID: 1675407982}
+  - {fileID: 776357688}
+  - {fileID: 141712043}
+  - {fileID: 1556760466}
+  - {fileID: 129986669}
+  - {fileID: 1995435466}
+  - {fileID: 400169985}
+  - {fileID: 342991881}
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1091594583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -161949,11 +163203,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1106335458
@@ -162049,11 +163306,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1106335465
@@ -164063,12 +165323,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120197298}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.51, y: 0.86, z: 100.1}
-  m_LocalScale: {x: 4.587169, y: 1, z: 112.663956}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.510002, y: 0.86, z: 120.9}
+  m_LocalScale: {x: 4.587169, y: 1, z: 69.29031}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1120197300
 MonoBehaviour:
@@ -164783,6 +166043,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 489384, guid: 1ac8b9099f0c47e41a84ef1f2e41988c, type: 3}
   m_PrefabInstance: {fileID: 1123479346}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1123868135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1123868136}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1123868136
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123868135}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1556809905}
+  - {fileID: 294174814}
+  m_Father: {fileID: 738397180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1123928449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165958,11 +167251,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1131088345
@@ -169396,11 +170692,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1152443095
@@ -173524,11 +174823,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1178710561
@@ -173775,11 +175077,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1180797403
@@ -176272,11 +177577,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1 &1202026667 stripped
@@ -178012,6 +179320,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 410594, guid: 005add2e805dff846a22a816bce2f715, type: 3}
   m_PrefabInstance: {fileID: 1214150461}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1214247352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1214247353}
+  - component: {fileID: 1214247357}
+  - component: {fileID: 1214247356}
+  - component: {fileID: 1214247355}
+  - component: {fileID: 1214247354}
+  m_Layer: 0
+  m_Name: Lane (15)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1214247353
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214247352}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -208.8, y: 0, z: -112.4}
+  m_LocalScale: {x: 4.587169, y: 1, z: 44.36302}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1214247354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214247352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1214247355
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214247352}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1214247356
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214247352}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1214247357
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214247352}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1214793575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -179623,11 +181058,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1 &1228728859
@@ -180233,7 +181671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -59.62
+      value: -54.24
       objectReference: {fileID: 0}
     - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_LocalPosition.y
@@ -181330,11 +182768,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1241450654
@@ -182744,11 +184185,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1251203778
@@ -184152,11 +185596,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1260381144
@@ -185099,11 +186546,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1268085144
@@ -187069,11 +188519,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1283407608
@@ -189493,11 +190946,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1296387585
@@ -189882,11 +191338,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1299203056
@@ -192193,11 +193652,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1 &1316253138 stripped
@@ -192410,11 +193872,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1317187029
@@ -193918,11 +195383,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1328095139
@@ -199364,11 +200832,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1367240881
@@ -199621,11 +201092,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1368699855
@@ -201056,7 +202530,7 @@ Transform:
   m_GameObject: {fileID: 1377921769}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 91.93, y: -0.332, z: -7.313508}
+  m_LocalPosition: {x: 88.51, y: -0.332, z: -7.313508}
   m_LocalScale: {x: 1, y: 1, z: 4.0894}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -201077,10 +202551,10 @@ MonoBehaviour:
   defaultTurnAngle: 0
   defaultTurnSpeed: 0
   defaultSpeedDuringTurn: 0
-  carsTakingDefaultRoute: 1
+  carsTakingDefaultRoute: 2
   specialTurnAngle: 90
-  specialTurnSpeed: 100
-  specialSpeedDuringTurn: 10
+  specialTurnSpeed: 60
+  specialSpeedDuringTurn: 9
 --- !u!65 &1377921772
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -201435,11 +202909,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1379670808
@@ -202738,11 +204215,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1388528843
@@ -203454,6 +204934,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 447308, guid: e74203ea62daad341816376fb141a8b5, type: 3}
   m_PrefabInstance: {fileID: 1392725952}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1392807583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1392807584}
+  - component: {fileID: 1392807588}
+  - component: {fileID: 1392807587}
+  - component: {fileID: 1392807586}
+  - component: {fileID: 1392807585}
+  m_Layer: 0
+  m_Name: Lane (14)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1392807584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392807583}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -161.3, y: 0, z: -132}
+  m_LocalScale: {x: 4.587169, y: 1, z: 97.81347}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1392807585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392807583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1392807586
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392807583}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1392807587
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392807583}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1392807588
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392807583}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1392905024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -208837,11 +210444,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1 &1428040325
@@ -209434,12 +211044,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1431543015}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -114.06, y: 0.86, z: 2.82}
-  m_LocalScale: {x: 4.9824, y: 1, z: 527.7302}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -114.06, y: 0.86, z: 8.4}
+  m_LocalScale: {x: 4.9824, y: 1, z: 305.6719}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1431543017
 MonoBehaviour:
@@ -209676,11 +211286,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 485062, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
   m_PrefabInstance: {fileID: 1432031600}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1432793015 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 189930, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-  m_PrefabInstance: {fileID: 1734722432}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1432848213
 PrefabInstance:
@@ -210337,11 +211942,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1437113093
@@ -212602,12 +214210,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451350475}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -167, y: 0.86, z: -61.8}
-  m_LocalScale: {x: 4.9824, y: 1, z: 527.7302}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -97.8, y: 0.86, z: -61.799995}
+  m_LocalScale: {x: 4.9824, y: 1, z: 191.62051}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1451350477
 MonoBehaviour:
@@ -213127,11 +214735,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1454442903
@@ -214235,11 +215846,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1460041943
@@ -216157,12 +217771,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473566692}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.72, y: 0.86, z: -17.5}
-  m_LocalScale: {x: 4.587169, y: 1, z: 164.47052}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13.720001, y: 0.86, z: -5.5}
+  m_LocalScale: {x: 4.587169, y: 1, z: 137.60426}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1473566694
 MonoBehaviour:
@@ -219237,11 +220851,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1497004196
@@ -221077,11 +222694,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1515701104
@@ -221730,11 +223350,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1519553223
@@ -225606,11 +227229,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1545770059
@@ -225970,11 +227596,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1548073297
@@ -227441,6 +229070,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 414952, guid: a154b407aa4395c40925726c816c3770, type: 3}
   m_PrefabInstance: {fileID: 1556445263}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1556760465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1556760466}
+  - component: {fileID: 1556760470}
+  - component: {fileID: 1556760469}
+  - component: {fileID: 1556760468}
+  - component: {fileID: 1556760467}
+  m_Layer: 0
+  m_Name: Lane (25)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1556760466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556760465}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.014639403, y: 0.0027157366, z: 0.023487031, w: -0.9996133}
+  m_LocalPosition: {x: -48.92, y: 1.68, z: -29.4}
+  m_LocalScale: {x: 4.587169, y: 1, z: 57.379555}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1556760467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556760465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1556760468
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556760465}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1556760469
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556760465}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1556760470
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556760465}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1556778660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -227499,6 +229255,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 440340, guid: d2b133bd1e0723046a270de71e937731, type: 3}
   m_PrefabInstance: {fileID: 1556778660}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1556809904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1556809905}
+  - component: {fileID: 1556809906}
+  m_Layer: 0
+  m_Name: SpawnZoneA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1556809905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556809904}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -261.48, y: 0, z: 2.72}
+  m_LocalScale: {x: 1.4031, y: 1.4031, z: 1.4031}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1123868136}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1556809906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556809904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ce515d2c3aeee41acb822144a4c97f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrafficSpawnZone
+  customCarRotation: {x: 0, y: 90, z: 0}
 --- !u!1 &1556931228
 GameObject:
   m_ObjectHideFlags: 0
@@ -227784,11 +229585,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1562094046
@@ -228562,11 +230366,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1566050914
@@ -230199,12 +232006,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571233099}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -167, y: 0.86, z: 8}
-  m_LocalScale: {x: 4.9824, y: 1, z: 527.7302}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -91.5, y: 0.86, z: 8}
+  m_LocalScale: {x: 4.9824, y: 1, z: 368.58472}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1571233101
 MonoBehaviour:
@@ -231570,11 +233377,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1578058499
@@ -235875,12 +237685,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613232872}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -82.8, y: 0.86, z: -107.4}
-  m_LocalScale: {x: 4.9824, y: 1, z: 211.5565}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -147.1, y: 0.86, z: -107.4}
+  m_LocalScale: {x: 4.9824, y: 1, z: 59.05335}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1613232874
 MonoBehaviour:
@@ -236822,11 +238632,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1618915128
@@ -237036,11 +238849,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1619440723
@@ -239017,11 +240833,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1632859248
@@ -239519,11 +241338,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1636645368
@@ -239678,11 +241500,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1 &1637896095 stripped
@@ -239706,11 +241531,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1637896100
@@ -241012,11 +242840,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1647111106
@@ -241769,12 +243600,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1651595345}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -88, y: 0.86, z: -101.6}
-  m_LocalScale: {x: 4.9824, y: 1, z: -198.84346}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -146.5, y: 0.86, z: -101.6}
+  m_LocalScale: {x: 4.9824, y: 1, z: -56.16537}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1651595347
 MonoBehaviour:
@@ -244079,11 +245910,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1667003056
@@ -244648,11 +246482,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1671425441
@@ -245049,6 +246886,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 413058, guid: ae7b8255185ace64ca379cb1ca3b24e6, type: 3}
   m_PrefabInstance: {fileID: 1674650334}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1675407981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1675407982}
+  - component: {fileID: 1675407986}
+  - component: {fileID: 1675407985}
+  - component: {fileID: 1675407984}
+  - component: {fileID: 1675407983}
+  m_Layer: 0
+  m_Name: Lane (22)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1675407982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675407981}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -153.47, y: 0, z: 77.87}
+  m_LocalScale: {x: 4.587169, y: 1, z: 63.997498}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1675407983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675407981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1675407984
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675407981}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1675407985
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675407981}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1675407986
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675407981}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1675763891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -247275,6 +249239,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 485062, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
   m_PrefabInstance: {fileID: 1689973365}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1690097806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1690097807}
+  - component: {fileID: 1690097811}
+  - component: {fileID: 1690097810}
+  - component: {fileID: 1690097809}
+  - component: {fileID: 1690097808}
+  m_Layer: 0
+  m_Name: Lane (20)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1690097807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690097806}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -65.14, y: 0, z: 38.13}
+  m_LocalScale: {x: 4.587169, y: 1, z: 30.077967}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1690097808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690097806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1690097809
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690097806}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1690097810
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690097806}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1690097811
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690097806}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1690545492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -248263,11 +250354,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1695753995
@@ -251164,11 +253258,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1 &1714834493 stripped
@@ -251219,11 +253316,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1715181717
@@ -251829,11 +253929,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1718166468
@@ -254413,124 +256516,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 468664, guid: a0fc9668797c0ba40bfd0a39fc67f2ed, type: 3}
   m_PrefabInstance: {fileID: 1734588804}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1734722432
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1042026892}
-    m_Modifications:
-    - target: {fileID: 189930, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-      propertyPath: m_Name
-      value: SM_Veh_Car_Police_14
-      objectReference: {fileID: 0}
-    - target: {fileID: 189930, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-      propertyPath: m_RootOrder
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -21.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 189930, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1734722437}
-    - targetCorrespondingSourceObject: {fileID: 189930, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1734722438}
-  m_SourcePrefab: {fileID: 100100000, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
---- !u!4 &1734722433 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
-  m_PrefabInstance: {fileID: 1734722432}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1734722437
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432793015}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &1734722438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432793015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4fe860f6ac77614cae9735b27c3568b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarPatrol
-  speed: 10
-  canMove: 1
-  targetStopZoneTag: StopZone
-  neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
-  frontSensorLength: 4.5
-  obliqueSensorLength: 4
-  obliqueSensorAngle: 25
-  maxWaitTime: 9999
-  isYielding: 0
-  isTurning: 0
 --- !u!1001 &1734980986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -257363,12 +259348,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1751402260}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -108.53, y: 0.86, z: 2.82}
-  m_LocalScale: {x: 4.9824, y: 1, z: 527.7302}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -108.53, y: 0.86, z: 24.2}
+  m_LocalScale: {x: 4.9824, y: 1, z: 285.12827}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1751402262
 MonoBehaviour:
@@ -259237,11 +261222,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1764785370
@@ -260330,6 +262318,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 464886, guid: 4290c366a38253b4f87a53b8a3654483, type: 3}
   m_PrefabInstance: {fileID: 1771295949}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1771316646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1771316647}
+  - component: {fileID: 1771316651}
+  - component: {fileID: 1771316650}
+  - component: {fileID: 1771316649}
+  - component: {fileID: 1771316648}
+  m_Layer: 0
+  m_Name: Lane (16)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1771316647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771316646}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -198.7, y: 0, z: -92}
+  m_LocalScale: {x: 4.587169, y: 1, z: 25.369884}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1771316648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771316646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1771316649
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771316646}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1771316650
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771316646}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1771316651
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771316646}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1771417660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -263109,11 +265224,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1788987743
@@ -264352,7 +266470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -33.187218
+      value: -62.67
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -264429,11 +266547,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1798967208
@@ -264642,11 +266763,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1800350756
@@ -264967,11 +267091,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1802238486
@@ -266472,6 +268599,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 493038, guid: dab5db0c0226560499e1021898aafb64, type: 3}
   m_PrefabInstance: {fileID: 1810650295}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1810819325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1810819326}
+  - component: {fileID: 1810819330}
+  - component: {fileID: 1810819329}
+  - component: {fileID: 1810819328}
+  - component: {fileID: 1810819327}
+  m_Layer: 0
+  m_Name: Lane (17)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1810819326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810819325}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -153.81, y: 0, z: -10.37}
+  m_LocalScale: {x: 4.587169, y: 1, z: 18.390602}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1810819327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810819325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1810819328
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810819325}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1810819329
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810819325}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1810819330
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810819325}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1810850920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -266639,11 +268893,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1811166114
@@ -268324,11 +270581,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1820875292
@@ -269426,11 +271686,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1829421670
@@ -274601,11 +276864,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1863801275
@@ -276261,11 +278527,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1877364534
@@ -276961,11 +279230,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &1885700116
@@ -279579,11 +281851,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1905579099
@@ -279933,11 +282208,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1906290229
@@ -289363,11 +291641,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1951064660
@@ -289477,11 +291758,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1951178302
@@ -292835,12 +295119,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967665549}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -184.26, y: 0.86, z: -37.7}
-  m_LocalScale: {x: 4.9824, y: 1, z: 164.47052}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -184.26, y: 0.86, z: -15.099999}
+  m_LocalScale: {x: 4.9824, y: 1, z: 195.42387}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 738397180}
+  m_Father: {fileID: 1091523034}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1967665551
 MonoBehaviour:
@@ -293264,11 +295548,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1972560139
@@ -294463,11 +296750,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1981289052
@@ -296314,11 +298604,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1 &1995290744 stripped
@@ -296369,11 +298662,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &1995307136
@@ -296484,6 +298780,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 405220, guid: 9384e4f7925dd0d47a003b910f826bf8, type: 3}
   m_PrefabInstance: {fileID: 1995326725}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1995435465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1995435466}
+  - component: {fileID: 1995435470}
+  - component: {fileID: 1995435469}
+  - component: {fileID: 1995435468}
+  - component: {fileID: 1995435467}
+  m_Layer: 0
+  m_Name: Lane (27)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1995435466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995435465}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -72.83, y: 0, z: 112.95}
+  m_LocalScale: {x: 4.587169, y: 1, z: 63.20117}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1091523034}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1995435467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995435465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &1995435468
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995435465}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1995435469
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995435465}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1995435470
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995435465}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1995538720
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -297509,11 +299932,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &2002843204
@@ -299947,11 +302373,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &2020719501
@@ -300492,11 +302921,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &2022877448
@@ -300955,11 +303387,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &2026038473
@@ -304975,11 +307410,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &2054173459
@@ -309689,11 +312127,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1 &2089676640 stripped
@@ -309744,11 +312185,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &2090231081
@@ -311486,11 +313930,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &2100540324
@@ -311777,11 +314224,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &2104079350
@@ -312163,11 +314613,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &2105804040
@@ -312985,11 +315438,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &2111611571
@@ -315303,11 +317759,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &2128152437
@@ -315682,11 +318141,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!1001 &2129930425
@@ -317448,11 +319910,14 @@ MonoBehaviour:
   canMove: 1
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
-  sensorFrontOffset: 1.8
+  sensorFrontOffset: 1.4
   frontSensorLength: 4.5
   obliqueSensorLength: 4
   obliqueSensorAngle: 25
   maxWaitTime: 9999
+  maxTimeOffMagnet: 15
+  maxStationaryTime: 15
+  timeOffMagnet: 0
   isYielding: 0
   isTurning: 0
 --- !u!54 &2142879085

@@ -2,8 +2,9 @@ using UnityEngine;
 
 /// <summary>
 /// Acts as a "Lane Magnet" for straight roads. 
-/// Gently pulls cars sideways to the exact center line of the lane.
+/// Gently pulls cars sideways to the exact center line of the lane to fix positional drift.
 /// Uses a Dot Product filter to ignore cross-traffic at intersections.
+/// Also resets the car's teleport timer so the traffic system knows the car is safely on a road.
 /// </summary>
 public class RoadLaneAligner : MonoBehaviour
 {
@@ -15,27 +16,37 @@ public class RoadLaneAligner : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        // Attempt to find the CarCityMovement script on the object that entered the trigger
         CarCityMovement car = other.GetComponentInParent<CarCityMovement>();
 
-        // Check if it's a car, and ensure it's not currently in the middle of a forced turn
-        if (car != null && !car.isTurning) 
+        // Proceed ONLY if it is a valid car
+        if (car != null) 
         {
-    
-            // Compare the magnet's forward direction (Z-axis) with the car's forward direction.
-            float directionMatch = Vector3.Dot(transform.forward, car.transform.forward);
+            // --- FAILSAFE RESET ---
+            // Tell the car it is safely inside a lane, preventing the 5-second teleport failsafe from triggering
+            car.timeOffMagnet = 0f;
 
-            // Only pull the car if it is driving in the same general direction as the magnet (directionMatch > 0.8).
-            // Cross-traffic will have a directionMatch near 0, so they will be completely ignored!
-            if (directionMatch >= requiredAlignment)
+            // We DO NOT align them if they are in the middle of a forced intersection turn
+            if (!car.isTurning)
             {
-                // 1. Convert the car's world position into the road's local space
-                Vector3 localCarPos = transform.InverseTransformPoint(car.transform.position);
+                // --- DIRECTIONAL FILTER (Cross-Traffic Protection) ---
+                // Compare the magnet's forward direction (Z-axis) with the car's forward direction.
+                // This returns 1 if parallel, 0 if perpendicular (crossing), and -1 if backwards.
+                float directionMatch = Vector3.Dot(transform.forward, car.transform.forward);
 
-                // 2. Smoothly pull the X position to 0 (the exact center of the road)
-                localCarPos.x = Mathf.Lerp(localCarPos.x, 0f, Time.deltaTime * alignmentSpeed);
+                // Only pull the car if it is driving in the same general direction as the magnet.
+                // Cross-traffic will have a directionMatch near 0, so they will be completely ignored!
+                if (directionMatch >= requiredAlignment)
+                {
+                    // 1. Convert the car's world position into the road's local space
+                    Vector3 localCarPos = transform.InverseTransformPoint(car.transform.position);
 
-                // 3. Convert back to world space and apply
-                car.transform.position = transform.TransformPoint(localCarPos);
+                    // 2. In local space, X is left/right. We smoothly Lerp the X position to 0 (the exact center of the road)
+                    localCarPos.x = Mathf.Lerp(localCarPos.x, 0f, Time.deltaTime * alignmentSpeed);
+
+                    // 3. Convert the position back to world space and apply it to the car
+                    car.transform.position = transform.TransformPoint(localCarPos);
+                }
             }
         }
     }
