@@ -14,6 +14,14 @@ public class FinishLevelTrigger : MonoBehaviour
     [Tooltip("Delay in seconds (Real Time) before showing the results")]
     public float finishDelay = 0.5f;
 
+    [Header("--- Audio Settings ---")]
+    [Tooltip("The sound effect to play when the star is collected")]
+    public AudioClip finishSound;
+
+    [Tooltip("Volume of the finish sound (0.0 to 1.0)")]
+    [Range(0f, 1f)]
+    public float finishVolume = 1f;
+
     private bool hasTriggered = false;
 
     private void OnTriggerEnter(Collider other)
@@ -22,6 +30,12 @@ public class FinishLevelTrigger : MonoBehaviour
         if (other.CompareTag("Player") && !hasTriggered)
         {
             hasTriggered = true;
+
+            // Using transform.position instead of Camera.main to prevent crashes ---
+            if (finishSound != null)
+            {
+                AudioSource.PlayClipAtPoint(finishSound, transform.position, finishVolume);
+            }
 
             // 1. HIDE VISUALS ONLY (Keep the GameObject active for the coroutine)
             HideStarVisuals();

@@ -3240,6 +3240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &40422497
@@ -6339,6 +6340,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &82540163
 MeshFilter:
@@ -7530,6 +7532,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 413058, guid: ae7b8255185ace64ca379cb1ca3b24e6, type: 3}
   m_PrefabInstance: {fileID: 99135429}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &99759769
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 532.86115
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 318.8619
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -494.50696
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482515810136080974, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
 --- !u!1001 &99876622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13195,6 +13254,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &161114765
 MeshFilter:
@@ -15099,14 +15159,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186016807}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
@@ -21203,6 +21263,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -27293,6 +27354,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -28925,6 +28987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &347318957
@@ -32430,6 +32493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &387183894
@@ -32964,6 +33028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &391643801
@@ -46067,6 +46132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &519891876
@@ -46682,14 +46748,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527440173}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
@@ -48356,6 +48422,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -58064,6 +58131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &664969119
@@ -62289,6 +62357,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 618702234036164939, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618702234036164939, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618702234036164939, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618702234036164939, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1032862400467688433, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1032862400467688433, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1032862400467688433, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1032862400467688433, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2723922525863290843, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -62326,6 +62426,38 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4302092325500478415, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849520236323972459, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849520236323972459, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849520236323972459, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849520236323972459, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244681409422174054, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244681409422174054, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244681409422174054, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6244681409422174054, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -62410,6 +62542,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7698877170417071970, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773472448715696061, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773472448715696061, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773472448715696061, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773472448715696061, guid: 74f6947801bd363498a1d0ffa8932bb5, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -76320,6 +76468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &878479561
@@ -78794,6 +78943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &900265489
@@ -91028,6 +91178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &1077845925
@@ -98205,6 +98356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "MANTER DIST\xC2NCIA DAS PESSOAS"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!136 &1157063265
@@ -129863,6 +130015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &1543180923
@@ -134152,6 +134305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "MANTER DIST\xC2NCIA DAS PESSOAS"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!136 &1581241739
@@ -136984,6 +137138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &1617155413
@@ -144811,6 +144966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &1710847783
@@ -152051,6 +152207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &1794734180
@@ -167557,6 +167714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "N\xC3O V\xC1S PARA A RELVA"
+  allowSafeExitIfAlreadyInside: 0
   warningTextUI: {fileID: 549250565}
   hazardPanel: {fileID: 1696789564}
 --- !u!65 &1949355136
@@ -183650,3 +183808,4 @@ SceneRoots:
   - {fileID: 104356266}
   - {fileID: 1946094604}
   - {fileID: 1815254899}
+  - {fileID: 99759769}

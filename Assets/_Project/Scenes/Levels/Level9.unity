@@ -21106,16 +21106,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!54 &156754680
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31626,16 +31628,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &234643172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37889,16 +37893,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!54 &278288774
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -38165,16 +38171,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!54 &280564697
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -39332,16 +39340,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!54 &288882000
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -40116,16 +40126,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &294286752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49211,16 +49223,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &357536978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60054,16 +60068,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!54 &420253844
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63293,16 +63309,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &444667618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67642,16 +67660,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!54 &477366683
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -68111,16 +68131,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &478896279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79081,16 +79103,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &553752731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83256,16 +83280,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!54 &585812503
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -89121,16 +89147,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!54 &630885142
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -90799,16 +90827,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &639894857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -96274,16 +96304,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &678943223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108406,16 +108438,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!54 &763906379
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -108615,16 +108649,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &766420537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113569,16 +113605,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &803654987
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -122347,16 +122385,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &861186496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -122719,16 +122759,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &866187227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126877,16 +126919,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &892760354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132072,16 +132116,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &925913591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145825,16 +145871,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1035472327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147466,16 +147514,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1050842545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150578,16 +150628,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!54 &1073538220
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155412,16 +155464,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1106335458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -155513,16 +155567,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!54 &1106335462
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -159173,16 +159229,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1131088345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164055,6 +164113,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 421212, guid: a0f542ba0461f8c4cbb89acbe6331cf5, type: 3}
   m_PrefabInstance: {fileID: 1163588656}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1164904172
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 532.86115
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 318.8619
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -494.50696
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8212073925770704637, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482515810136080974, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1d9070851a4f8c34986cf8cbbf23f574, type: 3}
 --- !u!1001 &1165082452
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -166091,16 +166206,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1178710561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -166348,16 +166465,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1180797403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -168916,16 +169035,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1202141787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -175183,16 +175304,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1251203778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -176582,16 +176705,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1260381144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191205,16 +191330,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1367240881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -194424,16 +194551,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!54 &1388523598
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -200327,16 +200456,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1428485742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -212165,16 +212296,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1519553223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218398,16 +218531,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1566050914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -225909,16 +226044,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1618915128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -228427,16 +228564,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1638348784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -236231,16 +236370,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1695753995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -240963,16 +241104,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!54 &1726555106
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -242247,16 +242390,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1734980986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246684,16 +246829,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1764785370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -252051,16 +252198,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1802238486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -265788,16 +265937,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1905579099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275509,16 +275660,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1951064660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281739,16 +281892,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &1995307136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -285323,16 +285478,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &2020719501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -286282,16 +286439,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &2026038473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294709,16 +294868,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1001 &2090231081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -302657,16 +302818,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarCityMovement
   speed: 10
   canMove: 1
-  turnZoneTag: TurnZone
-  turnAngle: 180
-  turnSpeed: 120
-  speedDuringTurn: 5
   targetStopZoneTag: StopZone
   neverStopZoneTag: CrosswalkZone
+  sensorFrontOffset: 1.4
   frontSensorLength: 8
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
+  maxTimeOffMagnet: 5
+  maxStationaryTime: 15
+  timeOffMagnet: 0
+  isYielding: 0
+  isTurning: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -302686,3 +302849,4 @@ SceneRoots:
   - {fileID: 2099523266}
   - {fileID: 1875296489}
   - {fileID: 139339666}
+  - {fileID: 1164904172}
