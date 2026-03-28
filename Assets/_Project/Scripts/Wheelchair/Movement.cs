@@ -29,7 +29,7 @@ public class Movement : MonoBehaviour
 
     [Header("=== Speed Settings ===")]
     [Tooltip("Maximum speed in normal mode (km/h)")]
-    public float maxSpeedNormal = 6f;
+    public float maxSpeedNormal = 8f;
 
     [Tooltip("Maximum speed in slow/interior mode (km/h)")]
     public float maxSpeedSlow = 3f;
@@ -712,7 +712,7 @@ public class Movement : MonoBehaviour
         GUI.Label(new Rect(120, 58, 120, 22), modeText, valueStyle);
 
         // Display Speed
-        float maxDisplaySpeed = currentMode == SpeedMode.Slow ? 3f : 6f;
+        float maxDisplaySpeed = currentMode == SpeedMode.Slow ? 3f : 8f;
         string speedText = $"{(currentSpeed * 3.6f):F1}/{maxDisplaySpeed:F0} km/h";
         labelStyle.normal.textColor = new Color(0.9f, 0.9f, 0.9f, 1f);
         GUI.Label(new Rect(30, 78, 90, 22), "Veloc:", labelStyle);
