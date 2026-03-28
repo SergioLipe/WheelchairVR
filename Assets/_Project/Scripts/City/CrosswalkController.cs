@@ -34,6 +34,7 @@ public class CrosswalkController : MonoBehaviour
 
     /// <summary>
     /// Scans all player zone colliders to see if the wheelchair is inside any of them.
+    /// Uses mathematically accurate Box bounds that respect rotation and scale.
     /// </summary>
     private bool CheckForPlayer()
     {
@@ -41,7 +42,11 @@ public class CrosswalkController : MonoBehaviour
         {
             if (pZone == null) continue;
 
-            Collider[] hits = Physics.OverlapBox(pZone.bounds.center, pZone.bounds.extents, pZone.transform.rotation);
+            // CORRECT MATH: Calculate exact world center and exact scaled half-extents
+            Vector3 boxCenter = pZone.transform.TransformPoint(pZone.center);
+            Vector3 boxHalfExtents = Vector3.Scale(pZone.size, pZone.transform.lossyScale) * 0.5f;
+
+            Collider[] hits = Physics.OverlapBox(boxCenter, boxHalfExtents, pZone.transform.rotation);
             
             foreach (Collider hit in hits)
             {
@@ -57,6 +62,7 @@ public class CrosswalkController : MonoBehaviour
 
     /// <summary>
     /// Scans all car zone colliders and updates the yielding state of any cars inside them.
+    /// Uses mathematically accurate Box bounds that respect rotation and scale.
     /// </summary>
     private void ControlCars(bool shouldStop)
     {
@@ -67,7 +73,11 @@ public class CrosswalkController : MonoBehaviour
         {
             if (cZone == null) continue;
 
-            Collider[] hits = Physics.OverlapBox(cZone.bounds.center, cZone.bounds.extents, cZone.transform.rotation);
+            //Calculate exact world center and exact scaled half-extents
+            Vector3 boxCenter = cZone.transform.TransformPoint(cZone.center);
+            Vector3 boxHalfExtents = Vector3.Scale(cZone.size, cZone.transform.lossyScale) * 0.5f;
+
+            Collider[] hits = Physics.OverlapBox(boxCenter, boxHalfExtents, cZone.transform.rotation);
             
             foreach (Collider hit in hits)
             {
