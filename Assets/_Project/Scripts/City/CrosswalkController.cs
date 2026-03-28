@@ -2,39 +2,38 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
-/// A single controller that manages multiple player waiting areas and multiple car stopping areas.
-/// Perfect for multi-lane roads and two-way crosswalks.
+/// Manages player waiting areas and car stopping areas.
+/// Allows cars that have already entered the crosswalk (Player Zone) to keep moving.
 /// </summary>
 public class CrosswalkController : MonoBehaviour
 {
     [Header("=== Zone Setup ===")]
-    [Tooltip("The BoxColliders on the sidewalks where the wheelchair waits.")]
+    [Tooltip("The BoxColliders covering the sidewalks and the crosswalk.")]
     public BoxCollider[] playerZones;
 
     [Tooltip("The BoxColliders on the roads where the cars must stop.")]
     public BoxCollider[] carZones;
 
-    // Keeps track of cars we have stopped, just in case they slide out of the zone
+    [Header("=== Advanced Stopping Logic ===")]
+    [Tooltip("How far (in meters) the car must be inside the Player Zone to keep going.\n0 = exactly on the edge.\nNegative values (e.g., -1.5) account for the car's front bumper if the pivot is at the rear wheels.")]
+    public float crosswalkEntryMargin = 0f;
+
+    // Keeps track of cars we have stopped
     private List<CarCityMovement> yieldingCars = new List<CarCityMovement>();
 
     void Update()
     {
-        // Safety check: Don't run if no zones are assigned
         if (playerZones == null || carZones == null || playerZones.Length == 0 || carZones.Length == 0)
         {
             return;
         }
 
-        // 1. Check if the player is currently inside ANY of the Player Zones
         bool playerIsWaiting = CheckForPlayer();
-
-        // 2. Control the cars in ALL Car Zones based on the player's presence
         ControlCars(playerIsWaiting);
     }
 
     /// <summary>
     /// Scans all player zone colliders to see if the wheelchair is inside any of them.
-    /// Uses mathematically accurate Box bounds that respect rotation and scale.
     /// </summary>
     private bool CheckForPlayer()
     {
@@ -42,7 +41,6 @@ public class CrosswalkController : MonoBehaviour
         {
             if (pZone == null) continue;
 
-            // CORRECT MATH: Calculate exact world center and exact scaled half-extents
             Vector3 boxCenter = pZone.transform.TransformPoint(pZone.center);
             Vector3 boxHalfExtents = Vector3.Scale(pZone.size, pZone.transform.lossyScale) * 0.5f;
 
@@ -52,7 +50,6 @@ public class CrosswalkController : MonoBehaviour
             {
                 if (hit.CompareTag("Player") || hit.transform.root.CompareTag("Player"))
                 {
-                    // If the player is in ANY zone, return true immediately
                     return true;
                 }
             }
@@ -61,19 +58,16 @@ public class CrosswalkController : MonoBehaviour
     }
 
     /// <summary>
-    /// Scans all car zone colliders and updates the yielding state of any cars inside them.
-    /// Uses mathematically accurate Box bounds that respect rotation and scale.
+    /// Scans all car zone colliders and stops cars UNLESS they are already inside the Player Zone.
     /// </summary>
     private void ControlCars(bool shouldStop)
     {
         List<CarCityMovement> carsCurrentlyInZone = new List<CarCityMovement>();
 
-        // Loop through every car zone you assigned in the inspector
         foreach (BoxCollider cZone in carZones)
         {
             if (cZone == null) continue;
 
-            //Calculate exact world center and exact scaled half-extents
             Vector3 boxCenter = cZone.transform.TransformPoint(cZone.center);
             Vector3 boxHalfExtents = Vector3.Scale(cZone.size, cZone.transform.lossyScale) * 0.5f;
 
@@ -83,13 +77,42 @@ public class CrosswalkController : MonoBehaviour
             {
                 CarCityMovement car = hit.GetComponentInParent<CarCityMovement>();
                 
-                // If it's a car, and we haven't already processed it in another zone
                 if (car != null && !carsCurrentlyInZone.Contains(car))
                 {
                     carsCurrentlyInZone.Add(car);
-                    car.isYielding = shouldStop;
+
+                    bool forceStop = shouldStop;
+
+                    // --- CROSSWALK ENTRY CHECK ---
+                    // If the crosswalk is triggered, check if the car is ALREADY inside the crosswalk
+                    if (forceStop)
+                    {
+                        foreach (BoxCollider pZone in playerZones)
+                        {
+                            if (pZone == null) continue;
+
+                            // Convert car position to the player zone's local space
+                            Vector3 localPos = pZone.transform.InverseTransformPoint(car.transform.position);
+                            Vector3 extents = pZone.size * 0.5f;
+
+                            // Calculate the effective boundary using your margin
+                            float checkX = Mathf.Max(0, extents.x - crosswalkEntryMargin);
+                            float checkZ = Mathf.Max(0, extents.z - crosswalkEntryMargin);
+
+                            // If the car is inside this boundary, it has entered the crosswalk!
+                            if (Mathf.Abs(localPos.x) <= checkX && 
+                                Mathf.Abs(localPos.y) <= extents.y + 2f && 
+                                Mathf.Abs(localPos.z) <= checkZ)
+                            {
+                                forceStop = false; // Let it pass!
+                                break; 
+                            }
+                        }
+                    }
+
+                    car.isYielding = forceStop;
                     
-                    if (shouldStop && !yieldingCars.Contains(car))
+                    if (forceStop && !yieldingCars.Contains(car))
                     {
                         yieldingCars.Add(car);
                     }
@@ -97,7 +120,7 @@ public class CrosswalkController : MonoBehaviour
             }
         }
 
-        // Free any cars that are no longer in ANY zone so they don't get stuck forever
+        // Free cars that left the zone
         for (int i = yieldingCars.Count - 1; i >= 0; i--)
         {
             CarCityMovement pastCar = yieldingCars[i];
@@ -111,6 +134,10 @@ public class CrosswalkController : MonoBehaviour
             if (!carsCurrentlyInZone.Contains(pastCar))
             {
                 pastCar.isYielding = false;
+                yieldingCars.RemoveAt(i);
+            }
+            else if (!pastCar.isYielding)
+            {
                 yieldingCars.RemoveAt(i);
             }
         }
