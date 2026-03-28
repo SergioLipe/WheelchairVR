@@ -10,12 +10,15 @@ using TMPro;
 public class MainMenuManager : MonoBehaviour
 {
     [Header("--- Level Buttons ---")]
-    [Tooltip("Drag ALL your level buttons here in order (Level 1, Level 2, etc.)")]
+    [Tooltip("Drag ALL your level buttons here in order (Level 1, Level 2... and Free Style last)")]
     public Button[] levelButtons;
 
     [Header("--- UI Colors ---")]
-    [Tooltip("Color for levels you can play")]
+    [Tooltip("Color for normal levels you can play")]
     public Color unlockedBGColor = new Color(0f, 0.78f, 0.32f, 1f); // Vibrant Green
+
+    [Tooltip("Color for the Free Style level when unlocked")]
+    public Color freeStyleColor = new Color(0f, 0.6f, 1f, 1f); // Cool Blue
 
     [Tooltip("Color for levels you cannot play yet")]
     public Color lockedBGColor = new Color(0.2f, 0.2f, 0.2f, 0.8f); // Dark Gray
@@ -70,7 +73,19 @@ public class MainMenuManager : MonoBehaviour
             if (isUnlocked)
             {
                 // -- UNLOCKED VISUALS --
-                if (bgImage != null) bgImage.color = unlockedBGColor;
+                if (bgImage != null)
+                {
+                    // If it is the LAST button in the array, apply the Free Style color
+                    if (i == levelButtons.Length - 1)
+                    {
+                        bgImage.color = freeStyleColor;
+                    }
+                    else // If it is a normal level, apply the green color
+                    {
+                        bgImage.color = unlockedBGColor;
+                    }
+                }
+                
                 if (levelText != null) levelText.color = Color.white;
 
                 if (starContainer != null)
@@ -129,12 +144,12 @@ public class MainMenuManager : MonoBehaviour
 
     public void UnlockAllLevels()
     {
-        // Guarda um "passe VIP" no sistema
+        // Saves a VIP pass in the system
         PlayerPrefs.SetInt("UnlockAll", 1);
 
-        // Atualiza o menu instantaneamente
+        // Updates the menu instantly
         InitializeAllLevels();
-        Debug.Log("Todos os níveis foram desbloqueados!");
+        Debug.Log("All levels have been unlocked!");
     }
 
     public void QuitGame()
