@@ -56,9 +56,10 @@ public class MainMenuManager : MonoBehaviour
                 prevStars = PlayerPrefs.GetInt("Level_" + (levelID - 1) + "_Stars", 0);
             }
 
-            // 2. Determine if UNLOCKED (Level 1 is always true, others need 1+ star in prev level) (also checks if UnlockAll was used)
-            bool isUnlocked = (levelID == 1) || (prevStars >= 1) || (PlayerPrefs.GetInt("UnlockAll", 0) == 1);
-
+            // 2. Determine if UNLOCKED 
+            //  Level 1 AND the Last Level (Free Style) are always unlocked
+            bool isFreeStyleLevel = (i == levelButtons.Length - 1);
+            bool isUnlocked = (levelID == 1) || isFreeStyleLevel || (prevStars >= 1) || (PlayerPrefs.GetInt("UnlockAll", 0) == 1);
             // 3. Get the visual components inside this specific button
             Button btn = levelButtons[i];
             Image bgImage = btn.GetComponent<Image>();
