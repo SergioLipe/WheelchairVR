@@ -2,7 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// Controls city traffic with straight-line driving and curve-turning at intersections.
-/// Features: Stop Zones, NonStop Zones, Player Detection, Failsafes, Auto-Teleport Recovery, Stationary Failsafe, and External Trigger-based Turning.
+/// Features: Stop Zones, NonStop Zones, Player Detection, Failsafes, Auto-Teleport Recovery, Stationary Failsafe, External Trigger-based Turning, and Two-Clip Engine Audio.
 /// </summary>
 public class CarCityMovement : MonoBehaviour
 {
@@ -43,17 +43,31 @@ public class CarCityMovement : MonoBehaviour
     [Tooltip("How many seconds the car can be completely stationary/blocked before it respawns.")]
     public float maxStationaryTime = 15f;
 
-    [HideInInspector] 
+    [HideInInspector]
     public float timeOffMagnet = 0f; // Tracked by RoadLaneAligner
-    
+
+    [Header("=== Audio Settings ===")]
+    [Tooltip("Drag the sound for when the car is stopped here.")]
+    public AudioClip idleSound;
+    [Tooltip("Drag the sound for when the car is driving here.")]
+    public AudioClip movingSound;
+    [Tooltip("Default volume for the engine.")]
+    public float engineVolume = 0.3f;
+
+    // The AudioSource is now private. The script will create it automatically!
+    private AudioSource engineAudio;
+
+    // We need this to remember what the car was doing in the last frame
+    private bool wasMoving = false;
+
     // --- Internal State Tracking ---
     private bool isInStopZone = false;
     private bool isInNeverStopZone = false;
     private float stuckTimer = 0f;
     private bool ignoreObliqueCars = false;
     private float recoveryTimer = 0f;
-    
-    [HideInInspector] 
+
+    [HideInInspector]
     public bool isYielding = false; // True when waiting for a player at a crosswalk
 
     // --- Stationary Failsafe Tracking ---
@@ -74,6 +88,30 @@ public class CarCityMovement : MonoBehaviour
     {
         // Store the initial position as soon as the game starts
         lastPosition = transform.position;
+
+        // --- AUTO-GENERATE AUDIO SOURCE ---
+        if (idleSound != null && movingSound != null)
+        {
+            engineAudio = gameObject.AddComponent<AudioSource>();
+            engineAudio.loop = true;
+            engineAudio.spatialBlend = 1f; // Full 3D Sound
+
+            // --- 3D AUDIO---
+            engineAudio.rolloffMode = AudioRolloffMode.Linear; // Forces sound to drop evenly to 0
+            engineAudio.minDistance = 2f;  // Sound is at max volume within 2 meters
+            engineAudio.maxDistance = 15f; // Sound goes completely SILENT at 20 meters
+
+            engineAudio.volume = engineVolume;
+
+            // Start the car with the idle sound
+            engineAudio.clip = idleSound;
+            engineAudio.Play();
+            wasMoving = false;
+        }
+        else
+        {
+            Debug.LogWarning($"[Traffic System] Missing Idle or Moving sound on {gameObject.name}!");
+        }
     }
 
     void Update()
@@ -99,7 +137,7 @@ public class CarCityMovement : MonoBehaviour
         // We pause the timer if the car is legally waiting at a red light or crosswalk
         if (isInStopZone || !canMove || isYielding)
         {
-            timeOffMagnet = 0f; 
+            timeOffMagnet = 0f;
         }
         else
         {
@@ -118,7 +156,7 @@ public class CarCityMovement : MonoBehaviour
             // The car is physically stopped.
             // Only start the timer if it is NOT legally waiting at a red light or crosswalk.
             bool isLegallyWaiting = (isInStopZone && !canMove) || isYielding;
-            
+
             if (!isLegallyWaiting)
             {
                 stationaryTimer += Time.deltaTime;
@@ -138,7 +176,7 @@ public class CarCityMovement : MonoBehaviour
         {
             stationaryTimer = 0f; // Reset because the car moved
         }
-        
+
         // Store current position to compare in the next frame
         lastPosition = transform.position;
 
@@ -149,7 +187,6 @@ public class CarCityMovement : MonoBehaviour
             stuckTimer = 0f;
             ignoreObliqueCars = false;
             recoveryTimer = 0f;
-            return;
         }
         else if (obliqueBlocked && !ignoreObliqueCars)
         {
@@ -164,7 +201,6 @@ public class CarCityMovement : MonoBehaviour
                     recoveryTimer = 0f;
                 }
             }
-            return;
         }
         else if (!centerBlocked && !obliqueBlocked)
         {
@@ -179,7 +215,7 @@ public class CarCityMovement : MonoBehaviour
         if (ignoreObliqueCars && wantsToMove)
         {
             recoveryTimer += Time.deltaTime;
-            if (recoveryTimer >= 2.0f) 
+            if (recoveryTimer >= 2.0f)
             {
                 ignoreObliqueCars = false;
                 stuckTimer = 0f;
@@ -187,10 +223,32 @@ public class CarCityMovement : MonoBehaviour
             }
         }
 
-        // --- 8. APPLY MOVEMENT AND TURNING ---
-        if (wantsToMove)
+        // --- 8. APPLY MOVEMENT AND AUDIO ---
+        // Check if the car is physically allowed to move right now
+        bool isActuallyMoving = wantsToMove && !centerBlocked && (!obliqueBlocked || ignoreObliqueCars);
+
+        if (isActuallyMoving)
         {
             ApplyMovementAndTurning();
+        }
+
+        // --- 9. TWO-CLIP ENGINE AUDIO CONTROL ---
+        if (engineAudio != null)
+        {
+            // If the car just started moving this exact frame
+            if (isActuallyMoving && !wasMoving)
+            {
+                engineAudio.clip = movingSound;
+                engineAudio.Play(); // Play the driving sound
+                wasMoving = true;
+            }
+            // If the car just stopped moving this exact frame
+            else if (!isActuallyMoving && wasMoving)
+            {
+                engineAudio.clip = idleSound;
+                engineAudio.Play(); // Play the stopped sound
+                wasMoving = false;
+            }
         }
     }
 
@@ -301,7 +359,7 @@ public class CarCityMovement : MonoBehaviour
                     // --- TIE-BREAKER FOR PILED UP CARS ---
                     // If cars got stacked in the intersection, they unstack one by one based on ID.
                     float distance = Vector3.Distance(transform.position, otherCar.transform.position);
-                    if (distance < 3.5f) 
+                    if (distance < 3.5f)
                     {
                         if (this.gameObject.GetInstanceID() > otherCar.gameObject.GetInstanceID())
                         {
@@ -381,7 +439,7 @@ public class CarCityMovement : MonoBehaviour
 
         // 1. Apply the position from the Spawn object
         transform.position = chosenSpawn.transform.position;
-        
+
         // 2. Apply the MANUAL rotation you typed in the inspector of that Spawn
         transform.rotation = Quaternion.Euler(chosenSpawn.customCarRotation);
 
@@ -392,7 +450,7 @@ public class CarCityMovement : MonoBehaviour
         isTurning = false;
         ignoreObliqueCars = false;
         stuckTimer = 0f;
-        
+
         Debug.Log($"[Traffic System] A lost car was teleported to {chosenSpawn.gameObject.name}.");
     }
 }
