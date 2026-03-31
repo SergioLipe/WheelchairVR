@@ -3996,7 +3996,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 157676, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_Name
@@ -4012,7 +4012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.4412098
+      value: 8.7
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11284,6 +11284,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 441798, guid: 06a9858b4309bcf4cbe7ef09ae436c1d, type: 3}
   m_PrefabInstance: {fileID: 88451142}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &88789739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 88789740}
+  m_Layer: 0
+  m_Name: SideB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &88789740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88789739}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1035461811}
+  - {fileID: 1201745820}
+  - {fileID: 1271079282}
+  - {fileID: 2020437970}
+  - {fileID: 892613264}
+  - {fileID: 1130926816}
+  - {fileID: 444520794}
+  - {fileID: 385828995}
+  - {fileID: 477366680}
+  - {fileID: 280564694}
+  m_Father: {fileID: 1474012300}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &89949263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14487,7 +14528,7 @@ Transform:
   m_GameObject: {fileID: 111351376}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.27, y: 0, z: -23.59}
+  m_LocalPosition: {x: 0.041, y: 0, z: -23.59}
   m_LocalScale: {x: 0.94087, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20504,7 +20545,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 141870, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_Name
@@ -20520,7 +20561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484704, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.4712098
+      value: 8.73
       objectReference: {fileID: 0}
     - target: {fileID: 484704, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_LocalPosition.y
@@ -20877,7 +20918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 440340, guid: d2b133bd1e0723046a270de71e937731, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 440340, guid: d2b133bd1e0723046a270de71e937731, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21035,7 +21076,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_RootOrder
@@ -21043,7 +21084,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.01121
+      value: 8.27
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21122,8 +21163,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -27419,7 +27460,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_Name
@@ -27443,7 +27484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.80242
+      value: -7.4000015
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -27451,7 +27492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -27459,7 +27500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -31629,7 +31670,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_Name
@@ -31653,7 +31694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.80242
+      value: -7.4000015
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -31661,7 +31702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -31669,7 +31710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -31750,8 +31791,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -32873,7 +32914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411642, guid: 4c588df48d373f5448513a886280f4af, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 411642, guid: 4c588df48d373f5448513a886280f4af, type: 3}
       propertyPath: m_LocalPosition.y
@@ -36000,7 +36041,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 130278, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_Name
@@ -36016,7 +36057,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.2412097
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -36705,33 +36746,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2053696408}
-  - {fileID: 1180707592}
-  - {fileID: 2025062576}
-  - {fileID: 264215822}
-  - {fileID: 1369761911}
-  - {fileID: 1105803510}
-  - {fileID: 153031679}
-  - {fileID: 1178097425}
-  - {fileID: 860660403}
-  - {fileID: 1733667525}
-  - {fileID: 553603267}
-  - {fileID: 922868900}
-  - {fileID: 669703039}
-  - {fileID: 1764742302}
-  - {fileID: 357364598}
-  - {fileID: 1626578070}
-  - {fileID: 28046853}
-  - {fileID: 347952646}
-  - {fileID: 1250908786}
-  - {fileID: 585812500}
-  - {fileID: 156754677}
-  - {fileID: 278288771}
-  - {fileID: 1726555103}
-  - {fileID: 630885139}
-  - {fileID: 1388523595}
-  - {fileID: 288881997}
-  - {fileID: 420253841}
+  - {fileID: 2106806003}
+  - {fileID: 1090539062}
   m_Father: {fileID: 1156491424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &268887701
@@ -38038,7 +38054,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 189930, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_Name
@@ -38050,7 +38066,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.3412104
+      value: 8.6
       objectReference: {fileID: 0}
     - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_LocalPosition.y
@@ -38121,8 +38137,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -38383,7 +38399,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 88789740}
     m_Modifications:
     - target: {fileID: 198730, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_Name
@@ -38403,7 +38419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.60242
+      value: -13.05
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalRotation.w
@@ -38502,8 +38518,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -39683,7 +39699,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_Name
@@ -39695,7 +39711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.4412098
+      value: 8.7
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -39774,8 +39790,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -40550,7 +40566,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 130278, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_Name
@@ -40574,7 +40590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.74242
+      value: -7.340004
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -40582,7 +40598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.y
@@ -40590,7 +40606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -40663,8 +40679,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -48336,7 +48352,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 198730, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_Name
@@ -48352,7 +48368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.7412097
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalPosition.y
@@ -49406,6 +49422,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 479640, guid: 400c967e5d1329c4c9dd5bc47e49d545, type: 3}
   m_PrefabInstance: {fileID: 354187411}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &354457494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 354457495}
+  - component: {fileID: 354457498}
+  - component: {fileID: 354457497}
+  - component: {fileID: 354457496}
+  - component: {fileID: 354457499}
+  m_Layer: 0
+  m_Name: LimiterA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &354457495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354457494}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.54, y: 0, z: -210.86}
+  m_LocalScale: {x: 4.5517154, y: 1, z: 52.913124}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2122403427}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &354457496
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354457494}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &354457497
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354457494}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &354457498
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354457494}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &354457499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354457494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
 --- !u!1001 &355758402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49752,7 +49895,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 1090539062}
     m_Modifications:
     - target: {fileID: 157676, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_Name
@@ -49768,7 +49911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.35121
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.y
@@ -49776,11 +49919,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 190.17
+      value: 14.5
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00000044703478
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.x
@@ -49788,7 +49931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0.00000046193594
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.z
@@ -49866,8 +50009,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -53202,6 +53345,30 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 489384, guid: 1ac8b9099f0c47e41a84ef1f2e41988c, type: 3}
   m_PrefabInstance: {fileID: 383632907}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &384014698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8796280009354689781, guid: feb235b45a8580449b49ec90cf6ab272, type: 3}
+  m_PrefabInstance: {fileID: 2099523266}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &384014703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384014698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f702b082baa90c4bbb574ee5befb6a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConditionalTurnZone
+  defaultTurnAngle: -180
+  defaultTurnSpeed: 185
+  defaultSpeedDuringTurn: 10
+  carsTakingDefaultRoute: 9999
+  specialTurnAngle: 90
+  specialTurnSpeed: 150
+  specialSpeedDuringTurn: 2.5
 --- !u!1001 &384273205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53492,7 +53659,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 88789740}
     m_Modifications:
     - target: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_Name
@@ -53516,7 +53683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.55
+      value: -12.997581
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -53524,7 +53691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -53532,7 +53699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -55843,7 +56010,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 157676, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_Name
@@ -55867,7 +56034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.102421
+      value: -7.7000046
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.w
@@ -60741,7 +60908,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 463928, guid: 416c46ca128db5f4bb76f235b4f991d5, type: 3}
       propertyPath: m_RootOrder
@@ -60749,7 +60916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 463928, guid: 416c46ca128db5f4bb76f235b4f991d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.4812107
+      value: 8.740001
       objectReference: {fileID: 0}
     - target: {fileID: 463928, guid: 416c46ca128db5f4bb76f235b4f991d5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -60820,8 +60987,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -62394,7 +62561,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 157676, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_Name
@@ -62418,7 +62585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.00242
+      value: -7.5999985
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.w
@@ -64046,7 +64213,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 88789740}
     m_Modifications:
     - target: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_Name
@@ -64070,7 +64237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.68
+      value: -13.12758
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -64078,7 +64245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -64086,7 +64253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -64167,8 +64334,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -68538,7 +68705,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 88789740}
     m_Modifications:
     - target: {fileID: 157676, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_Name
@@ -68558,7 +68725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.00242
+      value: -13.450001
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.w
@@ -68621,8 +68788,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -69192,8 +69359,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -80110,7 +80277,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 1090539062}
     m_Modifications:
     - target: {fileID: 130278, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_Name
@@ -80126,7 +80293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.04
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -80134,11 +80301,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 56.88
+      value: 147.8
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.00000010430813
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.x
@@ -80146,7 +80313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: -0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.z
@@ -80267,8 +80434,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -80754,6 +80921,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 481430, guid: 1e70e6b05165f864f8c42dab5a2544f9, type: 3}
   m_PrefabInstance: {fileID: 557716400}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &559407658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 559407659}
+  - component: {fileID: 559407663}
+  - component: {fileID: 559407662}
+  - component: {fileID: 559407661}
+  - component: {fileID: 559407660}
+  m_Layer: 0
+  m_Name: LimiterD
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &559407659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559407658}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 165.1, y: 0, z: -133.74}
+  m_LocalScale: {x: 4.5517154, y: 1, z: 52.913124}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2122403427}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &559407660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559407658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &559407661
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559407658}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &559407662
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559407658}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &559407663
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559407658}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &559513147
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83819,7 +84113,7 @@ Transform:
   m_GameObject: {fileID: 582349262}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.606, y: 0, z: -8.36}
+  m_LocalPosition: {x: -3.606, y: 0, z: -14.36}
   m_LocalScale: {x: 0.42409715, y: 1, z: 3.7243}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -84452,7 +84746,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 1090539062}
     m_Modifications:
     - target: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_Name
@@ -84464,7 +84758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.44121
+      value: 5.1
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -84472,23 +84766,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.733963
+      value: 215.4
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0.000000014901161
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -84547,8 +84841,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -90386,7 +90680,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 130278, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_Name
@@ -90398,7 +90692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.3412104
+      value: 8.6
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -90517,8 +90811,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -92174,7 +92468,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_Name
@@ -92190,7 +92484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 61.56
+      value: 61.560005
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -92198,7 +92492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.80242
+      value: -7.4000015
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -92206,7 +92500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -92214,7 +92508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -92300,8 +92594,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -96539,7 +96833,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_Name
@@ -96555,7 +96849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.4412098
+      value: 8.7
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -96571,15 +96865,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2311848, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -97742,7 +98036,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 127632, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_Name
@@ -97766,7 +98060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.70242
+      value: -7.300003
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalRotation.w
@@ -97883,8 +98177,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -110037,7 +110331,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 189930, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_Name
@@ -110057,7 +110351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.00242
+      value: -7.5999985
       objectReference: {fileID: 0}
     - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_LocalRotation.w
@@ -110120,8 +110414,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -110431,8 +110725,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -115344,7 +115638,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 127632, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_Name
@@ -115360,7 +115654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.5
+      value: 31.499996
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.y
@@ -115368,7 +115662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.70242
+      value: -7.300003
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalRotation.w
@@ -115490,8 +115784,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -124227,7 +124521,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 1090539062}
     m_Modifications:
     - target: {fileID: 127632, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_Name
@@ -124243,7 +124537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.27121
+      value: 5.3
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.y
@@ -124251,11 +124545,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 113.45
+      value: 91.2
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.0000009834765
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalRotation.x
@@ -124263,11 +124557,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0.0000009685754
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2306798, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -124373,8 +124667,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -124847,8 +125141,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -126077,7 +126371,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 130278, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_Name
@@ -126101,7 +126395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.90242
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -126109,7 +126403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.y
@@ -126117,7 +126411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -127043,7 +127337,7 @@ Transform:
   m_GameObject: {fileID: 878790603}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.505, y: 0, z: -14.08}
+  m_LocalPosition: {x: 2.505, y: 0, z: -9.07}
   m_LocalScale: {x: 0.42409715, y: 1, z: 3.7243}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -127198,6 +127492,30 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 410550, guid: 189a6283bd4925841bbf41d7c5919bff, type: 3}
   m_PrefabInstance: {fileID: 879321753}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &879565557 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2368931257538879948, guid: feb235b45a8580449b49ec90cf6ab272, type: 3}
+  m_PrefabInstance: {fileID: 2099523266}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &879565562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879565557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f702b082baa90c4bbb574ee5befb6a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConditionalTurnZone
+  defaultTurnAngle: -180
+  defaultTurnSpeed: 180
+  defaultSpeedDuringTurn: 10
+  carsTakingDefaultRoute: 9999
+  specialTurnAngle: 90
+  specialTurnSpeed: 150
+  specialSpeedDuringTurn: 2.5
 --- !u!1001 &879991011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129000,7 +129318,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 88789740}
     m_Modifications:
     - target: {fileID: 141870, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_Name
@@ -129024,7 +129342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484704, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.98
+      value: -13.427581
       objectReference: {fileID: 0}
     - target: {fileID: 484704, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_LocalRotation.w
@@ -129113,8 +129431,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -132175,6 +132493,7 @@ GameObject:
   - component: {fileID: 911506179}
   - component: {fileID: 911506178}
   - component: {fileID: 911506177}
+  - component: {fileID: 911506180}
   m_Layer: 0
   m_Name: TurnArea_C
   m_TagString: TurnZone
@@ -132191,7 +132510,7 @@ Transform:
   m_GameObject: {fileID: 911506175}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 5.21, y: 5.53, z: 76.17}
+  m_LocalPosition: {x: -0.26, y: 5.53, z: 76.17}
   m_LocalScale: {x: 1, y: 1, z: 4.0894}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -132275,6 +132594,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 911506175}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &911506180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911506175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f702b082baa90c4bbb574ee5befb6a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConditionalTurnZone
+  defaultTurnAngle: -180
+  defaultTurnSpeed: 185
+  defaultSpeedDuringTurn: 10
+  carsTakingDefaultRoute: 9999
+  specialTurnAngle: 90
+  specialTurnSpeed: 150
+  specialSpeedDuringTurn: 2.5
 --- !u!1001 &912590308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134251,7 +134589,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 1090539062}
     m_Modifications:
     - target: {fileID: 130278, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_Name
@@ -134267,7 +134605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.04121
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -134275,11 +134613,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 162.83
+      value: 41.8
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.00000010430813
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.x
@@ -134287,7 +134625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: -0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.z
@@ -134413,8 +134751,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -140036,6 +140374,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 439608, guid: f2ca19289c480c447ba0542e93b13da1, type: 3}
   m_PrefabInstance: {fileID: 965656738}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &966111943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 966111944}
+  - component: {fileID: 966111948}
+  - component: {fileID: 966111947}
+  - component: {fileID: 966111946}
+  - component: {fileID: 966111945}
+  m_Layer: 0
+  m_Name: LimiterB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &966111944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966111943}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.69, y: 0, z: -41.5}
+  m_LocalScale: {x: 4.5517154, y: 1, z: 52.913124}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2122403427}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &966111945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966111943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &966111946
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966111943}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &966111947
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966111943}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &966111948
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966111943}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &967580166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -148130,7 +148595,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 88789740}
     m_Modifications:
     - target: {fileID: 141870, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_Name
@@ -148154,7 +148619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484704, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.81242
+      value: -13.26
       objectReference: {fileID: 0}
     - target: {fileID: 484704, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_LocalRotation.w
@@ -148271,8 +148736,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -150014,8 +150479,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -153136,7 +153601,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_Name
@@ -153156,7 +153621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.80242
+      value: -7.4000015
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -153164,7 +153629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -153172,7 +153637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -153231,8 +153696,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -155909,6 +156374,49 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 468664, guid: a0fc9668797c0ba40bfd0a39fc67f2ed, type: 3}
   m_PrefabInstance: {fileID: 1090468557}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1090539061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1090539062}
+  m_Layer: 0
+  m_Name: SideB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1090539062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090539061}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.000000014901161}
+  m_LocalPosition: {x: 8.64121, y: 0, z: 204.66605}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2053696408}
+  - {fileID: 1180707592}
+  - {fileID: 2025062576}
+  - {fileID: 1369761911}
+  - {fileID: 1105803510}
+  - {fileID: 1178097425}
+  - {fileID: 860660403}
+  - {fileID: 553603267}
+  - {fileID: 922868900}
+  - {fileID: 1764742302}
+  - {fileID: 357364598}
+  - {fileID: 585812500}
+  m_Father: {fileID: 268825575}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1090644434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -158052,7 +158560,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 1090539062}
     m_Modifications:
     - target: {fileID: 157676, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_Name
@@ -158068,7 +158576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.43121
+      value: 5.1
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.y
@@ -158076,11 +158584,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 140.95
+      value: 63.7
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0000009834765
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.x
@@ -158088,7 +158596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: -0.0000009983777
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.z
@@ -158170,8 +158678,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -158281,7 +158789,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_Name
@@ -158301,7 +158809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.80242
+      value: -7.4000015
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -158309,7 +158817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -158317,7 +158825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -158376,8 +158884,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -161980,7 +162488,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 88789740}
     m_Modifications:
     - target: {fileID: 130278, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_Name
@@ -162004,7 +162512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.81
+      value: -13.257581
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -162012,7 +162520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.y
@@ -162020,7 +162528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 487146, guid: 94469aeaca2d49442af381840b70bb6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -162141,8 +162649,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -166638,7 +167146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411642, guid: 4c588df48d373f5448513a886280f4af, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 411642, guid: 4c588df48d373f5448513a886280f4af, type: 3}
       propertyPath: m_LocalRotation.w
@@ -169080,7 +169588,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 1090539062}
     m_Modifications:
     - target: {fileID: 127632, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_Name
@@ -169096,7 +169604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.27121
+      value: 5.3
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.y
@@ -169104,11 +169612,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 68.366035
+      value: 136.3
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.0000009834765
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalRotation.x
@@ -169116,11 +169624,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0.0000009685754
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2306798, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -169221,8 +169729,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -169494,7 +170002,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 1090539062}
     m_Modifications:
     - target: {fileID: 7111991533906514167, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_Name
@@ -169502,7 +170010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.64121
+      value: 4.9
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalPosition.y
@@ -169510,11 +170018,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 175.7
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.000000014901161
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalRotation.x
@@ -169522,7 +170030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalRotation.z
@@ -169583,8 +170091,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -172147,7 +172655,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 88789740}
     m_Modifications:
     - target: {fileID: 198730, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_Name
@@ -172171,7 +172679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.60242
+      value: -13.05
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalRotation.w
@@ -172256,8 +172764,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -178483,7 +178991,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 198730, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_Name
@@ -178499,7 +179007,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.2312098
+      value: 8.49
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalPosition.y
@@ -178628,8 +179136,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -180129,8 +180637,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -181269,7 +181777,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 88789740}
     m_Modifications:
     - target: {fileID: 198730, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_Name
@@ -181293,7 +181801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.8724203
+      value: -13.320001
       objectReference: {fileID: 0}
     - target: {fileID: 497832, guid: 85ac88d7c46e0ea4583870a98cc13580, type: 3}
       propertyPath: m_LocalRotation.w
@@ -187896,6 +188404,7 @@ GameObject:
   - component: {fileID: 1317553541}
   - component: {fileID: 1317553540}
   - component: {fileID: 1317553539}
+  - component: {fileID: 1317553542}
   m_Layer: 0
   m_Name: TurnArea_D
   m_TagString: TurnZone
@@ -187912,7 +188421,7 @@ Transform:
   m_GameObject: {fileID: 1317553537}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.198, y: 5.468, z: 329.76}
+  m_LocalPosition: {x: 5.18, y: 5.468, z: 329.76}
   m_LocalScale: {x: 1, y: 1, z: 4.0894}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -187996,6 +188505,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317553537}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1317553542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317553537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f702b082baa90c4bbb574ee5befb6a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConditionalTurnZone
+  defaultTurnAngle: -180
+  defaultTurnSpeed: 190
+  defaultSpeedDuringTurn: 10
+  carsTakingDefaultRoute: 9999
+  specialTurnAngle: 90
+  specialTurnSpeed: 150
+  specialSpeedDuringTurn: 2.5
 --- !u!1001 &1317702620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -194857,8 +195385,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -195335,7 +195863,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 1090539062}
     m_Modifications:
     - target: {fileID: 157676, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_Name
@@ -195351,7 +195879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.43121
+      value: 5.1
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.y
@@ -195359,11 +195887,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 105.02604
+      value: 99.6
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0000009834765
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.x
@@ -195371,7 +195899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: -0.0000009983777
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.z
@@ -198093,7 +198621,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_Name
@@ -198105,7 +198633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.4412098
+      value: 8.7
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -198184,8 +198712,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -204189,8 +204717,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -210812,32 +211340,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1035461811}
-  - {fileID: 1201745820}
-  - {fileID: 874735189}
-  - {fileID: 1271079282}
-  - {fileID: 1708541654}
-  - {fileID: 233916665}
-  - {fileID: 2020437970}
-  - {fileID: 1566012603}
-  - {fileID: 1695499927}
-  - {fileID: 892613264}
-  - {fileID: 1130926816}
-  - {fileID: 293412931}
-  - {fileID: 444520794}
-  - {fileID: 385828995}
-  - {fileID: 397638416}
-  - {fileID: 678725134}
-  - {fileID: 803156984}
-  - {fileID: 1734722433}
-  - {fileID: 201241006}
-  - {fileID: 639805579}
-  - {fileID: 431678515}
-  - {fileID: 763906376}
-  - {fileID: 1073538217}
-  - {fileID: 1106335459}
-  - {fileID: 477366680}
-  - {fileID: 280564694}
+  - {fileID: 1636023038}
+  - {fileID: 88789740}
   m_Father: {fileID: 1156491424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1474495268
@@ -216129,8 +216633,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -222358,7 +222862,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 189930, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_Name
@@ -222382,7 +222886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.00242
+      value: -7.5999985
       objectReference: {fileID: 0}
     - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_LocalRotation.w
@@ -222467,8 +222971,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -230080,8 +230584,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -231378,7 +231882,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 175378, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_Name
@@ -231394,7 +231898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.4412098
+      value: 8.7
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -231410,15 +231914,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 414190, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2311848, guid: a916a44328d322240bd1aaaca22fc8a7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -232546,6 +233050,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 420774, guid: 412e629bc1aeba94f84bc67e32a5cc7f, type: 3}
   m_PrefabInstance: {fileID: 1635958890}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1636023037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1636023038}
+  m_Layer: 0
+  m_Name: Side A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1636023038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636023037}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 874735189}
+  - {fileID: 1708541654}
+  - {fileID: 233916665}
+  - {fileID: 1566012603}
+  - {fileID: 1695499927}
+  - {fileID: 293412931}
+  - {fileID: 397638416}
+  - {fileID: 678725134}
+  - {fileID: 803156984}
+  - {fileID: 1734722433}
+  - {fileID: 201241006}
+  - {fileID: 639805579}
+  - {fileID: 431678515}
+  - {fileID: 763906376}
+  - {fileID: 1073538217}
+  - {fileID: 1106335459}
+  m_Father: {fileID: 1474012300}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1636645368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -232703,8 +233254,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -240499,7 +241050,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 157676, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_Name
@@ -240523,7 +241074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.102421
+      value: -7.7000046
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.w
@@ -240612,8 +241163,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -242868,7 +243419,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 127632, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_Name
@@ -242892,7 +243443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.50242
+      value: -7.0999985
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalRotation.w
@@ -245337,7 +245888,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 127632, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_Name
@@ -245349,7 +245900,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.41121
+      value: 8.67
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.y
@@ -245452,8 +246003,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -246605,7 +247156,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 2106806003}
     m_Modifications:
     - target: {fileID: 127632, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_Name
@@ -246621,7 +247172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.1412098
+      value: 8.4
       objectReference: {fileID: 0}
     - target: {fileID: 411938, guid: 0383b854a926f1643b20f9c7cdb2e4de, type: 3}
       propertyPath: m_LocalPosition.y
@@ -246735,7 +247286,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 1636023038}
     m_Modifications:
     - target: {fileID: 189930, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_Name
@@ -246759,7 +247310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.20242
+      value: -7.800003
       objectReference: {fileID: 0}
     - target: {fileID: 434564, guid: f539f0390d17a9f4a922b722e47998fe, type: 3}
       propertyPath: m_LocalRotation.w
@@ -246844,8 +247395,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -251277,7 +251828,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 1090539062}
     m_Modifications:
     - target: {fileID: 157676, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_Name
@@ -251293,7 +251844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.35121
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.y
@@ -251301,11 +251852,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.186035
+      value: 168.5
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00000044703478
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.x
@@ -251313,7 +251864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: 0.00000046193594
       objectReference: {fileID: 0}
     - target: {fileID: 477648, guid: fcd06c9319e99cc4bbee7ce7730d9422, type: 3}
       propertyPath: m_LocalRotation.z
@@ -251386,8 +251937,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -256855,8 +257406,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -270694,8 +271245,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -280517,8 +281068,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -285378,7 +285929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 440340, guid: d2b133bd1e0723046a270de71e937731, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 440340, guid: d2b133bd1e0723046a270de71e937731, type: 3}
       propertyPath: m_LocalRotation.w
@@ -286849,8 +287400,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -288628,7 +289179,7 @@ Transform:
   m_GameObject: {fileID: 2007230966}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.244, y: 0, z: 0}
   m_LocalScale: {x: 0.94087, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -290397,7 +290948,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1474012300}
+    m_TransformParent: {fileID: 88789740}
     m_Modifications:
     - target: {fileID: 141870, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_Name
@@ -290421,7 +290972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484704, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.70242
+      value: -13.150001
       objectReference: {fileID: 0}
     - target: {fileID: 484704, guid: edf6cb56e12fba648b2cf1e7dfa5bf88, type: 3}
       propertyPath: m_LocalRotation.w
@@ -290538,8 +291089,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -291513,7 +292064,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 1090539062}
     m_Modifications:
     - target: {fileID: 7111991533906514167, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_Name
@@ -291521,7 +292072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.64121
+      value: 4.9
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalPosition.y
@@ -291529,11 +292080,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 124.2
+      value: 80.5
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.000000014901161
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalRotation.x
@@ -291541,7 +292092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalRotation.z
@@ -291602,8 +292153,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -292413,6 +292964,133 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 485062, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
   m_PrefabInstance: {fileID: 2030521462}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2031007553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2031007554}
+  - component: {fileID: 2031007558}
+  - component: {fileID: 2031007557}
+  - component: {fileID: 2031007556}
+  - component: {fileID: 2031007555}
+  m_Layer: 0
+  m_Name: LimiterC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2031007554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031007553}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -110.49, y: 0, z: -139.06}
+  m_LocalScale: {x: 4.5517154, y: 1, z: 52.913124}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2122403427}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &2031007555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031007553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b82b1f8698dc348b653b1136406341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadLaneAligner
+  alignmentSpeed: 3
+  requiredAlignment: 0.8
+--- !u!65 &2031007556
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031007553}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &2031007557
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031007553}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &2031007558
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031007553}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &2031733101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -300131,8 +300809,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -301818,6 +302496,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2368931257538879948, guid: feb235b45a8580449b49ec90cf6ab272, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2545910006401569123, guid: feb235b45a8580449b49ec90cf6ab272, type: 3}
       propertyPath: m_LocalPosition.x
       value: 189.91
@@ -301828,7 +302510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2545910006401569123, guid: feb235b45a8580449b49ec90cf6ab272, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 188.42
+      value: 183.05
       objectReference: {fileID: 0}
     - target: {fileID: 5123516381211436486, guid: feb235b45a8580449b49ec90cf6ab272, type: 3}
       propertyPath: m_LocalPosition.x
@@ -301840,7 +302522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5123516381211436486, guid: feb235b45a8580449b49ec90cf6ab272, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 183.1
+      value: 188.6
       objectReference: {fileID: 0}
     - target: {fileID: 7753891903186502889, guid: feb235b45a8580449b49ec90cf6ab272, type: 3}
       propertyPath: m_LocalPosition.x
@@ -301895,7 +302577,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7753891903186502889, guid: feb235b45a8580449b49ec90cf6ab272, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1317553538}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2368931257538879948, guid: feb235b45a8580449b49ec90cf6ab272, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 879565562}
+    - targetCorrespondingSourceObject: {fileID: 8796280009354689781, guid: feb235b45a8580449b49ec90cf6ab272, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 384014703}
   m_SourcePrefab: {fileID: 100100000, guid: feb235b45a8580449b49ec90cf6ab272, type: 3}
 --- !u!4 &2099523267 stripped
 Transform:
@@ -302859,6 +303547,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 420774, guid: 412e629bc1aeba94f84bc67e32a5cc7f, type: 3}
   m_PrefabInstance: {fileID: 2106745908}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2106806002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2106806003}
+  m_Layer: 0
+  m_Name: SideA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2106806003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106806002}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 264215822}
+  - {fileID: 153031679}
+  - {fileID: 1733667525}
+  - {fileID: 669703039}
+  - {fileID: 1626578070}
+  - {fileID: 28046853}
+  - {fileID: 347952646}
+  - {fileID: 1250908786}
+  - {fileID: 156754677}
+  - {fileID: 278288771}
+  - {fileID: 1726555103}
+  - {fileID: 630885139}
+  - {fileID: 1388523595}
+  - {fileID: 288881997}
+  - {fileID: 420253841}
+  m_Father: {fileID: 268825575}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2107246693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -304604,6 +305338,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 459158, guid: 530c04ec7ccbeec44b8c9e6f3c681679, type: 3}
   m_PrefabInstance: {fileID: 2121122098}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2122403426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2122403427}
+  m_Layer: 0
+  m_Name: LaneLimiter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2122403427
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122403426}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.98613, y: 0, z: 131.43538}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 354457495}
+  - {fileID: 966111944}
+  - {fileID: 2031007554}
+  - {fileID: 559407659}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2122690580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -308100,7 +308869,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 268825575}
+    m_TransformParent: {fileID: 1090539062}
     m_Modifications:
     - target: {fileID: 7111991533906514167, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_Name
@@ -308108,7 +308877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.64121
+      value: 4.9
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalPosition.y
@@ -308116,11 +308885,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 204.66605
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.000000014901161
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalRotation.x
@@ -308128,7 +308897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8441804784575792658, guid: f9712c74ce06b4d46a9d106f4bd63e85, type: 3}
       propertyPath: m_LocalRotation.z
@@ -308184,8 +308953,8 @@ MonoBehaviour:
   obliqueSensorLength: 5
   obliqueSensorAngle: 25
   maxWaitTime: 7
-  maxTimeOffMagnet: 5
-  maxStationaryTime: 15
+  maxTimeOffMagnet: 9999999
+  maxStationaryTime: 1e+9
   timeOffMagnet: 0
   idleSound: {fileID: 8300000, guid: df7e9cedd2e6d0b47b9c26e4a0b37024, type: 3}
   movingSound: {fileID: 8300000, guid: 87a95f0b9df813348bc0c9d50450091a, type: 3}
@@ -308309,3 +309078,4 @@ SceneRoots:
   - {fileID: 1875296489}
   - {fileID: 139339666}
   - {fileID: 1164904172}
+  - {fileID: 2122403427}
