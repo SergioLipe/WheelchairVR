@@ -351,7 +351,7 @@ public class MovementVR : MonoBehaviour
         {
             if (switchSteeringAction.action.WasPressedThisFrame())
             {
-                wheelController.ToggleSteeringType();
+                // wheelController.ToggleSteering(); — uncomment when ready
                 PlaySound(steeringChangeSound);
                 SendHapticPulse(rightController, 0.15f, 0.08f);
             }
