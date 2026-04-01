@@ -101,6 +101,9 @@ public class WheelController : MonoBehaviour
     // For manual speed calculation
     private Vector3 previousPosition;
 
+    private Vector3[] initialLocPos = new Vector3[6]; // To store the "Home" position
+private Transform[] allJoints = new Transform[6]; // To make it easy to loop through all wheels
+
     // Rotation axes
     private readonly Vector3 ROTATION_AXIS = Vector3.forward;
     private readonly Vector3 STEERING_AXIS = Vector3.up;
@@ -133,13 +136,14 @@ public class WheelController : MonoBehaviour
 
     // ===== INITIALIZATION =====
 
-    void Start()
+    void Awake()
     {
         InitializeComponents();
         FindJointsAutomatically();
         StoreInitialRotations();
         VerifyConfiguration();
         ConfigureMovementScript();
+        
     }
 
     void Update()
