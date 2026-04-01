@@ -370,14 +370,7 @@ public class CollisionFlashEffect : MonoBehaviour
                 movePC.PlaySound(movePC.hardCollisionSound);
             }
 
-            // Note: Ready for the VR script! 
-            /*
-            MovementVR moveVR = GetComponent<MovementVR>();
-            if (moveVR != null && moveVR.hardCollisionSound != null) 
-            {
-                moveVR.PlaySound(moveVR.hardCollisionSound);
-            }
-            */
+
         }
         // ==========================================
 

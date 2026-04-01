@@ -101,6 +101,13 @@ public class MovementVR : MonoBehaviour
     public AudioClip slideStartSound;
     public float minCollisionSpeed = 0.8f;
 
+    [Header("=== Sound Cooldowns ===")]
+    [Tooltip("Minimum time between collision sounds (seconds)")]
+    public float collisionSoundCooldown = 0.5f;
+
+    [Tooltip("Minimum time between slide sounds (seconds)")]
+    public float slideSoundCooldown = 0.8f;
+
     [Header("=== Physics and Limits ===")]
     public float maxSlope = 10f;
     public float gravity = -9.81f;
@@ -132,10 +139,8 @@ public class MovementVR : MonoBehaviour
     // Sound cache
     private bool slidingCache = false;
     private string steeringTypeCache = "Frontal";
-    private bool inCollisionCache = false;
     private float lastCollisionSoundTime = 0f;
     private float lastSlideSoundTime = 0f;
-    private float soundCooldown = 1.0f;
 
     // Haptic state
     private bool wasColliding = false;
@@ -346,7 +351,7 @@ public class MovementVR : MonoBehaviour
         {
             if (switchSteeringAction.action.WasPressedThisFrame())
             {
-                // wheelController.ToggleSteering(); — uncomment when ready
+                wheelController.ToggleSteeringType();
                 PlaySound(steeringChangeSound);
                 SendHapticPulse(rightController, 0.15f, 0.08f);
             }
@@ -641,6 +646,7 @@ public class MovementVR : MonoBehaviour
     {
         float currentTime = Time.time;
 
+        // Steering change sound
         if (currentSteeringType != steeringTypeCache)
         {
             PlaySound(steeringChangeSound);
@@ -648,33 +654,19 @@ public class MovementVR : MonoBehaviour
         }
 
         bool slidingNow = collisionSystem.IsWallSliding;
-        bool inCollisionNow = (collisionSystem.IsInCollision ||
-                               collisionSystem.IsFrontBlocked ||
-                               collisionSystem.IsBackBlocked);
 
+        // Only handle slide sounds here!
+        // Hard collision sounds are now handled perfectly in sync by CollisionFlashEffect.cs
         if (slidingNow)
         {
-            if (!slidingCache && currentTime - lastSlideSoundTime > soundCooldown)
+            if (!slidingCache && currentTime - lastSlideSoundTime > slideSoundCooldown)
             {
                 PlaySound(slideStartSound);
                 lastSlideSoundTime = currentTime;
             }
-            inCollisionCache = inCollisionNow;
-        }
-        else if (inCollisionNow)
-        {
-            if (!inCollisionCache && currentTime - lastCollisionSoundTime > soundCooldown)
-            {
-                PlaySound(hardCollisionSound);
-                lastCollisionSoundTime = currentTime;
-            }
         }
 
         slidingCache = slidingNow;
-        if (!slidingNow)
-        {
-            inCollisionCache = inCollisionNow;
-        }
     }
 
     private void UpdateTimers()
@@ -711,6 +703,13 @@ public class MovementVR : MonoBehaviour
     {
         if (effectsAudio != null && clip != null)
         {
+            // Check cooldown specifically for hard collision sounds to prevent spam
+            if (clip == hardCollisionSound)
+            {
+                if (Time.time - lastCollisionSoundTime < collisionSoundCooldown) return;
+                lastCollisionSoundTime = Time.time;
+            }
+
             effectsAudio.PlayOneShot(clip);
         }
     }

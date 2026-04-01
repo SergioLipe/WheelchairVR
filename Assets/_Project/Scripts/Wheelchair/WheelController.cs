@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Complete wheelchair wheel control system
 /// Manages steering, spinning and differential wheel movement
 /// Supports two modes: Front Steering (standard) and Rear Steering (more maneuverable)
-/// Compatible with both MovementPC and MovementVR
+/// Fully compatible with both PC Keyboard and VR Joysticks.
 /// NOTE: Sound effects are handled by the Movement scripts, NOT here
 /// </summary>
 public class WheelController : MonoBehaviour
@@ -33,7 +34,7 @@ public class WheelController : MonoBehaviour
     [Tooltip("Wheelchair steering type")]
     public SteeringType steeringType = SteeringType.FrontSteering;
 
-    [Tooltip("Key to toggle steering type")]
+    [Tooltip("Key to toggle steering type (PC Fallback)")]
     public KeyCode toggleSteeringKey = KeyCode.T;
 
     [Header("=== Physical Configuration ===")]
@@ -143,6 +144,7 @@ public class WheelController : MonoBehaviour
 
     void Update()
     {
+        // PC Keyboard fallback for toggling steering
         if (Input.GetKeyDown(toggleSteeringKey))
         {
             ToggleSteeringType();
@@ -177,9 +179,9 @@ public class WheelController : MonoBehaviour
 
     /// <summary>
     /// Toggles between front and rear steering.
-    /// Sound is NOT played here — MovementPC/VR detect the change and play it.
+    /// Made PUBLIC so MovementVR and MovementPC can trigger it.
     /// </summary>
-    void ToggleSteeringType()
+    public void ToggleSteeringType()
     {
         if (steeringType == SteeringType.FrontSteering)
         {
@@ -196,7 +198,8 @@ public class WheelController : MonoBehaviour
 
     void GetInputs()
     {
-        steeringInput = Input.GetAxis("Horizontal");
+        // Fetch steering input dynamically from VR Joystick or PC Keyboard
+        steeringInput = GetDynamicSteeringInput();
 
         if (HasMovementScript())
         {
@@ -215,6 +218,24 @@ public class WheelController : MonoBehaviour
             currentSpeed = Mathf.Clamp(currentSpeed, -1f, 1f);
             previousPosition = transform.position;
         }
+    }
+
+    /// <summary>
+    /// Detects if the player is using VR or PC and grabs the correct horizontal input.
+    /// </summary>
+    private float GetDynamicSteeringInput()
+    {
+        // If VR script is active, read the thumbstick X axis directly
+        if (movementVR != null && movementVR.isActiveAndEnabled)
+        {
+            if (movementVR.joystickAction != null && movementVR.joystickAction.action != null)
+            {
+                return movementVR.joystickAction.action.ReadValue<Vector2>().x;
+            }
+        }
+        
+        // PC Fallback
+        return Input.GetAxis("Horizontal");
     }
 
     void ApplySteering()

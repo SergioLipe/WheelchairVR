@@ -288359,6 +288359,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 960358987989687153, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
+      propertyPath: startupAudioSource
+      value: 
+      objectReference: {fileID: 1942329980}
+    - target: {fileID: 960358987989687153, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
+      propertyPath: movementAudioSource
+      value: 
+      objectReference: {fileID: 1942329978}
     - target: {fileID: 2153454117530968442, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -288911,6 +288919,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7484341647399616546, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
+      propertyPath: vrCanvasDistance
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 7830010716988711205, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
@@ -288927,7 +288939,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5335227114178252830, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6772623600402851781, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
     - {fileID: 2786312352058804342, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
@@ -288941,7 +288954,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 950943729506768555, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
       insertIndex: 0
       addedObject: {fileID: 17414381}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8085255482058965501, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1942329985}
   m_SourcePrefab: {fileID: 100100000, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
 --- !u!1 &1942329974 stripped
 GameObject:
@@ -288953,6 +288969,74 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 950943729506768555, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
   m_PrefabInstance: {fileID: 1942329973}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1942329977 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2779707456382150532, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
+  m_PrefabInstance: {fileID: 1942329973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1942329978 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6186213277603296895, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
+  m_PrefabInstance: {fileID: 1942329973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1942329980 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2460939904801887666, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
+  m_PrefabInstance: {fileID: 1942329973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1942329985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942329974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2948ca8efee3e548a9c10bbf908541c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovementVR
+  joystickAction: {fileID: -1403880596419931861, guid: da803d4aa849f234d9ed6cbd213f2b73, type: 3}
+  toggleSpeedAction: {fileID: -3788089420310262399, guid: da803d4aa849f234d9ed6cbd213f2b73, type: 3}
+  switchSteeringAction: {fileID: 0}
+  brakeAction: {fileID: 0}
+  leftController: {fileID: 0}
+  rightController: {fileID: 0}
+  collisionHapticIntensity: 0.6
+  slideHapticIntensity: 0.25
+  brakeHapticIntensity: 0.3
+  maxSpeedNormal: 8
+  maxSpeedSlow: 3
+  reverseSpeed: 2
+  joystickDeadzone: 0.12
+  joystickCurve: 1.8
+  joystickSmoothing: 4
+  accelerationTime: 2.5
+  brakingTime: 1.5
+  emergencyBrakeTime: 0.4
+  rotationSpeed: 90
+  rotationInPlace: 0
+  startingSpeedMode: 1
+  startingSteeringMode: 0
+  currentMode: 1
+  effectsAudio: {fileID: 1942329977}
+  modeChangeSound: {fileID: 8300000, guid: 58f1d424e08dec74fbde134e66fa04b3, type: 3}
+  steeringChangeSound: {fileID: 8300000, guid: 58f1d424e08dec74fbde134e66fa04b3, type: 3}
+  hardCollisionSound: {fileID: 8300000, guid: 5dd604ae86442224b81d68474a7c6451, type: 3}
+  slideStartSound: {fileID: 8300000, guid: 8297ce1aea3f7d9459b8818f4f108e00, type: 3}
+  minCollisionSpeed: 0.8
+  collisionSoundCooldown: 0.5
+  slideSoundCooldown: 0.8
+  maxSlope: 10
+  gravity: -9.81
+  currentSpeed: 0
+  targetSpeed: 0
+  emergencyBrake: 0
+  currentSteeringType: Frontal
+  rotationEfficiency: 100
+  rawJoystickInput: {x: 0, y: 0}
+  processedJoystickInput: {x: 0, y: 0}
+  playerIsAccelerating: 0
 --- !u!1001 &1942474073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -323226,7 +323310,6 @@ MonoBehaviour:
   steeringChangeSound: {fileID: 8300000, guid: 58f1d424e08dec74fbde134e66fa04b3, type: 3}
   hardCollisionSound: {fileID: 8300000, guid: 5dd604ae86442224b81d68474a7c6451, type: 3}
   slideStartSound: {fileID: 8300000, guid: 8297ce1aea3f7d9459b8818f4f108e00, type: 3}
-  minCollisionSpeed: 0.8
   collisionSoundCooldown: 0.5
   slideSoundCooldown: 0.8
   maxSlope: 10
