@@ -4,6 +4,8 @@ using UnityEngine;
 /// Complete wheelchair wheel control system
 /// Manages steering, spinning and differential wheel movement
 /// Supports two modes: Front Steering (standard) and Rear Steering (more maneuverable)
+/// Compatible with both MovementPC and MovementVR
+/// NOTE: Sound effects are handled by the Movement scripts, NOT here
 /// </summary>
 public class WheelController : MonoBehaviour
 {
@@ -83,7 +85,8 @@ public class WheelController : MonoBehaviour
     }
 
     // Component references
-    private Movement movementScript;
+    private MovementPC movementPC;
+    private MovementVR movementVR;
     private Rigidbody rb;
 
     // Initial joint rotations
@@ -100,6 +103,34 @@ public class WheelController : MonoBehaviour
     // Rotation axes
     private readonly Vector3 ROTATION_AXIS = Vector3.forward;
     private readonly Vector3 STEERING_AXIS = Vector3.up;
+
+    // ===== HELPER METHODS =====
+
+    private float GetMovementNormalizedSpeed()
+    {
+        if (movementPC != null) return movementPC.GetNormalizedSpeed();
+        if (movementVR != null) return movementVR.GetNormalizedSpeed();
+        return 0f;
+    }
+
+    private bool HasMovementScript()
+    {
+        return movementPC != null || movementVR != null;
+    }
+
+    private void SetRotationSpeed(float speed)
+    {
+        if (movementPC != null) movementPC.rotationSpeed = speed;
+        if (movementVR != null) movementVR.rotationSpeed = speed;
+    }
+
+    private void SetRotationInPlace(bool value)
+    {
+        if (movementPC != null) movementPC.rotationInPlace = value;
+        if (movementVR != null) movementVR.rotationInPlace = value;
+    }
+
+    // ===== INITIALIZATION =====
 
     void Start()
     {
@@ -122,38 +153,31 @@ public class WheelController : MonoBehaviour
         ApplyWheelRotation();
     }
 
-    /// <summary>
-    /// Initializes component references
-    /// </summary>
     private void InitializeComponents()
     {
-        movementScript = GetComponent<Movement>();
+        movementPC = GetComponent<MovementPC>();
+        movementVR = GetComponent<MovementVR>();
         rb = GetComponent<Rigidbody>();
         previousPosition = transform.position;
     }
 
-    /// <summary>
-    /// Configures movement script based on steering type
-    /// </summary>
     private void ConfigureMovementScript()
     {
-        if (movementScript != null)
+        if (steeringType == SteeringType.RearSteering)
         {
-            if (steeringType == SteeringType.RearSteering)
-            {
-                movementScript.rotationSpeed = 60f;
-                movementScript.rotationInPlace = true;
-            }
-            else
-            {
-                movementScript.rotationSpeed = 45f;
-                movementScript.rotationInPlace = false;
-            }
+            SetRotationSpeed(60f);
+            SetRotationInPlace(true);
+        }
+        else
+        {
+            SetRotationSpeed(45f);
+            SetRotationInPlace(false);
         }
     }
 
     /// <summary>
-    /// Toggles between front and rear steering
+    /// Toggles between front and rear steering.
+    /// Sound is NOT played here — MovementPC/VR detect the change and play it.
     /// </summary>
     void ToggleSteeringType()
     {
@@ -166,26 +190,17 @@ public class WheelController : MonoBehaviour
             steeringType = SteeringType.FrontSteering;
         }
 
-        // Play sound using Movement script
-        if (movementScript != null)
-        {
-            movementScript.PlaySound(movementScript.steeringChangeSound);
-        }
-
         ResetSteering();
         ConfigureMovementScript();
     }
 
-    /// <summary>
-    /// Gets player inputs and calculates current speed
-    /// </summary>
     void GetInputs()
     {
         steeringInput = Input.GetAxis("Horizontal");
 
-        if (movementScript != null)
+        if (HasMovementScript())
         {
-            currentSpeed = movementScript.GetNormalizedSpeed();
+            currentSpeed = GetMovementNormalizedSpeed();
         }
         else if (rb != null)
         {
@@ -202,9 +217,6 @@ public class WheelController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Applies steering to correct wheels depending on mode
-    /// </summary>
     void ApplySteering()
     {
         if (Mathf.Abs(steeringInput) > 0.01f)
@@ -237,9 +249,6 @@ public class WheelController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Calculates and applies realistic rotation to all wheels
-    /// </summary>
     void ApplyWheelRotation()
     {
         float rearCircumference = Mathf.PI * rearWheelDiameter;
@@ -313,9 +322,6 @@ public class WheelController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Returns wheels to straight position
-    /// </summary>
     void ResetSteering()
     {
         currentSteeringAngle = 0f;
@@ -327,9 +333,6 @@ public class WheelController : MonoBehaviour
             joint5_RearSteering.localRotation = initialRotJoint5;
     }
 
-    /// <summary>
-    /// Automatically searches for all joints in hierarchy
-    /// </summary>
     void FindJointsAutomatically()
     {
         if (joint4_FrontSteering == null)
@@ -346,9 +349,6 @@ public class WheelController : MonoBehaviour
             joint9_RearRightWheel = transform.Find("joint9");
     }
 
-    /// <summary>
-    /// Stores initial rotations of all joints
-    /// </summary>
     void StoreInitialRotations()
     {
         if (joint4_FrontSteering != null)
@@ -365,9 +365,6 @@ public class WheelController : MonoBehaviour
             initialRotJoint9 = joint9_RearRightWheel.localRotation;
     }
 
-    /// <summary>
-    /// Verifies if all necessary components are configured
-    /// </summary>
     void VerifyConfiguration()
     {
         if (joint4_FrontSteering == null) return;
@@ -380,9 +377,6 @@ public class WheelController : MonoBehaviour
 
     // ===== PUBLIC METHODS =====
 
-    /// <summary>
-    /// Completely stops all wheels and resets to initial position
-    /// </summary>
     public void StopWheels()
     {
         rotationFrontLeft = 0f;
@@ -405,17 +399,11 @@ public class WheelController : MonoBehaviour
             joint9_RearRightWheel.localRotation = initialRotJoint9;
     }
 
-    /// <summary>
-    /// Returns current steering type
-    /// </summary>
     public SteeringType GetSteeringType()
     {
         return steeringType;
     }
 
-    /// <summary>
-    /// Forces a specific steering type and updates dependencies automatically
-    /// </summary>
     public void SetSteeringType(SteeringType newType)
     {
         steeringType = newType;

@@ -4,8 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
-/// Modern visual collision feedback system with spam prevention
-/// Uses UI Canvas with gradients, smooth animations and directional effects
+/// Modern visual collision feedback system with spam prevention.
+/// Uses pre-cached UI Canvas gradients, smooth animations, and directional effects
+/// to ensure zero latency and perfect audio-visual synchronization.
 /// </summary>
 public class CollisionFlashEffect : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class CollisionFlashEffect : MonoBehaviour
     [Tooltip("Minimum time between effects for same direction (seconds)")]
     [Range(0.1f, 2f)]
     public float effectCooldown = 1f;
-    
+
     [Tooltip("Global cooldown between any effects (seconds)")]
     [Range(0f, 1f)]
     public float globalCooldown = 1f;
@@ -101,16 +102,53 @@ public class CollisionFlashEffect : MonoBehaviour
     private float lastGlobalEffectTime = 0f;
     private Dictionary<CollisionType, int> effectCounter = new Dictionary<CollisionType, int>();
 
+    // Cache for pre-generated gradient textures to avoid CPU/GC spikes during collisions
+    private Dictionary<CollisionType, Sprite> cachedGradientSprites = new Dictionary<CollisionType, Sprite>();
+
     void Start()
     {
         SetupUI();
         InitializeCamera();
         InitializeCooldowns();
+        PrecomputeSprites(); // Generate textures ONLY ONCE at startup to prevent lag
     }
 
     void OnDestroy()
     {
         StopAllEffects();
+        ClearCache();
+    }
+
+    /// <summary>
+    /// Pre-generates the 512x512 gradient textures at startup.
+    /// This prevents massive CPU spikes and Garbage Collection stuttering during gameplay.
+    /// </summary>
+    private void PrecomputeSprites()
+    {
+        CollisionType[] types = { CollisionType.Front, CollisionType.Back, CollisionType.LeftSide, CollisionType.RightSide };
+        
+        foreach (CollisionType type in types)
+        {
+            Texture2D tex = CreateGradientTexture(type);
+            Sprite sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+            cachedGradientSprites[type] = sprite;
+        }
+    }
+
+    /// <summary>
+    /// Cleans up cached textures from memory when the script is destroyed.
+    /// </summary>
+    private void ClearCache()
+    {
+        foreach (Sprite cachedSprite in cachedGradientSprites.Values)
+        {
+            if (cachedSprite != null)
+            {
+                if (cachedSprite.texture != null) Destroy(cachedSprite.texture);
+                Destroy(cachedSprite);
+            }
+        }
+        cachedGradientSprites.Clear();
     }
 
     /// <summary>
@@ -122,7 +160,7 @@ public class CollisionFlashEffect : MonoBehaviour
         lastEffectTime[CollisionType.Back] = 0f;
         lastEffectTime[CollisionType.LeftSide] = 0f;
         lastEffectTime[CollisionType.RightSide] = 0f;
-        
+
         effectCounter[CollisionType.Front] = 0;
         effectCounter[CollisionType.Back] = 0;
         effectCounter[CollisionType.LeftSide] = 0;
@@ -148,7 +186,7 @@ public class CollisionFlashEffect : MonoBehaviour
     {
         CreateCanvasIfNeeded();
         CreateEffectPanel();
-        
+
         if (showArrows)
         {
             CreateArrows();
@@ -272,7 +310,7 @@ public class CollisionFlashEffect : MonoBehaviour
     private bool IsEffectAllowed(CollisionType type)
     {
         float currentTime = Time.time;
-        
+
         // Check global cooldown
         if (currentTime - lastGlobalEffectTime < globalCooldown)
         {
@@ -295,64 +333,85 @@ public class CollisionFlashEffect : MonoBehaviour
     }
 
     /// <summary>
-    /// Activates visual feedback with spam prevention
+    /// Activates visual feedback and plays the collision sound in perfect sync.
+    /// Sound will ONLY play if the visual flash is also triggered.
+    /// Hard collision sounds are exclusively played for Front and Back impacts.
     /// </summary>
     void ActivateFeedback(CollisionType type)
     {
+        // 1. Basic validation
         if (!feedbackActive || type == CollisionType.None) return;
 
-        // Check cooldowns
+        // 2. Cooldown & Spam Check
+        // If the effect is on cooldown, we block BOTH the visual flash and the audio.
         if (!IsEffectAllowed(type))
         {
-            // Increment spam counter
             effectCounter[type]++;
-            
-            // Optional: You can add a warning system here
+
             if (effectCounter[type] > 5)
             {
                 if (showDebugInfo) Debug.LogWarning($"Excessive collision spam detected for {type}");
-                effectCounter[type] = 0; // Reset counter
+                effectCounter[type] = 0; 
             }
-            
-            return; // Block the effect
+
+            return; // Blocks execution: NO flash and NO sound
         }
 
-        // Update cooldown timers
+        // ==========================================
+        // 3. PERFECT AUDIO & VISUAL SYNC
+        // ==========================================
+        // We only want the hard collision sound for direct impacts (Front/Back).
+        // Slide sounds are handled separately by MovementPC.
+        if (type == CollisionType.Front || type == CollisionType.Back)
+        {
+            MovementPC movePC = GetComponent<MovementPC>();
+            if (movePC != null && movePC.hardCollisionSound != null)
+            {
+                movePC.PlaySound(movePC.hardCollisionSound);
+            }
+
+            // Note: Ready for the VR script! 
+            /*
+            MovementVR moveVR = GetComponent<MovementVR>();
+            if (moveVR != null && moveVR.hardCollisionSound != null) 
+            {
+                moveVR.PlaySound(moveVR.hardCollisionSound);
+            }
+            */
+        }
+        // ==========================================
+
+        // 4. Update cooldown timers
         float currentTime = Time.time;
         lastEffectTime[type] = currentTime;
         lastGlobalEffectTime = currentTime;
-        effectCounter[type] = 0; // Reset spam counter
+        effectCounter[type] = 0; 
 
-        // Stop and clean previous main effect
+        // 5. Restart Main Screen Effect
         if (mainEffectCoroutine != null)
         {
             StopCoroutine(mainEffectCoroutine);
             mainEffectCoroutine = null;
         }
-
-        // Start main effect
         mainEffectCoroutine = StartCoroutine(AnimateMainEffect(type));
 
-        // Handle arrow animation independently
+        // 6. Handle Directional Arrows Animation
         int arrowIndex = GetArrowIndex(type);
         if (arrowIndex >= 0 && showArrows)
         {
-            // Stop previous arrow animation for this specific arrow
             if (arrowCoroutines[arrowIndex] != null)
             {
                 StopCoroutine(arrowCoroutines[arrowIndex]);
                 arrowCoroutines[arrowIndex] = null;
             }
 
-            // Start new arrow animation
             Color color = GetColorForType(type);
             arrowCoroutines[arrowIndex] = StartCoroutine(AnimateArrow(arrowIndex, color));
         }
 
-        // Camera shake with cooldown check
+        // 7. Camera Shake
         if (cameraShakeActive && cameraTransform != null)
         {
-            // Only shake if not recently shaken
             if (currentTime - lastGlobalEffectTime > shakeDuration)
             {
                 StartCoroutine(CameraShake());
@@ -361,15 +420,18 @@ public class CollisionFlashEffect : MonoBehaviour
     }
 
     /// <summary>
-    /// Animates the main screen effect
+    /// Animates the main screen effect using pre-cached sprites.
+    /// This is highly optimized and will not cause Garbage Collection spikes.
     /// </summary>
     IEnumerator AnimateMainEffect(CollisionType type)
     {
         Color color = GetColorForType(type);
-        Texture2D texture = CreateGradientTexture(type);
-        Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), 
-            new Vector2(0.5f, 0.5f));
-        effectImage.sprite = sprite;
+        
+        // Apply the pre-calculated sprite from the dictionary
+        if (cachedGradientSprites.ContainsKey(type))
+        {
+            effectImage.sprite = cachedGradientSprites[type];
+        }
 
         float durationPerPulse = effectDuration / pulseCount;
         float elapsedTime = 0f;
@@ -392,10 +454,8 @@ public class CollisionFlashEffect : MonoBehaviour
             }
         }
 
-        // Clean up main effect
+        // Clean up main effect visibility (Reset alpha to 0)
         effectImage.color = new Color(color.r, color.g, color.b, 0);
-        Destroy(texture);
-        Destroy(sprite);
         mainEffectCoroutine = null;
     }
 
@@ -506,7 +566,7 @@ public class CollisionFlashEffect : MonoBehaviour
     {
         float distX = Mathf.Abs(x - size / 2f) / (size / 2f);
         float distY = Mathf.Abs(y - size / 2f) / (size / 2f);
-        
+
         switch (type)
         {
             case CollisionType.Front:
@@ -552,7 +612,7 @@ public class CollisionFlashEffect : MonoBehaviour
         while (elapsedTime < shakeDuration)
         {
             float intensity = Mathf.Lerp(shakeIntensity, 0f, elapsedTime / shakeDuration);
-            
+
             Vector3 offset = new Vector3(
                 Random.Range(-1f, 1f) * intensity,
                 Random.Range(-1f, 1f) * intensity,

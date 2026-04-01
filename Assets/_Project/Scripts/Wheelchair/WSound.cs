@@ -4,8 +4,8 @@ using System.Collections;
 /// <summary>
 /// Alternative sound system with fade out effects
 /// Uses separate AudioSources for startup and movement loop
+/// Compatible with both MovementPC and MovementVR
 /// </summary>
-[RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(AudioSource))]
 public class WSound : MonoBehaviour
 {
@@ -21,7 +21,8 @@ public class WSound : MonoBehaviour
     public float fadeOutTime = 0.2f;
 
     // Component references
-    private Movement movementController;
+    private MovementPC movementPC;
+    private MovementVR movementVR;
 
     // State
     private bool startupSoundPlayed = false;
@@ -42,27 +43,33 @@ public class WSound : MonoBehaviour
         UpdateStartupToLoopTransition();
     }
 
-    /// <summary>
-    /// Initializes component references and validates audio sources
-    /// </summary>
     private void InitializeComponents()
     {
-        movementController = GetComponent<Movement>();
+        movementPC = GetComponent<MovementPC>();
+        movementVR = GetComponent<MovementVR>();
 
         if (startupAudioSource == null || movementAudioSource == null)
         {
             return;
         }
+
+        // Set 2D audio for minimal latency
+        startupAudioSource.spatialBlend = 0f;
+        movementAudioSource.spatialBlend = 0f;
         
         originalMovementVolume = movementAudioSource.volume;
     }
 
-    /// <summary>
-    /// Checks acceleration state and triggers appropriate sounds
-    /// </summary>
+    private bool IsPlayerAccelerating()
+    {
+        if (movementPC != null) return movementPC.playerIsAccelerating;
+        if (movementVR != null) return movementVR.playerIsAccelerating;
+        return false;
+    }
+
     private void CheckAccelerationState()
     {
-        bool acceleratingNow = movementController.playerIsAccelerating;
+        bool acceleratingNow = IsPlayerAccelerating();
 
         // Player started accelerating
         if (acceleratingNow && !wasAcceleratingCache)
@@ -78,14 +85,11 @@ public class WSound : MonoBehaviour
         wasAcceleratingCache = acceleratingNow;
     }
 
-    /// <summary>
-    /// Handles transition from startup sound to movement loop
-    /// </summary>
     private void UpdateStartupToLoopTransition()
     {
         if (startupSoundPlayed && !startupAudioSource.isPlaying)
         {
-            bool acceleratingNow = movementController.playerIsAccelerating;
+            bool acceleratingNow = IsPlayerAccelerating();
             
             if (acceleratingNow && !movementAudioSource.isPlaying)
             {
@@ -96,9 +100,6 @@ public class WSound : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Plays startup sounds when acceleration begins
-    /// </summary>
     private void PlayStartupSounds()
     {
         // Cancel fade out if active
@@ -120,9 +121,6 @@ public class WSound : MonoBehaviour
         startupSoundPlayed = true;
     }
 
-    /// <summary>
-    /// Stops sounds with fade out effect
-    /// </summary>
     private void StopSounds()
     {
         // Stop startup immediately
@@ -136,9 +134,6 @@ public class WSound : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Coroutine that lowers AudioSource volume to zero then stops it
-    /// </summary>
     private IEnumerator FadeOut(AudioSource audioSource, float fadeTime)
     {
         float startVolume = audioSource.volume;
@@ -151,7 +146,6 @@ public class WSound : MonoBehaviour
             yield return null;
         }
 
-        // Ensure volume is zero and stop sound
         audioSource.volume = 0f;
         audioSource.Stop();
         
