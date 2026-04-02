@@ -214,7 +214,7 @@ public class MovementVR : MonoBehaviour
         controller.minMoveDistance = 0.0f;
         controller.stepOffset = 0.08f;
 
-        transform.position += Vector3.up * 0.1f;
+      
     }
 
     private void SetupComponents()

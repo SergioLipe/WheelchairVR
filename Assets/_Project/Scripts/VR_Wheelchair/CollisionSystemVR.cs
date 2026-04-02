@@ -33,7 +33,7 @@ public class CollisionSystemVR : MonoBehaviour
     // External components
     private CharacterController controller;
     private Transform wheelchairTransform;
-    private CollisionFlashEffect flashEffect;
+    private CollisionFlashEffectVR flashEffect;
 
     // Collision variables
     private Vector3 collisionNormal = Vector3.zero;
@@ -62,11 +62,11 @@ public class CollisionSystemVR : MonoBehaviour
         this.controller = characterController;
         this.wheelchairTransform = transform;
 
-        flashEffect = GetComponent<CollisionFlashEffect>();
+        flashEffect = GetComponent<CollisionFlashEffectVR>();
         if (flashEffect == null)
         {
-            Debug.LogWarning("CollisionFlashEffect missing. Adding one automatically.");
-            flashEffect = gameObject.AddComponent<CollisionFlashEffect>();
+            Debug.LogWarning("CollisionFlashEffectVR missing. Adding one automatically.");
+            flashEffect = gameObject.AddComponent<CollisionFlashEffectVR>();
         }
     }
 
