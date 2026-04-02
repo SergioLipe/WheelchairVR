@@ -8,10 +8,7 @@ public class VRSeatEnforcer : MonoBehaviour
 
     [Header("Core References")]
     [SerializeField] private Transform headCamera;
-
-    [Tooltip("MUST be the SeatTarget object on the wheelchair!")]
     [SerializeField] private Transform seatCenter;
-
     [SerializeField] private Image fadeImage;
     [SerializeField] private VRSeatCalibrator seatCalibrator;
 
@@ -31,16 +28,15 @@ public class VRSeatEnforcer : MonoBehaviour
     [Header("Fade Settings")]
     [SerializeField] private float fadeSpeed = 10f;
     [SerializeField] private float fadeStartPercent = 0.7f;
-
-    [Header("Debug")]
-    [SerializeField] private bool showDebugLogs = true;
+    [Range(0f, 1f)]
+    [Tooltip("1.0 is pitch black, 0.5 is semi-transparent.")]
+    [SerializeField] private float maxDarkness = 1.0f;
 
     // Internal state trackers
     private float currentFadeAlpha = 0f;
     private Color fadeColor = Color.black;
-    private float calibratedHeadHeight = 0f;
+    private float calibratedLocalHeight = 0f;
     private bool heightCalibrated = false;
-    private float debugTimer = 0f;
 
     // --- UNITY LIFECYCLE METHODS ---
 
@@ -101,32 +97,26 @@ public class VRSeatEnforcer : MonoBehaviour
             return;
         }
 
-        // --- POSITION MATH ---
-        Vector3 localOffset = seatCenter.InverseTransformPoint(headCamera.position);
-        float heightDelta = headCamera.position.y - calibratedHeadHeight;
+        // --- BULLETPROOF POSITION MATH ---
+        Vector3 worldOffset = headCamera.position - seatCenter.position;
+        
+        float currentZ = Vector3.Dot(worldOffset, seatCenter.forward);
+        float currentX = Vector3.Dot(worldOffset, seatCenter.right);
+        float currentY = Vector3.Dot(worldOffset, seatCenter.up);
+        
+        float heightDelta = currentY - calibratedLocalHeight;
 
         float violation = 0f;
 
-        if (localOffset.z > 0) violation = Mathf.Max(violation, FadeRatio(localOffset.z, maxForward));
-        if (localOffset.z < 0) violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(localOffset.z), maxBack));
-        violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(localOffset.x), maxSide));
+        if (currentZ > 0) violation = Mathf.Max(violation, FadeRatio(currentZ, maxForward));
+        if (currentZ < 0) violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(currentZ), maxBack));
+        violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(currentX), maxSide));
+        
         if (heightDelta > 0) violation = Mathf.Max(violation, FadeRatio(heightDelta, maxUp));
         if (heightDelta < 0) violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(heightDelta), maxDown));
 
-        // --- DEBUG PRINTING ---
-        if (showDebugLogs)
-        {
-            debugTimer += Time.deltaTime;
-            if (debugTimer > 2f)
-            {
-                debugTimer = 0f;
-                Debug.Log($"[Enforcer] fwd/back:{localOffset.z:F2} side:{localOffset.x:F2} " +
-                          $"height:{heightDelta:F2} violation:{violation:F2}");
-            }
-        }
-
         // --- FADE APPLICATION ---
-        float targetAlpha = Mathf.Clamp(violation, 0f, 0.85f);
+        float targetAlpha = Mathf.Clamp(violation, 0f, maxDarkness);
         currentFadeAlpha = Mathf.Lerp(currentFadeAlpha, targetAlpha, Time.deltaTime * fadeSpeed);
 
         if (fadeImage != null)
@@ -136,7 +126,7 @@ public class VRSeatEnforcer : MonoBehaviour
         }
 
         // --- WARNING TEXT ---
-        if (currentFadeAlpha > 0.5f)
+        if (currentFadeAlpha > (maxDarkness * 0.6f))
             ShowWarning();
         else
             HideWarning();
@@ -154,16 +144,9 @@ public class VRSeatEnforcer : MonoBehaviour
     private void ShowWarning()
     {
         if (warningText == null) return;
-
-        float pulse = Mathf.Lerp(0.7f, 1f,
-            (Mathf.Sin(Time.unscaledTime * warningPulseSpeed) + 1f) / 2f);
-
+        float pulse = Mathf.Lerp(0.7f, 1f, (Mathf.Sin(Time.unscaledTime * warningPulseSpeed) + 1f) / 2f);
         string hex = ColorUtility.ToHtmlStringRGBA(warningColor);
-
-        warningText.text =
-            $"<color=#{hex}><size=150%><b>Oops!</b></size>\n\n" +
-            $"<size=80%>{warningMessage}</size></color>";
-
+        warningText.text = $"<color=#{hex}><size=150%><b>Oops!</b></size>\n\n<size=80%>{warningMessage}</size></color>";
         warningText.alpha = pulse;
     }
 
@@ -176,9 +159,10 @@ public class VRSeatEnforcer : MonoBehaviour
 
     public void ResetHeightCalibration()
     {
-        if (headCamera != null)
+        if (headCamera != null && seatCenter != null)
         {
-            calibratedHeadHeight = headCamera.position.y;
+            Vector3 worldOffset = headCamera.position - seatCenter.position;
+            calibratedLocalHeight = Vector3.Dot(worldOffset, seatCenter.up);
             heightCalibrated = true;
 
             currentFadeAlpha = 0f;
@@ -189,8 +173,6 @@ public class VRSeatEnforcer : MonoBehaviour
             }
 
             HideWarning();
-
-            Debug.Log($"[VRSeatEnforcer] Limits Reset! Height calibrated at {calibratedHeadHeight}");
         }
     }
 
@@ -200,7 +182,7 @@ public class VRSeatEnforcer : MonoBehaviour
     {
         if (seatCenter == null) return;
 
-        Gizmos.matrix = seatCenter.localToWorldMatrix;
+        Gizmos.matrix = Matrix4x4.TRS(seatCenter.position, seatCenter.rotation, Vector3.one);
 
         Gizmos.color = new Color(0, 1, 0, 0.15f);
         Vector3 center = new Vector3(0, 0, (maxForward - maxBack) * 0.5f);
@@ -212,7 +194,6 @@ public class VRSeatEnforcer : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(Vector3.zero, Vector3.forward * maxForward);
-
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(Vector3.zero, 0.03f);
     }

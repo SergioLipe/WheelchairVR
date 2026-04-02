@@ -2819,14 +2819,14 @@ MonoBehaviour:
     recentrar"
   warningColor: {r: 1, g: 0, b: 0, a: 1}
   warningPulseSpeed: 2
-  maxForward: 0.2
+  maxForward: 0.4
   maxBack: 0.05
-  maxSide: 0.3
-  maxUp: 0.2
-  maxDown: 0.2
+  maxSide: 0.45
+  maxUp: 0.25
+  maxDown: 0.3
   fadeSpeed: 10
   fadeStartPercent: 0.7
-  showDebugLogs: 1
+  maxDarkness: 1
 --- !u!114 &17414383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289036,6 +289036,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1048207069}
     m_Modifications:
+    - target: {fileID: 50642685448399657, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
+      propertyPath: m_Height
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 50642685448399657, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 50642685448399657, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
+      propertyPath: m_Center.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 50642685448399657, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
+      propertyPath: m_SkinWidth
+      value: 0.08
+      objectReference: {fileID: 0}
     - target: {fileID: 950943729506768555, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -289722,6 +289738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5335227114178252830, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
+    - {fileID: 7888952264384822436, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6772623600402851781, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
     - {fileID: 2786312352058804342, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
@@ -289746,6 +289763,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8085255482058965501, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1942329985}
+    - targetCorrespondingSourceObject: {fileID: 8085255482058965501, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1942329991}
   m_SourcePrefab: {fileID: 100100000, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
 --- !u!1 &1942329974 stripped
 GameObject:
@@ -289826,6 +289846,33 @@ MonoBehaviour:
   processedJoystickInput: {x: 0, y: 0}
   playerIsAccelerating: 0
   inputLocked: 0
+--- !u!114 &1942329991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942329974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a6a2b0b55eece4fa627a17e27a00c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionSystemVR
+  inCollision: 0
+  collidedObject: 
+  frontBlocked: 0
+  backBlocked: 0
+  wallSliding: 0
+  enableCollisionDebug: 1
+  minCollisionHeight: 0.08
+  maxGroundAngle: 45
+  ignoreTags:
+  - Ground
+  - Floor
+  - Terrain
+  ignoreLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &1942474073
 PrefabInstance:
   m_ObjectHideFlags: 0

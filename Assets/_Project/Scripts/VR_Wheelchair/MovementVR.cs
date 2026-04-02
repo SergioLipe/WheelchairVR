@@ -125,7 +125,7 @@ public class MovementVR : MonoBehaviour
     private CharacterController controller;
     private Vector3 movementVelocity;
     private WheelController wheelController;
-    private CollisionSystem collisionSystem;
+    private CollisionSystemVR collisionSystem;
 
     // Smoothed input
     private float smoothedVerticalInput = 0f;
@@ -211,10 +211,6 @@ public class MovementVR : MonoBehaviour
             controller = gameObject.AddComponent<CharacterController>();
         }
 
-        controller.height = 0.8f;
-        controller.radius = 0.17f;
-        controller.center = new Vector3(0, 0.4f, 0);
-        controller.skinWidth = 0.0001f;
         controller.minMoveDistance = 0.0f;
         controller.stepOffset = 0.08f;
 
@@ -222,16 +218,16 @@ public class MovementVR : MonoBehaviour
     }
 
     private void SetupComponents()
-    {
-        wheelController = GetComponent<WheelController>();
+{
+    wheelController = GetComponent<WheelController>();
 
-        collisionSystem = GetComponent<CollisionSystem>();
-        if (collisionSystem == null)
-        {
-            collisionSystem = gameObject.AddComponent<CollisionSystem>();
-        }
-        collisionSystem.Initialize(controller, transform);
+    collisionSystem = GetComponent<CollisionSystemVR>();
+    if (collisionSystem == null)
+    {
+        collisionSystem = gameObject.AddComponent<CollisionSystemVR>();
     }
+    collisionSystem.Initialize(controller, transform);
+}
 
     private void ConvertSpeeds()
     {
