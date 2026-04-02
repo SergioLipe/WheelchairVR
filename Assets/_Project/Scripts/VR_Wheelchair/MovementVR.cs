@@ -136,6 +136,9 @@ public class MovementVR : MonoBehaviour
     [HideInInspector]
     public bool playerIsAccelerating = false;
 
+    // Lock for countdown
+    [HideInInspector] public bool inputLocked = false;
+
     // Sound cache
     private bool slidingCache = false;
     private string steeringTypeCache = "Frontal";
@@ -247,6 +250,7 @@ public class MovementVR : MonoBehaviour
 
     void Update()
     {
+        if (inputLocked) return;
         UpdateSteeringState();
         collisionSystem.Update();
         ProcessSoundEffects();
@@ -265,6 +269,8 @@ public class MovementVR : MonoBehaviour
             EmergencyStop();
             ApplyVerticalMovement();
         }
+
+       
 
         ApplyGravity();
     }
@@ -713,4 +719,7 @@ public class MovementVR : MonoBehaviour
             effectsAudio.PlayOneShot(clip);
         }
     }
+
+    public void LockInput() { inputLocked = true; }
+    public void UnlockInput() { inputLocked = false; }
 }
