@@ -2,8 +2,8 @@ using UnityEngine;
 
 /// <summary>
 /// VR-Optimized collision detection and management system.
-/// Uses surface normals (Dot Product) instead of hit points to ensure 
-/// precise detection of frontal, rear, and lateral impacts in VR.
+/// Uses surface normals (Dot Product) for physical impacts and a 
+/// proactive BoxCast sensor (Option 2) for the front footrests.
 /// </summary>
 public class CollisionSystemVR : MonoBehaviour
 {
@@ -16,6 +16,22 @@ public class CollisionSystemVR : MonoBehaviour
 
     [Header("=== Debug Settings ===")]
     public bool enableCollisionDebug = true;
+
+    [Header("=== Front Sensor (Option 2) ===")]
+    [Tooltip("Enable the proactive front sensor for footrests")]
+    public bool useFrontSensor = true;
+    
+    [Tooltip("How far ahead the sensor checks (meters)")]
+    public float sensorLength = 0.3f;
+    
+    [Tooltip("Size of the sensor box (Width, Height, Depth)")]
+    public Vector3 sensorBoxSize = new Vector3(0.4f, 0.2f, 0.1f);
+    
+    [Tooltip("Offset from the center of the wheelchair (X, Y, Z)")]
+    public Vector3 sensorOffset = new Vector3(0f, 0.2f, 0.4f);
+    
+    [Tooltip("Layers the sensor should detect as obstacles")]
+    public LayerMask obstacleLayerMask = ~0; // ~0 means 'Everything'
 
     [Header("=== Detection Settings ===")]
     [Tooltip("Minimum collision point height to be considered (ignores ground)")]
@@ -53,9 +69,8 @@ public class CollisionSystemVR : MonoBehaviour
     private Vector3 slideDirection = Vector3.zero;
     private float slideTimer = 0f;
 
-    // Spam prevention timers
-    private float lastManagerUpdate = 0f;
-    private float lastSlideTime = 0f;
+    // Front sensor state
+    private bool wasFrontSensorBlockedLastFrame = false;
 
     public void Initialize(CharacterController characterController, Transform transform)
     {
@@ -76,6 +91,86 @@ public class CollisionSystemVR : MonoBehaviour
         UpdateCollisionState();
         UpdateSlideTimer();
         HandleMultipleCollisions();
+
+        if (useFrontSensor)
+        {
+            CheckFrontSensor();
+        }
+    }
+
+    /// <summary>
+    /// Option 2: Projects a BoxCast forward to detect obstacles before the physical capsule hits them.
+    /// Perfect for long wheelchair footrests.
+    /// </summary>
+    private void CheckFrontSensor()
+    {
+        if (wheelchairTransform == null) return;
+
+        // Calculate starting position based on offset
+        Vector3 startPos = wheelchairTransform.position + 
+                           wheelchairTransform.forward * sensorOffset.z + 
+                           wheelchairTransform.up * sensorOffset.y + 
+                           wheelchairTransform.right * sensorOffset.x;
+
+        Vector3 halfExtents = sensorBoxSize / 2f;
+        bool hitObstacle = false;
+
+        // Cast the box forward
+        RaycastHit[] hits = Physics.BoxCastAll(startPos, halfExtents, wheelchairTransform.forward, wheelchairTransform.rotation, sensorLength, obstacleLayerMask);
+
+        foreach (RaycastHit hit in hits)
+        {
+            // Ignore self
+            if (hit.collider.transform.root == wheelchairTransform.root) continue;
+
+            // Apply standard ignore rules (same as physical collisions)
+            float collisionHeight = hit.point.y - wheelchairTransform.position.y;
+            if (collisionHeight < minCollisionHeight) continue;
+
+            float angleWithUp = Vector3.Angle(hit.normal, Vector3.up);
+            if (angleWithUp < maxGroundAngle) continue;
+
+            bool ignore = false;
+            foreach (string tag in ignoreTags)
+            {
+                if (hit.collider.tag == tag)
+                {
+                    ignore = true;
+                    break;
+                }
+            }
+            if (ignore) continue;
+
+            if (ignoreLayerMask != 0 && ((ignoreLayerMask.value & (1 << hit.collider.gameObject.layer)) != 0)) continue;
+            if (hit.collider.GetComponent<Terrain>() != null) continue;
+
+            // Valid obstacle found!
+            hitObstacle = true;
+            collidedObject = hit.collider.gameObject.name;
+            collisionPoint = hit.point;
+            break;
+        }
+
+        if (hitObstacle)
+        {
+            frontBlocked = true;
+            frontBlockTimer = 0.15f; // Keep blocked while hitting
+
+            if (!wasFrontSensorBlockedLastFrame)
+            {
+                // First impact moment: Trigger Flash and Sound
+                float dummySpeed = 0f; 
+                ProcessFrontCollision(ref dummySpeed);
+                
+                inCollision = true;
+                collisionTime = Time.time;
+            }
+            wasFrontSensorBlockedLastFrame = true;
+        }
+        else
+        {
+            wasFrontSensorBlockedLastFrame = false;
+        }
     }
 
     private void UpdateBlockingTimers()
@@ -83,7 +178,7 @@ public class CollisionSystemVR : MonoBehaviour
         if (frontBlockTimer > 0)
         {
             frontBlockTimer -= Time.deltaTime;
-            if (frontBlockTimer <= 0) frontBlocked = false;
+            if (frontBlockTimer <= 0 && !wasFrontSensorBlockedLastFrame) frontBlocked = false;
         }
 
         if (backBlockTimer > 0)
@@ -132,6 +227,7 @@ public class CollisionSystemVR : MonoBehaviour
         }
     }
 
+    // Physical collisions (sides and back, or front if sensor misses)
     public void ProcessCollision(ControllerColliderHit hit, float currentSpeed, ref float currentSpeedRef)
     {
         if (ShouldIgnoreCollision(hit)) return;
@@ -144,20 +240,16 @@ public class CollisionSystemVR : MonoBehaviour
         float timeSinceLastCollision = Time.time - lastValidCollisionTime;
         if (timeSinceLastCollision < 0.05f) return;
 
-        // VR FIX: Use the surface normal to determine direction, not the hit point.
-        // -hit.normal points from the obstacle directly towards the player.
         Vector3 impactDirection = -hit.normal;
         impactDirection.y = 0;
 
         if (impactDirection.sqrMagnitude < 0.001f) return;
         impactDirection.Normalize();
 
-        // Calculate Dot Product to determine hit location accurately
-        // 1.0 = dead front, -1.0 = dead back, 0.0 = perfect side
         float forwardDot = Vector3.Dot(wheelchairTransform.forward, impactDirection);
         bool collisionProcessed = false;
 
-        // Frontal hit (Greater than 0.5)
+        // Frontal hit (Greater than 0.5) - Used as backup if front sensor is disabled or missed
         if (forwardDot > 0.5f && !frontBlocked)
         {
             ProcessFrontCollision(ref currentSpeedRef);
@@ -219,15 +311,6 @@ public class CollisionSystemVR : MonoBehaviour
 
         if (currentSpeedRef > 0) currentSpeedRef = 0;
         if (flashEffect != null) flashEffect.FrontFlash();
-
-        // Optional LevelManager hook
-        /*
-        if (Time.time > lastManagerUpdate + 1.0f && LevelManager.Instance != null)
-        {
-            LevelManager.Instance.RegisterStrongCollision("Front Obstacle");
-            lastManagerUpdate = Time.time;
-        }
-        */
     }
 
     private void ProcessBackCollision(ref float currentSpeedRef)
@@ -243,7 +326,6 @@ public class CollisionSystemVR : MonoBehaviour
     {
         collisionNormal = hit.normal;
 
-        // Calculate slide direction (tangent to the wall)
         Vector3 projection = Vector3.Project(wheelchairTransform.forward, collisionNormal);
         slideDirection = (wheelchairTransform.forward - projection).normalized;
 
@@ -287,6 +369,26 @@ public class CollisionSystemVR : MonoBehaviour
         wallSliding = false;
         slideDirection = Vector3.zero;
         slideTimer = 0f;
+    }
+
+    // Draws the sensor box in the Unity Scene View for easy adjustment!
+    private void OnDrawGizmos()
+    {
+        if (enableCollisionDebug && useFrontSensor)
+        {
+            Transform t = wheelchairTransform != null ? wheelchairTransform : transform;
+            
+            Vector3 startPos = t.position + 
+                               t.forward * sensorOffset.z + 
+                               t.up * sensorOffset.y + 
+                               t.right * sensorOffset.x;
+
+            Gizmos.color = new Color(1f, 0.5f, 0f, 0.5f); // Orange semi-transparent
+            Gizmos.matrix = Matrix4x4.TRS(startPos, t.rotation, Vector3.one);
+            
+            // Draw the BoxCast area
+            Gizmos.DrawWireCube(Vector3.forward * (sensorLength / 2f), new Vector3(sensorBoxSize.x, sensorBoxSize.y, sensorLength));
+        }
     }
 
     // Public Properties

@@ -411,10 +411,20 @@ public class MovementVR : MonoBehaviour
 
     private void ApplyAccelerationDeceleration(float maxSpeed)
     {
-        bool notBlocked = !collisionSystem.IsFrontBlocked && !collisionSystem.IsBackBlocked;
+        // 1. Determine which direction the player is trying to go
+        bool isMovingForward = targetSpeed > 0;
+        bool isMovingBackward = targetSpeed < 0;
+        
+        // 2. Check if the specific direction they want to go is blocked
+        bool blockedForward = collisionSystem.IsFrontBlocked && isMovingForward;
+        bool blockedBackward = collisionSystem.IsBackBlocked && isMovingBackward;
+        
+        bool blockedInTargetDirection = blockedForward || blockedBackward;
+        
         bool accelerating = Mathf.Abs(targetSpeed) > Mathf.Abs(currentSpeed);
 
-        if (notBlocked && accelerating)
+        // 3. Only accelerate if the chosen direction is free
+        if (!blockedInTargetDirection && accelerating)
         {
             float acceleration = maxSpeed / accelerationTime;
             currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.deltaTime);
@@ -425,7 +435,6 @@ public class MovementVR : MonoBehaviour
 
             if (emergencyBrake)
             {
-                // Emergency brake stops much faster
                 deceleration = maxSpeed / emergencyBrakeTime;
             }
             else
@@ -433,7 +442,12 @@ public class MovementVR : MonoBehaviour
                 deceleration = maxSpeed / brakingTime;
             }
 
-            if (collisionSystem.IsFrontBlocked || collisionSystem.IsBackBlocked)
+            // 4. Force speed to 0 ONLY if moving INTO the obstacle
+            if (collisionSystem.IsFrontBlocked && currentSpeed > 0)
+            {
+                currentSpeed = 0;
+            }
+            else if (collisionSystem.IsBackBlocked && currentSpeed < 0)
             {
                 currentSpeed = 0;
             }
