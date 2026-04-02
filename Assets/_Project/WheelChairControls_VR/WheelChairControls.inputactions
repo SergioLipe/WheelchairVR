@@ -79,6 +79,45 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Recenter",
+            "id": "e38514e4-35b5-4701-9e0a-4aff282b41f9",
+            "actions": [
+                {
+                    "name": "Recenter",
+                    "type": "Button",
+                    "id": "abedfc8b-cbc5-4e80-9930-8beed8998ecc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bcd1b3e6-54c1-40ca-a9d2-d4bc08dbca14",
+                    "path": "<XRController>{LeftHand}/touchpadClicked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Recenter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7f447f5-f101-400d-92d5-63d4647ecc3e",
+                    "path": "<XRController>{RightHand}/thumbstickClicked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Recenter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
