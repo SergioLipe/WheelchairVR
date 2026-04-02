@@ -191,6 +191,21 @@ public class MovementVR : MonoBehaviour
         ConvertSpeeds();
         InitializeCache();
         InitializeLevelSettings();
+        PreloadSounds();
+    }
+
+    private void PreloadSounds()
+    {
+        if (effectsAudio == null) return;
+
+        // Forçar o áudio a 2D (0f) garante que toca instantaneamente nos dois ouvidos sem cálculos 3D pesados
+        effectsAudio.spatialBlend = 0f; 
+
+        // Carregar os sons para a memória ANTES de bater
+        if (modeChangeSound != null) modeChangeSound.LoadAudioData();
+        if (steeringChangeSound != null) steeringChangeSound.LoadAudioData();
+        if (hardCollisionSound != null) hardCollisionSound.LoadAudioData();
+        if (slideStartSound != null) slideStartSound.LoadAudioData();
     }
 
     private void InitializeLevelSettings()

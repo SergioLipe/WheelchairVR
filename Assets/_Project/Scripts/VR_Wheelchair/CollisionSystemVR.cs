@@ -4,6 +4,7 @@ using UnityEngine;
 /// VR-Optimized collision detection and management system.
 /// Uses surface normals (Dot Product) for physical impacts and a 
 /// proactive BoxCast sensor (Option 2) for the front footrests.
+/// Includes Advanced Debugging to track down "phantom" collisions.
 /// </summary>
 public class CollisionSystemVR : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class CollisionSystemVR : MonoBehaviour
     [SerializeField] private bool wallSliding = false;
 
     [Header("=== Debug Settings ===")]
+    [Tooltip("Enable to print exactly WHAT you hit to the Unity Console")]
     public bool enableCollisionDebug = true;
 
     [Header("=== Front Sensor (Option 2) ===")]
@@ -31,7 +33,7 @@ public class CollisionSystemVR : MonoBehaviour
     public Vector3 sensorOffset = new Vector3(0f, 0.2f, 0.4f);
     
     [Tooltip("Layers the sensor should detect as obstacles")]
-    public LayerMask obstacleLayerMask = ~0; // ~0 means 'Everything'
+    public LayerMask obstacleLayerMask = ~0;
 
     [Header("=== Detection Settings ===")]
     [Tooltip("Minimum collision point height to be considered (ignores ground)")]
@@ -106,7 +108,6 @@ public class CollisionSystemVR : MonoBehaviour
     {
         if (wheelchairTransform == null) return;
 
-        // Calculate starting position based on offset
         Vector3 startPos = wheelchairTransform.position + 
                            wheelchairTransform.forward * sensorOffset.z + 
                            wheelchairTransform.up * sensorOffset.y + 
@@ -115,15 +116,12 @@ public class CollisionSystemVR : MonoBehaviour
         Vector3 halfExtents = sensorBoxSize / 2f;
         bool hitObstacle = false;
 
-        // Cast the box forward
         RaycastHit[] hits = Physics.BoxCastAll(startPos, halfExtents, wheelchairTransform.forward, wheelchairTransform.rotation, sensorLength, obstacleLayerMask);
 
         foreach (RaycastHit hit in hits)
         {
-            // Ignore self
             if (hit.collider.transform.root == wheelchairTransform.root) continue;
 
-            // Apply standard ignore rules (same as physical collisions)
             float collisionHeight = hit.point.y - wheelchairTransform.position.y;
             if (collisionHeight < minCollisionHeight) continue;
 
@@ -143,25 +141,30 @@ public class CollisionSystemVR : MonoBehaviour
 
             if (ignoreLayerMask != 0 && ((ignoreLayerMask.value & (1 << hit.collider.gameObject.layer)) != 0)) continue;
             if (hit.collider.GetComponent<Terrain>() != null) continue;
+            if (hit.collider.isTrigger) continue; // IGNORE TRIGGERS (Common cause of phantom hits)
 
-            // Valid obstacle found!
             hitObstacle = true;
             collidedObject = hit.collider.gameObject.name;
             collisionPoint = hit.point;
+
+            // --- EXTREME DEBUG FOR FRONT SENSOR ---
+            if (enableCollisionDebug && !wasFrontSensorBlockedLastFrame)
+            {
+                Debug.LogWarning($"<color=cyan>[FRONT SENSOR HIT]</color> Wheelchair stopped by: <b>{collidedObject}</b> | Tag: {hit.collider.tag} | Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
+                Debug.DrawRay(hit.point, Vector3.up * 2f, Color.cyan, 3f); // Draws a cyan line pointing up where it hit
+            }
             break;
         }
 
         if (hitObstacle)
         {
             frontBlocked = true;
-            frontBlockTimer = 0.15f; // Keep blocked while hitting
+            frontBlockTimer = 0.15f; 
 
             if (!wasFrontSensorBlockedLastFrame)
             {
-                // First impact moment: Trigger Flash and Sound
                 float dummySpeed = 0f; 
                 ProcessFrontCollision(ref dummySpeed);
-                
                 inCollision = true;
                 collisionTime = Time.time;
             }
@@ -232,13 +235,15 @@ public class CollisionSystemVR : MonoBehaviour
     {
         if (ShouldIgnoreCollision(hit)) return;
 
-        if (enableCollisionDebug)
-        {
-            Debug.DrawRay(hit.point, hit.normal * 1.5f, Color.red, 2f);
-        }
-
         float timeSinceLastCollision = Time.time - lastValidCollisionTime;
         if (timeSinceLastCollision < 0.05f) return;
+
+        // --- EXTREME DEBUG FOR CAPSULE ---
+        if (enableCollisionDebug)
+        {
+            Debug.LogWarning($"<color=orange>[CAPSULE HIT]</color> Wheelchair touched: <b>{hit.gameObject.name}</b> | Tag: {hit.gameObject.tag} | Layer: {LayerMask.LayerToName(hit.gameObject.layer)}");
+            Debug.DrawRay(hit.point, hit.normal * 1.5f, Color.red, 2f);
+        }
 
         Vector3 impactDirection = -hit.normal;
         impactDirection.y = 0;
@@ -249,19 +254,16 @@ public class CollisionSystemVR : MonoBehaviour
         float forwardDot = Vector3.Dot(wheelchairTransform.forward, impactDirection);
         bool collisionProcessed = false;
 
-        // Frontal hit (Greater than 0.5) - Used as backup if front sensor is disabled or missed
         if (forwardDot > 0.5f && !frontBlocked)
         {
             ProcessFrontCollision(ref currentSpeedRef);
             collisionProcessed = true;
         }
-        // Rear hit (Less than -0.5)
         else if (forwardDot < -0.5f && !backBlocked)
         {
             ProcessBackCollision(ref currentSpeedRef);
             collisionProcessed = true;
         }
-        // Side hit (Between -0.5 and 0.5)
         else if (Mathf.Abs(forwardDot) <= 0.5f)
         {
             ProcessSideCollision(hit, impactDirection);
@@ -298,6 +300,7 @@ public class CollisionSystemVR : MonoBehaviour
 
         if (ignoreLayerMask != 0 && ((ignoreLayerMask.value & (1 << hit.gameObject.layer)) != 0)) return true;
         if (hit.gameObject.GetComponent<Terrain>() != null) return true;
+        if (hit.collider.isTrigger) return true; // IGNORE TRIGGERS (Common cause of phantom hits)
         if (hit.moveDirection.y < -0.3f) return true;
         if (hit.normal.y > 0.7f) return true;
 
@@ -371,7 +374,6 @@ public class CollisionSystemVR : MonoBehaviour
         slideTimer = 0f;
     }
 
-    // Draws the sensor box in the Unity Scene View for easy adjustment!
     private void OnDrawGizmos()
     {
         if (enableCollisionDebug && useFrontSensor)
@@ -383,10 +385,8 @@ public class CollisionSystemVR : MonoBehaviour
                                t.up * sensorOffset.y + 
                                t.right * sensorOffset.x;
 
-            Gizmos.color = new Color(1f, 0.5f, 0f, 0.5f); // Orange semi-transparent
+            Gizmos.color = new Color(1f, 0.5f, 0f, 0.5f);
             Gizmos.matrix = Matrix4x4.TRS(startPos, t.rotation, Vector3.one);
-            
-            // Draw the BoxCast area
             Gizmos.DrawWireCube(Vector3.forward * (sensorLength / 2f), new Vector3(sensorBoxSize.x, sensorBoxSize.y, sensorLength));
         }
     }
