@@ -745,6 +745,10 @@ public class MovementVR : MonoBehaviour
         }
     }
 
+    public float GetCurrentSpeed() { return currentSpeed; }
+    public bool IsEmergencyBraking() { return emergencyBrake; }
+    public string GetCurrentSteeringType() { return currentSteeringType; }
+
     public void LockInput() { inputLocked = true; }
     public void UnlockInput() { inputLocked = false; }
 }
