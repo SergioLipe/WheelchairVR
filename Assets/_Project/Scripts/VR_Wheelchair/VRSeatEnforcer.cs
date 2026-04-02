@@ -20,7 +20,10 @@ public class VRSeatEnforcer : MonoBehaviour
 
     [Header("Lean Boundaries (meters)")]
     [SerializeField] private float maxForward = 0.4f;
-    [SerializeField] private float maxBack = 0.15f;
+    [Tooltip("Strict back limit when looking straight ahead (blocked by physical seat).")]
+    [SerializeField] private float maxBackStraight = 0.05f;
+    [Tooltip("Relaxed back limit when turning head to look over the shoulder.")]
+    [SerializeField] private float maxBackLookingAround = 0.25f;
     [SerializeField] private float maxSide = 0.35f;
     [SerializeField] private float maxUp = 0.3f;
     [SerializeField] private float maxDown = 0.2f;
@@ -106,12 +109,27 @@ public class VRSeatEnforcer : MonoBehaviour
         
         float heightDelta = currentY - calibratedLocalHeight;
 
+        // --- DYNAMIC BACK LIMIT CALCULATION ---
+        // Calculate how much the player's head is turned away from the center
+        Vector3 headForwardLevel = Vector3.ProjectOnPlane(headCamera.forward, seatCenter.up).normalized;
+        Vector3 seatForwardLevel = Vector3.ProjectOnPlane(seatCenter.forward, seatCenter.up).normalized;
+        
+        // This angle goes from 0 (looking straight ahead) to 180 (looking perfectly backwards)
+        float headTurnAngle = Vector3.Angle(seatForwardLevel, headForwardLevel);
+
+        // Smoothly blend between the strict back limit and relaxed back limit.
+        // Starts relaxing at 30 degrees, fully relaxed at 90 degrees (looking fully sideways).
+        float turnRatio = Mathf.Clamp01((headTurnAngle - 30f) / 60f);
+        float dynamicMaxBack = Mathf.Lerp(maxBackStraight, maxBackLookingAround, turnRatio);
+
+        // --- VIOLATION CHECKS ---
         float violation = 0f;
 
         if (currentZ > 0) violation = Mathf.Max(violation, FadeRatio(currentZ, maxForward));
-        if (currentZ < 0) violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(currentZ), maxBack));
-        violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(currentX), maxSide));
+        // Use the new dynamic limit for backward leaning
+        if (currentZ < 0) violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(currentZ), dynamicMaxBack));
         
+        violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(currentX), maxSide));
         if (heightDelta > 0) violation = Mathf.Max(violation, FadeRatio(heightDelta, maxUp));
         if (heightDelta < 0) violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(heightDelta), maxDown));
 
@@ -185,8 +203,9 @@ public class VRSeatEnforcer : MonoBehaviour
         Gizmos.matrix = Matrix4x4.TRS(seatCenter.position, seatCenter.rotation, Vector3.one);
 
         Gizmos.color = new Color(0, 1, 0, 0.15f);
-        Vector3 center = new Vector3(0, 0, (maxForward - maxBack) * 0.5f);
-        Vector3 size = new Vector3(maxSide * 2f, 0.1f, maxForward + maxBack);
+        // Using maxBackStraight for the gizmo display so you see the core seated boundary
+        Vector3 center = new Vector3(0, 0, (maxForward - maxBackStraight) * 0.5f);
+        Vector3 size = new Vector3(maxSide * 2f, 0.1f, maxForward + maxBackStraight);
         Gizmos.DrawCube(center, size);
 
         Gizmos.color = Color.green;
