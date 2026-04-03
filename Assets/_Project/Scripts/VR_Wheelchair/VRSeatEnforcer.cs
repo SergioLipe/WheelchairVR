@@ -14,6 +14,7 @@ public class VRSeatEnforcer : MonoBehaviour
 
     [Header("Warning Text")]
     [SerializeField] private TMP_Text warningText;
+    [SerializeField] private string warningHeader = "Foste longe de mais."; // Adicionado para o novo design
     [SerializeField] private string warningMessage = "Volta para a cadeira!\n\nCarrega no botão do analógico\npara recentrar";
     [SerializeField] private Color warningColor = new Color(0.2f, 0.8f, 1f);
     [SerializeField] private float warningPulseSpeed = 2f;
@@ -110,15 +111,11 @@ public class VRSeatEnforcer : MonoBehaviour
         float heightDelta = currentY - calibratedLocalHeight;
 
         // --- DYNAMIC BACK LIMIT CALCULATION ---
-        // Calculate how much the player's head is turned away from the center
         Vector3 headForwardLevel = Vector3.ProjectOnPlane(headCamera.forward, seatCenter.up).normalized;
         Vector3 seatForwardLevel = Vector3.ProjectOnPlane(seatCenter.forward, seatCenter.up).normalized;
         
-        // This angle goes from 0 (looking straight ahead) to 180 (looking perfectly backwards)
         float headTurnAngle = Vector3.Angle(seatForwardLevel, headForwardLevel);
 
-        // Smoothly blend between the strict back limit and relaxed back limit.
-        // Starts relaxing at 30 degrees, fully relaxed at 90 degrees (looking fully sideways).
         float turnRatio = Mathf.Clamp01((headTurnAngle - 30f) / 60f);
         float dynamicMaxBack = Mathf.Lerp(maxBackStraight, maxBackLookingAround, turnRatio);
 
@@ -126,7 +123,6 @@ public class VRSeatEnforcer : MonoBehaviour
         float violation = 0f;
 
         if (currentZ > 0) violation = Mathf.Max(violation, FadeRatio(currentZ, maxForward));
-        // Use the new dynamic limit for backward leaning
         if (currentZ < 0) violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(currentZ), dynamicMaxBack));
         
         violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(currentX), maxSide));
@@ -162,9 +158,21 @@ public class VRSeatEnforcer : MonoBehaviour
     private void ShowWarning()
     {
         if (warningText == null) return;
+        
         float pulse = Mathf.Lerp(0.7f, 1f, (Mathf.Sin(Time.unscaledTime * warningPulseSpeed) + 1f) / 2f);
         string hex = ColorUtility.ToHtmlStringRGBA(warningColor);
-        warningText.text = $"<color=#{hex}><size=150%><b>Oops!</b></size>\n\n<size=80%>{warningMessage}</size></color>";
+
+        // --- ADVANCED RICH TEXT FORMATTING ---
+        // Cabeçalho tático usando a tua warningColor
+        string headerPart = $"<color=#{hex}><size=140%><b>[ AVISO DE SEGURANÇA ]</b></size></color>";
+        
+        // Aviso principal a branco
+        string oopsPart = $"<color=#FFFFFF><size=110%><b>Oops! {warningHeader}</b></size></color>";
+        
+        // Instruções em cinzento para melhor leitura
+        string messagePart = $"<color=#CCCCCC><size=80%>{warningMessage}</size></color>";
+
+        warningText.text = $"{headerPart}\n\n{oopsPart}\n\n{messagePart}";
         warningText.alpha = pulse;
     }
 
@@ -203,7 +211,6 @@ public class VRSeatEnforcer : MonoBehaviour
         Gizmos.matrix = Matrix4x4.TRS(seatCenter.position, seatCenter.rotation, Vector3.one);
 
         Gizmos.color = new Color(0, 1, 0, 0.15f);
-        // Using maxBackStraight for the gizmo display so you see the core seated boundary
         Vector3 center = new Vector3(0, 0, (maxForward - maxBackStraight) * 0.5f);
         Vector3 size = new Vector3(maxSide * 2f, 0.1f, maxForward + maxBackStraight);
         Gizmos.DrawCube(center, size);
