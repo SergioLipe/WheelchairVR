@@ -15,6 +15,14 @@ public class CollisionSystemVR : MonoBehaviour
     [SerializeField] private bool backBlocked = false;
     [SerializeField] private bool wallSliding = false;
 
+    // Stats for collision tracking
+    public int TotalCollisions { get; private set; } = 0;
+    public int TotalSlides { get; private set; } = 0;
+
+    // Only Count one collision per object until it's resolved to prevent spam
+    private bool wasInCollisionState = false;
+    private bool wasSlidingState = false;
+
     [Header("=== Debug Settings ===")]
     [Tooltip("Enable to print exactly WHAT you hit to the Unity Console")]
     public bool enableCollisionDebug = true;
@@ -22,16 +30,16 @@ public class CollisionSystemVR : MonoBehaviour
     [Header("=== Front Sensor (Option 2) ===")]
     [Tooltip("Enable the proactive front sensor for footrests")]
     public bool useFrontSensor = true;
-    
+
     [Tooltip("How far ahead the sensor checks (meters)")]
     public float sensorLength = 0.3f;
-    
+
     [Tooltip("Size of the sensor box (Width, Height, Depth)")]
     public Vector3 sensorBoxSize = new Vector3(0.4f, 0.2f, 0.1f);
-    
+
     [Tooltip("Offset from the center of the wheelchair (X, Y, Z)")]
     public Vector3 sensorOffset = new Vector3(0f, 0.2f, 0.4f);
-    
+
     [Tooltip("Layers the sensor should detect as obstacles")]
     public LayerMask obstacleLayerMask = ~0;
 
@@ -98,6 +106,13 @@ public class CollisionSystemVR : MonoBehaviour
         {
             CheckFrontSensor();
         }
+
+        // Update collision stats
+        if (inCollision && !wasInCollisionState) TotalCollisions++;
+        wasInCollisionState = inCollision;
+
+        if (wallSliding && !wasSlidingState) TotalSlides++;
+        wasSlidingState = wallSliding;
     }
 
     /// <summary>
@@ -108,9 +123,9 @@ public class CollisionSystemVR : MonoBehaviour
     {
         if (wheelchairTransform == null) return;
 
-        Vector3 startPos = wheelchairTransform.position + 
-                           wheelchairTransform.forward * sensorOffset.z + 
-                           wheelchairTransform.up * sensorOffset.y + 
+        Vector3 startPos = wheelchairTransform.position +
+                           wheelchairTransform.forward * sensorOffset.z +
+                           wheelchairTransform.up * sensorOffset.y +
                            wheelchairTransform.right * sensorOffset.x;
 
         Vector3 halfExtents = sensorBoxSize / 2f;
@@ -159,11 +174,11 @@ public class CollisionSystemVR : MonoBehaviour
         if (hitObstacle)
         {
             frontBlocked = true;
-            frontBlockTimer = 0.15f; 
+            frontBlockTimer = 0.15f;
 
             if (!wasFrontSensorBlockedLastFrame)
             {
-                float dummySpeed = 0f; 
+                float dummySpeed = 0f;
                 ProcessFrontCollision(ref dummySpeed);
                 inCollision = true;
                 collisionTime = Time.time;
@@ -379,10 +394,10 @@ public class CollisionSystemVR : MonoBehaviour
         if (enableCollisionDebug && useFrontSensor)
         {
             Transform t = wheelchairTransform != null ? wheelchairTransform : transform;
-            
-            Vector3 startPos = t.position + 
-                               t.forward * sensorOffset.z + 
-                               t.up * sensorOffset.y + 
+
+            Vector3 startPos = t.position +
+                               t.forward * sensorOffset.z +
+                               t.up * sensorOffset.y +
                                t.right * sensorOffset.x;
 
             Gizmos.color = new Color(1f, 0.5f, 0f, 0.5f);
@@ -399,4 +414,6 @@ public class CollisionSystemVR : MonoBehaviour
     public bool IsInCollision => inCollision;
     public string CollidedObject => collidedObject;
     public bool IsStuck => collisionCount > 2 || multiCollisionResetTime > 0.3f;
+
+
 }

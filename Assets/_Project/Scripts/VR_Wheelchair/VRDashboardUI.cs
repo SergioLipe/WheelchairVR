@@ -1,91 +1,105 @@
 using UnityEngine;
-using TMPro; // Adicionado para suportar o TextMeshPro!
+using TMPro;
 
 /// <summary>
-/// VR Dashboard UI Controller using TextMeshPro
+/// Professional VR Dashboard UI Controller
+/// Manages the Left Tablet (Stats: Time, Collisions, Slides) 
+/// and the Right Tablet (Mode, replaced dynamically by Emergency Brake).
+/// Uses TextMeshPro Rich Text for a clean, modern, and readable layout.
 /// </summary>
 public class VRDashboardUI : MonoBehaviour
 {
     [Header("=== Core References ===")]
     public MovementVR wheelchairController;
+    public CollisionSystemVR collisionSystem;
 
-    [Header("=== UI Text References (TextMeshPro) ===")]
+    [Header("=== Left Dashboard (Stats) ===")]
+    public TextMeshProUGUI timeText;
+    public TextMeshProUGUI collisionsText;
+    public TextMeshProUGUI slidesText;
+
+    [Header("=== Right Dashboard (Mode & Brake) ===")]
     public TextMeshProUGUI modeText;
-    public TextMeshProUGUI speedText;
-    public TextMeshProUGUI steeringText;
-    
-    [Header("=== UI Panels ===")]
-    public GameObject emergencyBrakePanel;
 
     void Update()
     {
-        if (wheelchairController == null) return;
+        // Prevent errors if references are not assigned in the Inspector
+        if (wheelchairController == null || collisionSystem == null) return;
 
+        UpdateTimerDisplay();
+        UpdateStatsDisplay();
         UpdateModeDisplay();
-        UpdateSpeedDisplay();
-        UpdateSteeringDisplay();
-        UpdateBrakeWarning();
     }
 
+    /// <summary>
+    /// Updates the digital clock showing time since the level started.
+    /// </summary>
+    private void UpdateTimerDisplay()
+    {
+        if (timeText == null) return;
+        
+        float timeElapsed = Time.timeSinceLevelLoad;
+        int minutes = Mathf.FloorToInt(timeElapsed / 60f);
+        int seconds = Mathf.FloorToInt(timeElapsed % 60f);
+        
+        // Formats time as "00:00" and makes it bigger and bold
+        timeText.text = $"<size=130%><b>{minutes:00}:{seconds:00}</b></size>";
+    }
+
+    /// <summary>
+    /// Updates the collision and slide counters with custom colors.
+    /// </summary>
+    private void UpdateStatsDisplay()
+    {
+        if (collisionsText != null) 
+        {
+            // Uses Rich Text (Hex color) to make the number stand out
+            collisionsText.text = $"Colisões: <color=#FF4D4D><b>{collisionSystem.TotalCollisions}</b></color>";
+        }
+
+        if (slidesText != null) 
+        {
+            slidesText.text = $"Deslizes: <color=#FFB84D><b>{collisionSystem.TotalSlides}</b></color>";
+        }
+    }
+
+    /// <summary>
+    /// Handles the right tablet logic. Shows the driving mode, 
+    /// but completely overrides it with a warning if the brake is held.
+    /// </summary>
     private void UpdateModeDisplay()
     {
         if (modeText == null) return;
 
+        // 1. Check if the emergency brake is active first
+        if (wheelchairController.IsEmergencyBraking())
+        {
+            modeText.text = "<size=150%><b>TRAVÃO</b></size>";
+            modeText.color = new Color(1f, 0.2f, 0.2f, 1f); // Strong Red
+            return; // Stops the function here so the mode text doesn't overwrite it
+        }
+
+        // 2. If no brake is applied, show the current speed mode
         string modeString = "";
         Color modeColor = Color.white;
 
         switch (wheelchairController.currentMode)
         {
             case MovementVR.SpeedMode.Slow:
-                modeString = "Interior";
-                modeColor = new Color(1f, 0.9f, 0.5f, 1f); 
+                modeString = "<size=150%><b>INTERIOR</b></size>";
+                modeColor = new Color(1f, 0.9f, 0.5f, 1f); // Yellowish
                 break;
             case MovementVR.SpeedMode.Normal:
-                modeString = "Exterior";
-                modeColor = new Color(0.6f, 1f, 0.7f, 1f); 
+                modeString = "<size=150%><b>EXTERIOR</b></size>";
+                modeColor = new Color(0.6f, 1f, 0.7f, 1f); // Greenish
                 break;
             case MovementVR.SpeedMode.Off:
-                modeString = "Desligado";
-                modeColor = new Color(1f, 0.6f, 0.6f, 1f); 
+                modeString = "<size=150%><b>DESLIGADO</b></size>";
+                modeColor = new Color(0.6f, 0.6f, 0.6f, 1f); // Gray
                 break;
         }
 
-        modeText.text = $"Modo: {modeString}";
+        modeText.text = modeString;
         modeText.color = modeColor;
-    }
-
-    private void UpdateSpeedDisplay()
-    {
-        if (speedText == null) return;
-
-        float currentSpeedKmH = wheelchairController.GetCurrentSpeed() * 3.6f;
-        float maxSpeedLimit = wheelchairController.currentMode == MovementVR.SpeedMode.Slow ? 3f : 8f;
-
-        speedText.text = $"Veloc: {currentSpeedKmH:F1} / {maxSpeedLimit:F0} km/h";
-    }
-
-    private void UpdateSteeringDisplay()
-    {
-        if (steeringText == null) return;
-
-        string steerType = wheelchairController.GetCurrentSteeringType();
-        bool isRear = steerType.Contains("Rear");
-
-        string steerString = isRear ? "Traseira" : "Frontal";
-        Color steerColor = isRear ? new Color(1f, 0.75f, 1f, 1f) : new Color(0.65f, 0.95f, 1f, 1f);
-
-        steeringText.text = $"Direção: {steerString}";
-        steeringText.color = steerColor;
-    }
-
-    private void UpdateBrakeWarning()
-    {
-        if (emergencyBrakePanel == null) return;
-
-        bool isBraking = wheelchairController.IsEmergencyBraking();
-        if (emergencyBrakePanel.activeSelf != isBraking)
-        {
-            emergencyBrakePanel.SetActive(isBraking);
-        }
     }
 }
