@@ -3,10 +3,9 @@ using UnityEngine.InputSystem;
 
 /// <summary>
 /// Complete wheelchair wheel control system
-/// Manages steering, spinning and differential wheel movement
-/// Supports two modes: Front Steering (standard) and Rear Steering (more maneuverable)
+/// Manages steering, spinning and differential wheel movement based on true physics.
 /// Fully compatible with both PC Keyboard and VR Joysticks.
-/// NOTE: Sound effects are handled by the Movement scripts, NOT here
+/// NOTE: Sound effects are handled by the Movement scripts, NOT here.
 /// </summary>
 public class WheelController : MonoBehaviour
 {
@@ -38,17 +37,14 @@ public class WheelController : MonoBehaviour
     public KeyCode toggleSteeringKey = KeyCode.T;
 
     [Header("=== Physical Configuration ===")]
-    [Tooltip("Maximum wheelchair speed in km/h")]
+    [Tooltip("Maximum wheelchair speed in km/h (Used as fallback if no movement script found)")]
     public float maxSpeedKmH = 6f;
 
-    [Tooltip("Rear wheel diameter in meters")]
+    [Tooltip("Rear wheel diameter in meters. Crucial for realistic rotation speed!")]
     public float rearWheelDiameter = 0.6f;
 
-    [Tooltip("Front wheel diameter in meters")]
+    [Tooltip("Front wheel diameter in meters. Crucial for realistic rotation speed!")]
     public float frontWheelDiameter = 0.15f;
-
-    [Tooltip("Rotation speed multiplier")]
-    public float speedMultiplier = 5f;
 
     [Header("=== Steering Configuration ===")]
     [Tooltip("Maximum steering angle")]
@@ -67,7 +63,7 @@ public class WheelController : MonoBehaviour
     [Range(0f, 2f)]
     public float differentialIntensity = 0.5f;
 
-    [Tooltip("Invert rotation direction")]
+    [Tooltip("Invert rotation direction if your 3D model axes are flipped")]
     public bool invertRotation = false;
 
     [Header("=== Debug Info ===")]
@@ -76,7 +72,7 @@ public class WheelController : MonoBehaviour
     [SerializeField] private float rotationRearLeft = 0f;
     [SerializeField] private float rotationRearRight = 0f;
     [SerializeField] private float currentSteeringAngle = 0f;
-    [SerializeField] private float currentSpeed = 0f;
+    [SerializeField] private float currentSpeed = 0f; // Exact speed in m/s
     [SerializeField] private float steeringInput = 0f;
 
     public enum SteeringType
@@ -98,24 +94,14 @@ public class WheelController : MonoBehaviour
     private Quaternion initialRotJoint8;
     private Quaternion initialRotJoint9;
 
-    // For manual speed calculation
+    // For manual speed calculation (fallback)
     private Vector3 previousPosition;
-
-    private Vector3[] initialLocPos = new Vector3[6]; // To store the "Home" position
-private Transform[] allJoints = new Transform[6]; // To make it easy to loop through all wheels
 
     // Rotation axes
     private readonly Vector3 ROTATION_AXIS = Vector3.forward;
     private readonly Vector3 STEERING_AXIS = Vector3.up;
 
     // ===== HELPER METHODS =====
-
-    private float GetMovementNormalizedSpeed()
-    {
-        if (movementPC != null) return movementPC.GetNormalizedSpeed();
-        if (movementVR != null) return movementVR.GetNormalizedSpeed();
-        return 0f;
-    }
 
     private bool HasMovementScript()
     {
@@ -143,7 +129,6 @@ private Transform[] allJoints = new Transform[6]; // To make it easy to loop thr
         StoreInitialRotations();
         VerifyConfiguration();
         ConfigureMovementScript();
-        
     }
 
     void Update()
@@ -181,20 +166,12 @@ private Transform[] allJoints = new Transform[6]; // To make it easy to loop thr
         }
     }
 
-    /// <summary>
-    /// Toggles between front and rear steering.
-    /// Made PUBLIC so MovementVR and MovementPC can trigger it.
-    /// </summary>
     public void ToggleSteeringType()
     {
         if (steeringType == SteeringType.FrontSteering)
-        {
             steeringType = SteeringType.RearSteering;
-        }
         else
-        {
             steeringType = SteeringType.FrontSteering;
-        }
 
         ResetSteering();
         ConfigureMovementScript();
@@ -202,34 +179,39 @@ private Transform[] allJoints = new Transform[6]; // To make it easy to loop thr
 
     void GetInputs()
     {
-        // Fetch steering input dynamically from VR Joystick or PC Keyboard
         steeringInput = GetDynamicSteeringInput();
 
+        // Use EXACT physical speed (m/s) instead of fake normalized multipliers
         if (HasMovementScript())
         {
-            currentSpeed = GetMovementNormalizedSpeed();
+            if (movementVR != null) 
+            {
+                currentSpeed = movementVR.GetCurrentSpeed();
+            }
+            else if (movementPC != null) 
+            {
+                // Safe fallback for PC script if it doesn't have GetCurrentSpeed() yet
+                currentSpeed = movementPC.GetNormalizedSpeed() * (maxSpeedKmH / 3.6f); 
+            }
         }
         else if (rb != null)
         {
-            currentSpeed = rb.linearVelocity.magnitude / (maxSpeedKmH / 3.6f);
-            currentSpeed = Mathf.Clamp(currentSpeed, -1f, 1f);
+            currentSpeed = rb.linearVelocity.magnitude;
+            // Check if moving backwards
+            if (Vector3.Dot(rb.linearVelocity, transform.forward) < 0) currentSpeed = -currentSpeed;
         }
         else
         {
-            float distance = Vector3.Distance(transform.position, previousPosition);
-            float calculatedSpeed = distance / Time.deltaTime;
-            currentSpeed = calculatedSpeed / (maxSpeedKmH / 3.6f);
-            currentSpeed = Mathf.Clamp(currentSpeed, -1f, 1f);
+            Vector3 movementVector = transform.position - previousPosition;
+            currentSpeed = movementVector.magnitude / Time.deltaTime;
+            
+            if (Vector3.Dot(movementVector, transform.forward) < 0) currentSpeed = -currentSpeed;
             previousPosition = transform.position;
         }
     }
 
-    /// <summary>
-    /// Detects if the player is using VR or PC and grabs the correct horizontal input.
-    /// </summary>
     private float GetDynamicSteeringInput()
     {
-        // If VR script is active, read the thumbstick X axis directly
         if (movementVR != null && movementVR.isActiveAndEnabled)
         {
             if (movementVR.joystickAction != null && movementVR.joystickAction.action != null)
@@ -237,8 +219,6 @@ private Transform[] allJoints = new Transform[6]; // To make it easy to loop thr
                 return movementVR.joystickAction.action.ReadValue<Vector2>().x;
             }
         }
-        
-        // PC Fallback
         return Input.GetAxis("Horizontal");
     }
 
@@ -276,16 +256,19 @@ private Transform[] allJoints = new Transform[6]; // To make it easy to loop thr
 
     void ApplyWheelRotation()
     {
+        // --- REALISTIC PHYSICS MATH ---
+        // 1. Calculate circumference (Distance traveled in 1 full rotation)
         float rearCircumference = Mathf.PI * rearWheelDiameter;
-        float rotationsPerMeterRear = 1f / rearCircumference;
-        float speedMetersPerSecond = currentSpeed * (maxSpeedKmH / 3.6f);
-        float rotationsPerSecondRear = speedMetersPerSecond * rotationsPerMeterRear;
-        float degreesPerSecondRear = rotationsPerSecondRear * 360f * speedMultiplier;
-
         float frontCircumference = Mathf.PI * frontWheelDiameter;
-        float rotationsPerMeterFront = 1f / frontCircumference;
-        float rotationsPerSecondFront = speedMetersPerSecond * rotationsPerMeterFront;
-        float degreesPerSecondFront = rotationsPerSecondFront * 360f * speedMultiplier;
+
+        // 2. Calculate rotations per second based on exact m/s speed
+        // If circumference is 0 to avoid DivideByZero error, we set it to 0.01f
+        float rotationsPerSecondRear = currentSpeed / Mathf.Max(rearCircumference, 0.01f);
+        float rotationsPerSecondFront = currentSpeed / Mathf.Max(frontCircumference, 0.01f);
+
+        // 3. Convert to degrees per second
+        float degreesPerSecondRear = rotationsPerSecondRear * 360f;
+        float degreesPerSecondFront = rotationsPerSecondFront * 360f;
 
         if (invertRotation)
         {
@@ -296,6 +279,7 @@ private Transform[] allJoints = new Transform[6]; // To make it easy to loop thr
         float deltaRotationLeft = 1f;
         float deltaRotationRight = 1f;
 
+        // Apply differential speed for turns
         if (differentialRotation && Mathf.Abs(steeringInput) > 0.01f)
         {
             float intensity = differentialIntensity;
@@ -305,46 +289,36 @@ private Transform[] allJoints = new Transform[6]; // To make it easy to loop thr
                 intensity *= 1.5f;
             }
 
-            if (steeringInput > 0)
+            if (steeringInput > 0) // Turning Right
             {
                 deltaRotationLeft = 1f + (Mathf.Abs(steeringInput) * intensity);
                 deltaRotationRight = 1f - (Mathf.Abs(steeringInput) * intensity * 0.5f);
             }
-            else
+            else // Turning Left
             {
                 deltaRotationRight = 1f + (Mathf.Abs(steeringInput) * intensity);
                 deltaRotationLeft = 1f - (Mathf.Abs(steeringInput) * intensity * 0.5f);
             }
         }
 
+        // Add to current rotation (keeps memory of where the wheel stopped)
         rotationRearLeft += degreesPerSecondRear * deltaRotationLeft * Time.deltaTime;
         rotationRearRight += degreesPerSecondRear * deltaRotationRight * Time.deltaTime;
         rotationFrontLeft += degreesPerSecondFront * deltaRotationLeft * Time.deltaTime;
         rotationFrontRight += degreesPerSecondFront * deltaRotationRight * Time.deltaTime;
 
+        // Apply visual rotation to joints
         if (joint8_RearLeftWheel != null)
-        {
-            Quaternion rotation = Quaternion.AngleAxis(rotationRearLeft, ROTATION_AXIS);
-            joint8_RearLeftWheel.localRotation = initialRotJoint8 * rotation;
-        }
+            joint8_RearLeftWheel.localRotation = initialRotJoint8 * Quaternion.AngleAxis(rotationRearLeft, ROTATION_AXIS);
 
         if (joint9_RearRightWheel != null)
-        {
-            Quaternion rotation = Quaternion.AngleAxis(rotationRearRight, ROTATION_AXIS);
-            joint9_RearRightWheel.localRotation = initialRotJoint9 * rotation;
-        }
+            joint9_RearRightWheel.localRotation = initialRotJoint9 * Quaternion.AngleAxis(rotationRearRight, ROTATION_AXIS);
 
         if (joint6_FrontLeftWheel != null)
-        {
-            Quaternion rotation = Quaternion.AngleAxis(rotationFrontLeft, ROTATION_AXIS);
-            joint6_FrontLeftWheel.localRotation = initialRotJoint6 * rotation;
-        }
+            joint6_FrontLeftWheel.localRotation = initialRotJoint6 * Quaternion.AngleAxis(rotationFrontLeft, ROTATION_AXIS);
 
         if (joint7_FrontRightWheel != null)
-        {
-            Quaternion rotation = Quaternion.AngleAxis(rotationFrontRight, ROTATION_AXIS);
-            joint7_FrontRightWheel.localRotation = initialRotJoint7 * rotation;
-        }
+            joint7_FrontRightWheel.localRotation = initialRotJoint7 * Quaternion.AngleAxis(rotationFrontRight, ROTATION_AXIS);
     }
 
     void ResetSteering()
@@ -360,68 +334,46 @@ private Transform[] allJoints = new Transform[6]; // To make it easy to loop thr
 
     void FindJointsAutomatically()
     {
-        if (joint4_FrontSteering == null)
-            joint4_FrontSteering = transform.Find("joint4");
-        if (joint5_RearSteering == null)
-            joint5_RearSteering = transform.Find("joint5");
-        if (joint6_FrontLeftWheel == null)
-            joint6_FrontLeftWheel = transform.Find("joint6");
-        if (joint7_FrontRightWheel == null)
-            joint7_FrontRightWheel = transform.Find("joint7");
-        if (joint8_RearLeftWheel == null)
-            joint8_RearLeftWheel = transform.Find("joint8");
-        if (joint9_RearRightWheel == null)
-            joint9_RearRightWheel = transform.Find("joint9");
+        if (joint4_FrontSteering == null) joint4_FrontSteering = transform.Find("joint4");
+        if (joint5_RearSteering == null) joint5_RearSteering = transform.Find("joint5");
+        if (joint6_FrontLeftWheel == null) joint6_FrontLeftWheel = transform.Find("joint6");
+        if (joint7_FrontRightWheel == null) joint7_FrontRightWheel = transform.Find("joint7");
+        if (joint8_RearLeftWheel == null) joint8_RearLeftWheel = transform.Find("joint8");
+        if (joint9_RearRightWheel == null) joint9_RearRightWheel = transform.Find("joint9");
     }
 
     void StoreInitialRotations()
     {
-        if (joint4_FrontSteering != null)
-            initialRotJoint4 = joint4_FrontSteering.localRotation;
-        if (joint5_RearSteering != null)
-            initialRotJoint5 = joint5_RearSteering.localRotation;
-        if (joint6_FrontLeftWheel != null)
-            initialRotJoint6 = joint6_FrontLeftWheel.localRotation;
-        if (joint7_FrontRightWheel != null)
-            initialRotJoint7 = joint7_FrontRightWheel.localRotation;
-        if (joint8_RearLeftWheel != null)
-            initialRotJoint8 = joint8_RearLeftWheel.localRotation;
-        if (joint9_RearRightWheel != null)
-            initialRotJoint9 = joint9_RearRightWheel.localRotation;
+        if (joint4_FrontSteering != null) initialRotJoint4 = joint4_FrontSteering.localRotation;
+        if (joint5_RearSteering != null) initialRotJoint5 = joint5_RearSteering.localRotation;
+        if (joint6_FrontLeftWheel != null) initialRotJoint6 = joint6_FrontLeftWheel.localRotation;
+        if (joint7_FrontRightWheel != null) initialRotJoint7 = joint7_FrontRightWheel.localRotation;
+        if (joint8_RearLeftWheel != null) initialRotJoint8 = joint8_RearLeftWheel.localRotation;
+        if (joint9_RearRightWheel != null) initialRotJoint9 = joint9_RearRightWheel.localRotation;
     }
 
     void VerifyConfiguration()
     {
-        if (joint4_FrontSteering == null) return;
-        if (joint5_RearSteering == null) return;
-        if (joint6_FrontLeftWheel == null) return;
-        if (joint7_FrontRightWheel == null) return;
-        if (joint8_RearLeftWheel == null) return;
-        if (joint9_RearRightWheel == null) return;
+        if (joint4_FrontSteering == null || joint5_RearSteering == null || 
+            joint6_FrontLeftWheel == null || joint7_FrontRightWheel == null || 
+            joint8_RearLeftWheel == null || joint9_RearRightWheel == null)
+        {
+            Debug.LogWarning("WheelController: One or more joints are missing! Visual rotation might not work.");
+        }
     }
 
     // ===== PUBLIC METHODS =====
 
     public void StopWheels()
     {
-        rotationFrontLeft = 0f;
-        rotationFrontRight = 0f;
-        rotationRearLeft = 0f;
-        rotationRearRight = 0f;
+        // FIXED: Only zero out speed and steering logic, do NOT reset wheel rotation angles!
         currentSteeringAngle = 0f;
         currentSpeed = 0f;
         steeringInput = 0f;
 
         ResetSteering();
-
-        if (joint6_FrontLeftWheel != null)
-            joint6_FrontLeftWheel.localRotation = initialRotJoint6;
-        if (joint7_FrontRightWheel != null)
-            joint7_FrontRightWheel.localRotation = initialRotJoint7;
-        if (joint8_RearLeftWheel != null)
-            joint8_RearLeftWheel.localRotation = initialRotJoint8;
-        if (joint9_RearRightWheel != null)
-            joint9_RearRightWheel.localRotation = initialRotJoint9;
+        
+        // As rodas rotativas (joints 6, 7, 8, 9) mantêm a sua última rotação intacta!
     }
 
     public SteeringType GetSteeringType()
