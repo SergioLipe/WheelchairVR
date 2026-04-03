@@ -22,6 +22,9 @@ public class CollisionSystemVR : MonoBehaviour
     // Only Count one collision per object until it's resolved to prevent spam
     private bool wasInCollisionState = false;
     private bool wasSlidingState = false;
+    
+    // NEW: Slide cooldown to prevent micro-bounce spam
+    private float lastSlideCountTime = 0f;
 
     [Header("=== Debug Settings ===")]
     [Tooltip("Enable to print exactly WHAT you hit to the Unity Console")]
@@ -111,7 +114,15 @@ public class CollisionSystemVR : MonoBehaviour
         if (inCollision && !wasInCollisionState) TotalCollisions++;
         wasInCollisionState = inCollision;
 
-        if (wallSliding && !wasSlidingState) TotalSlides++;
+        // FIXED: Only count a slide if 1 second has passed since the last count
+        if (wallSliding && !wasSlidingState)
+        {
+            if (Time.time - lastSlideCountTime > 1.0f)
+            {
+                TotalSlides++;
+                lastSlideCountTime = Time.time;
+            }
+        }
         wasSlidingState = wallSliding;
     }
 
@@ -350,7 +361,8 @@ public class CollisionSystemVR : MonoBehaviour
         if (Mathf.Abs(controller.velocity.magnitude) > 0.1f)
         {
             wallSliding = true;
-            slideTimer = 0.3f;
+            // FIXED: Increased timer from 0.3f to 0.5f to tolerate physics micro-bounces
+            slideTimer = 0.5f; 
         }
 
         float side = Vector3.Dot(wheelchairTransform.right, impactDirection);
@@ -414,6 +426,4 @@ public class CollisionSystemVR : MonoBehaviour
     public bool IsInCollision => inCollision;
     public string CollidedObject => collidedObject;
     public bool IsStuck => collisionCount > 2 || multiCollisionResetTime > 0.3f;
-
-
 }
