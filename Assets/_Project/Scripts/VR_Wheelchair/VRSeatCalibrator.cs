@@ -88,10 +88,6 @@ public class VRSeatCalibrator : MonoBehaviour
         // Calculate the exact world distance from the current headset position to the perfect seat position
         Vector3 posDiff = seatTarget.position - headCamera.position;
 
-        // We set Y to 0 because we DO NOT want to change the player's real-world height.
-        // The "Tracking Origin Mode: Floor" handles the height. If we didn't zero this out,
-        // the player would get buried into the floor or float in the air.
-        posDiff.y = 0f;
 
         // Move the whole world (XR Origin) by that exact distance so the headset lands perfectly on the seat
         xrOrigin.transform.position += posDiff;
