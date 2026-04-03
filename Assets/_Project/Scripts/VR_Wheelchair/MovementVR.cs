@@ -61,7 +61,7 @@ public class MovementVR : MonoBehaviour
     [Range(1f, 3f)]
     public float joystickCurve = 1.8f;
 
-    [Tooltip("Smoothing applied to joystick input (simulates joystick physical resistance)")]
+    [Tooltip("Smoothing applied to joystick input (simulates physical resistance)")]
     [Range(1f, 10f)]
     public float joystickSmoothing = 4f;
 
@@ -132,6 +132,10 @@ public class MovementVR : MonoBehaviour
     private float smoothedHorizontalInput = 0f;
     private float tryingToTurnTime = 0f;
 
+    // Realistic Physics State
+    private float currentAccelerationVelocity = 0f;
+    private bool brakeLockEngaged = true;
+
     // Public for sound script
     [HideInInspector]
     public bool playerIsAccelerating = false;
@@ -197,11 +201,7 @@ public class MovementVR : MonoBehaviour
     private void PreloadSounds()
     {
         if (effectsAudio == null) return;
-
-        // Forçar o áudio a 2D (0f) garante que toca instantaneamente nos dois ouvidos sem cálculos 3D pesados
         effectsAudio.spatialBlend = 0f; 
-
-        // Carregar os sons para a memória ANTES de bater
         if (modeChangeSound != null) modeChangeSound.LoadAudioData();
         if (steeringChangeSound != null) steeringChangeSound.LoadAudioData();
         if (hardCollisionSound != null) hardCollisionSound.LoadAudioData();
@@ -211,7 +211,6 @@ public class MovementVR : MonoBehaviour
     private void InitializeLevelSettings()
     {
         currentMode = startingSpeedMode;
-
         if (wheelController != null)
         {
             wheelController.SetSteeringType(startingSteeringMode);
@@ -225,24 +224,20 @@ public class MovementVR : MonoBehaviour
         {
             controller = gameObject.AddComponent<CharacterController>();
         }
-
         controller.minMoveDistance = 0.0f;
         controller.stepOffset = 0.08f;
-
-      
     }
 
     private void SetupComponents()
-{
-    wheelController = GetComponent<WheelController>();
-
-    collisionSystem = GetComponent<CollisionSystemVR>();
-    if (collisionSystem == null)
     {
-        collisionSystem = gameObject.AddComponent<CollisionSystemVR>();
+        wheelController = GetComponent<WheelController>();
+        collisionSystem = GetComponent<CollisionSystemVR>();
+        if (collisionSystem == null)
+        {
+            collisionSystem = gameObject.AddComponent<CollisionSystemVR>();
+        }
+        collisionSystem.Initialize(controller, transform);
     }
-    collisionSystem.Initialize(controller, transform);
-}
 
     private void ConvertSpeeds()
     {
@@ -262,6 +257,7 @@ public class MovementVR : MonoBehaviour
     void Update()
     {
         if (inputLocked) return;
+        
         UpdateSteeringState();
         collisionSystem.Update();
         ProcessSoundEffects();
@@ -270,19 +266,18 @@ public class MovementVR : MonoBehaviour
 
         ManageModes();
 
+        // Control logic separated from physics application
         if (currentMode != SpeedMode.Off)
         {
             ProcessJoystickInput();
-            ApplyRealisticMovement();
         }
         else
         {
             EmergencyStop();
-            ApplyVerticalMovement();
         }
 
-       
-
+        // Apply movement ALWAYS so SmoothDamp inertia works during braking
+        ApplyRealisticMovement();
         ApplyGravity();
     }
 
@@ -296,23 +291,17 @@ public class MovementVR : MonoBehaviour
 
     // ===== JOYSTICK INPUT PROCESSING =====
 
-    /// <summary>
-    /// Reads VR thumbstick and processes it to feel like a real wheelchair joystick.
-    /// Applies deadzone, response curve, and smoothing.
-    /// </summary>
     void ProcessJoystickInput()
     {
         Vector2 rawInput = Vector2.zero;
 
-        // Read VR joystick
         if (joystickAction != null && joystickAction.action != null)
         {
             rawInput = joystickAction.action.ReadValue<Vector2>();
         }
-
         rawJoystickInput = rawInput;
 
-        // Step 1: Apply deadzone (real wheelchair joysticks have a dead center)
+        // Apply deadzone
         float magnitude = rawInput.magnitude;
         if (magnitude < joystickDeadzone)
         {
@@ -320,27 +309,27 @@ public class MovementVR : MonoBehaviour
         }
         else
         {
-            // Remap from deadzone-1 to 0-1 so movement starts smoothly after deadzone
             float remapped = (magnitude - joystickDeadzone) / (1f - joystickDeadzone);
             rawInput = rawInput.normalized * remapped;
         }
 
-        // Step 2: Apply response curve (gives more precision at low speeds)
-        // A real wheelchair joystick is more sensitive in the center
+        // Apply response curve
         float curvedMagnitude = Mathf.Pow(rawInput.magnitude, joystickCurve);
         Vector2 curvedInput = rawInput.normalized * curvedMagnitude;
 
-        // Step 3: Smooth the input (simulates physical joystick resistance/inertia)
+        // Apply input smoothing
         smoothedVerticalInput = Mathf.Lerp(smoothedVerticalInput, curvedInput.y, joystickSmoothing * Time.deltaTime);
         smoothedHorizontalInput = Mathf.Lerp(smoothedHorizontalInput, curvedInput.x, joystickSmoothing * Time.deltaTime);
 
         processedJoystickInput = new Vector2(smoothedHorizontalInput, smoothedVerticalInput);
-
-        // Set acceleration flag
         playerIsAccelerating = (Mathf.Abs(smoothedVerticalInput) > 0.05f);
 
-        // Calculate target speed
         float maxSpeed = currentMode == SpeedMode.Slow ? maxSpeedSlow : maxSpeedNormal;
+
+        // DIFFERENTIAL STEERING PHYSICS: Turning aggressively reduces max forward speed naturally
+        float turnPenalty = 1f - (Mathf.Abs(smoothedHorizontalInput) * 0.4f);
+        maxSpeed *= turnPenalty;
+
         float verticalForCollision = smoothedVerticalInput;
 
         ApplyCollisionBlocking(ref verticalForCollision, ref maxSpeed);
@@ -352,7 +341,6 @@ public class MovementVR : MonoBehaviour
 
     void ManageModes()
     {
-        // Toggle Speed Mode
         if (toggleSpeedAction != null && toggleSpeedAction.action != null)
         {
             if (toggleSpeedAction.action.WasPressedThisFrame())
@@ -363,18 +351,16 @@ public class MovementVR : MonoBehaviour
             }
         }
 
-        // Switch Steering
         if (switchSteeringAction != null && switchSteeringAction.action != null)
         {
             if (switchSteeringAction.action.WasPressedThisFrame())
             {
-                // wheelController.ToggleSteering(); — uncomment when ready
+                // wheelController.ToggleSteering(); 
                 PlaySound(steeringChangeSound);
                 SendHapticPulse(rightController, 0.15f, 0.08f);
             }
         }
 
-        // Emergency Brake (hold)
         bool brakeIsHeld = false;
         if (brakeAction != null && brakeAction.action != null)
         {
@@ -426,54 +412,40 @@ public class MovementVR : MonoBehaviour
 
     private void ApplyAccelerationDeceleration(float maxSpeed)
     {
-        // 1. Determine which direction the player is trying to go
         bool isMovingForward = targetSpeed > 0;
         bool isMovingBackward = targetSpeed < 0;
-        
-        // 2. Check if the specific direction they want to go is blocked
         bool blockedForward = collisionSystem.IsFrontBlocked && isMovingForward;
         bool blockedBackward = collisionSystem.IsBackBlocked && isMovingBackward;
-        
         bool blockedInTargetDirection = blockedForward || blockedBackward;
-        
         bool accelerating = Mathf.Abs(targetSpeed) > Mathf.Abs(currentSpeed);
 
-        // 3. Only accelerate if the chosen direction is free
+        // REALISTIC INERTIA: SmoothDamp creates an S-curve for heavy wheelchair acceleration
         if (!blockedInTargetDirection && accelerating)
         {
-            float acceleration = maxSpeed / accelerationTime;
-            currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.deltaTime);
+            brakeLockEngaged = false; 
+            currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref currentAccelerationVelocity, accelerationTime * 0.5f);
         }
         else
         {
-            float deceleration;
-
-            if (emergencyBrake)
-            {
-                deceleration = maxSpeed / emergencyBrakeTime;
-            }
-            else
-            {
-                deceleration = maxSpeed / brakingTime;
-            }
-
-            // 4. Force speed to 0 ONLY if moving INTO the obstacle
             if (collisionSystem.IsFrontBlocked && currentSpeed > 0)
-            {
                 currentSpeed = 0;
-            }
             else if (collisionSystem.IsBackBlocked && currentSpeed < 0)
-            {
                 currentSpeed = 0;
-            }
             else if (collisionSystem.IsInCollision)
-            {
-                deceleration *= 2f;
-                currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, deceleration * Time.deltaTime);
-            }
+                currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref currentAccelerationVelocity, brakingTime * 0.3f);
             else
+                currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref currentAccelerationVelocity, brakingTime);
+
+            // MECHANICAL BRAKE CLICK: Locks the wheels completely when almost stopped
+            if (Mathf.Abs(targetSpeed) < 0.05f && Mathf.Abs(currentSpeed) < 0.15f && !brakeLockEngaged)
             {
-                currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, deceleration * Time.deltaTime);
+                currentSpeed = 0f; 
+                targetSpeed = 0f;
+                currentAccelerationVelocity = 0f;
+                brakeLockEngaged = true; 
+                
+                SendHapticPulse(leftController, 0.4f, 0.05f);
+                SendHapticPulse(rightController, 0.4f, 0.05f);
             }
         }
     }
@@ -583,12 +555,6 @@ public class MovementVR : MonoBehaviour
         controller.Move(movementDirection * Time.deltaTime);
     }
 
-    void ApplyVerticalMovement()
-    {
-        Vector3 verticalMovement = new Vector3(0, movementVelocity.y, 0);
-        controller.Move(verticalMovement * Time.deltaTime);
-    }
-
     void ApplyGravity()
     {
         if (controller.isGrounded)
@@ -604,13 +570,20 @@ public class MovementVR : MonoBehaviour
 
     void EmergencyStop()
     {
-        float deceleration = maxSpeedNormal / emergencyBrakeTime;
-        currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, deceleration * Time.deltaTime);
+        // Smoothly but aggressively ramp down speed instead of stopping instantly
+        currentSpeed = Mathf.SmoothDamp(currentSpeed, 0f, ref currentAccelerationVelocity, emergencyBrakeTime * 0.5f);
 
-        if (Mathf.Abs(currentSpeed) < 0.01f)
+        // Heavy mechanical lock when almost completely stopped
+        if (Mathf.Abs(currentSpeed) < 0.15f && !brakeLockEngaged)
         {
-            currentSpeed = 0;
-            targetSpeed = 0;
+            currentSpeed = 0f;
+            targetSpeed = 0f;
+            currentAccelerationVelocity = 0f;
+            brakeLockEngaged = true;
+
+            // Stronger haptic feedback to simulate the emergency brake pads engaging
+            SendHapticPulse(leftController, 0.7f, 0.1f);
+            SendHapticPulse(rightController, 0.7f, 0.1f);
         }
 
         collisionSystem.ClearSlide();
@@ -623,18 +596,12 @@ public class MovementVR : MonoBehaviour
 
     // ===== HAPTIC FEEDBACK =====
 
-    /// <summary>
-    /// Processes haptic feedback based on current state.
-    /// Collisions = strong pulse, sliding = continuous gentle rumble,
-    /// hitting speed limit = subtle click
-    /// </summary>
     void ProcessHapticFeedback()
     {
         bool isColliding = collisionSystem.IsInCollision ||
                            collisionSystem.IsFrontBlocked ||
                            collisionSystem.IsBackBlocked;
 
-        // Strong haptic on collision impact
         if (isColliding && !wasColliding)
         {
             float impactStrength = Mathf.Clamp01(Mathf.Abs(currentSpeed) / maxSpeedNormal);
@@ -643,14 +610,12 @@ public class MovementVR : MonoBehaviour
             SendHapticPulse(rightController, intensity, 0.2f);
         }
 
-        // Gentle continuous rumble while wall sliding
         if (collisionSystem.IsWallSliding)
         {
             SendHapticPulse(leftController, slideHapticIntensity, Time.deltaTime);
             SendHapticPulse(rightController, slideHapticIntensity, Time.deltaTime);
         }
 
-        // Subtle rumble proportional to speed (simulates wheelchair motor vibration)
         if (Mathf.Abs(currentSpeed) > 0.1f && !isColliding)
         {
             float speedRatio = Mathf.Abs(currentSpeed) / maxSpeedNormal;
@@ -661,13 +626,9 @@ public class MovementVR : MonoBehaviour
         wasColliding = isColliding;
     }
 
-    /// <summary>
-    /// Sends a haptic pulse to a specific controller
-    /// </summary>
     private void SendHapticPulse(ActionBasedController controller, float intensity, float duration)
     {
         if (controller == null) return;
-
         controller.SendHapticImpulse(intensity, duration);
     }
 
@@ -677,7 +638,6 @@ public class MovementVR : MonoBehaviour
     {
         float currentTime = Time.time;
 
-        // Steering change sound
         if (currentSteeringType != steeringTypeCache)
         {
             PlaySound(steeringChangeSound);
@@ -686,8 +646,6 @@ public class MovementVR : MonoBehaviour
 
         bool slidingNow = collisionSystem.IsWallSliding;
 
-        // Only handle slide sounds here!
-        // Hard collision sounds are now handled perfectly in sync by CollisionFlashEffect.cs
         if (slidingNow)
         {
             if (!slidingCache && currentTime - lastSlideSoundTime > slideSoundCooldown)
@@ -734,7 +692,6 @@ public class MovementVR : MonoBehaviour
     {
         if (effectsAudio != null && clip != null)
         {
-            // Check cooldown specifically for hard collision sounds to prevent spam
             if (clip == hardCollisionSound)
             {
                 if (Time.time - lastCollisionSoundTime < collisionSoundCooldown) return;
