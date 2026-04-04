@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "WheelChairControls",
+    "name": "VR_InputActions",
     "maps": [
         {
             "name": "Driving",
@@ -171,6 +171,45 @@
                     "name": "",
                     "id": "384abf00-931a-4ebd-8edc-36dc9ff4e089",
                     "path": "<XRController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Pause",
+            "id": "08a3b727-2edb-4b9d-aca9-acf030e62b60",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "ad3e77c4-2cc5-4649-86aa-b7b64238409f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a5ade5e1-2c59-4cd6-9a92-4669fdb9ad50",
+                    "path": "<XRController>{LeftHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9c2ff3fe-1005-40ff-a515-c76d6c1388ca",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

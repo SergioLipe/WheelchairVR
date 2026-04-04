@@ -199,6 +199,14 @@ public class MovementPC : MonoBehaviour
 
     void Update()
     {
+
+        // Pause handling (also unlocks cursor and shows it when paused)
+        if (Time.timeScale == 0)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            return;
+        }
         // Save speed BEFORE collision processing so we can check it for sounds
         speedBeforeCollision = Mathf.Abs(currentSpeed);
 
@@ -503,7 +511,7 @@ public class MovementPC : MonoBehaviour
     }
 
 
-   /// <summary>
+    /// <summary>
     /// Collision sounds are played HERE
     /// </summary>
     void OnControllerColliderHit(ControllerColliderHit hit)
@@ -528,7 +536,7 @@ public class MovementPC : MonoBehaviour
         currentSpeed *= multiplier;
     }
 
-public void PlaySound(AudioClip clip)
+    public void PlaySound(AudioClip clip)
     {
         if (effectsAudio != null && clip != null)
         {
