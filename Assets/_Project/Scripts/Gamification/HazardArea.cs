@@ -3,7 +3,7 @@ using TMPro;
 
 /// <summary>
 /// Universal hazard zone. Stops the player, shows a custom message, 
-/// and activates the Game Over panel.
+/// and activates the Game Over panel for both PC and VR.
 /// </summary>
 public class HazardArea : MonoBehaviour
 {
@@ -15,12 +15,20 @@ public class HazardArea : MonoBehaviour
     [Tooltip("CHECK THIS FOR CROSSWALKS: If the player is already inside when this turns on, they won't die.")]
     public bool allowSafeExitIfAlreadyInside = false;
 
-    [Header("=== UI References ===")]
-    [Tooltip("Drag the Warning Text UI here")]
-    public TMP_Text warningTextUI;
+    [Header("=== UI References (PC) ===")]
+    public TMP_Text warningTextPC;
+    public GameObject hazardPanelPC;
+
+    [Header("=== UI References (VR) ===")]
+    public TMP_Text warningTextVR;
+    public GameObject hazardPanelVR;
+    public Transform vrCamera;
     
-    [Tooltip("Drag the Game Over Panel you copied here")]
-    public GameObject hazardPanel; 
+    [Tooltip("Arrasta os comandos de VR para aqui para os ligar quando o menu aparece")]
+    public GameObject leftHandVR;
+    public GameObject rightHandVR;
+
+    public float vrPanelDistance = 1.5f;
 
     private static bool isGameOver = false;
     private bool playerIsSafe = false;
@@ -52,7 +60,7 @@ public class HazardArea : MonoBehaviour
         }
     }
 
-  private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (isGameOver) return;
 
@@ -66,28 +74,40 @@ public class HazardArea : MonoBehaviour
             // --- GAME OVER LOGIC ---
             isGameOver = true;
 
-            // 1. Pára o tempo (tal como na Pausa! Isto já impede a cadeira de andar)
+            // 1. Pára o tempo (Impede qualquer cadeira de andar)
             Time.timeScale = 0f;
 
-            // 2. Mostra o aviso e ativa o painel
-            if (warningTextUI != null)
-            {
-                warningTextUI.text = hazardMessage;
-            }
+            // 2. === LÓGICA DO PC ===
+            if (warningTextPC != null) warningTextPC.text = hazardMessage;
+            if (hazardPanelPC != null) hazardPanelPC.SetActive(true);
             
-            if (hazardPanel != null)
-            {
-                hazardPanel.SetActive(true);
-            }
-
-            // 3. Liberta o rato (tal como na Pausa!)
+            // Liberta e mostra o rato para o jogador de PC poder clicar
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            
-            // Já NÃO desligamos o MovementPC.enabled = false. 
-            // Assim ele continua a proteger o rato de ser escondido pela câmara!
+
+            // 3. === LÓGICA DO VR ===
+            if (warningTextVR != null) warningTextVR.text = hazardMessage;
+            if (hazardPanelVR != null)
+            {
+                // Teletransporta o painel para a frente da cara
+                if (vrCamera != null)
+                {
+                    Vector3 spawnPos = vrCamera.position + (vrCamera.forward * vrPanelDistance);
+                    spawnPos.y = vrCamera.position.y; 
+                    hazardPanelVR.transform.position = spawnPos;
+                    hazardPanelVR.transform.LookAt(vrCamera);
+                    hazardPanelVR.transform.Rotate(0, 180, 0); 
+                }
+                
+                hazardPanelVR.SetActive(true);
+
+                // Liga os lasers/mãos apenas neste momento para o jogador VR poder clicar!
+                if (leftHandVR != null) leftHandVR.SetActive(true);
+                if (rightHandVR != null) rightHandVR.SetActive(true);
+            }
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
