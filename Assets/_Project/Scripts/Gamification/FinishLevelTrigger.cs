@@ -2,8 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 /// <summary>
-/// Handles the star collection. Disables visuals instead of the whole object 
-/// to allow the coroutine to finish and show the end panel.
+/// Universal Finish Trigger. Works for both PC and VR.
 /// </summary>
 public class FinishLevelTrigger : MonoBehaviour
 {
@@ -26,31 +25,31 @@ public class FinishLevelTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the player touched the star
-        if (other.CompareTag("Player") && !hasTriggered)
+        // 1. O SEGREDO DO VR: Verifica se quem bateu foi o Player, OU se a "Raiz/Pai" de quem bateu é o Player.
+        // Assim, se bateres com o comando ou com a cabeça, ele deteta a cadeira na mesma!
+        if (!hasTriggered && (other.CompareTag("Player") || other.transform.root.CompareTag("Player")))
         {
             hasTriggered = true;
 
-            // Using transform.position instead of Camera.main to prevent crashes ---
             if (finishSound != null)
             {
                 AudioSource.PlayClipAtPoint(finishSound, transform.position, finishVolume);
             }
 
-            // 1. HIDE VISUALS ONLY (Keep the GameObject active for the coroutine)
+            // 2. Esconde a Estrela
             HideStarVisuals();
 
-            // 2. Freeze the game
+            // 3. Pára o tempo
             Time.timeScale = 0f;
 
-            // 3. Disable movement
-            Movement wheelchair = other.GetComponent<Movement>();
-            if (wheelchair != null) 
-            {
-                wheelchair.enabled = false;
-            }
+            // 4. Desliga o movimento (Procurando na 'Raiz' para não falhar)
+            MonoBehaviour movementPC = other.transform.root.GetComponent("Movement") as MonoBehaviour;
+            if (movementPC != null) movementPC.enabled = false;
 
-            // 4. Start the sequence
+            MonoBehaviour movementVR = other.transform.root.GetComponent("MovementVR") as MonoBehaviour;
+            if (movementVR != null) movementVR.enabled = false;
+
+            // 5. Inicia a sequência de fim
             StartCoroutine(FinishSequence());
         }
     }
@@ -59,15 +58,12 @@ public class FinishLevelTrigger : MonoBehaviour
     {
         if (starVisual == null) return;
 
-        // Try to hide 3D mesh
         Renderer mesh = starVisual.GetComponent<Renderer>();
         if (mesh != null) mesh.enabled = false;
 
-        // Try to hide UI Image (if it's a Canvas star)
         UnityEngine.UI.Image img = starVisual.GetComponent<UnityEngine.UI.Image>();
         if (img != null) img.enabled = false;
 
-        // If it has children (like particles or multiple meshes), hide them too
         foreach (Renderer r in starVisual.GetComponentsInChildren<Renderer>())
         {
             r.enabled = false;
@@ -76,13 +72,29 @@ public class FinishLevelTrigger : MonoBehaviour
 
     private IEnumerator FinishSequence()
     {
-        // Wait using Realtime because Time.timeScale is 0
+        // Espera o tempo definido
         yield return new WaitForSecondsRealtime(finishDelay);
 
-        // 5. Trigger the LevelManager to show the panel
-        if (LevelManager.Instance != null)
+        bool panelShown = false;
+
+        // Tenta acionar o Gestor de PC
+        if (LevelManager_PC.Instance != null)
         {
-            LevelManager.Instance.FinishLevel();
+            LevelManager_PC.Instance.FinishLevel();
+            panelShown = true;
+        }
+
+        // Tenta acionar o Gestor de VR
+        if (LevelManagerVR.Instance != null)
+        {
+            LevelManagerVR.Instance.FinishLevel();
+            panelShown = true;
+        }
+
+        // Se por algum motivo não encontrar nenhum gestor, avisa na consola
+        if (!panelShown)
+        {
+            Debug.LogWarning("FinishLevelTrigger: Não encontrei nem o LevelManager_PC nem o LevelManagerVR na cena!");
         }
     }
 }
