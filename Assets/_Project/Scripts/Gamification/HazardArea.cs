@@ -24,9 +24,9 @@ public class HazardArea : MonoBehaviour
     public GameObject hazardPanelVR;
     public Transform vrCamera;
     
-    [Tooltip("Arrasta os comandos de VR para aqui para os ligar quando o menu aparece")]
-    public GameObject leftHandVR;
-    public GameObject rightHandVR;
+    [Header("=== VR Hand Manager ===")]
+    [Tooltip("Drag the Camera Offset (HandVisibilityManager) here")]
+    public HandVisibilityManager handVisibilityManager;
 
     public float vrPanelDistance = 1.5f;
 
@@ -77,7 +77,14 @@ public class HazardArea : MonoBehaviour
             // 1. Pára o tempo (Impede qualquer cadeira de andar)
             Time.timeScale = 0f;
 
-            // 2. === LÓGICA DO PC ===
+            // 2. BLOQUEIA O MENU DE PAUSA!
+            // Ao dizer ao Level Manager que o nível não está ativo, a Pausa deixa de funcionar.
+            if (LevelManagerVR.Instance != null)
+            {
+                LevelManagerVR.Instance.isLevelActive = false;
+            }
+
+            // 3. === LÓGICA DO PC ===
             if (warningTextPC != null) warningTextPC.text = hazardMessage;
             if (hazardPanelPC != null) hazardPanelPC.SetActive(true);
             
@@ -85,7 +92,7 @@ public class HazardArea : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            // 3. === LÓGICA DO VR ===
+            // 4. === LÓGICA DO VR ===
             if (warningTextVR != null) warningTextVR.text = hazardMessage;
             if (hazardPanelVR != null)
             {
@@ -101,9 +108,11 @@ public class HazardArea : MonoBehaviour
                 
                 hazardPanelVR.SetActive(true);
 
-                // Liga os lasers/mãos apenas neste momento para o jogador VR poder clicar!
-                if (leftHandVR != null) leftHandVR.SetActive(true);
-                if (rightHandVR != null) rightHandVR.SetActive(true);
+                // Avisa o gestor de mãos para ligar os lasers (modo Pausa)
+                if (handVisibilityManager != null)
+                {
+                    handVisibilityManager.currentMode = HandVisibilityManager.GameMode.PauseMenu;
+                }
             }
         }
     }

@@ -13,11 +13,9 @@ public class LevelManagerVR : MonoBehaviour
     public InputActionReference vrPauseAction;
     public float menuSpawnDistance = 1.5f;
 
-    [Header("--- VR Controllers (Lasers) ---")]
-    [Tooltip("Arrasta o LeftHandController para aqui")]
-    public GameObject leftHandVR;
-    [Tooltip("Arrasta o RightHandController para aqui")]
-    public GameObject rightHandVR;
+    [Header("--- VR Hand Manager ---")]
+    [Tooltip("Drag the Camera Offset (which has the HandVisibilityManager) here")]
+    public HandVisibilityManager handVisibilityManager;
 
     [Header("--- Level Configuration ---")]
     public int levelID = 1;
@@ -35,12 +33,6 @@ public class LevelManagerVR : MonoBehaviour
     public bool isLevelActive = true;
     private bool isPaused = false;
 
-    [Header("--- UI References (In-Game HUD) ---")]
-    public GameObject gameHUDPanel;
-    public TMP_Text timeText;
-    public TMP_Text collisionText;
-    public TMP_Text slideText;
-
     [Header("--- UI References (Pause & End Game) ---")]
     public GameObject pauseMenuPanel;
     public GameObject endGamePanel;
@@ -52,9 +44,6 @@ public class LevelManagerVR : MonoBehaviour
     public Image star1;
     public Image star2;
     public Image star3;
-
-    [Header("--- Special Buttons ---")]
-    public GameObject nextLevelButton; 
 
     private void Awake()
     {
@@ -79,12 +68,14 @@ public class LevelManagerVR : MonoBehaviour
         isLevelActive = true;
         elapsedTime = 0f;
 
-        if (gameHUDPanel != null) gameHUDPanel.SetActive(true);
         if (endGamePanel != null) endGamePanel.SetActive(false);
         if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
 
-        // Garante que os lasers começam desligados ao iniciar o nível
-        SetVRControllersActive(false);
+        // Avisa o gestor de mãos que estamos a jogar o nível
+        if (handVisibilityManager != null)
+        {
+            handVisibilityManager.currentMode = HandVisibilityManager.GameMode.PlayingLevel;
+        }
         
         Time.timeScale = 1f; 
     }
@@ -100,7 +91,6 @@ public class LevelManagerVR : MonoBehaviour
         if (isLevelActive && !isPaused)
         {
             elapsedTime += Time.deltaTime;
-            UpdateUI();
         }
     }
 
@@ -114,8 +104,11 @@ public class LevelManagerVR : MonoBehaviour
             PositionMenuInFrontOfPlayer(pauseMenuPanel);
             pauseMenuPanel.SetActive(true);
             
-            // ATIVA os lasers para poder clicar no menu
-            SetVRControllersActive(true);
+            // Avisa o gestor de mãos que estamos na Pausa
+            if (handVisibilityManager != null)
+            {
+                handVisibilityManager.currentMode = HandVisibilityManager.GameMode.PauseMenu;
+            }
         }
     }
 
@@ -129,8 +122,11 @@ public class LevelManagerVR : MonoBehaviour
             pauseMenuPanel.SetActive(false);
         }
 
-        // DESATIVA os lasers para voltar a conduzir
-        SetVRControllersActive(false);
+        // Avisa o gestor de mãos para voltar ao modo de jogo normal
+        if (handVisibilityManager != null)
+        {
+            handVisibilityManager.currentMode = HandVisibilityManager.GameMode.PlayingLevel;
+        }
     }
 
     private void PositionMenuInFrontOfPlayer(GameObject menu)
@@ -143,13 +139,6 @@ public class LevelManagerVR : MonoBehaviour
         menu.transform.position = spawnPos;
         menu.transform.LookAt(vrCamera);
         menu.transform.Rotate(0, 180, 0); 
-    }
-
-    private void UpdateUI()
-    {
-        if (timeText != null) timeText.text = FormatTime(elapsedTime);
-        if (collisionText != null) collisionText.text = $"Colisões: {collisionCount}";
-        if (slideText != null) slideText.text = $"Deslizes: {slideCount}";
     }
 
     private string FormatTime(float timeInSeconds)
@@ -194,15 +183,17 @@ public class LevelManagerVR : MonoBehaviour
     private void ShowEndScreen(int starCount)
     {
         Time.timeScale = 0f;
-        if (gameHUDPanel != null) gameHUDPanel.SetActive(false);
 
         if (endGamePanel != null && vrCamera != null)
         {
             PositionMenuInFrontOfPlayer(endGamePanel);
             endGamePanel.SetActive(true);
 
-            // ATIVA os lasers para poder clicar no resultado final
-            SetVRControllersActive(true);
+            // Avisa o gestor de mãos que estamos no ecrã final (Lasers ON)
+            if (handVisibilityManager != null)
+            {
+                handVisibilityManager.currentMode = HandVisibilityManager.GameMode.PauseMenu;
+            }
 
             if (finalTimeText != null) finalTimeText.text = FormatTime(elapsedTime);
             if (finalCollisionText != null) finalCollisionText.text = collisionCount.ToString();
@@ -214,13 +205,7 @@ public class LevelManagerVR : MonoBehaviour
         }
     }
 
-    // Função auxiliar para ligar/desligar os lasers
-    private void SetVRControllersActive(bool isActive)
-    {
-        if (leftHandVR != null) leftHandVR.SetActive(isActive);
-        if (rightHandVR != null) rightHandVR.SetActive(isActive);
-    }
-
+    // Funções para ligar no evento "On Click ()" dos botões
     public void Button_NextLevel() { Time.timeScale = 1f; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); }
     public void Button_RetryLevel() { Time.timeScale = 1f; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
     public void Button_MainMenu() { Time.timeScale = 1f; SceneManager.LoadScene("MainMenu"); }
