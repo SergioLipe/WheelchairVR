@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System; // Necessário para usar Actions (Eventos)
 
 public class VRCountdownUI : MonoBehaviour
 {
@@ -16,6 +17,13 @@ public class VRCountdownUI : MonoBehaviour
     [Header("References")]
     [SerializeField] private MovementVR movementScript;
 
+    [Header("--- Visibility Control ---")]
+    [Tooltip("Add all the GameObjects you want to hide during the countdown")]
+    [SerializeField] private GameObject[] objectsToHide; 
+    
+    [Tooltip("Drag the object with the VRSeatCalibrator script here to sync the appearance")]
+    [SerializeField] private VRSeatCalibrator seatCalibrator;
+
     [Header("Style")]
     [SerializeField] private float textSize = 0.5f;
     [SerializeField] private float numberSize = 1.2f;
@@ -24,21 +32,61 @@ public class VRCountdownUI : MonoBehaviour
     [SerializeField] private Color messageColor = Color.white;
     [SerializeField] private Color finalColor = new Color(0.4f, 1f, 0.5f);
 
+    // ---> O NOSSO NOVO EVENTO (O "Tiro de Partida") <---
+    public Action OnCountdownFinished;
+
     private float timer;
     private bool isCounting = false;
     private bool showingFinal = false;
     private float finalTimer = 0f;
 
+    private void OnEnable()
+    {
+        if (seatCalibrator != null)
+        {
+            seatCalibrator.OnCalibrated += ShowHiddenObjects;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (seatCalibrator != null)
+        {
+            seatCalibrator.OnCalibrated -= ShowHiddenObjects;
+        }
+    }
+
     private void Start()
     {
+        foreach (GameObject obj in objectsToHide)
+        {
+            if (obj != null)
+            {
+                obj.SetActive(false);
+            }
+        }
+
         if (movementScript != null)
+        {
             movementScript.inputLocked = true;
+        }
 
         timer = countdownTime;
         isCounting = true;
 
         if (countdownText != null)
             countdownText.alignment = TextAlignmentOptions.Center;
+    }
+
+    private void ShowHiddenObjects()
+    {
+        foreach (GameObject obj in objectsToHide)
+        {
+            if (obj != null)
+            {
+                obj.SetActive(true);
+            }
+        }
     }
 
     private void Update()
@@ -54,6 +102,9 @@ public class VRCountdownUI : MonoBehaviour
 
                 if (movementScript != null)
                     movementScript.inputLocked = false;
+
+                // ---> AVISA O DASHBOARD QUE O TEMPO PODE COMEÇAR <---
+                OnCountdownFinished?.Invoke();
             }
             return;
         }

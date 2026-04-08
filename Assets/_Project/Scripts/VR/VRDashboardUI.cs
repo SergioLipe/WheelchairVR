@@ -13,6 +13,10 @@ public class VRDashboardUI : MonoBehaviour
     public MovementVR wheelchairController;
     public CollisionSystemVR collisionSystem;
 
+    [Header("=== Countdown Reference ===")]
+    [Tooltip("Drag the object with the VRCountdownUI script here")]
+    public VRCountdownUI countdownScript;
+
     [Header("=== Left Dashboard (Stats) ===")]
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI collisionsText;
@@ -20,6 +24,39 @@ public class VRDashboardUI : MonoBehaviour
 
     [Header("=== Right Dashboard (Mode & Brake) ===")]
     public TextMeshProUGUI modeText;
+
+    // --- Custom Timer Variables ---
+    private float timeElapsed = 0f;
+    private bool isTimerRunning = false;
+
+    private void OnEnable()
+    {
+        // Start listening to the countdown script
+        if (countdownScript != null)
+        {
+            countdownScript.OnCountdownFinished += StartTimer;
+        }
+        else
+        {
+            // Fallback: If no countdown script is assigned, start immediately
+            isTimerRunning = true;
+        }
+    }
+
+    private void OnDisable()
+    {
+        // Stop listening to prevent errors
+        if (countdownScript != null)
+        {
+            countdownScript.OnCountdownFinished -= StartTimer;
+        }
+    }
+
+    // Function called by the event when countdown finishes
+    private void StartTimer()
+    {
+        isTimerRunning = true;
+    }
 
     void Update()
     {
@@ -38,7 +75,12 @@ public class VRDashboardUI : MonoBehaviour
     {
         if (timeText == null) return;
         
-        float timeElapsed = Time.timeSinceLevelLoad;
+        // Only increment the timer if the countdown is finished
+        if (isTimerRunning)
+        {
+            timeElapsed += Time.deltaTime;
+        }
+
         int minutes = Mathf.FloorToInt(timeElapsed / 60f);
         int seconds = Mathf.FloorToInt(timeElapsed % 60f);
         
