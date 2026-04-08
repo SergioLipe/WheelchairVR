@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Hands;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals;
 
 /// <summary>
 /// Independently switches between controller and hand on each side.
@@ -21,6 +23,9 @@ public class InputModeSwitcher : MonoBehaviour
 
         [Tooltip("GameObject of the tracked hand on this side")]
         public GameObject handObject;
+
+        [Tooltip("Root GameObject that owns the laser components (XR Ray Interactor, Line Renderer, XR Interactor Line Visual). Usually the same as controllerTransform's GameObject.")]
+        public GameObject laserRoot;
     }
 
     [Header("=== Lado Esquerdo ===")]
@@ -42,6 +47,11 @@ public class InputModeSwitcher : MonoBehaviour
     [SerializeField] private bool leftControllerInUse = true;
     [SerializeField] private bool rightControllerInUse = true;
 
+    // Cached laser components
+    private XRRayInteractor leftRay, rightRay;
+    private LineRenderer leftLine, rightLine;
+    private XRInteractorLineVisual leftLineVisual, rightLineVisual;
+
     private XRHandSubsystem handSubsystem;
 
     private Vector3 lastLeftPos;
@@ -52,6 +62,7 @@ public class InputModeSwitcher : MonoBehaviour
     void OnEnable()
     {
         TryGetSubsystem();
+        CacheLaserComponents();
 
         lastLeftMoveTime = Time.time;
         lastRightMoveTime = Time.time;
@@ -60,6 +71,22 @@ public class InputModeSwitcher : MonoBehaviour
             lastLeftPos = leftSide.controllerTransform.localPosition;
         if (rightSide.controllerTransform != null)
             lastRightPos = rightSide.controllerTransform.localPosition;
+    }
+
+    void CacheLaserComponents()
+    {
+        if (leftSide.laserRoot != null)
+        {
+            leftRay = leftSide.laserRoot.GetComponent<XRRayInteractor>();
+            leftLine = leftSide.laserRoot.GetComponent<LineRenderer>();
+            leftLineVisual = leftSide.laserRoot.GetComponent<XRInteractorLineVisual>();
+        }
+        if (rightSide.laserRoot != null)
+        {
+            rightRay = rightSide.laserRoot.GetComponent<XRRayInteractor>();
+            rightLine = rightSide.laserRoot.GetComponent<LineRenderer>();
+            rightLineVisual = rightSide.laserRoot.GetComponent<XRInteractorLineVisual>();
+        }
     }
 
     void TryGetSubsystem()
@@ -81,8 +108,8 @@ public class InputModeSwitcher : MonoBehaviour
         leftControllerInUse  = IsInUse(leftSide.controllerTransform,  ref lastLeftPos,  ref lastLeftMoveTime);
         rightControllerInUse = IsInUse(rightSide.controllerTransform, ref lastRightPos, ref lastRightMoveTime);
 
-        ApplySide(leftSide,  leftHandTracked,  leftControllerInUse);
-        ApplySide(rightSide, rightHandTracked, rightControllerInUse);
+        ApplySide(leftSide,  leftHandTracked,  leftControllerInUse,  leftRay,  leftLine,  leftLineVisual);
+        ApplySide(rightSide, rightHandTracked, rightControllerInUse, rightRay, rightLine, rightLineVisual);
     }
 
     bool IsInUse(Transform t, ref Vector3 lastPos, ref float lastMoveTime)
@@ -102,7 +129,8 @@ public class InputModeSwitcher : MonoBehaviour
         return (Time.time - lastMoveTime) < idleTimeout;
     }
 
-    void ApplySide(HandSide side, bool handTracked, bool controllerInUse)
+    void ApplySide(HandSide side, bool handTracked, bool controllerInUse,
+                   XRRayInteractor ray, LineRenderer line, XRInteractorLineVisual lineVisual)
     {
         if (side == null) return;
 
@@ -115,5 +143,10 @@ public class InputModeSwitcher : MonoBehaviour
 
         if (side.handObject != null && side.handObject.activeSelf != showHand)
             side.handObject.SetActive(showHand);
+
+        // Laser components follow the controller visibility
+        if (ray != null && ray.enabled != showCtrl) ray.enabled = showCtrl;
+        if (line != null && line.enabled != showCtrl) line.enabled = showCtrl;
+        if (lineVisual != null && lineVisual.enabled != showCtrl) lineVisual.enabled = showCtrl;
     }
 }

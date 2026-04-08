@@ -56458,7 +56458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2332122885259588137, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
       propertyPath: m_Radius
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2588291693410601315, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
       propertyPath: m_AnchorMax.y
@@ -85990,7 +85990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2939994529206623931, guid: 3ff2b21a5ca24e843a15da41ae4d8197, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2939994529206623931, guid: 3ff2b21a5ca24e843a15da41ae4d8197, type: 3}
       propertyPath: m_LocalPosition.z
@@ -138304,10 +138304,12 @@ MonoBehaviour:
     controllerObject: {fileID: 1364365917}
     controllerTransform: {fileID: 1807417209}
     handObject: {fileID: 0}
+    laserRoot: {fileID: 1807417208}
   rightSide:
     controllerObject: {fileID: 1902610040}
     controllerTransform: {fileID: 938366173}
     handObject: {fileID: 1345071369}
+    laserRoot: {fileID: 938366172}
   idleTimeout: 1.5
   movementThreshold: 0.002
   leftHandTracked: 0
