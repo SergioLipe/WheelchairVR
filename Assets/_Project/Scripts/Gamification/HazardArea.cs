@@ -60,12 +60,15 @@ public class HazardArea : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+  private void OnTriggerEnter(Collider other)
     {
         if (isGameOver) return;
 
         if (other.CompareTag("Player"))
         {
+            // === A LINHA DETETIVE ===
+            Debug.Log("<color=red>HAZARD ATIVADO PELO OBJETO: </color>" + other.gameObject.name);
+
             if (allowSafeExitIfAlreadyInside && playerIsSafe)
             {
                 return;
@@ -78,7 +81,6 @@ public class HazardArea : MonoBehaviour
             Time.timeScale = 0f;
 
             // 2. BLOQUEIA O MENU DE PAUSA!
-            // Ao dizer ao Level Manager que o nível não está ativo, a Pausa deixa de funcionar.
             if (LevelManagerVR.Instance != null)
             {
                 LevelManagerVR.Instance.isLevelActive = false;
@@ -88,7 +90,6 @@ public class HazardArea : MonoBehaviour
             if (warningTextPC != null) warningTextPC.text = hazardMessage;
             if (hazardPanelPC != null) hazardPanelPC.SetActive(true);
             
-            // Liberta e mostra o rato para o jogador de PC poder clicar
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
@@ -96,7 +97,6 @@ public class HazardArea : MonoBehaviour
             if (warningTextVR != null) warningTextVR.text = hazardMessage;
             if (hazardPanelVR != null)
             {
-                // Teletransporta o painel para a frente da cara
                 if (vrCamera != null)
                 {
                     Vector3 spawnPos = vrCamera.position + (vrCamera.forward * vrPanelDistance);
@@ -108,7 +108,6 @@ public class HazardArea : MonoBehaviour
                 
                 hazardPanelVR.SetActive(true);
 
-                // Avisa o gestor de mãos para ligar os lasers (modo Pausa)
                 if (handVisibilityManager != null)
                 {
                     handVisibilityManager.currentMode = HandVisibilityManager.GameMode.PauseMenu;
@@ -116,7 +115,6 @@ public class HazardArea : MonoBehaviour
             }
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
