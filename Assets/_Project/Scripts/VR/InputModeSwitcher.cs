@@ -2,24 +2,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Hands;
 
+/// <summary>
+/// Independently switches between controller and hand on each side.
+/// Uses local position to detect controller movement, so wheelchair
+/// movement doesn't falsely mark a resting controller as "in use".
+/// Priority per side: tracked hand > active controller > hide both.
+/// </summary>
 public class InputModeSwitcher : MonoBehaviour
 {
     [System.Serializable]
     public class HandSide
     {
+        [Tooltip("Visual GameObject of the physical controller on this side")]
         public GameObject controllerObject;
+
+        [Tooltip("Transform that receives the Tracked Pose Driver updates (the parent, never disabled)")]
         public Transform controllerTransform;
+
+        [Tooltip("GameObject of the tracked hand on this side")]
         public GameObject handObject;
     }
 
-    [Header("=== Lados ===")]
+    [Header("=== Lado Esquerdo ===")]
     public HandSide leftSide;
+
+    [Header("=== Lado Direito ===")]
     public HandSide rightSide;
 
     [Header("=== Deteção de comando pousado ===")]
-    [Tooltip("Segundos sem movimento até considerar o comando pousado")]
+    [Tooltip("Seconds without movement before considering the controller resting")]
     public float idleTimeout = 1.0f;
-    [Tooltip("Movimento mínimo (m) para considerar 'em uso'")]
+
+    [Tooltip("Minimum movement (meters) to count as 'in use'")]
     public float movementThreshold = 0.002f;
 
     [Header("=== Debug ===")]
@@ -29,28 +43,37 @@ public class InputModeSwitcher : MonoBehaviour
     [SerializeField] private bool rightControllerInUse = true;
 
     private XRHandSubsystem handSubsystem;
-    private Vector3 lastLeftPos, lastRightPos;
-    private float lastLeftMoveTime, lastRightMoveTime;
+
+    private Vector3 lastLeftPos;
+    private Vector3 lastRightPos;
+    private float lastLeftMoveTime;
+    private float lastRightMoveTime;
 
     void OnEnable()
     {
         TryGetSubsystem();
+
         lastLeftMoveTime = Time.time;
         lastRightMoveTime = Time.time;
-        if (leftSide.controllerTransform != null) lastLeftPos = leftSide.controllerTransform.position;
-        if (rightSide.controllerTransform != null) lastRightPos = rightSide.controllerTransform.position;
+
+        if (leftSide.controllerTransform != null)
+            lastLeftPos = leftSide.controllerTransform.localPosition;
+        if (rightSide.controllerTransform != null)
+            lastRightPos = rightSide.controllerTransform.localPosition;
     }
 
     void TryGetSubsystem()
     {
         var subsystems = new List<XRHandSubsystem>();
         SubsystemManager.GetSubsystems(subsystems);
-        if (subsystems.Count > 0) handSubsystem = subsystems[0];
+        if (subsystems.Count > 0)
+            handSubsystem = subsystems[0];
     }
 
     void Update()
     {
-        if (handSubsystem == null) TryGetSubsystem();
+        if (handSubsystem == null)
+            TryGetSubsystem();
 
         leftHandTracked  = handSubsystem != null && handSubsystem.leftHand.isTracked;
         rightHandTracked = handSubsystem != null && handSubsystem.rightHand.isTracked;
@@ -65,12 +88,17 @@ public class InputModeSwitcher : MonoBehaviour
     bool IsInUse(Transform t, ref Vector3 lastPos, ref float lastMoveTime)
     {
         if (t == null) return false;
-        float moved = Vector3.Distance(t.position, lastPos);
+
+        // Use LOCAL position so wheelchair movement doesn't count as controller movement
+        Vector3 currentPos = t.localPosition;
+        float moved = Vector3.Distance(currentPos, lastPos);
+
         if (moved > movementThreshold)
         {
             lastMoveTime = Time.time;
-            lastPos = t.position;
+            lastPos = currentPos;
         }
+
         return (Time.time - lastMoveTime) < idleTimeout;
     }
 
@@ -78,7 +106,7 @@ public class InputModeSwitcher : MonoBehaviour
     {
         if (side == null) return;
 
-        // Prioridade: mão tracked > comando em uso > esconder tudo
+        // Priority: tracked hand wins; otherwise active controller; otherwise hide both
         bool showHand = handTracked;
         bool showCtrl = !handTracked && controllerInUse;
 
