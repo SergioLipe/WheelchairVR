@@ -218,6 +218,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Tracking",
+            "id": "7f95c7f5-a868-4f47-9d9c-2fedbb05d1d3",
+            "actions": [
+                {
+                    "name": "LeftIsTracked",
+                    "type": "Button",
+                    "id": "8245d450-c33a-4486-914a-3eeba80e0fd0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightIsTracked",
+                    "type": "Button",
+                    "id": "6539650a-fabe-4e9d-82e1-4a81ca24ea88",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "90075433-23a0-4f18-a51c-391410a7b85c",
+                    "path": "<XRController>{LeftHand}/isTracked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftIsTracked",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1734a58d-a51f-45c4-b70b-71b7912b0735",
+                    "path": "<XRController>{RightHand}/isTracked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightIsTracked",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

@@ -14,6 +14,10 @@ public class MovementVR : MonoBehaviour
     [Tooltip("Left controller thumbstick - acts as the wheelchair joystick")]
     public InputActionReference joystickAction;
 
+    [Header("=== Hand Joystick (opcional) ===")]
+    [Tooltip("Joystick virtual por hand tracking. Quando ativo, sobrepõe-se ao thumbstick.")]
+    public HandVirtualJoystick handJoystick;
+
     [Tooltip("Button to toggle between Slow/Normal Mode (e.g. Left X button)")]
     public InputActionReference toggleSpeedAction;
 
@@ -201,7 +205,7 @@ public class MovementVR : MonoBehaviour
     private void PreloadSounds()
     {
         if (effectsAudio == null) return;
-        effectsAudio.spatialBlend = 0f; 
+        effectsAudio.spatialBlend = 0f;
         if (modeChangeSound != null) modeChangeSound.LoadAudioData();
         if (steeringChangeSound != null) steeringChangeSound.LoadAudioData();
         if (hardCollisionSound != null) hardCollisionSound.LoadAudioData();
@@ -257,7 +261,7 @@ public class MovementVR : MonoBehaviour
     void Update()
     {
         if (inputLocked) return;
-        
+
         UpdateSteeringState();
         collisionSystem.Update();
         ProcessSoundEffects();
@@ -291,51 +295,56 @@ public class MovementVR : MonoBehaviour
 
     // ===== JOYSTICK INPUT PROCESSING =====
 
-    void ProcessJoystickInput()
+void ProcessJoystickInput()
+{
+    Vector2 rawInput = Vector2.zero;
+
+    // Prioridade: hand tracking se estiver a agarrar; senão, comando
+    if (handJoystick != null && handJoystick.IsActive)
     {
-        Vector2 rawInput = Vector2.zero;
-
-        if (joystickAction != null && joystickAction.action != null)
-        {
-            rawInput = joystickAction.action.ReadValue<Vector2>();
-        }
-        rawJoystickInput = rawInput;
-
-        // Apply deadzone
-        float magnitude = rawInput.magnitude;
-        if (magnitude < joystickDeadzone)
-        {
-            rawInput = Vector2.zero;
-        }
-        else
-        {
-            float remapped = (magnitude - joystickDeadzone) / (1f - joystickDeadzone);
-            rawInput = rawInput.normalized * remapped;
-        }
-
-        // Apply response curve
-        float curvedMagnitude = Mathf.Pow(rawInput.magnitude, joystickCurve);
-        Vector2 curvedInput = rawInput.normalized * curvedMagnitude;
-
-        // Apply input smoothing
-        smoothedVerticalInput = Mathf.Lerp(smoothedVerticalInput, curvedInput.y, joystickSmoothing * Time.deltaTime);
-        smoothedHorizontalInput = Mathf.Lerp(smoothedHorizontalInput, curvedInput.x, joystickSmoothing * Time.deltaTime);
-
-        processedJoystickInput = new Vector2(smoothedHorizontalInput, smoothedVerticalInput);
-        playerIsAccelerating = (Mathf.Abs(smoothedVerticalInput) > 0.05f);
-
-        float maxSpeed = currentMode == SpeedMode.Slow ? maxSpeedSlow : maxSpeedNormal;
-
-        // DIFFERENTIAL STEERING PHYSICS: Turning aggressively reduces max forward speed naturally
-        float turnPenalty = 1f - (Mathf.Abs(smoothedHorizontalInput) * 0.4f);
-        maxSpeed *= turnPenalty;
-
-        float verticalForCollision = smoothedVerticalInput;
-
-        ApplyCollisionBlocking(ref verticalForCollision, ref maxSpeed);
-        ApplyAccelerationDeceleration(maxSpeed);
-        ProcessRotation(smoothedHorizontalInput);
+        rawInput = handJoystick.Output;
     }
+    else if (joystickAction != null && joystickAction.action != null)
+    {
+        rawInput = joystickAction.action.ReadValue<Vector2>();
+    }
+    rawJoystickInput = rawInput;
+
+    // Apply deadzone
+    float magnitude = rawInput.magnitude;
+    if (magnitude < joystickDeadzone)
+    {
+        rawInput = Vector2.zero;
+    }
+    else
+    {
+        float remapped = (magnitude - joystickDeadzone) / (1f - joystickDeadzone);
+        rawInput = rawInput.normalized * remapped;
+    }
+
+    // Apply response curve
+    float curvedMagnitude = Mathf.Pow(rawInput.magnitude, joystickCurve);
+    Vector2 curvedInput = rawInput.normalized * curvedMagnitude;
+
+    // Apply input smoothing
+    smoothedVerticalInput = Mathf.Lerp(smoothedVerticalInput, curvedInput.y, joystickSmoothing * Time.deltaTime);
+    smoothedHorizontalInput = Mathf.Lerp(smoothedHorizontalInput, curvedInput.x, joystickSmoothing * Time.deltaTime);
+
+    processedJoystickInput = new Vector2(smoothedHorizontalInput, smoothedVerticalInput);
+    playerIsAccelerating = (Mathf.Abs(smoothedVerticalInput) > 0.05f);
+
+    float maxSpeed = currentMode == SpeedMode.Slow ? maxSpeedSlow : maxSpeedNormal;
+
+    // DIFFERENTIAL STEERING PHYSICS: Turning aggressively reduces max forward speed naturally
+    float turnPenalty = 1f - (Mathf.Abs(smoothedHorizontalInput) * 0.4f);
+    maxSpeed *= turnPenalty;
+
+    float verticalForCollision = smoothedVerticalInput;
+
+    ApplyCollisionBlocking(ref verticalForCollision, ref maxSpeed);
+    ApplyAccelerationDeceleration(maxSpeed);
+    ProcessRotation(smoothedHorizontalInput);
+}
 
     // ===== MODE MANAGEMENT =====
 
@@ -422,7 +431,7 @@ public class MovementVR : MonoBehaviour
         // REALISTIC INERTIA: SmoothDamp creates an S-curve for heavy wheelchair acceleration
         if (!blockedInTargetDirection && accelerating)
         {
-            brakeLockEngaged = false; 
+            brakeLockEngaged = false;
             currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref currentAccelerationVelocity, accelerationTime * 0.5f);
         }
         else
@@ -439,11 +448,11 @@ public class MovementVR : MonoBehaviour
             // MECHANICAL BRAKE CLICK: Locks the wheels completely when almost stopped
             if (Mathf.Abs(targetSpeed) < 0.05f && Mathf.Abs(currentSpeed) < 0.15f && !brakeLockEngaged)
             {
-                currentSpeed = 0f; 
+                currentSpeed = 0f;
                 targetSpeed = 0f;
                 currentAccelerationVelocity = 0f;
-                brakeLockEngaged = true; 
-                
+                brakeLockEngaged = true;
+
                 SendHapticPulse(leftController, 0.4f, 0.05f);
                 SendHapticPulse(rightController, 0.4f, 0.05f);
             }
