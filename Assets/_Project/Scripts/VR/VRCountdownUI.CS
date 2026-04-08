@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using System; // Necessário para usar Actions (Eventos)
+using System;
 
 public class VRCountdownUI : MonoBehaviour
 {
@@ -17,6 +17,11 @@ public class VRCountdownUI : MonoBehaviour
     [Header("References")]
     [SerializeField] private MovementVR movementScript;
 
+    // ---> NOVO: Referência para o Gestor de Mãos <---
+    [Header("Hand Manager")]
+    [Tooltip("Drag the Camera Offset (HandVisibilityManager) here")]
+    [SerializeField] private HandVisibilityManager handManager;
+
     [Header("--- Visibility Control ---")]
     [Tooltip("Add all the GameObjects you want to hide during the countdown")]
     [SerializeField] private GameObject[] objectsToHide; 
@@ -32,7 +37,6 @@ public class VRCountdownUI : MonoBehaviour
     [SerializeField] private Color messageColor = Color.white;
     [SerializeField] private Color finalColor = new Color(0.4f, 1f, 0.5f);
 
-    // ---> O NOSSO NOVO EVENTO (O "Tiro de Partida") <---
     public Action OnCountdownFinished;
 
     private float timer;
@@ -71,6 +75,12 @@ public class VRCountdownUI : MonoBehaviour
             movementScript.inputLocked = true;
         }
 
+        // ---> FORÇA O CANVAS A APARECER <---
+        if (handManager != null)
+        {
+            handManager.currentMode = HandVisibilityManager.GameMode.Countdown;
+        }
+
         timer = countdownTime;
         isCounting = true;
 
@@ -103,7 +113,12 @@ public class VRCountdownUI : MonoBehaviour
                 if (movementScript != null)
                     movementScript.inputLocked = false;
 
-                // ---> AVISA O DASHBOARD QUE O TEMPO PODE COMEÇAR <---
+                // ---> VOLTA AO NORMAL (Esconde o Canvas) <---
+                if (handManager != null)
+                {
+                    handManager.currentMode = HandVisibilityManager.GameMode.PlayingLevel;
+                }
+
                 OnCountdownFinished?.Invoke();
             }
             return;

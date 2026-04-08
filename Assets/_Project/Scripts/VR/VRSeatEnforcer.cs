@@ -14,10 +14,14 @@ public class VRSeatEnforcer : MonoBehaviour
 
     [Header("Warning Text")]
     [SerializeField] private TMP_Text warningText;
-    [SerializeField] private string warningHeader = "Foste longe de mais."; // Adicionado para o novo design
+    [SerializeField] private string warningHeader = "Foste longe de mais."; 
     [SerializeField] private string warningMessage = "Volta para a cadeira!\n\nCarrega no botão do analógico\npara recentrar";
     [SerializeField] private Color warningColor = new Color(0.2f, 0.8f, 1f);
     [SerializeField] private float warningPulseSpeed = 2f;
+
+    [Header("Visibility Control")]
+    [Tooltip("Add all GameObjects to hide when the player leans too far back (e.g., wheelchair visuals, hands)")]
+    [SerializeField] private GameObject[] objectsToHide;
 
     [Header("Lean Boundaries (meters)")]
     [SerializeField] private float maxForward = 0.4f;
@@ -139,14 +143,47 @@ public class VRSeatEnforcer : MonoBehaviour
             fadeImage.color = fadeColor;
         }
 
-        // --- WARNING TEXT ---
-        if (currentFadeAlpha > (maxDarkness * 0.6f))
+        // --- WARNING TEXT & VISIBILITY CONTROL ---
+        bool isWarningActive = currentFadeAlpha > (maxDarkness * 0.6f);
+
+        if (isWarningActive)
+        {
             ShowWarning();
+            
+            // SE o jogador está a ver o aviso E a cabeça dele está para trás do centro (Z negativo)
+            if (currentZ < -0.05f)
+            {
+                SetObjectsVisibility(false);
+            }
+            // SE ele está muito para a frente, lados ou cima, os objetos continuam visíveis
+            else
+            {
+                SetObjectsVisibility(true);
+            }
+        }
         else
+        {
             HideWarning();
+            
+            // Garante que os objetos voltam quando ele volta a estar seguro
+            SetObjectsVisibility(true);
+        }
     }
 
     // --- HELPER METHODS ---
+
+    private void SetObjectsVisibility(bool isVisible)
+    {
+        if (objectsToHide == null) return;
+
+        foreach (GameObject obj in objectsToHide)
+        {
+            if (obj != null && obj.activeSelf != isVisible)
+            {
+                obj.SetActive(isVisible);
+            }
+        }
+    }
 
     private float FadeRatio(float distance, float limit)
     {
@@ -163,13 +200,8 @@ public class VRSeatEnforcer : MonoBehaviour
         string hex = ColorUtility.ToHtmlStringRGBA(warningColor);
 
         // --- ADVANCED RICH TEXT FORMATTING ---
-        // Cabeçalho tático usando a tua warningColor
         string headerPart = $"<color=#{hex}><size=140%><b>[ AVISO DE SEGURANÇA ]</b></size></color>";
-        
-        // Aviso principal a branco
         string oopsPart = $"<color=#FFFFFF><size=110%><b>Oops! {warningHeader}</b></size></color>";
-        
-        // Instruções em cinzento para melhor leitura
         string messagePart = $"<color=#CCCCCC><size=80%>{warningMessage}</size></color>";
 
         warningText.text = $"{headerPart}\n\n{oopsPart}\n\n{messagePart}";

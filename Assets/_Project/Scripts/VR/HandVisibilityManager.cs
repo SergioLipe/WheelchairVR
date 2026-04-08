@@ -1,13 +1,13 @@
 using UnityEngine;
 
-
 public class HandVisibilityManager : MonoBehaviour
 {
     public enum GameMode 
     { 
         PauseMenu,      // Menu de Pausa
         OtherMenus,     // Resto dos Menus (ex: Principal)
-        PlayingLevel    // A jogar o nível
+        PlayingLevel,   // A jogar o nível
+        Countdown       // ---> NOVO: Durante a contagem inicial
     }
 
     [Header("Current State")]
@@ -53,6 +53,12 @@ public class HandVisibilityManager : MonoBehaviour
         {
             // 3. A jogar o nível: Canvas SÓ aparece a olhar para baixo (Lasers desligados)
             shouldShowCanvas = isLookingDown;
+            shouldShowLaser = false;
+        }
+        else if (currentMode == GameMode.Countdown)
+        {
+            // 4. ---> NOVO: Durante a contagem, Canvas aparece SEMPRE (Lasers desligados)
+            shouldShowCanvas = true;
             shouldShowLaser = false;
         }
 
