@@ -144,6 +144,8 @@ public class MovementVR : MonoBehaviour
     private float currentAccelerationVelocity = 0f;
     private bool brakeLockEngaged = true;
 
+    private float previousSpeed = 0f;
+
     // Public for sound script
     [HideInInspector]
     public bool playerIsAccelerating = false;
@@ -439,7 +441,11 @@ public class MovementVR : MonoBehaviour
         // REALISTIC INERTIA: SmoothDamp creates an S-curve for heavy wheelchair acceleration
         if (!blockedInTargetDirection && accelerating)
         {
-            brakeLockEngaged = false;
+            // Only release the brake lock if the user is clearly trying to move (not micro-noise)
+            if (Mathf.Abs(targetSpeed) > 0.1f)
+            {
+                brakeLockEngaged = false;
+            }
             currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref currentAccelerationVelocity, accelerationTime * 0.5f);
         }
         else
@@ -453,8 +459,10 @@ public class MovementVR : MonoBehaviour
             else
                 currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref currentAccelerationVelocity, brakingTime);
 
-            // MECHANICAL BRAKE CLICK: Locks the wheels completely when almost stopped
-            if (Mathf.Abs(targetSpeed) < 0.05f && Mathf.Abs(currentSpeed) < 0.15f && !brakeLockEngaged)
+            // MECHANICAL BRAKE CLICK: Locks the wheels completely when almost stopped.
+            // Only fires once per real stop: requires that we were actually moving (previousSpeed had real magnitude)
+            // before reaching the near-zero state.
+            if (Mathf.Abs(targetSpeed) < 0.05f && Mathf.Abs(currentSpeed) < 0.15f && !brakeLockEngaged && Mathf.Abs(previousSpeed) > 0.2f)
             {
                 currentSpeed = 0f;
                 targetSpeed = 0f;
@@ -464,9 +472,18 @@ public class MovementVR : MonoBehaviour
                 SendHapticPulse(leftHapticAction, 0.4f, 0.05f);
                 SendHapticPulse(rightHapticAction, 0.4f, 0.05f);
             }
+            else if (Mathf.Abs(targetSpeed) < 0.05f && Mathf.Abs(currentSpeed) < 0.05f && !brakeLockEngaged)
+            {
+                // Silently engage the lock without haptic feedback (avoids pulse spam at rest)
+                currentSpeed = 0f;
+                targetSpeed = 0f;
+                currentAccelerationVelocity = 0f;
+                brakeLockEngaged = true;
+            }
         }
-    }
 
+        previousSpeed = currentSpeed;
+    }
     // ===== ROTATION =====
 
     void ProcessRotation(float horizontalInput)
