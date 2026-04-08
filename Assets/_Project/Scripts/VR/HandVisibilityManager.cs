@@ -76,15 +76,24 @@ public class HandVisibilityManager : MonoBehaviour
         if (leftLaser != null)
         {
             leftLaser.enabled = showLaser;
+            
             var lineL = leftLaser.GetComponent<LineRenderer>();
             if (lineL != null) lineL.enabled = showLaser;
+
+            // ---> O SEGREDO PARA A BOLINHA (RETICLE) DESAPARECER <---
+            var lineVisualL = leftLaser.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals.XRInteractorLineVisual>();
+            if (lineVisualL != null) lineVisualL.enabled = showLaser;
         }
 
         if (rightLaser != null)
         {
             rightLaser.enabled = showLaser;
+            
             var lineR = rightLaser.GetComponent<LineRenderer>();
             if (lineR != null) lineR.enabled = showLaser;
+
+            var lineVisualR = rightLaser.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals.XRInteractorLineVisual>();
+            if (lineVisualR != null) lineVisualR.enabled = showLaser;
         }
     }
 }

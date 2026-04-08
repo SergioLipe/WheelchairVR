@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 /// <summary>
-/// Hides the ghost laser when the VR controller disconnects or loses tracking.
+/// Hides the ghost laser and the reticle (bolinha) when the VR controller disconnects or loses tracking.
 /// </summary>
 public class GhostLaserFix : MonoBehaviour
 {
@@ -11,23 +10,32 @@ public class GhostLaserFix : MonoBehaviour
     public InputActionReference isTrackedAction;
 
     private UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals.XRInteractorLineVisual lineVisual;
+    private UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor rayInteractor;
 
     void Start()
     {
-        // Apanha a linha vermelha que está neste comando
+        // Apanha o gestor visual (linha e bolinha) e o interactor (cliques)
         lineVisual = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals.XRInteractorLineVisual>();
+        rayInteractor = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor>();
     }
 
     void Update()
     {
-        // Verifica se a ação existe e se temos a linha
-        if (isTrackedAction != null && isTrackedAction.action != null && lineVisual != null)
+        if (isTrackedAction != null && isTrackedAction.action != null)
         {
-            // Lê o estado do comando (0 = desligado/perdido, 1 = a ser detetado)
             float isTracked = isTrackedAction.action.ReadValue<float>();
+            bool shouldBeActive = (isTracked > 0.5f);
             
-            // Liga ou desliga a linha dependendo do estado
-            lineVisual.enabled = (isTracked > 0.5f);
+            // Só atualiza se houver uma mudança (poupa performance)
+            if (lineVisual != null && lineVisual.enabled != shouldBeActive)
+            {
+                lineVisual.enabled = shouldBeActive;
+                
+                if (rayInteractor != null)
+                {
+                    rayInteractor.enabled = shouldBeActive;
+                }
+            }
         }
     }
 }
