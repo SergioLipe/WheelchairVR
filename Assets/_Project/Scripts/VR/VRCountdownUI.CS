@@ -105,10 +105,13 @@ public class VRCountdownUI : MonoBehaviour
         {
             finalTimer -= Time.unscaledDeltaTime;
             if (finalTimer <= 0)
-            {
-                showingFinal = false;
-                if (countdownText != null)
-                    countdownText.text = "";
+{
+    showingFinal = false;
+    if (countdownText != null)
+    {
+        countdownText.text = "";
+        countdownText.gameObject.SetActive(false);
+    }
 
                 if (movementScript != null)
                     movementScript.inputLocked = false;
