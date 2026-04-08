@@ -23,8 +23,9 @@ public class CollisionSystemVR : MonoBehaviour
     private bool wasInCollisionState = false;
     private bool wasSlidingState = false;
     
-    // NEW: Slide cooldown to prevent micro-bounce spam
+    // Cooldowns to prevent micro-bounce spam
     private float lastSlideCountTime = 0f;
+    private float lastCollisionCountTime = 0f;
 
     [Header("=== Debug Settings ===")]
     [Tooltip("Enable to print exactly WHAT you hit to the Unity Console")]
@@ -110,11 +111,20 @@ public class CollisionSystemVR : MonoBehaviour
             CheckFrontSensor();
         }
 
-        // Update collision stats
-        if (inCollision && !wasInCollisionState) TotalCollisions++;
+        // --- THE FIX FOR SPAMMING COLLISIONS DURING SLIDES ---
+        // Só conta como uma nova "Colisão" se não estiver a deslizar na parede
+        // E só permite contar 1 colisão por segundo (Cooldown de 1 segundo)
+        if (inCollision && !wasInCollisionState && !wallSliding) 
+        {
+            if (Time.time - lastCollisionCountTime > 1.0f)
+            {
+                TotalCollisions++;
+                lastCollisionCountTime = Time.time;
+            }
+        }
         wasInCollisionState = inCollision;
 
-        // FIXED: Only count a slide if 1 second has passed since the last count
+        // Slide counting logic
         if (wallSliding && !wasSlidingState)
         {
             if (Time.time - lastSlideCountTime > 1.0f)
@@ -126,10 +136,6 @@ public class CollisionSystemVR : MonoBehaviour
         wasSlidingState = wallSliding;
     }
 
-    /// <summary>
-    /// Option 2: Projects a BoxCast forward to detect obstacles before the physical capsule hits them.
-    /// Perfect for long wheelchair footrests.
-    /// </summary>
     private void CheckFrontSensor()
     {
         if (wheelchairTransform == null) return;
@@ -167,17 +173,16 @@ public class CollisionSystemVR : MonoBehaviour
 
             if (ignoreLayerMask != 0 && ((ignoreLayerMask.value & (1 << hit.collider.gameObject.layer)) != 0)) continue;
             if (hit.collider.GetComponent<Terrain>() != null) continue;
-            if (hit.collider.isTrigger) continue; // IGNORE TRIGGERS (Common cause of phantom hits)
+            if (hit.collider.isTrigger) continue;
 
             hitObstacle = true;
             collidedObject = hit.collider.gameObject.name;
             collisionPoint = hit.point;
 
-            // --- EXTREME DEBUG FOR FRONT SENSOR ---
             if (enableCollisionDebug && !wasFrontSensorBlockedLastFrame)
             {
                 Debug.LogWarning($"<color=cyan>[FRONT SENSOR HIT]</color> Wheelchair stopped by: <b>{collidedObject}</b> | Tag: {hit.collider.tag} | Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
-                Debug.DrawRay(hit.point, Vector3.up * 2f, Color.cyan, 3f); // Draws a cyan line pointing up where it hit
+                Debug.DrawRay(hit.point, Vector3.up * 2f, Color.cyan, 3f);
             }
             break;
         }
@@ -256,7 +261,6 @@ public class CollisionSystemVR : MonoBehaviour
         }
     }
 
-    // Physical collisions (sides and back, or front if sensor misses)
     public void ProcessCollision(ControllerColliderHit hit, float currentSpeed, ref float currentSpeedRef)
     {
         if (ShouldIgnoreCollision(hit)) return;
@@ -264,7 +268,6 @@ public class CollisionSystemVR : MonoBehaviour
         float timeSinceLastCollision = Time.time - lastValidCollisionTime;
         if (timeSinceLastCollision < 0.05f) return;
 
-        // --- EXTREME DEBUG FOR CAPSULE ---
         if (enableCollisionDebug)
         {
             Debug.LogWarning($"<color=orange>[CAPSULE HIT]</color> Wheelchair touched: <b>{hit.gameObject.name}</b> | Tag: {hit.gameObject.tag} | Layer: {LayerMask.LayerToName(hit.gameObject.layer)}");
@@ -326,7 +329,7 @@ public class CollisionSystemVR : MonoBehaviour
 
         if (ignoreLayerMask != 0 && ((ignoreLayerMask.value & (1 << hit.gameObject.layer)) != 0)) return true;
         if (hit.gameObject.GetComponent<Terrain>() != null) return true;
-        if (hit.collider.isTrigger) return true; // IGNORE TRIGGERS (Common cause of phantom hits)
+        if (hit.collider.isTrigger) return true;
         if (hit.moveDirection.y < -0.3f) return true;
         if (hit.normal.y > 0.7f) return true;
 
@@ -361,7 +364,6 @@ public class CollisionSystemVR : MonoBehaviour
         if (Mathf.Abs(controller.velocity.magnitude) > 0.1f)
         {
             wallSliding = true;
-            // FIXED: Increased timer from 0.3f to 0.5f to tolerate physics micro-bounces
             slideTimer = 0.5f; 
         }
 
@@ -418,7 +420,6 @@ public class CollisionSystemVR : MonoBehaviour
         }
     }
 
-    // Public Properties
     public bool IsFrontBlocked => frontBlocked;
     public bool IsBackBlocked => backBlocked;
     public bool IsWallSliding => wallSliding;

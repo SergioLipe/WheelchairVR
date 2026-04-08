@@ -56376,6 +56376,10 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1782913763}
+    - target: {fileID: 902131499270492807, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
+      propertyPath: countdownScript
+      value: 
+      objectReference: {fileID: 911015731}
     - target: {fileID: 965704585874728666, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
       propertyPath: m_Name
       value: Joystick_Stick_Visual
@@ -56384,6 +56388,14 @@ PrefabInstance:
       propertyPath: handJoystick
       value: 
       objectReference: {fileID: 384764080}
+    - target: {fileID: 1190414049763810235, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
+      propertyPath: leftHapticAction
+      value: 
+      objectReference: {fileID: -8100531122724633894, guid: da803d4aa849f234d9ed6cbd213f2b73, type: 3}
+    - target: {fileID: 1190414049763810235, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
+      propertyPath: rightHapticAction
+      value: 
+      objectReference: {fileID: 3904570902070208154, guid: da803d4aa849f234d9ed6cbd213f2b73, type: 3}
     - target: {fileID: 1224531788804124254, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -138325,6 +138337,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1493842474510219191, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
   m_PrefabInstance: {fileID: 384764078}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &911015731 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4746077485096895309, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
+  m_PrefabInstance: {fileID: 384764078}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911015729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25391048e6627dc4698ebf7fbf012bff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VRCountdownUI
 --- !u!114 &911015732 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8048255130000044925, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}

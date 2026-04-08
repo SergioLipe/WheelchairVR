@@ -266,6 +266,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Haptics",
+            "id": "a69e9639-ed4e-4916-b0ff-759e7173ad80",
+            "actions": [
+                {
+                    "name": "LeftHaptic",
+                    "type": "PassThrough",
+                    "id": "b71bd8d4-c8e9-4032-b750-6be9b559c8d5",
+                    "expectedControlType": "Haptic",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightHaptic",
+                    "type": "PassThrough",
+                    "id": "19e06f1d-fb90-41f6-8406-aee1f9b2bcbc",
+                    "expectedControlType": "Haptic",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d0f1b93f-bf36-442b-a83a-9057e89baa61",
+                    "path": "<XRController>{LeftHand}/haptic",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftHaptic",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b84e3d40-f840-4c6e-bca1-2850c4f5ed0c",
+                    "path": "<XRController>{RightHand}/haptic",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightHaptic",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

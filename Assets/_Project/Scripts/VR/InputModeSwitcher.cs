@@ -47,6 +47,9 @@ public class InputModeSwitcher : MonoBehaviour
     [SerializeField] private bool leftControllerInUse = true;
     [SerializeField] private bool rightControllerInUse = true;
 
+    public bool LeftSideActive => leftHandTracked || leftControllerInUse;
+    public bool RightSideActive => rightHandTracked || rightControllerInUse;
+
     // Cached laser components
     private XRRayInteractor leftRay, rightRay;
     private LineRenderer leftLine, rightLine;
@@ -102,13 +105,13 @@ public class InputModeSwitcher : MonoBehaviour
         if (handSubsystem == null)
             TryGetSubsystem();
 
-        leftHandTracked  = handSubsystem != null && handSubsystem.leftHand.isTracked;
+        leftHandTracked = handSubsystem != null && handSubsystem.leftHand.isTracked;
         rightHandTracked = handSubsystem != null && handSubsystem.rightHand.isTracked;
 
-        leftControllerInUse  = IsInUse(leftSide.controllerTransform,  ref lastLeftPos,  ref lastLeftMoveTime);
+        leftControllerInUse = IsInUse(leftSide.controllerTransform, ref lastLeftPos, ref lastLeftMoveTime);
         rightControllerInUse = IsInUse(rightSide.controllerTransform, ref lastRightPos, ref lastRightMoveTime);
 
-        ApplySide(leftSide,  leftHandTracked,  leftControllerInUse,  leftRay,  leftLine,  leftLineVisual);
+        ApplySide(leftSide, leftHandTracked, leftControllerInUse, leftRay, leftLine, leftLineVisual);
         ApplySide(rightSide, rightHandTracked, rightControllerInUse, rightRay, rightLine, rightLineVisual);
     }
 

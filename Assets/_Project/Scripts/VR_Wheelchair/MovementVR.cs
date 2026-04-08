@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
@@ -28,11 +29,14 @@ public class MovementVR : MonoBehaviour
     public InputActionReference brakeAction;
 
     [Header("=== Haptic Feedback ===")]
-    [Tooltip("Left hand controller for haptic feedback")]
-    public ActionBasedController leftController;
+    [Tooltip("Haptic action for the left controller (binding: <XRController>{LeftHand}/haptic)")]
+    public InputActionReference leftHapticAction;
 
-    [Tooltip("Right hand controller for haptic feedback")]
-    public ActionBasedController rightController;
+    [Tooltip("Haptic action for the right controller (binding: <XRController>{RightHand}/haptic)")]
+    public InputActionReference rightHapticAction;
+
+    [Tooltip("Skip haptics on a side when its controller is resting")]
+    public InputModeSwitcher inputModeSwitcher;
 
     [Tooltip("Haptic intensity for collisions (0-1)")]
     [Range(0f, 1f)]
@@ -170,6 +174,8 @@ public class MovementVR : MonoBehaviour
         EnableAction(toggleSpeedAction);
         EnableAction(switchSteeringAction);
         EnableAction(brakeAction);
+        EnableAction(leftHapticAction);
+        EnableAction(rightHapticAction);
     }
 
     private void OnDisable()
@@ -178,6 +184,8 @@ public class MovementVR : MonoBehaviour
         DisableAction(toggleSpeedAction);
         DisableAction(switchSteeringAction);
         DisableAction(brakeAction);
+        DisableAction(leftHapticAction);
+        DisableAction(rightHapticAction);
     }
 
     private void EnableAction(InputActionReference actionRef)
@@ -295,56 +303,56 @@ public class MovementVR : MonoBehaviour
 
     // ===== JOYSTICK INPUT PROCESSING =====
 
-void ProcessJoystickInput()
-{
-    Vector2 rawInput = Vector2.zero;
-
-    // Prioridade: hand tracking se estiver a agarrar; senão, comando
-    if (handJoystick != null && handJoystick.IsActive)
+    void ProcessJoystickInput()
     {
-        rawInput = handJoystick.Output;
+        Vector2 rawInput = Vector2.zero;
+
+        // Prioridade: hand tracking se estiver a agarrar; senão, comando
+        if (handJoystick != null && handJoystick.IsActive)
+        {
+            rawInput = handJoystick.Output;
+        }
+        else if (joystickAction != null && joystickAction.action != null)
+        {
+            rawInput = joystickAction.action.ReadValue<Vector2>();
+        }
+        rawJoystickInput = rawInput;
+
+        // Apply deadzone
+        float magnitude = rawInput.magnitude;
+        if (magnitude < joystickDeadzone)
+        {
+            rawInput = Vector2.zero;
+        }
+        else
+        {
+            float remapped = (magnitude - joystickDeadzone) / (1f - joystickDeadzone);
+            rawInput = rawInput.normalized * remapped;
+        }
+
+        // Apply response curve
+        float curvedMagnitude = Mathf.Pow(rawInput.magnitude, joystickCurve);
+        Vector2 curvedInput = rawInput.normalized * curvedMagnitude;
+
+        // Apply input smoothing
+        smoothedVerticalInput = Mathf.Lerp(smoothedVerticalInput, curvedInput.y, joystickSmoothing * Time.deltaTime);
+        smoothedHorizontalInput = Mathf.Lerp(smoothedHorizontalInput, curvedInput.x, joystickSmoothing * Time.deltaTime);
+
+        processedJoystickInput = new Vector2(smoothedHorizontalInput, smoothedVerticalInput);
+        playerIsAccelerating = (Mathf.Abs(smoothedVerticalInput) > 0.05f);
+
+        float maxSpeed = currentMode == SpeedMode.Slow ? maxSpeedSlow : maxSpeedNormal;
+
+        // DIFFERENTIAL STEERING PHYSICS: Turning aggressively reduces max forward speed naturally
+        float turnPenalty = 1f - (Mathf.Abs(smoothedHorizontalInput) * 0.4f);
+        maxSpeed *= turnPenalty;
+
+        float verticalForCollision = smoothedVerticalInput;
+
+        ApplyCollisionBlocking(ref verticalForCollision, ref maxSpeed);
+        ApplyAccelerationDeceleration(maxSpeed);
+        ProcessRotation(smoothedHorizontalInput);
     }
-    else if (joystickAction != null && joystickAction.action != null)
-    {
-        rawInput = joystickAction.action.ReadValue<Vector2>();
-    }
-    rawJoystickInput = rawInput;
-
-    // Apply deadzone
-    float magnitude = rawInput.magnitude;
-    if (magnitude < joystickDeadzone)
-    {
-        rawInput = Vector2.zero;
-    }
-    else
-    {
-        float remapped = (magnitude - joystickDeadzone) / (1f - joystickDeadzone);
-        rawInput = rawInput.normalized * remapped;
-    }
-
-    // Apply response curve
-    float curvedMagnitude = Mathf.Pow(rawInput.magnitude, joystickCurve);
-    Vector2 curvedInput = rawInput.normalized * curvedMagnitude;
-
-    // Apply input smoothing
-    smoothedVerticalInput = Mathf.Lerp(smoothedVerticalInput, curvedInput.y, joystickSmoothing * Time.deltaTime);
-    smoothedHorizontalInput = Mathf.Lerp(smoothedHorizontalInput, curvedInput.x, joystickSmoothing * Time.deltaTime);
-
-    processedJoystickInput = new Vector2(smoothedHorizontalInput, smoothedVerticalInput);
-    playerIsAccelerating = (Mathf.Abs(smoothedVerticalInput) > 0.05f);
-
-    float maxSpeed = currentMode == SpeedMode.Slow ? maxSpeedSlow : maxSpeedNormal;
-
-    // DIFFERENTIAL STEERING PHYSICS: Turning aggressively reduces max forward speed naturally
-    float turnPenalty = 1f - (Mathf.Abs(smoothedHorizontalInput) * 0.4f);
-    maxSpeed *= turnPenalty;
-
-    float verticalForCollision = smoothedVerticalInput;
-
-    ApplyCollisionBlocking(ref verticalForCollision, ref maxSpeed);
-    ApplyAccelerationDeceleration(maxSpeed);
-    ProcessRotation(smoothedHorizontalInput);
-}
 
     // ===== MODE MANAGEMENT =====
 
@@ -356,7 +364,7 @@ void ProcessJoystickInput()
             {
                 currentMode = (currentMode == SpeedMode.Slow) ? SpeedMode.Normal : SpeedMode.Slow;
                 PlaySound(modeChangeSound);
-                SendHapticPulse(leftController, 0.15f, 0.08f);
+                SendHapticPulse(leftHapticAction, 0.15f, 0.08f);
             }
         }
 
@@ -366,7 +374,7 @@ void ProcessJoystickInput()
             {
                 // wheelController.ToggleSteering(); 
                 PlaySound(steeringChangeSound);
-                SendHapticPulse(rightController, 0.15f, 0.08f);
+                SendHapticPulse(rightHapticAction, 0.15f, 0.08f);
             }
         }
 
@@ -380,8 +388,8 @@ void ProcessJoystickInput()
         {
             currentMode = SpeedMode.Off;
             emergencyBrake = true;
-            SendHapticPulse(leftController, brakeHapticIntensity, 0.15f);
-            SendHapticPulse(rightController, brakeHapticIntensity, 0.15f);
+            SendHapticPulse(leftHapticAction, brakeHapticIntensity, 0.15f);
+            SendHapticPulse(rightHapticAction, brakeHapticIntensity, 0.15f);
         }
         else if (!brakeIsHeld && emergencyBrake)
         {
@@ -453,8 +461,8 @@ void ProcessJoystickInput()
                 currentAccelerationVelocity = 0f;
                 brakeLockEngaged = true;
 
-                SendHapticPulse(leftController, 0.4f, 0.05f);
-                SendHapticPulse(rightController, 0.4f, 0.05f);
+                SendHapticPulse(leftHapticAction, 0.4f, 0.05f);
+                SendHapticPulse(rightHapticAction, 0.4f, 0.05f);
             }
         }
     }
@@ -591,8 +599,8 @@ void ProcessJoystickInput()
             brakeLockEngaged = true;
 
             // Stronger haptic feedback to simulate the emergency brake pads engaging
-            SendHapticPulse(leftController, 0.7f, 0.1f);
-            SendHapticPulse(rightController, 0.7f, 0.1f);
+            SendHapticPulse(leftHapticAction, 0.7f, 0.1f);
+            SendHapticPulse(rightHapticAction, 0.7f, 0.1f);
         }
 
         collisionSystem.ClearSlide();
@@ -615,30 +623,39 @@ void ProcessJoystickInput()
         {
             float impactStrength = Mathf.Clamp01(Mathf.Abs(currentSpeed) / maxSpeedNormal);
             float intensity = collisionHapticIntensity * impactStrength;
-            SendHapticPulse(leftController, intensity, 0.2f);
-            SendHapticPulse(rightController, intensity, 0.2f);
+            SendHapticPulse(leftHapticAction, intensity, 0.2f);
+            SendHapticPulse(rightHapticAction, intensity, 0.2f);
         }
 
         if (collisionSystem.IsWallSliding)
         {
-            SendHapticPulse(leftController, slideHapticIntensity, Time.deltaTime);
-            SendHapticPulse(rightController, slideHapticIntensity, Time.deltaTime);
-        }
-
-        if (Mathf.Abs(currentSpeed) > 0.1f && !isColliding)
-        {
-            float speedRatio = Mathf.Abs(currentSpeed) / maxSpeedNormal;
-            float motorVibration = Mathf.Lerp(0.02f, 0.08f, speedRatio);
-            SendHapticPulse(leftController, motorVibration, Time.deltaTime);
+            SendHapticPulse(leftHapticAction, slideHapticIntensity, Time.deltaTime);
+            SendHapticPulse(rightHapticAction, slideHapticIntensity, Time.deltaTime);
         }
 
         wasColliding = isColliding;
     }
 
-    private void SendHapticPulse(ActionBasedController controller, float intensity, float duration)
+    private void SendHapticPulse(InputActionReference hapticRef, float intensity, float duration)
     {
-        if (controller == null) return;
-        controller.SendHapticImpulse(intensity, duration);
+        if (hapticRef == null || hapticRef.action == null) return;
+
+        // Skip if this side's controller is resting
+        if (inputModeSwitcher != null)
+        {
+            if (hapticRef == leftHapticAction && !inputModeSwitcher.LeftSideActive) return;
+            if (hapticRef == rightHapticAction && !inputModeSwitcher.RightSideActive) return;
+        }
+
+        // Find the XR controller device that owns this action's binding and send a haptic impulse
+        foreach (var control in hapticRef.action.controls)
+        {
+            if (control.device is UnityEngine.InputSystem.XR.XRControllerWithRumble rumbleDevice)
+            {
+                rumbleDevice.SendImpulse(intensity, duration);
+                return;
+            }
+        }
     }
 
     // ===== SOUND EFFECTS =====
