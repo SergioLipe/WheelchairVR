@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// VR-Optimized collision detection and management system.
 /// Uses surface normals (Dot Product) for physical impacts and a 
-/// proactive BoxCast sensor (Option 2) for the front footrests.
+/// proactive BoxCast sensor for the front footrests and rear wheels.
 /// Includes Advanced Debugging to track down "phantom" collisions.
 /// </summary>
 public class CollisionSystemVR : MonoBehaviour
@@ -31,25 +31,27 @@ public class CollisionSystemVR : MonoBehaviour
     [Tooltip("Enable to print exactly WHAT you hit to the Unity Console")]
     public bool enableCollisionDebug = true;
 
-    [Header("=== Front Sensor (Option 2) ===")]
+    [Header("=== Front Sensor ===")]
     [Tooltip("Enable the proactive front sensor for footrests")]
     public bool useFrontSensor = true;
+    public float frontSensorLength = 0.2f;
+    public Vector3 frontSensorBoxSize = new Vector3(0.38f, 0.2f, 0.1f);
+    public Vector3 frontSensorOffset = new Vector3(0f, 0.3f, 0.4f);
+    
+    [Header("=== Back Sensor ===")]
+    [Tooltip("Enable the proactive back sensor for reversing")]
+    public bool useBackSensor = true;
+    public float backSensorLength = 0.2f;
+    public Vector3 backSensorBoxSize = new Vector3(0.8f, 0.2f, 0.1f);
+    public Vector3 backSensorOffset = new Vector3(0f, 0.3f, -0.45f); // Negative Z to place it at the back
 
-    [Tooltip("How far ahead the sensor checks (meters)")]
-    public float sensorLength = 0.3f;
-
-    [Tooltip("Size of the sensor box (Width, Height, Depth)")]
-    public Vector3 sensorBoxSize = new Vector3(0.4f, 0.2f, 0.1f);
-
-    [Tooltip("Offset from the center of the wheelchair (X, Y, Z)")]
-    public Vector3 sensorOffset = new Vector3(0f, 0.2f, 0.4f);
-
-    [Tooltip("Layers the sensor should detect as obstacles")]
+    [Header("=== General Sensor Settings ===")]
+    [Tooltip("Layers the sensors should detect as obstacles")]
     public LayerMask obstacleLayerMask = ~0;
 
     [Header("=== Detection Settings ===")]
     [Tooltip("Minimum collision point height to be considered (ignores ground)")]
-    [SerializeField] private float minCollisionHeight = 0.2f;
+    [SerializeField] private float minCollisionHeight = 0.08f;
 
     [Tooltip("Maximum angle with vertical to ignore (90° = perfect horizontal)")]
     [SerializeField] private float maxGroundAngle = 45f;
@@ -83,8 +85,9 @@ public class CollisionSystemVR : MonoBehaviour
     private Vector3 slideDirection = Vector3.zero;
     private float slideTimer = 0f;
 
-    // Front sensor state
+    // Sensor states
     private bool wasFrontSensorBlockedLastFrame = false;
+    private bool wasBackSensorBlockedLastFrame = false;
 
     public void Initialize(CharacterController characterController, Transform transform)
     {
@@ -106,14 +109,10 @@ public class CollisionSystemVR : MonoBehaviour
         UpdateSlideTimer();
         HandleMultipleCollisions();
 
-        if (useFrontSensor)
-        {
-            CheckFrontSensor();
-        }
+        if (useFrontSensor) CheckFrontSensor();
+        if (useBackSensor) CheckBackSensor();
 
         // --- THE FIX FOR SPAMMING COLLISIONS DURING SLIDES ---
-        // Só conta como uma nova "Colisão" se não estiver a deslizar na parede
-        // E só permite contar 1 colisão por segundo (Cooldown de 1 segundo)
         if (inCollision && !wasInCollisionState && !wallSliding) 
         {
             if (Time.time - lastCollisionCountTime > 1.0f)
@@ -140,40 +139,23 @@ public class CollisionSystemVR : MonoBehaviour
     {
         if (wheelchairTransform == null) return;
 
-        Vector3 startPos = wheelchairTransform.position +
-                           wheelchairTransform.forward * sensorOffset.z +
-                           wheelchairTransform.up * sensorOffset.y +
-                           wheelchairTransform.right * sensorOffset.x;
+        Vector3 scaledOffset = Vector3.Scale(frontSensorOffset, wheelchairTransform.lossyScale);
+        float scaledLength = frontSensorLength * wheelchairTransform.lossyScale.z;
+        Vector3 scaledBoxSize = Vector3.Scale(frontSensorBoxSize, wheelchairTransform.lossyScale);
 
-        Vector3 halfExtents = sensorBoxSize / 2f;
+        Vector3 startPos = wheelchairTransform.position +
+                           wheelchairTransform.forward * scaledOffset.z +
+                           wheelchairTransform.up * scaledOffset.y +
+                           wheelchairTransform.right * scaledOffset.x;
+
+        Vector3 halfExtents = scaledBoxSize / 2f;
         bool hitObstacle = false;
 
-        RaycastHit[] hits = Physics.BoxCastAll(startPos, halfExtents, wheelchairTransform.forward, wheelchairTransform.rotation, sensorLength, obstacleLayerMask);
+        RaycastHit[] hits = Physics.BoxCastAll(startPos, halfExtents, wheelchairTransform.forward, wheelchairTransform.rotation, scaledLength, obstacleLayerMask);
 
         foreach (RaycastHit hit in hits)
         {
-            if (hit.collider.transform.root == wheelchairTransform.root) continue;
-
-            float collisionHeight = hit.point.y - wheelchairTransform.position.y;
-            if (collisionHeight < minCollisionHeight) continue;
-
-            float angleWithUp = Vector3.Angle(hit.normal, Vector3.up);
-            if (angleWithUp < maxGroundAngle) continue;
-
-            bool ignore = false;
-            foreach (string tag in ignoreTags)
-            {
-                if (hit.collider.tag == tag)
-                {
-                    ignore = true;
-                    break;
-                }
-            }
-            if (ignore) continue;
-
-            if (ignoreLayerMask != 0 && ((ignoreLayerMask.value & (1 << hit.collider.gameObject.layer)) != 0)) continue;
-            if (hit.collider.GetComponent<Terrain>() != null) continue;
-            if (hit.collider.isTrigger) continue;
+            if (ShouldIgnoreSensorHit(hit)) continue;
 
             hitObstacle = true;
             collidedObject = hit.collider.gameObject.name;
@@ -181,7 +163,7 @@ public class CollisionSystemVR : MonoBehaviour
 
             if (enableCollisionDebug && !wasFrontSensorBlockedLastFrame)
             {
-                Debug.LogWarning($"<color=cyan>[FRONT SENSOR HIT]</color> Wheelchair stopped by: <b>{collidedObject}</b> | Tag: {hit.collider.tag} | Layer: {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
+                Debug.LogWarning($"<color=cyan>[FRONT SENSOR HIT]</color> Stopped by: <b>{collidedObject}</b>");
                 Debug.DrawRay(hit.point, Vector3.up * 2f, Color.cyan, 3f);
             }
             break;
@@ -207,6 +189,83 @@ public class CollisionSystemVR : MonoBehaviour
         }
     }
 
+    private void CheckBackSensor()
+    {
+        if (wheelchairTransform == null) return;
+
+        Vector3 scaledOffset = Vector3.Scale(backSensorOffset, wheelchairTransform.lossyScale);
+        float scaledLength = backSensorLength * wheelchairTransform.lossyScale.z;
+        Vector3 scaledBoxSize = Vector3.Scale(backSensorBoxSize, wheelchairTransform.lossyScale);
+
+        Vector3 startPos = wheelchairTransform.position +
+                           wheelchairTransform.forward * scaledOffset.z +
+                           wheelchairTransform.up * scaledOffset.y +
+                           wheelchairTransform.right * scaledOffset.x;
+
+        Vector3 halfExtents = scaledBoxSize / 2f;
+        bool hitObstacle = false;
+
+        // Note: Casting BACKWARDS (-wheelchairTransform.forward)
+        RaycastHit[] hits = Physics.BoxCastAll(startPos, halfExtents, -wheelchairTransform.forward, wheelchairTransform.rotation, scaledLength, obstacleLayerMask);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (ShouldIgnoreSensorHit(hit)) continue;
+
+            hitObstacle = true;
+            collidedObject = hit.collider.gameObject.name;
+            collisionPoint = hit.point;
+
+            if (enableCollisionDebug && !wasBackSensorBlockedLastFrame)
+            {
+                Debug.LogWarning($"<color=magenta>[BACK SENSOR HIT]</color> Stopped by: <b>{collidedObject}</b>");
+                Debug.DrawRay(hit.point, Vector3.up * 2f, Color.magenta, 3f);
+            }
+            break;
+        }
+
+        if (hitObstacle)
+        {
+            backBlocked = true;
+            backBlockTimer = 0.15f;
+
+            if (!wasBackSensorBlockedLastFrame)
+            {
+                float dummySpeed = 0f;
+                ProcessBackCollision(ref dummySpeed);
+                inCollision = true;
+                collisionTime = Time.time;
+            }
+            wasBackSensorBlockedLastFrame = true;
+        }
+        else
+        {
+            wasBackSensorBlockedLastFrame = false;
+        }
+    }
+
+    private bool ShouldIgnoreSensorHit(RaycastHit hit)
+    {
+        if (hit.collider.transform.root == wheelchairTransform.root) return true;
+
+        float collisionHeight = hit.point.y - wheelchairTransform.position.y;
+        if (collisionHeight < minCollisionHeight) return true;
+
+        float angleWithUp = Vector3.Angle(hit.normal, Vector3.up);
+        if (angleWithUp < maxGroundAngle) return true;
+
+        foreach (string tag in ignoreTags)
+        {
+            if (hit.collider.tag == tag) return true;
+        }
+
+        if (ignoreLayerMask != 0 && ((ignoreLayerMask.value & (1 << hit.collider.gameObject.layer)) != 0)) return true;
+        if (hit.collider.GetComponent<Terrain>() != null) return true;
+        if (hit.collider.isTrigger) return true;
+
+        return false;
+    }
+
     private void UpdateBlockingTimers()
     {
         if (frontBlockTimer > 0)
@@ -218,7 +277,7 @@ public class CollisionSystemVR : MonoBehaviour
         if (backBlockTimer > 0)
         {
             backBlockTimer -= Time.deltaTime;
-            if (backBlockTimer <= 0) backBlocked = false;
+            if (backBlockTimer <= 0 && !wasBackSensorBlockedLastFrame) backBlocked = false;
         }
     }
 
@@ -270,7 +329,7 @@ public class CollisionSystemVR : MonoBehaviour
 
         if (enableCollisionDebug)
         {
-            Debug.LogWarning($"<color=orange>[CAPSULE HIT]</color> Wheelchair touched: <b>{hit.gameObject.name}</b> | Tag: {hit.gameObject.tag} | Layer: {LayerMask.LayerToName(hit.gameObject.layer)}");
+            Debug.LogWarning($"<color=orange>[CAPSULE HIT]</color> Wheelchair touched: <b>{hit.gameObject.name}</b>");
             Debug.DrawRay(hit.point, hit.normal * 1.5f, Color.red, 2f);
         }
 
@@ -405,18 +464,41 @@ public class CollisionSystemVR : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Transform t = wheelchairTransform != null ? wheelchairTransform : transform;
+
+        // --- DRAW FRONT SENSOR (ORANGE) ---
         if (enableCollisionDebug && useFrontSensor)
         {
-            Transform t = wheelchairTransform != null ? wheelchairTransform : transform;
+            Vector3 scaledOffsetF = Vector3.Scale(frontSensorOffset, t.lossyScale);
+            float scaledLengthF = frontSensorLength * t.lossyScale.z;
+            Vector3 scaledBoxSizeF = Vector3.Scale(frontSensorBoxSize, t.lossyScale);
 
-            Vector3 startPos = t.position +
-                               t.forward * sensorOffset.z +
-                               t.up * sensorOffset.y +
-                               t.right * sensorOffset.x;
+            Vector3 startPosF = t.position +
+                                t.forward * scaledOffsetF.z +
+                                t.up * scaledOffsetF.y +
+                                t.right * scaledOffsetF.x;
 
-            Gizmos.color = new Color(1f, 0.5f, 0f, 0.5f);
-            Gizmos.matrix = Matrix4x4.TRS(startPos, t.rotation, Vector3.one);
-            Gizmos.DrawWireCube(Vector3.forward * (sensorLength / 2f), new Vector3(sensorBoxSize.x, sensorBoxSize.y, sensorLength));
+            Gizmos.color = new Color(1f, 0.5f, 0f, 0.5f); // Orange
+            Gizmos.matrix = Matrix4x4.TRS(startPosF, t.rotation, Vector3.one);
+            Gizmos.DrawWireCube(Vector3.forward * (scaledLengthF / 2f), new Vector3(scaledBoxSizeF.x, scaledBoxSizeF.y, scaledLengthF));
+        }
+
+        // --- DRAW BACK SENSOR (PURPLE/MAGENTA) ---
+        if (enableCollisionDebug && useBackSensor)
+        {
+            Vector3 scaledOffsetB = Vector3.Scale(backSensorOffset, t.lossyScale);
+            float scaledLengthB = backSensorLength * t.lossyScale.z;
+            Vector3 scaledBoxSizeB = Vector3.Scale(backSensorBoxSize, t.lossyScale);
+
+            Vector3 startPosB = t.position +
+                                t.forward * scaledOffsetB.z +
+                                t.up * scaledOffsetB.y +
+                                t.right * scaledOffsetB.x;
+
+            Gizmos.color = new Color(1f, 0f, 1f, 0.5f); // Magenta/Purple
+            Gizmos.matrix = Matrix4x4.TRS(startPosB, t.rotation, Vector3.one);
+            // Draw backwards from the offset
+            Gizmos.DrawWireCube(Vector3.back * (scaledLengthB / 2f), new Vector3(scaledBoxSizeB.x, scaledBoxSizeB.y, scaledLengthB));
         }
     }
 
