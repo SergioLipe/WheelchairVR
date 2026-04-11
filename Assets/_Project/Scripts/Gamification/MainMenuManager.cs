@@ -31,8 +31,22 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        // This function runs once when the menu opens
+        // Force the mouse to be visible when the menu opens
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         InitializeAllLevels();
+    }
+
+    private void LateUpdate()
+    {
+        // Runs AFTER all other scripts. 
+        // If any spy script tries to lock the mouse on click, this instantly overrides it!
+        if (Cursor.lockState != CursorLockMode.None || !Cursor.visible)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     /// <summary>
@@ -86,7 +100,7 @@ public class MainMenuManager : MonoBehaviour
                         bgImage.color = unlockedBGColor;
                     }
                 }
-                
+
                 if (levelText != null) levelText.color = Color.white;
 
                 if (starContainer != null)
