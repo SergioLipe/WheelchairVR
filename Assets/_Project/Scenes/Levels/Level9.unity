@@ -14565,10 +14565,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 7
-  initialRedDuration: 7
-  greenLightDuration: 17
-  redLightDuration: 17
+  initialGreenDuration: 10
+  initialRedDuration: 10
+  greenLightDuration: 10
+  redLightDuration: 10
   isGreen: 0
 --- !u!65 &111351379
 BoxCollider:
@@ -83710,10 +83710,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 7
-  initialRedDuration: 7
-  greenLightDuration: 17
-  redLightDuration: 17
+  initialGreenDuration: 10
+  initialRedDuration: 10
+  greenLightDuration: 10
+  redLightDuration: 10
   isGreen: 1
 --- !u!65 &582349265
 BoxCollider:
@@ -126874,10 +126874,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 7
-  initialRedDuration: 7
-  greenLightDuration: 17
-  redLightDuration: 17
+  initialGreenDuration: 10
+  initialRedDuration: 10
+  greenLightDuration: 10
+  redLightDuration: 10
   isGreen: 1
 --- !u!65 &878790606
 BoxCollider:
@@ -143059,15 +143059,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: redDuration
-      value: 17
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: greenDuration
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: initialRedDuration
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: initialGreenDuration
-      value: 17
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: 'hazardObjects.Array.data[0]'
@@ -204737,19 +204741,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: redDuration
-      value: 17
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: greenDuration
-      value: 17
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: initialRedDuration
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: initialGreenDuration
-      value: 17
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: 'hazardObjects.Array.data[0]'
@@ -244148,6 +244152,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1810095693}
     m_Modifications:
+    - target: {fileID: 807910211964316002, guid: a9f89a93b55b6294a9e62fe0c0ddbecd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1056962767566208647, guid: a9f89a93b55b6294a9e62fe0c0ddbecd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1272668258959769473, guid: a9f89a93b55b6294a9e62fe0c0ddbecd, type: 3}
       propertyPath: m_Name
       value: Wheelchair_PC
@@ -289341,10 +289353,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 7
-  initialRedDuration: 7
-  greenLightDuration: 17
-  redLightDuration: 17
+  initialGreenDuration: 10
+  initialRedDuration: 10
+  greenLightDuration: 10
+  redLightDuration: 10
   isGreen: 0
 --- !u!65 &2007230969
 BoxCollider:
