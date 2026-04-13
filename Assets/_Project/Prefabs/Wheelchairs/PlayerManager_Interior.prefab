@@ -408,9 +408,45 @@ PrefabInstance:
       value: -0.45
       objectReference: {fileID: 0}
     - target: {fileID: 5533077699062357259, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
-      propertyPath: backSensorBoxSize.x
-      value: 0.5
+      propertyPath: startupGracePeriod
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5533077699062357259, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: backSensorBoxSize.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533077699062357259, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: backLeftWheelOffset.x
+      value: -0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533077699062357259, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: backLeftWheelOffset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533077699062357259, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: backLeftWheelOffset.z
+      value: -0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533077699062357259, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: backWheelSensorLength
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533077699062357259, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: backRightWheelOffset.x
+      value: 0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533077699062357259, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: backRightWheelOffset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533077699062357259, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: backRightWheelOffset.z
+      value: -0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564720188673816471, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: collisionSystem
+      value: 
+      objectReference: {fileID: 3330018495937029857}
     - target: {fileID: 7672299456591473344, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.11399999
@@ -482,3 +518,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5270989495543095939, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
   m_PrefabInstance: {fileID: 7133678684693724138}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3330018495937029857 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5533077699062357259, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+  m_PrefabInstance: {fileID: 7133678684693724138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693112701573625073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a6a2b0b55eece4fa627a17e27a00c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionSystemVR

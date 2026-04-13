@@ -146,6 +146,8 @@ public class MovementVR : MonoBehaviour
 
     private float previousSpeed = 0f;
 
+    private SpeedMode modeBeforeBrake = SpeedMode.Slow;
+
     // Public for sound script
     [HideInInspector]
     public bool playerIsAccelerating = false;
@@ -388,6 +390,7 @@ public class MovementVR : MonoBehaviour
 
         if (brakeIsHeld && currentMode != SpeedMode.Off)
         {
+            modeBeforeBrake = currentMode; // <-- Guarda o modo em que estavas!
             currentMode = SpeedMode.Off;
             emergencyBrake = true;
             SendHapticPulse(leftHapticAction, brakeHapticIntensity, 0.15f);
@@ -395,7 +398,7 @@ public class MovementVR : MonoBehaviour
         }
         else if (!brakeIsHeld && emergencyBrake)
         {
-            currentMode = SpeedMode.Normal;
+            currentMode = modeBeforeBrake; // <-- Restaura o modo exato que guardou!
             emergencyBrake = false;
         }
     }
