@@ -10282,6 +10282,7 @@ MonoBehaviour:
   topMessage: "P\xF5e-te confort\xE1vel!"
   finalMessage: "Vamos l\xE1!"
   movementScript: {fileID: 5109985105948740571}
+  collisionSystem: {fileID: 0}
   handManager: {fileID: 1931872082532192846}
   objectsToHide:
   - {fileID: 425618277987275464}
@@ -15438,7 +15439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8578215292664969270, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.048
+      value: 0.154
       objectReference: {fileID: 0}
     - target: {fileID: 8578215292664969270, guid: 96a5d4c3b1e71b5468d62f0443a44440, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15594,6 +15595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a6a2b0b55eece4fa627a17e27a00c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollisionSystemVR
+  startupGracePeriod: 0.5
   inCollision: 0
   collidedObject: 
   frontBlocked: 0
@@ -15608,6 +15610,11 @@ MonoBehaviour:
   backSensorLength: 0.2
   backSensorBoxSize: {x: 0.8, y: 0.2, z: 0.1}
   backSensorOffset: {x: 0, y: 0.3, z: -0.45}
+  useBackWheelVisualSensors: 1
+  backWheelSensorLength: 0.2
+  backWheelSensorBoxSize: {x: 0.15, y: 0.2, z: 0.3}
+  backLeftWheelOffset: {x: -0.35, y: 0.3, z: -0.45}
+  backRightWheelOffset: {x: 0.35, y: 0.3, z: -0.45}
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
