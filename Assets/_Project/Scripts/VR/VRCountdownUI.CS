@@ -14,15 +14,18 @@ public class VRCountdownUI : MonoBehaviour
     [SerializeField] private string topMessage = "Senta-te bem na cadeira!";
     [SerializeField] private string finalMessage = "Vamos lá!";
 
-    [Header("References")]
+    [Header("--- Target Scripts to Disable ---")]
+    [Tooltip("Drag the object with MovementVR here")]
     [SerializeField] private MovementVR movementScript;
+    
+    [Tooltip("Drag the object with CollisionSystemVR here")]
+    [SerializeField] private CollisionSystemVR collisionSystem;
 
-    // ---> NOVO: Referência para o Gestor de Mãos <---
     [Header("Hand Manager")]
     [Tooltip("Drag the Camera Offset (HandVisibilityManager) here")]
     [SerializeField] private HandVisibilityManager handManager;
 
-    [Header("--- Visibility Control ---")]
+    [Header("Visibility Control")]
     [Tooltip("Add all the GameObjects you want to hide during the countdown")]
     [SerializeField] private GameObject[] objectsToHide; 
     
@@ -70,12 +73,18 @@ public class VRCountdownUI : MonoBehaviour
             }
         }
 
+        // ---> A TUA SOLUÇÃO: Desligar os scripts por completo no início <---
         if (movementScript != null)
         {
-            movementScript.inputLocked = true;
+            movementScript.enabled = false;
         }
 
-        // ---> FORÇA O CANVAS A APARECER <---
+        if (collisionSystem != null)
+        {
+            collisionSystem.enabled = false;
+        }
+
+        // Força o Canvas a aparecer
         if (handManager != null)
         {
             handManager.currentMode = HandVisibilityManager.GameMode.Countdown;
@@ -105,18 +114,26 @@ public class VRCountdownUI : MonoBehaviour
         {
             finalTimer -= Time.unscaledDeltaTime;
             if (finalTimer <= 0)
-{
-    showingFinal = false;
-    if (countdownText != null)
-    {
-        countdownText.text = "";
-        countdownText.gameObject.SetActive(false);
-    }
+            {
+                showingFinal = false;
+                if (countdownText != null)
+                {
+                    countdownText.text = "";
+                    countdownText.gameObject.SetActive(false);
+                }
 
+                // ---> LIGA OS SCRIPTS DE VOLTA QUANDO ACABA O COUNTDOWN <---
                 if (movementScript != null)
-                    movementScript.inputLocked = false;
+                {
+                    movementScript.enabled = true;
+                }
 
-                // ---> VOLTA AO NORMAL (Esconde o Canvas) <---
+                if (collisionSystem != null)
+                {
+                    collisionSystem.enabled = true;
+                }
+
+                // Volta ao normal (esconde o Canvas)
                 if (handManager != null)
                 {
                     handManager.currentMode = HandVisibilityManager.GameMode.PlayingLevel;
