@@ -255,6 +255,10 @@ PrefabInstance:
       propertyPath: distance
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 751598600976842535, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1068949679264409960, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -311,6 +315,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2800646276713600928, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1607275091041769665}
+    - target: {fileID: 2800646276713600928, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManagerVR, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4275177344203280158, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -325,6 +337,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4275177344203280158, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4424505351053316644, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1607275091041769665}
+    - target: {fileID: 4424505351053316644, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManagerVR, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588618619823840155, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4617922891614830710, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
@@ -508,6 +532,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+--- !u!114 &1607275091041769665 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8408742610173240107, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+  m_PrefabInstance: {fileID: 7133678684693724138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a2585778445ac458ae7e8b11044112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManagerVR
 --- !u!1 &1693112701573625073 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8466995997121089307, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}

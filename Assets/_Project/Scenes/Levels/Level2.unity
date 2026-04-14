@@ -1612,6 +1612,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2800646276713600928, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 938899167}
+    - target: {fileID: 2800646276713600928, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Button_RetryLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800646276713600928, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManagerVR, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4275177344203280158, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1627,6 +1639,18 @@ PrefabInstance:
     - target: {fileID: 4275177344203280158, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4424505351053316644, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 938899167}
+    - target: {fileID: 4424505351053316644, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Button_MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4424505351053316644, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManagerVR, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4617922891614830710, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1786,6 +1810,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5270989495543095939, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
   m_PrefabInstance: {fileID: 938899164}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &938899167 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8408742610173240107, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+  m_PrefabInstance: {fileID: 938899164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a2585778445ac458ae7e8b11044112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManagerVR
 --- !u!1001 &968348700
 PrefabInstance:
   m_ObjectHideFlags: 0

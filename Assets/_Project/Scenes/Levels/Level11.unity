@@ -125571,6 +125571,7 @@ MonoBehaviour:
   carZones:
   - {fileID: 267809276}
   crosswalkEntryMargin: 0
+  timeToWaitBeforeStopping: 3
 --- !u!1001 &846830677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -206724,6 +206725,7 @@ MonoBehaviour:
   - {fileID: 1868668322}
   - {fileID: 0}
   crosswalkEntryMargin: 0
+  timeToWaitBeforeStopping: 3
 --- !u!4 &1403441907
 Transform:
   m_ObjectHideFlags: 0
@@ -265987,6 +265989,7 @@ MonoBehaviour:
   - {fileID: 1077625045}
   - {fileID: 1721415990}
   crosswalkEntryMargin: 0
+  timeToWaitBeforeStopping: 3
 --- !u!1001 &1793439598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281503,6 +281506,7 @@ MonoBehaviour:
   - {fileID: 455957322}
   - {fileID: 0}
   crosswalkEntryMargin: 0
+  timeToWaitBeforeStopping: 3
 --- !u!1001 &1901476310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -321333,6 +321337,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6542946405260573056, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 491094102881666558}
+    - target: {fileID: 6542946405260573056, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Button_MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6542946405260573056, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManagerVR, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6723740689979023353, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -321420,6 +321436,18 @@ PrefabInstance:
     - target: {fileID: 7175234909033353507, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.097
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627843279073492474, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 491094102881666558}
+    - target: {fileID: 7627843279073492474, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Button_RetryLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627843279073492474, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManagerVR, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7712539700365051691, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
       propertyPath: m_AnchorMax.y
@@ -321541,6 +321569,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c526371dfed5814cb9fe9023aaef1b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandVisibilityManager
+--- !u!114 &491094102881666558 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8850390556454039105, guid: 68c7402d78c06f64c91c0f38215b6582, type: 3}
+  m_PrefabInstance: {fileID: 491094102881666553}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a2585778445ac458ae7e8b11044112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManagerVR
 --- !u!1001 &666408619282276503
 PrefabInstance:
   m_ObjectHideFlags: 0

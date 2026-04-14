@@ -4,6 +4,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Manages player waiting areas and car stopping areas.
 /// Allows cars that have already entered the crosswalk (Player Zone) to keep moving.
+/// Requires the player to wait in the zone for a specific time before cars stop.
 /// </summary>
 public class CrosswalkController : MonoBehaviour
 {
@@ -18,8 +19,15 @@ public class CrosswalkController : MonoBehaviour
     [Tooltip("How far (in meters) the car must be inside the Player Zone to keep going.\n0 = exactly on the edge.\nNegative values (e.g., -1.5) account for the car's front bumper if the pivot is at the rear wheels.")]
     public float crosswalkEntryMargin = 0f;
 
+    [Tooltip("How many seconds the player must stay in the zone before cars stop.")]
+    public float timeToWaitBeforeStopping = 3f;
+
     // Keeps track of cars we have stopped
     private List<CarCityMovement> yieldingCars = new List<CarCityMovement>();
+
+    // Timer variables
+    private float playerWaitTimer = 0f;
+    private bool isPlayerCurrentlyInZone = false;
 
     void Update()
     {
@@ -28,8 +36,24 @@ public class CrosswalkController : MonoBehaviour
             return;
         }
 
-        bool playerIsWaiting = CheckForPlayer();
-        ControlCars(playerIsWaiting);
+        bool playerDetected = CheckForPlayer();
+
+        // --- TIMER LOGIC ---
+        if (playerDetected)
+        {
+            playerWaitTimer += Time.deltaTime;
+        }
+        else
+        {
+            playerWaitTimer = 0f; // Reset timer if player leaves
+        }
+
+        isPlayerCurrentlyInZone = playerDetected;
+
+        // Cars only stop if the player has been in the zone long enough
+        bool shouldStopCars = playerWaitTimer >= timeToWaitBeforeStopping;
+
+        ControlCars(shouldStopCars);
     }
 
     /// <summary>
