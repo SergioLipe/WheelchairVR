@@ -44,10 +44,19 @@ public class HazardArea : MonoBehaviour
         {
             playerIsSafe = false; 
 
-            Collider myCollider = GetComponent<Collider>();
-            if (myCollider != null)
+            // Vamos buscar o BoxCollider específico em vez de um Collider genérico
+            BoxCollider myBox = GetComponent<BoxCollider>();
+            if (myBox != null)
             {
-                Collider[] hits = Physics.OverlapBox(myCollider.bounds.center, myCollider.bounds.extents, transform.rotation);
+                // 1. Calcula o centro exato no mundo
+                Vector3 boxCenter = transform.TransformPoint(myBox.center);
+                
+                // 2. Calcula o tamanho exato, ignorando se a escala tem o sinal de menos (-)
+                Vector3 boxHalfExtents = Vector3.Scale(myBox.size, transform.lossyScale) * 0.5f;
+                boxHalfExtents = new Vector3(Mathf.Abs(boxHalfExtents.x), Mathf.Abs(boxHalfExtents.y), Mathf.Abs(boxHalfExtents.z));
+
+                // 3. Procura o jogador com precisão absoluta
+                Collider[] hits = Physics.OverlapBox(boxCenter, boxHalfExtents, transform.rotation);
                 foreach (Collider hit in hits)
                 {
                     if (hit.CompareTag("Player"))
