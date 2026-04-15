@@ -4,7 +4,7 @@ using TMPro;
 /// <summary>
 /// Professional VR Dashboard UI Controller
 /// Manages the Left Tablet (Stats: Time, Collisions, Slides) 
-/// and the Right Tablet (Mode, replaced dynamically by Emergency Brake).
+/// and the Right Tablet (Mode, Speed, replaced dynamically by Emergency Brake).
 /// Uses TextMeshPro Rich Text for a clean, modern, and readable layout.
 /// </summary>
 public class VRDashboardUI : MonoBehaviour
@@ -22,8 +22,15 @@ public class VRDashboardUI : MonoBehaviour
     public TextMeshProUGUI collisionsText;
     public TextMeshProUGUI slidesText;
 
-    [Header("=== Right Dashboard (Mode & Brake) ===")]
+    [Header("=== Right Dashboard (Mode, Speed & Brake) ===")]
     public TextMeshProUGUI modeText;
+    
+    // --- NOVO: Referência para a Velocidade ---
+    [Tooltip("Drag the new TextMeshPro for Speed here")]
+    public TextMeshProUGUI speedText; 
+    
+    [Tooltip("Format for the speed number. '0.0' for one decimal, '0' for whole numbers.")]
+    public string speedFormat = "0.0";
 
     // --- Custom Timer Variables ---
     private float timeElapsed = 0f;
@@ -65,7 +72,7 @@ public class VRDashboardUI : MonoBehaviour
 
         UpdateTimerDisplay();
         UpdateStatsDisplay();
-        UpdateModeDisplay();
+        UpdateRightDashboardDisplay(); // Atualizado para tratar do modo E da velocidade
     }
 
     /// <summary>
@@ -106,42 +113,62 @@ public class VRDashboardUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Handles the right tablet logic. Shows the driving mode, 
-    /// but completely overrides it with a warning if the brake is held.
+    /// Handles the right tablet logic. Shows the driving mode AND current speed, 
+    /// but completely overrides BOTH with a warning if the brake is held.
     /// </summary>
-    private void UpdateModeDisplay()
+    private void UpdateRightDashboardDisplay()
     {
-        if (modeText == null) return;
+        // --- CÁLCULO DA VELOCIDADE ---
+        float currentKmh = Mathf.Abs(wheelchairController.GetCurrentSpeed()) * 3.6f;
+        string speedString = $"{currentKmh.ToString(speedFormat)} km/h";
 
         // 1. Check if the emergency brake is active first
         if (wheelchairController.IsEmergencyBraking())
         {
-            modeText.text = "<size=150%><b>TRAVÃO</b></size>";
-            modeText.color = new Color(1f, 0.2f, 0.2f, 1f); // Strong Red
-            return; // Stops the function here so the mode text doesn't overwrite it
+            if (modeText != null)
+            {
+                modeText.text = "<size=150%><b>TRAVÃO</b></size>";
+                modeText.color = new Color(1f, 0.2f, 0.2f, 1f); // Strong Red
+            }
+            
+            // Opcional: Se quiseres que a velocidade desapareça ou diga "0.0 km/h" enquanto travas
+            if (speedText != null)
+            {
+                speedText.text = "0.0 km/h"; 
+            }
+            return; // Stops the function here so the normal text doesn't overwrite it
         }
 
         // 2. If no brake is applied, show the current speed mode
-        string modeString = "";
-        Color modeColor = Color.white;
-
-        switch (wheelchairController.currentMode)
+        if (modeText != null)
         {
-            case MovementVR.SpeedMode.Slow:
-                modeString = "<size=150%><b>INTERIOR</b></size>";
-                modeColor = new Color(1f, 0.9f, 0.5f, 1f); // Yellowish
-                break;
-            case MovementVR.SpeedMode.Normal:
-                modeString = "<size=150%><b>EXTERIOR</b></size>";
-                modeColor = new Color(0.6f, 1f, 0.7f, 1f); // Greenish
-                break;
-            case MovementVR.SpeedMode.Off:
-                modeString = "<size=150%><b>DESLIGADO</b></size>";
-                modeColor = new Color(0.6f, 0.6f, 0.6f, 1f); // Gray
-                break;
+            string modeString = "";
+            Color modeColor = Color.white;
+
+            switch (wheelchairController.currentMode)
+            {
+                case MovementVR.SpeedMode.Slow:
+                    modeString = "<size=150%><b>INTERIOR</b></size>";
+                    modeColor = new Color(1f, 0.9f, 0.5f, 1f); // Yellowish
+                    break;
+                case MovementVR.SpeedMode.Normal:
+                    modeString = "<size=150%><b>EXTERIOR</b></size>";
+                    modeColor = new Color(0.6f, 1f, 0.7f, 1f); // Greenish
+                    break;
+                case MovementVR.SpeedMode.Off:
+                    modeString = "<size=150%><b>DESLIGADO</b></size>";
+                    modeColor = new Color(0.6f, 0.6f, 0.6f, 1f); // Gray
+                    break;
+            }
+
+            modeText.text = modeString;
+            modeText.color = modeColor;
         }
 
-        modeText.text = modeString;
-        modeText.color = modeColor;
+        // 3. Atualiza o texto da velocidade
+        if (speedText != null)
+        {
+            speedText.text = speedString;
+        }
     }
 }
