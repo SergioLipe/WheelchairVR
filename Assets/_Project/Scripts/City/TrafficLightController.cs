@@ -3,29 +3,36 @@ using System.Collections.Generic;
 
 /// <summary>
 /// Controls an invisible Stop Zone acting as a traffic light for cars.
-/// It automatically toggles the "canMove" variable of any CarCityMovement scripts inside it.
-/// Allows for a unique duration on the very first light cycle to sync intersections perfectly.
+/// Automatically switches between VR and PC timings based on which wheelchair is active.
 /// </summary>
 [RequireComponent(typeof(Collider))]
 public class TrafficLightController : MonoBehaviour
 {
-    [Header("=== Initial Timing Settings ===")]
-    [Tooltip("How long the invisible light stays green on the VERY FIRST cycle.")]
-    public float initialGreenDuration = 10f;
+    [Header("=== Mode Detection ===")]
+    [Tooltip("Drag the Wheelchair_VR here. If it's active, it uses VR timings. If not, it uses PC timings.")]
+    public GameObject vrWheelchair;
 
-    [Tooltip("How long the invisible light stays red on the VERY FIRST cycle.")]
-    public float initialRedDuration = 10f;
+    [Header("=== VR Timings ===")]
+    public float vrInitialGreen = 10f;
+    public float vrInitialRed = 10f;
+    public float vrNormalGreen = 10f;
+    public float vrNormalRed = 10f;
 
-    [Header("=== Normal Loop Timing Settings ===")]
-    [Tooltip("How long the invisible light stays green (cars can go).")]
-    public float greenLightDuration = 10f;
-
-    [Tooltip("How long the invisible light stays red (cars must stop).")]
-    public float redLightDuration = 10f;
+    [Header("=== PC Timings ===")]
+    public float pcInitialGreen = 5f;
+    public float pcInitialRed = 5f;
+    public float pcNormalGreen = 5f;
+    public float pcNormalRed = 5f;
 
     [Header("=== Current State ===")]
     [Tooltip("Check this if you want the lane to start Green when the game plays.")]
     public bool isGreen = true;
+
+    // --- Active Timings (chosen when the game starts) ---
+    private float activeInitialGreen;
+    private float activeInitialRed;
+    private float activeNormalGreen;
+    private float activeNormalRed;
 
     // --- Internal Timers and State Tracking ---
     private float timer = 0f;
@@ -34,6 +41,27 @@ public class TrafficLightController : MonoBehaviour
 
     // List to remember which cars are currently waiting inside this specific Stop Zone
     private List<CarCityMovement> carsInZone = new List<CarCityMovement>();
+
+    void Start()
+    {
+        // Check if VR Wheelchair exists and is turned on in the Hierarchy
+        if (vrWheelchair != null && vrWheelchair.activeInHierarchy)
+        {
+            // Apply VR Timings
+            activeInitialGreen = vrInitialGreen;
+            activeInitialRed = vrInitialRed;
+            activeNormalGreen = vrNormalGreen;
+            activeNormalRed = vrNormalRed;
+        }
+        else
+        {
+            // Apply PC Timings
+            activeInitialGreen = pcInitialGreen;
+            activeInitialRed = pcInitialRed;
+            activeNormalGreen = pcNormalGreen;
+            activeNormalRed = pcNormalRed;
+        }
+    }
 
     void Update()
     {
@@ -44,11 +72,11 @@ public class TrafficLightController : MonoBehaviour
         float currentLimit;
         if (isGreen)
         {
-            currentLimit = isFirstGreen ? initialGreenDuration : greenLightDuration;
+            currentLimit = isFirstGreen ? activeInitialGreen : activeNormalGreen;
         }
         else
         {
-            currentLimit = isFirstRed ? initialRedDuration : redLightDuration;
+            currentLimit = isFirstRed ? activeInitialRed : activeNormalRed;
         }
 
         // 3. Swap the light state if the timer reaches the limit

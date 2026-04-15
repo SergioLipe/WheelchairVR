@@ -14565,10 +14565,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 1972242677}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 7
+  pcInitialRed: 7
+  pcNormalGreen: 17
+  pcNormalRed: 17
   isGreen: 0
 --- !u!65 &111351379
 BoxCollider:
@@ -83721,10 +83726,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 1972242677}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 7
+  pcInitialRed: 7
+  pcNormalGreen: 17
+  pcNormalRed: 17
   isGreen: 1
 --- !u!65 &582349265
 BoxCollider:
@@ -126911,10 +126921,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 1972242677}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 7
+  pcInitialRed: 7
+  pcNormalGreen: 17
+  pcNormalRed: 17
   isGreen: 1
 --- !u!65 &878790606
 BoxCollider:
@@ -143100,12 +143115,40 @@ PrefabInstance:
     m_TransformParent: {fileID: 1875296489}
     m_Modifications:
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: pcNormalRed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: redDuration
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: vrNormalRed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: pcInitialRed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: vrWheelchair
+      value: 
+      objectReference: {fileID: 1972242677}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: greenDuration
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: pcNormalGreen
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: vrNormalGreen
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: pcInitialGreen
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: initialRedDuration
@@ -204839,12 +204882,40 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: pcNormalRed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: redDuration
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: vrNormalRed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: pcInitialRed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: vrWheelchair
+      value: 
+      objectReference: {fileID: 1972242677}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: greenDuration
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: pcNormalGreen
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: vrNormalGreen
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
+      propertyPath: pcInitialGreen
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2237771526344154019, guid: acd4a18d4917f504b8aa0585f2a2cf01, type: 3}
       propertyPath: initialRedDuration
@@ -289547,10 +289618,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 1972242677}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 7
+  pcInitialRed: 7
+  pcNormalGreen: 17
+  pcNormalRed: 17
   isGreen: 0
 --- !u!65 &2007230969
 BoxCollider:

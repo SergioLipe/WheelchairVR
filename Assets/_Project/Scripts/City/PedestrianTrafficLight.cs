@@ -3,11 +3,15 @@ using UnityEngine;
 /// <summary>
 /// Controls a pedestrian traffic light system.
 /// Switches between Red and Green states and toggles associated hazards on the road.
-/// Allows for a unique duration on the very first light cycle.
+/// Automatically switches between VR and PC timings based on which wheelchair is active.
 /// This script DOES NOT control cars directly.
 /// </summary>
 public class PedestrianTrafficLight : MonoBehaviour
 {
+    [Header("=== Mode Detection ===")]
+    [Tooltip("Drag the Wheelchair_VR here. If active, uses VR timings. If not, uses PC timings.")]
+    public GameObject vrWheelchair;
+
     [Header("=== Light Visuals ===")]
     [Tooltip("The GameObject representing the Red light glow.")]
     public GameObject redLightObject;
@@ -19,22 +23,27 @@ public class PedestrianTrafficLight : MonoBehaviour
     [Tooltip("List of hazard objects (e.g., triggers on the road) to enable during Red light.")]
     public GameObject[] hazardObjects;
 
-    [Header("=== Initial Timing Settings ===")]
-    [Tooltip("Duration in seconds for the VERY FIRST Red light phase.")]
-    public float initialRedDuration = 10.0f;
+    [Header("=== VR Timings ===")]
+    public float vrInitialRed = 10.0f;
+    public float vrInitialGreen = 10.0f;
+    public float vrNormalRed = 5.0f;
+    public float vrNormalGreen = 5.0f;
 
-    [Tooltip("Duration in seconds for the VERY FIRST Green light phase.")]
-    public float initialGreenDuration = 10.0f;
+    [Header("=== PC Timings ===")]
+    public float pcInitialRed = 5.0f;
+    public float pcInitialGreen = 5.0f;
+    public float pcNormalRed = 3.0f;
+    public float pcNormalGreen = 3.0f;
 
-    [Header("=== Normal Loop Timing Settings ===")]
-    [Tooltip("Duration in seconds for all subsequent Red light phases.")]
-    public float redDuration = 5.0f;
-
-    [Tooltip("Duration in seconds for all subsequent Green light phases.")]
-    public float greenDuration = 5.0f;
-
+    [Header("=== Starting State ===")]
     [Tooltip("If true, the cycle starts with the Green light. Otherwise, starts with Red.")]
     public bool startGreen = false;
+
+    // --- Active Timings (chosen when the game starts) ---
+    private float activeInitialRed;
+    private float activeInitialGreen;
+    private float activeNormalRed;
+    private float activeNormalGreen;
 
     // Internal state tracking
     private float timer;
@@ -46,6 +55,24 @@ public class PedestrianTrafficLight : MonoBehaviour
 
     void Start()
     {
+        // Check if VR Wheelchair exists and is turned on in the Hierarchy
+        if (vrWheelchair != null && vrWheelchair.activeInHierarchy)
+        {
+            // Apply VR Timings
+            activeInitialRed = vrInitialRed;
+            activeInitialGreen = vrInitialGreen;
+            activeNormalRed = vrNormalRed;
+            activeNormalGreen = vrNormalGreen;
+        }
+        else
+        {
+            // Apply PC Timings
+            activeInitialRed = pcInitialRed;
+            activeInitialGreen = pcInitialGreen;
+            activeNormalRed = pcNormalRed;
+            activeNormalGreen = pcNormalGreen;
+        }
+
         // Initialize the traffic light based on the 'startGreen' toggle
         if (startGreen)
         {
@@ -93,12 +120,12 @@ public class PedestrianTrafficLight : MonoBehaviour
         // Apply initial duration if it's the first time, otherwise use normal duration
         if (isFirstRed)
         {
-            timer = initialRedDuration;
+            timer = activeInitialRed;
             isFirstRed = false; // Never use the initial time again
         }
         else
         {
-            timer = redDuration;
+            timer = activeNormalRed;
         }
     }
 
@@ -119,12 +146,12 @@ public class PedestrianTrafficLight : MonoBehaviour
         // Apply initial duration if it's the first time, otherwise use normal duration
         if (isFirstGreen)
         {
-            timer = initialGreenDuration;
+            timer = activeInitialGreen;
             isFirstGreen = false; // Never use the initial time again
         }
         else
         {
-            timer = greenDuration;
+            timer = activeNormalGreen;
         }
     }
 
