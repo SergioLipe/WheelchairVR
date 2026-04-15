@@ -7635,6 +7635,10 @@ PrefabInstance:
       propertyPath: handVisibilityManager
       value: 
       objectReference: {fileID: 1668283460888396720}
+    - target: {fileID: 4365799397373381258, guid: 794c4d3d5dc6e0748b2764ee90bedfaa, type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8220440641356943012, guid: 794c4d3d5dc6e0748b2764ee90bedfaa, type: 3}
       propertyPath: m_Name
       value: Caracter_Stopped
@@ -39893,10 +39897,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 1
 --- !u!65 &271844745
 BoxCollider:
@@ -68815,10 +68824,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 0
 --- !u!65 &457983545
 BoxCollider:
@@ -72651,10 +72665,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 0
 --- !u!65 &480471997
 BoxCollider:
@@ -85727,10 +85746,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 0
 --- !u!65 &570557731
 BoxCollider:
@@ -85910,10 +85934,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 0
 --- !u!65 &570892190
 BoxCollider:
@@ -90787,10 +90816,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 0
 --- !u!65 &602862987
 BoxCollider:
@@ -142700,10 +142734,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 0
 --- !u!65 &954918627
 BoxCollider:
@@ -149946,7 +149985,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -170726,10 +170765,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 0
 --- !u!65 &1150858221
 BoxCollider:
@@ -172461,10 +172505,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 1
 --- !u!65 &1164924165
 BoxCollider:
@@ -219952,10 +220001,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 1
 --- !u!65 &1483656827
 BoxCollider:
@@ -230368,10 +230422,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 1
 --- !u!65 &1556931231
 BoxCollider:
@@ -236704,10 +236763,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 1
 --- !u!65 &1594782198
 BoxCollider:
@@ -258623,7 +258687,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -259279,10 +259343,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 1
 --- !u!65 &1742608120
 BoxCollider:
@@ -303085,10 +303154,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 0
 --- !u!65 &2014384875
 BoxCollider:
@@ -306594,10 +306668,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 0
 --- !u!65 &2039183276
 BoxCollider:
@@ -315869,10 +315948,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 0
 --- !u!65 &2103443958
 BoxCollider:
@@ -321143,10 +321227,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfbb43adbcb77e41bdb395bb5251f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController
-  initialGreenDuration: 10
-  initialRedDuration: 10
-  greenLightDuration: 10
-  redLightDuration: 10
+  vrWheelchair: {fileID: 0}
+  vrInitialGreen: 10
+  vrInitialRed: 10
+  vrNormalGreen: 10
+  vrNormalRed: 10
+  pcInitialGreen: 5
+  pcInitialRed: 5
+  pcNormalGreen: 5
+  pcNormalRed: 5
   isGreen: 1
 --- !u!65 &2138410129
 BoxCollider:
@@ -322837,38 +322926,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 364670658460321643, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 364670658460321643, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 364670658460321643, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 364670658460321643, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 538058067651349975, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 538058067651349975, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 538058067651349975, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 538058067651349975, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 700050402330229291, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -322909,249 +322966,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 798165995439929735, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 798165995439929735, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 798165995439929735, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 798165995439929735, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 798165995439929735, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1354398672796706315, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1354398672796706315, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1354398672796706315, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1354398672796706315, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1382719533755336700, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1382719533755336700, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1382719533755336700, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1382719533755336700, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1415079817543497361, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1415079817543497361, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1415079817543497361, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1415079817543497361, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1449576194678045142, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 7532613790910904750}
-    - target: {fileID: 1449576194678045142, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Button_RetryLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 1449576194678045142, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelManagerVR, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1543305898508287379, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1543305898508287379, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1543305898508287379, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1543305898508287379, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1543305898508287379, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2901585786547993975, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 7532613790910904750}
-    - target: {fileID: 2901585786547993975, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Button_MainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 2901585786547993975, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelManagerVR, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3075325597736063174, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3075325597736063174, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3075325597736063174, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3075325597736063174, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5990309754599825157, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5990309754599825157, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5990309754599825157, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5990309754599825157, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5990309754599825157, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6369779720609775506, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6369779720609775506, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6369779720609775506, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6369779720609775506, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6369779720609775506, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6516808081807977770, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6516808081807977770, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6516808081807977770, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6516808081807977770, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6516808081807977770, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6827237640510522253, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1782913763}
-    - target: {fileID: 6870962910620639968, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6870962910620639968, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6870962910620639968, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6870962910620639968, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7945850035573213951, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
       propertyPath: m_Name
       value: PlayerManager_Exterior
-      objectReference: {fileID: 0}
-    - target: {fileID: 8434313318508980079, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8434313318508980079, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8434313318508980079, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8434313318508980079, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8802040266891640859, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8802040266891640859, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8802040266891640859, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8802040266891640859, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8989952379298322065, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
       propertyPath: m_InteractionManager
@@ -323165,17 +322986,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
---- !u!114 &7532613790910904750 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 65864183649256499, guid: 2fa41706672b1354dabaca072ac47016, type: 3}
-  m_PrefabInstance: {fileID: 7532613790910904749}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a2585778445ac458ae7e8b11044112, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LevelManagerVR
 --- !u!1001 &8048100291835227869
 PrefabInstance:
   m_ObjectHideFlags: 0
