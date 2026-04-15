@@ -32,6 +32,14 @@ public class VRCountdownUI : MonoBehaviour
     [Tooltip("Drag the object with the VRSeatCalibrator script here to sync the appearance")]
     [SerializeField] private VRSeatCalibrator seatCalibrator;
 
+    [Header("=== Audio Settings ===")]
+    [Tooltip("The AudioSource that will play the sounds")]
+    [SerializeField] private AudioSource audioSource;
+    [Tooltip("Short beep for numbers (3, 2, 1)")]
+    [SerializeField] private AudioClip beepSound;
+    [Tooltip("Long beep or chime for 'Vamos lá!'")]
+    [SerializeField] private AudioClip goSound;
+
     [Header("Style")]
     [SerializeField] private float textSize = 0.5f;
     [SerializeField] private float numberSize = 1.2f;
@@ -46,6 +54,9 @@ public class VRCountdownUI : MonoBehaviour
     private bool isCounting = false;
     private bool showingFinal = false;
     private float finalTimer = 0f;
+    
+    // Variável para garantir que o som só toca uma vez por cada segundo
+    private int lastSecondPlayed = -1;
 
     private void OnEnable()
     {
@@ -73,7 +84,7 @@ public class VRCountdownUI : MonoBehaviour
             }
         }
 
-        // ---> A TUA SOLUÇÃO: Desligar os scripts por completo no início <---
+        // Desligar os scripts por completo no início
         if (movementScript != null)
         {
             movementScript.enabled = false;
@@ -92,6 +103,9 @@ public class VRCountdownUI : MonoBehaviour
 
         timer = countdownTime;
         isCounting = true;
+        
+        // Força o primeiro som a tocar mal o script arranca
+        lastSecondPlayed = Mathf.CeilToInt(countdownTime) + 1;
 
         if (countdownText != null)
             countdownText.alignment = TextAlignmentOptions.Center;
@@ -122,7 +136,7 @@ public class VRCountdownUI : MonoBehaviour
                     countdownText.gameObject.SetActive(false);
                 }
 
-                // ---> LIGA OS SCRIPTS DE VOLTA QUANDO ACABA O COUNTDOWN <---
+                // LIGA OS SCRIPTS DE VOLTA QUANDO ACABA O COUNTDOWN
                 if (movementScript != null)
                 {
                     movementScript.enabled = true;
@@ -150,10 +164,20 @@ public class VRCountdownUI : MonoBehaviour
 
         if (timer > 0)
         {
+            int seconds = Mathf.CeilToInt(timer);
+
+            // ---> LÓGICA DO ÁUDIO PARA OS NÚMEROS (3, 2, 1) <---
+            if (seconds != lastSecondPlayed)
+            {
+                if (audioSource != null && beepSound != null)
+                {
+                    audioSource.PlayOneShot(beepSound);
+                }
+                lastSecondPlayed = seconds;
+            }
+
             if (countdownText != null)
             {
-                int seconds = Mathf.CeilToInt(timer);
-
                 float pulse = Mathf.Lerp(0.9f, 1.1f,
                     (Mathf.Sin(Time.unscaledTime * pulseSpeed) + 1f) / 2f);
 
@@ -170,6 +194,12 @@ public class VRCountdownUI : MonoBehaviour
         }
         else
         {
+            // ---> LÓGICA DO ÁUDIO PARA O COMEÇO DO NÍVEL (Vamos lá!) <---
+            if (audioSource != null && goSound != null)
+            {
+                audioSource.PlayOneShot(goSound);
+            }
+
             isCounting = false;
             showingFinal = true;
             finalTimer = 1f;
