@@ -6,9 +6,19 @@ using TMPro;
 /// <summary>
 /// Manages the Main Menu dynamically.
 /// Automatically finds and colors the stars and backgrounds for any number of levels.
+/// Now includes Profile Selection logic and current user display.
 /// </summary>
 public class MainMenuManager : MonoBehaviour
 {
+    [Header("--- Profile UI Elements ---")]
+    public GameObject profileSelectionPanel;
+    public GameObject levelSelectionPanel;
+    public TMP_InputField inputFieldProfileID;
+    public Button btnLogin;
+    
+    [Tooltip("Text to show who is currently logged in")]
+    public TMP_Text txtCurrentProfile; // <--- NOVA VARIÁVEL AQUI
+
     [Header("--- Level Buttons ---")]
     [Tooltip("Drag ALL your level buttons here in order (Level 1, Level 2... and Free Style last)")]
     public Button[] levelButtons;
@@ -35,6 +45,21 @@ public class MainMenuManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
+        // --- Profile Logic ---
+        // 1. Show profiles panel and hide levels panel on start
+        if (profileSelectionPanel != null && levelSelectionPanel != null)
+        {
+            profileSelectionPanel.SetActive(true);
+            levelSelectionPanel.SetActive(false);
+        }
+
+        // 2. Link the login button to the function
+        if (btnLogin != null)
+        {
+            btnLogin.onClick.AddListener(OnLoginButtonClicked);
+        }
+
+        // --- Level Logic ---
         InitializeAllLevels();
     }
 
@@ -47,6 +72,53 @@ public class MainMenuManager : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
+    }
+
+    /// <summary>
+    /// Handles the login process when the user clicks the login button.
+    /// </summary>
+    public void OnLoginButtonClicked()
+    {
+        // Reads what the user typed
+        string typedID = inputFieldProfileID.text.Trim();
+
+        // If it's empty, do nothing
+        if (string.IsNullOrEmpty(typedID))
+        {
+            Debug.LogWarning("Atenção: O ID do paciente não pode estar vazio!");
+            return;
+        }
+
+        // Try to load the profile
+        PlayerData loadedData = SaveManager.LoadProfile(typedID);
+
+        if (loadedData != null)
+        {
+            // Profile exists! Set it as active
+            ProfileManager.Instance.SetActiveProfile(loadedData);
+        }
+        else
+        {
+            // Profile does not exist, create a new one
+            PlayerData newData = new PlayerData();
+            newData.profileID = typedID;
+            
+            // Save to disk
+            SaveManager.SaveProfile(newData);
+            
+            // Set as active
+            ProfileManager.Instance.SetActiveProfile(newData);
+        }
+
+        // --- ATUALIZA O TEXTO NO ECRÃ COM O ID DO PACIENTE ---
+        if (txtCurrentProfile != null)
+        {
+            txtCurrentProfile.text = ProfileManager.Instance.currentPlayer.profileID;
+        }
+
+        // Hide profiles panel and show levels panel
+        profileSelectionPanel.SetActive(false);
+        levelSelectionPanel.SetActive(true);
     }
 
     /// <summary>
@@ -74,6 +146,7 @@ public class MainMenuManager : MonoBehaviour
             //  Level 1 AND the Last Level (Free Style) are always unlocked
             bool isFreeStyleLevel = (i == levelButtons.Length - 1);
             bool isUnlocked = (levelID == 1) || isFreeStyleLevel || (prevStars >= 1) || (PlayerPrefs.GetInt("UnlockAll", 0) == 1);
+            
             // 3. Get the visual components inside this specific button
             Button btn = levelButtons[i];
             Image bgImage = btn.GetComponent<Image>();
@@ -146,7 +219,7 @@ public class MainMenuManager : MonoBehaviour
     public void LoadGameLevel(int levelNumber)
     {
         string sceneName = "Level" + levelNumber;
-        Debug.Log($"Loading Scene: {sceneName}");
+        Debug.Log($"A carregar a cena: {sceneName}");
         SceneManager.LoadScene(sceneName);
     }
 
@@ -154,7 +227,7 @@ public class MainMenuManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         InitializeAllLevels(); // Refresh visuals immediately
-        Debug.Log("Progress Reset!");
+        Debug.Log("Progresso apagado!");
     }
 
     public void UnlockAllLevels()
@@ -164,7 +237,7 @@ public class MainMenuManager : MonoBehaviour
 
         // Updates the menu instantly
         InitializeAllLevels();
-        Debug.Log("All levels have been unlocked!");
+        Debug.Log("Todos os níveis foram desbloqueados!");
     }
 
     public void QuitGame()
