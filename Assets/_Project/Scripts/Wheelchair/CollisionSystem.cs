@@ -3,6 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Collision detection and management system for the wheelchair
 /// Processes CharacterController collisions and manages directional blocking and wall sliding
+/// Corrigido para comunicar corretamente com o LevelManager_PC
 /// </summary>
 public class CollisionSystem : MonoBehaviour
 {
@@ -53,7 +54,6 @@ public class CollisionSystem : MonoBehaviour
     // Wall sliding system
     private Vector3 slideDirection = Vector3.zero;
     private float slideTimer = 0f;
-
 
     // Controlls time between warnings to LevelManager to prevent spamming
     private float lastManagerUpdate = 0f;
@@ -324,13 +324,13 @@ public class CollisionSystem : MonoBehaviour
         if (flashEffect != null)
             flashEffect.FrontFlash();
 
-        // Checks if its been 1 second since last warning to LevelManager to prevent spamming
+        // Checks if its been 1 second since last warning to LevelManager_PC to prevent spamming
         if (Time.time > lastManagerUpdate + 1.0f)
         {
-            if (LevelManager.Instance != null)
+            if (LevelManager_PC.Instance != null)
             {
-                LevelManager.Instance.RegisterStrongCollision("Front Obstacle");
-                lastManagerUpdate = Time.time;
+                LevelManager_PC.Instance.RegisterStrongCollision("Front Obstacle");
+                lastManagerUpdate = Time.time; // Update the timer HERE
             }
         }
     }
@@ -352,18 +352,16 @@ public class CollisionSystem : MonoBehaviour
         if (flashEffect != null)
             flashEffect.BackFlash();
 
-
-        // Checks if its been 1 second since last warning to LevelManager to prevent spamming
+        // Checks if its been 1 second since last warning to LevelManager_PC to prevent spamming
         if (Time.time > lastManagerUpdate + 1.0f)
         {
-            if (LevelManager.Instance != null)
+            if (LevelManager_PC.Instance != null)
             {
-                LevelManager.Instance.RegisterStrongCollision("Back Obstacle");
-                lastManagerUpdate = Time.time;
+                LevelManager_PC.Instance.RegisterStrongCollision("Back Obstacle");
+                lastManagerUpdate = Time.time; // Update the timer HERE
             }
         }
     }
-
 
     /// <summary>
     /// Processes side collision and calculates slide direction
@@ -382,16 +380,13 @@ public class CollisionSystem : MonoBehaviour
             wallSliding = true;
             slideTimer = 0.3f; // Slide for a brief period
 
-            // === CORRECTED LOGIC ===
-            // Uses a specific timer for slides (same logic as collisions).
             // Checks if 1 second has passed since the last registered slide.
             if (Time.time > lastSlideTime + 1.0f)
             {
-                if (LevelManager.Instance != null)
+                if (LevelManager_PC.Instance != null)
                 {
-                    LevelManager.Instance.RegisterSlide();
-
-                    // Update the specific slide timer
+                    LevelManager_PC.Instance.RegisterSlide();
+                    // Update the specific slide timer HERE, inside the if block!
                     lastSlideTime = Time.time;
                 }
             }

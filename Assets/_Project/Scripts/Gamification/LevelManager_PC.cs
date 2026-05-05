@@ -2,9 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;              // Required for Image manipulation
 using TMPro;                       // Required for TextMeshPro elements
 using UnityEngine.SceneManagement; // Required for reloading scenes or loading the Menu
+using System;                      // Required for DateTime
 
 /// <summary>
 /// Manages the game state, timer, scoring system, saving progress, pause system, and UI updates.
+/// Now includes patient data saving for clinical history.
 /// </summary>
 public class LevelManager_PC : MonoBehaviour
 {
@@ -111,6 +113,9 @@ public class LevelManager_PC : MonoBehaviour
         if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
 
         ResumeGame();
+        
+        string currentLevelName = SceneManager.GetActiveScene().name;
+        Debug.Log($"Sessão iniciada no nível: {currentLevelName}");
     }
 
     private void Update()
@@ -258,7 +263,7 @@ public class LevelManager_PC : MonoBehaviour
             stars = 2;
         }
 
-        // --- SAVE SYSTEM ---
+        // --- GAME PROGRESS SAVE SYSTEM (PlayerPrefs) ---
         string saveKey = "Level_" + levelID + "_Stars";
         int currentBest = PlayerPrefs.GetInt(saveKey, 0);
 
@@ -266,7 +271,28 @@ public class LevelManager_PC : MonoBehaviour
         {
             PlayerPrefs.SetInt(saveKey, stars);
             PlayerPrefs.Save();
-            Debug.Log($"Game Saved! Level {levelID} completed with {stars} stars.");
+            Debug.Log($"Progresso do jogo gravado! Nível {levelID} completo com {stars} estrelas.");
+        }
+
+        // --- PATIENT DATA SAVE SYSTEM (JSON) ---
+        if (ProfileManager.Instance != null && ProfileManager.Instance.currentPlayer != null)
+        {
+            SessionRecord newRecord = new SessionRecord();
+            newRecord.sessionDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+            newRecord.levelName = SceneManager.GetActiveScene().name;
+            newRecord.completionTime = elapsedTime;
+            newRecord.totalCollisions = collisionCount;
+            newRecord.totalSlides = slideCount;
+
+            // Add the record to the patient and save to disk
+            ProfileManager.Instance.currentPlayer.sessionHistory.Add(newRecord);
+            SaveManager.SaveProfile(ProfileManager.Instance.currentPlayer);
+            
+            Debug.Log("Dados clínicos da sessão gravados com sucesso no perfil do paciente!");
+        }
+        else
+        {
+            Debug.LogWarning("Aviso: Nenhum perfil de paciente ativo detetado. Os dados clínicos não foram guardados.");
         }
 
         ShowEndScreen(stars);
@@ -347,7 +373,7 @@ public class LevelManager_PC : MonoBehaviour
         else
         {
             // Fallback to menu if no next level
-            Debug.Log("No more levels! Loading Main Menu.");
+            Debug.Log("Não há mais níveis! A carregar o Menu Principal.");
             SceneManager.LoadScene("MainMenu");
         }
     }
