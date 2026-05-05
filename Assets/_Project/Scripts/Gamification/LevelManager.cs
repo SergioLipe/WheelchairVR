@@ -84,11 +84,20 @@ public class LevelManager : MonoBehaviour
 
     [Header("--- Special Buttons ---")]
     [Tooltip("The Next Level Button (Drag here to hide it automatically on last level)")]
-    public GameObject nextLevelButton; // <--- NEW: Reference for the Next Level Button
+    public GameObject nextLevelButton;
+
+    /// <summary>
+    /// Helper: returns true if we are currently in the Main Menu scene.
+    /// In that case, this manager should not touch the cursor at all.
+    /// </summary>
+    private bool IsInMainMenu()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        return sceneName == "MainMenu" || sceneName.Contains("Menu");
+    }
 
     private void Awake()
     {
-        // Singleton Pattern
         if (Instance == null)
         {
             Instance = this;
@@ -101,11 +110,17 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        // Ensure the game starts in a playable state
+        // SAFETY: If somehow this manager is alive in the Main Menu, do nothing.
+        if (IsInMainMenu())
+        {
+            Debug.LogWarning("[LevelManager] Detected in MainMenu scene. Disabling itself to avoid cursor conflicts.");
+            this.enabled = false;
+            return;
+        }
+
         isLevelActive = true;
         elapsedTime = 0f;
 
-        // Ensure correct panels are visible/hidden
         if (gameHUDPanel != null) gameHUDPanel.SetActive(true);
         if (endGamePanel != null) endGamePanel.SetActive(false);
         if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
@@ -115,7 +130,6 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        // Check for Pause Input (ESC)
         if (Input.GetKeyDown(KeyCode.Escape) && isLevelActive)
         {
             if (isPaused)
@@ -128,7 +142,6 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        // Only update the timer if the level is active and NOT paused
         if (isLevelActive && !isPaused)
         {
             elapsedTime += Time.deltaTime;
@@ -136,15 +149,13 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Pauses the game, shows the cursor, and opens the pause menu
-    /// </summary>
     public void PauseGame()
     {
-        isPaused = true;
-        Time.timeScale = 0f; // Freezes physics and movement
+        if (IsInMainMenu()) return;
 
-        // Unlock and show cursor
+        isPaused = true;
+        Time.timeScale = 0f;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -154,15 +165,19 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Resumes the game, hides the cursor, and closes the pause menu
-    /// </summary>
     public void ResumeGame()
     {
-        isPaused = false;
-        Time.timeScale = 1f; // Unfreezes the game
+        // CRITICAL FIX: Never lock/hide cursor if we're in the Main Menu
+        if (IsInMainMenu())
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            return;
+        }
 
-        // Lock and hide cursor for gameplay (Assuming First Person / Wheelchair view)
+        isPaused = false;
+        Time.timeScale = 1f;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -176,14 +191,10 @@ public class LevelManager : MonoBehaviour
     {
         if (timeText != null)
         {
-            // Update the live timer
             timeText.text = FormatTime(elapsedTime);
         }
     }
 
-    /// <summary>
-    /// Helper to format seconds into MM:SS string
-    /// </summary>
     private string FormatTime(float timeInSeconds)
     {
         string minutes = Mathf.Floor(timeInSeconds / 60).ToString("00");
@@ -199,7 +210,6 @@ public class LevelManager : MonoBehaviour
 
         if (collisionText != null)
         {
-            // Update Debug UI if needed
             collisionText.text = $"Colisões: {collisionCount}";
         }
     }
@@ -212,7 +222,6 @@ public class LevelManager : MonoBehaviour
 
         if (slideText != null)
         {
-            // Update Debug UI if needed
             slideText.text = $"Deslizes: {slideCount}";
         }
     }
@@ -223,7 +232,6 @@ public class LevelManager : MonoBehaviour
 
         isLevelActive = false;
 
-        // Ensure pause menu is closed
         if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
 
         CalculateResults();
@@ -231,16 +239,14 @@ public class LevelManager : MonoBehaviour
 
     private void CalculateResults()
     {
-        int stars = 1; // Minimum 1 star
+        int stars = 1;
 
-        // 3 STARS CRITERIA (GOLD)
         if (elapsedTime <= timeFor3Stars &&
             collisionCount <= maxCollisionsFor3Stars &&
             slideCount <= maxSlidesFor3Stars)
         {
             stars = 3;
         }
-        // 2 STARS CRITERIA (SILVER)
         else if (elapsedTime <= timeFor2Stars &&
                  collisionCount <= maxCollisionsFor2Stars &&
                  slideCount <= maxSlidesFor2Stars)
@@ -248,7 +254,6 @@ public class LevelManager : MonoBehaviour
             stars = 2;
         }
 
-        // --- SAVE SYSTEM ---
         string saveKey = "Level_" + levelID + "_Stars";
         int currentBest = PlayerPrefs.GetInt(saveKey, 0);
 
@@ -264,99 +269,76 @@ public class LevelManager : MonoBehaviour
 
     private void ShowEndScreen(int starCount)
     {
-        // 1. Hide the Game HUD (The speedometer, instructions, etc.)
         if (gameHUDPanel != null)
             gameHUDPanel.SetActive(false);
 
-        // 2. Hide interface (from Movement script)
         Movement wheelchairMovement = FindObjectOfType<Movement>();
         if (wheelchairMovement != null)
         {
             wheelchairMovement.showInterface = false;
         }
 
-        // 3. Show the End Game Panel
         if (endGamePanel != null)
         {
             endGamePanel.SetActive(true);
 
-            // Update the Report Card Stats
             if (finalTimeText != null) finalTimeText.text = FormatTime(elapsedTime);
             if (finalCollisionText != null) finalCollisionText.text = collisionCount.ToString();
             if (finalSlideText != null) finalSlideText.text = slideCount.ToString();
 
-            // Update Star Images (Turn them Gold or Dark based on score)
-            Color activeColor = Color.white;  // Or your Gold Color
-            Color inactiveColor = new Color(0.3f, 0.3f, 0.3f, 1f); // Dark Grey
+            Color activeColor = Color.white;
+            Color inactiveColor = new Color(0.3f, 0.3f, 0.3f, 1f);
 
             if (star1 != null) star1.color = (starCount >= 1) ? activeColor : inactiveColor;
             if (star2 != null) star2.color = (starCount >= 2) ? activeColor : inactiveColor;
             if (star3 != null) star3.color = (starCount >= 3) ? activeColor : inactiveColor;
 
-            // === NEXT LEVEL BUTTON LOGIC ===
             if (nextLevelButton != null)
             {
-                // Check if there is a next scene in Build Settings
                 int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
                 if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
                 {
-                    nextLevelButton.SetActive(true); // There is a next level
+                    nextLevelButton.SetActive(true);
                 }
                 else
                 {
-                    nextLevelButton.SetActive(false); // Last level, hide button
+                    nextLevelButton.SetActive(false);
                 }
             }
         }
 
-        // 4. Freeze game and show cursor
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    // =========================================================
-    // BUTTON FUNCTIONS (Connect these in the Inspector OnClick)
-    // =========================================================
-
-    /// <summary>
-    /// Loads the Next Level if available
-    /// </summary>
     public void Button_NextLevel()
     {
-        Time.timeScale = 1f; // Always unfreeze before loading
+        Time.timeScale = 1f;
 
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
-        // Safety check to ensure scene exists
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
             SceneManager.LoadScene(nextSceneIndex);
         }
         else
         {
-            // Fallback to menu if no next level
             Debug.Log("No more levels! Loading Main Menu.");
             SceneManager.LoadScene("MainMenu");
         }
     }
 
-    /// <summary>
-    /// Reloads the current scene
-    /// </summary>
     public void Button_RetryLevel()
     {
-        Time.timeScale = 1f; // Always unfreeze before loading
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    /// <summary>
-    /// Loads the Main Menu scene
-    /// </summary>
     public void Button_MainMenu()
     {
-        Time.timeScale = 1f; // Always unfreeze before loading
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 }

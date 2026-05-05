@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 using System.Collections.Generic;
 using System; // Required to format the date
 
@@ -41,16 +42,21 @@ public class MainMenuManager : MonoBehaviour
     public Button[] levelButtons;
 
     [Header("--- UI Colors ---")]
-    public Color unlockedBGColor = new Color(0f, 0.78f, 0.32f, 1f); 
-    public Color freeStyleColor = new Color(0f, 0.6f, 1f, 1f); 
-    public Color lockedBGColor = new Color(0.2f, 0.2f, 0.2f, 0.8f); 
-    public Color starEarnedColor = new Color(1f, 0.84f, 0f, 1f); 
-    public Color starEmptyColor = new Color(0f, 0f, 0f, 0.4f); 
+    public Color unlockedBGColor = new Color(0f, 0.78f, 0.32f, 1f);
+    public Color freeStyleColor = new Color(0f, 0.6f, 1f, 1f);
+    public Color lockedBGColor = new Color(0.2f, 0.2f, 0.2f, 0.8f);
+    public Color starEarnedColor = new Color(1f, 0.84f, 0f, 1f);
+    public Color starEmptyColor = new Color(0f, 0f, 0f, 0.4f);
 
     private void Start()
     {
+        // Force cursor visible immediately
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+        // Start safety coroutine that runs at the end of every frame
+        // This guarantees the cursor stays visible no matter what other scripts do
+        StartCoroutine(KeepCursorVisible());
 
         // 1. Setup Initial Panels Visibility
         if (profileSelectionPanel != null) profileSelectionPanel.SetActive(true);
@@ -74,12 +80,18 @@ public class MainMenuManager : MonoBehaviour
         InitializeAllLevels();
     }
 
-    private void LateUpdate()
+    /// <summary>
+    /// Coroutine that runs at the END of every frame (after all Update and LateUpdate calls).
+    /// This forces the cursor to stay visible even if XR or other scripts try to hide it.
+    /// </summary>
+    private IEnumerator KeepCursorVisible()
     {
-        if (Cursor.lockState != CursorLockMode.None || !Cursor.visible)
+        WaitForEndOfFrame wait = new WaitForEndOfFrame();
+        while (true)
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            yield return wait;
+            if (!Cursor.visible) Cursor.visible = true;
+            if (Cursor.lockState != CursorLockMode.None) Cursor.lockState = CursorLockMode.None;
         }
     }
 
@@ -91,7 +103,7 @@ public class MainMenuManager : MonoBehaviour
     {
         if (dropdownProfiles == null) return;
         dropdownProfiles.ClearOptions();
-        
+
         string[] savedIDs = SaveManager.GetAllProfileIDs();
         List<string> options = new List<string>();
 
@@ -181,7 +193,7 @@ public class MainMenuManager : MonoBehaviour
             string targetLevelName = "Level" + levelID;
 
             bool hasPlayedThisLevel = false;
-            
+
             // Search the history to see if this level exists
             foreach (SessionRecord record in data.sessionHistory)
             {
@@ -219,7 +231,7 @@ public class MainMenuManager : MonoBehaviour
         historyText += $"<align=center><color=#666666>_________________________________________</color></align>\n\n";
 
         int attemptCount = 1;
-        
+
         // Reverse to show the most recent first
         List<SessionRecord> records = new List<SessionRecord>(data.sessionHistory);
         records.Reverse();
@@ -238,7 +250,7 @@ public class MainMenuManager : MonoBehaviour
                 historyText += $"<color=#A0E4FF><b>TENTATIVA {attemptCount}</b></color>   <color=#AAAAAA>•   {formattedDate}</color>\n";
                 historyText += $"Tempo: <b>{record.completionTime:F1}s</b>   |   Colisões: <color=red><b>{record.totalCollisions}</b></color>   |   Deslizes: <color=yellow><b>{record.totalSlides}</b></color>\n";
                 historyText += "<color=#444444>--------------------------------------------------------</color>\n\n";
-                
+
                 attemptCount++;
             }
         }
@@ -271,7 +283,7 @@ public class MainMenuManager : MonoBehaviour
         {
             if (levelButtons[i] == null) continue;
 
-            int levelID = i + 1; 
+            int levelID = i + 1;
 
             string saveKey = "Level_" + levelID + "_Stars";
             int currentStars = PlayerPrefs.GetInt(saveKey, 0);
@@ -284,7 +296,7 @@ public class MainMenuManager : MonoBehaviour
 
             bool isFreeStyleLevel = (i == levelButtons.Length - 1);
             bool isUnlocked = (levelID == 1) || isFreeStyleLevel || (prevStars >= 1) || (PlayerPrefs.GetInt("UnlockAll", 0) == 1);
-            
+
             Button btn = levelButtons[i];
             Image bgImage = btn.GetComponent<Image>();
             TMP_Text levelText = btn.GetComponentInChildren<TMP_Text>();
@@ -337,7 +349,7 @@ public class MainMenuManager : MonoBehaviour
     public void ResetProgress()
     {
         PlayerPrefs.DeleteAll();
-        InitializeAllLevels(); 
+        InitializeAllLevels();
     }
 
     public void UnlockAllLevels()
