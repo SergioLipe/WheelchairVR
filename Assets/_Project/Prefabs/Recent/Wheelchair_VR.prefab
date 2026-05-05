@@ -1584,12 +1584,16 @@ MonoBehaviour:
   topMessage: "P\xF5e-te confort\xE1vel!"
   finalMessage: "Vamos l\xE1!"
   movementScript: {fileID: 4886186908543615269}
+  collisionSystem: {fileID: 0}
   handManager: {fileID: 3035223486467767893}
   objectsToHide:
   - {fileID: 2450614824334918484}
   - {fileID: 4708798181978920810}
   - {fileID: 7839677308366274167}
   seatCalibrator: {fileID: 8864660255013471715}
+  audioSource: {fileID: 0}
+  beepSound: {fileID: 0}
+  goSound: {fileID: 0}
   textSize: 0.8
   numberSize: 1.5
   pulseSpeed: 3
@@ -18549,6 +18553,8 @@ MonoBehaviour:
   collisionsText: {fileID: 8698259581075456406}
   slidesText: {fileID: 443279652759145710}
   modeText: {fileID: 4279399897341795559}
+  speedText: {fileID: 0}
+  speedFormat: 0.0
 --- !u!1 &7862773585163285817
 GameObject:
   m_ObjectHideFlags: 0
@@ -21126,6 +21132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a6a2b0b55eece4fa627a17e27a00c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollisionSystemVR
+  startupGracePeriod: 0.5
   inCollision: 0
   collidedObject: 
   frontBlocked: 0
@@ -21140,6 +21147,11 @@ MonoBehaviour:
   backSensorLength: 0.2
   backSensorBoxSize: {x: 0.8, y: 0.2, z: 0.1}
   backSensorOffset: {x: 0, y: 0.3, z: -0.45}
+  useBackWheelVisualSensors: 1
+  backWheelSensorLength: 0.2
+  backWheelSensorBoxSize: {x: 0.15, y: 0.2, z: 0.3}
+  backLeftWheelOffset: {x: -0.35, y: 0.3, z: -0.45}
+  backRightWheelOffset: {x: 0.35, y: 0.3, z: -0.45}
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
