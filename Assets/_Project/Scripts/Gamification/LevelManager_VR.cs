@@ -1,9 +1,14 @@
 using UnityEngine;
-using UnityEngine.UI;              
-using TMPro;                       
-using UnityEngine.SceneManagement; 
-using UnityEngine.InputSystem;     
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using System; // Required for DateTime
 
+/// <summary>
+/// Manages the game state for VR levels: timer, scoring, save system, pause, and end-game UI.
+/// Includes patient session saving to integrate with the History panel in the Main Menu.
+/// </summary>
 public class LevelManagerVR : MonoBehaviour
 {
     public static LevelManagerVR Instance { get; private set; }
@@ -45,6 +50,16 @@ public class LevelManagerVR : MonoBehaviour
     public Image star2;
     public Image star3;
 
+    /// <summary>
+    /// Helper: returns true if we are currently in the Main Menu scene.
+    /// In that case, this manager should not run any gameplay logic.
+    /// </summary>
+    private bool IsInMainMenu()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        return sceneName == "MainMenu" || sceneName.Contains("Menu");
+    }
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -65,19 +80,30 @@ public class LevelManagerVR : MonoBehaviour
 
     private void Start()
     {
+        // SAFETY: If somehow this manager ends up in the Main Menu, disable itself.
+        if (IsInMainMenu())
+        {
+            Debug.LogWarning("[LevelManagerVR] Detected in MainMenu scene. Disabling itself.");
+            this.enabled = false;
+            return;
+        }
+
         isLevelActive = true;
         elapsedTime = 0f;
 
         if (endGamePanel != null) endGamePanel.SetActive(false);
         if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
 
-        // Avisa o gestor de mãos que estamos a jogar o nível
+        // Tell the hand manager we are playing the level
         if (handVisibilityManager != null)
         {
             handVisibilityManager.currentMode = HandVisibilityManager.GameMode.PlayingLevel;
         }
-        
-        Time.timeScale = 1f; 
+
+        Time.timeScale = 1f;
+
+        string currentLevelName = SceneManager.GetActiveScene().name;
+        Debug.Log($"Sessão VR iniciada no nível: {currentLevelName}");
     }
 
     private void Update()
@@ -97,14 +123,14 @@ public class LevelManagerVR : MonoBehaviour
     public void PauseGame()
     {
         isPaused = true;
-        Time.timeScale = 0f; 
+        Time.timeScale = 0f;
 
         if (pauseMenuPanel != null && vrCamera != null)
         {
             PositionMenuInFrontOfPlayer(pauseMenuPanel);
             pauseMenuPanel.SetActive(true);
-            
-            // Avisa o gestor de mãos que estamos na Pausa
+
+            // Tell the hand manager we are in the Pause Menu
             if (handVisibilityManager != null)
             {
                 handVisibilityManager.currentMode = HandVisibilityManager.GameMode.PauseMenu;
@@ -115,14 +141,14 @@ public class LevelManagerVR : MonoBehaviour
     public void ResumeGame()
     {
         isPaused = false;
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
 
         if (pauseMenuPanel != null)
         {
             pauseMenuPanel.SetActive(false);
         }
 
-        // Avisa o gestor de mãos para voltar ao modo de jogo normal
+        // Tell the hand manager we are back in normal gameplay mode
         if (handVisibilityManager != null)
         {
             handVisibilityManager.currentMode = HandVisibilityManager.GameMode.PlayingLevel;
@@ -134,11 +160,11 @@ public class LevelManagerVR : MonoBehaviour
         if (vrCamera == null) return;
 
         Vector3 spawnPos = vrCamera.position + (vrCamera.forward * menuSpawnDistance);
-        spawnPos.y = vrCamera.position.y; 
+        spawnPos.y = vrCamera.position.y;
 
         menu.transform.position = spawnPos;
         menu.transform.LookAt(vrCamera);
-        menu.transform.Rotate(0, 180, 0); 
+        menu.transform.Rotate(0, 180, 0);
     }
 
     private string FormatTime(float timeInSeconds)
@@ -170,12 +196,42 @@ public class LevelManagerVR : MonoBehaviour
 
     private void CalculateResults()
     {
-        int stars = 1; 
+        int stars = 1;
         if (elapsedTime <= timeFor3Stars && collisionCount <= maxCollisionsFor3Stars && slideCount <= maxSlidesFor3Stars) stars = 3;
         else if (elapsedTime <= timeFor2Stars && collisionCount <= maxCollisionsFor2Stars && slideCount <= maxSlidesFor2Stars) stars = 2;
 
-        PlayerPrefs.SetInt("Level_" + levelID + "_Stars", stars);
-        PlayerPrefs.Save();
+        // --- GAME PROGRESS SAVE SYSTEM (PlayerPrefs) ---
+        // Only update if the new score is better than the previous best
+        string saveKey = "Level_" + levelID + "_Stars";
+        int currentBest = PlayerPrefs.GetInt(saveKey, 0);
+
+        if (stars > currentBest)
+        {
+            PlayerPrefs.SetInt(saveKey, stars);
+            PlayerPrefs.Save();
+            Debug.Log($"Progresso do jogo gravado! Nível {levelID} completo com {stars} estrelas (VR).");
+        }
+
+        // --- PATIENT DATA SAVE SYSTEM (JSON) ---
+        // Save session record so it appears in the Main Menu history panel
+        if (ProfileManager.Instance != null && ProfileManager.Instance.currentPlayer != null)
+        {
+            SessionRecord newRecord = new SessionRecord();
+            newRecord.sessionDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+            newRecord.levelName = SceneManager.GetActiveScene().name;
+            newRecord.completionTime = elapsedTime;
+            newRecord.totalCollisions = collisionCount;
+            newRecord.totalSlides = slideCount;
+
+            ProfileManager.Instance.currentPlayer.sessionHistory.Add(newRecord);
+            SaveManager.SaveProfile(ProfileManager.Instance.currentPlayer);
+
+            Debug.Log("Dados clínicos da sessão VR gravados com sucesso no perfil do paciente!");
+        }
+        else
+        {
+            Debug.LogWarning("Aviso (VR): Nenhum perfil de paciente ativo detetado. Os dados clínicos não foram guardados.");
+        }
 
         ShowEndScreen(stars);
     }
@@ -189,7 +245,7 @@ public class LevelManagerVR : MonoBehaviour
             PositionMenuInFrontOfPlayer(endGamePanel);
             endGamePanel.SetActive(true);
 
-            // Avisa o gestor de mãos que estamos no ecrã final (Lasers ON)
+            // Tell the hand manager we are on the end screen (lasers ON)
             if (handVisibilityManager != null)
             {
                 handVisibilityManager.currentMode = HandVisibilityManager.GameMode.PauseMenu;
@@ -199,15 +255,46 @@ public class LevelManagerVR : MonoBehaviour
             if (finalCollisionText != null) finalCollisionText.text = collisionCount.ToString();
             if (finalSlideText != null) finalSlideText.text = slideCount.ToString();
 
-            star1.color = (starCount >= 1) ? Color.white : new Color(0.3f, 0.3f, 0.3f);
-            star2.color = (starCount >= 2) ? Color.white : new Color(0.3f, 0.3f, 0.3f);
-            star3.color = (starCount >= 3) ? Color.white : new Color(0.3f, 0.3f, 0.3f);
+            if (star1 != null) star1.color = (starCount >= 1) ? Color.white : new Color(0.3f, 0.3f, 0.3f);
+            if (star2 != null) star2.color = (starCount >= 2) ? Color.white : new Color(0.3f, 0.3f, 0.3f);
+            if (star3 != null) star3.color = (starCount >= 3) ? Color.white : new Color(0.3f, 0.3f, 0.3f);
         }
     }
 
-    // Funções para ligar no evento "On Click ()" dos botões
-    public void Button_NextLevel() { Time.timeScale = 1f; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); }
-    public void Button_RetryLevel() { Time.timeScale = 1f; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
-    public void Button_MainMenu() { Time.timeScale = 1f; SceneManager.LoadScene("MainMenu"); }
-    public void Button_ResumeGame() { ResumeGame(); }
+    // =========================================================
+    // BUTTON FUNCTIONS (Connect these in the Inspector OnClick)
+    // =========================================================
+
+    public void Button_NextLevel()
+    {
+        Time.timeScale = 1f;
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Debug.Log("Não há mais níveis! A carregar o Menu Principal.");
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+
+    public void Button_RetryLevel()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Button_MainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Button_ResumeGame()
+    {
+        ResumeGame();
+    }
 }
