@@ -379,7 +379,7 @@ public class MainMenuManager_VR : MonoBehaviour
                 {
                     if (hasPlayedThisLevel)
                     {
-                        string label = attemptsCount == 1 ? "tentativa" : "tentativas";
+                        string label = attemptsCount == 1 ? "Tentativa" : "Tentativas";
                         attemptsText.text = $"{attemptsCount} {label}";
                         attemptsText.color = new Color(1f, 1f, 1f, 0.85f);
                     }
@@ -440,7 +440,7 @@ public class MainMenuManager_VR : MonoBehaviour
             }
             else
             {
-                txtHistFreestyleCount.text = "sem sessões registadas";
+                txtHistFreestyleCount.text = "Sem sessões registadas";
             }
         }
 
@@ -468,7 +468,7 @@ public class MainMenuManager_VR : MonoBehaviour
 
         if (txtAttemptsCount != null)
         {
-            string label = totalAttempts == 1 ? "tentativa registada" : "tentativas registadas";
+            string label = totalAttempts == 1 ? "Tentativa registada" : "Tentativas registadas";
             txtAttemptsCount.text = $"{totalAttempts} {label}";
         }
 
