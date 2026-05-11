@@ -2,21 +2,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 using System.Collections.Generic;
-using System; // Required to format the date
+using System;
 
 /// <summary>
 /// VR version of the Main Menu Manager.
-/// Differences from the PC version:
-/// - No cursor coroutine (controllers use raycast, not mouse cursor)
-/// - Profiles shown as dynamic list of clickable buttons (instead of dropdown)
-/// - Clicking a profile button logs in directly (no separate login button)
-/// - Separate "Create new profile" flow with input field + virtual keyboard
+/// Each profile row has:
+/// - Login (click on the name)
+/// - Edit button (rename inline, uses Quest virtual keyboard)
+/// - Delete button (with confirmation popup)
 /// 
-/// Same as PC version:
-/// - History system (levels grid + attempts panel)
-/// - Save/Load via SaveManager and ProfileManager
-/// - Level initialization with stars
+/// Level selection panel has a steering type toggle (Frontal / Traseira)
+/// which is stored in SteeringPreference and applied when entering each level.
 /// </summary>
 public class MainMenuManager_VR : MonoBehaviour
 {
@@ -30,11 +28,11 @@ public class MainMenuManager_VR : MonoBehaviour
     public TMP_Text txtCurrentProfile;
 
     [Header("--- VR: Existing Profiles List ---")]
-    [Tooltip("Drag the Content GameObject of the ProfilesList ScrollView (where buttons will be cloned)")]
+    [Tooltip("Drag the Content GameObject of the ProfilesList ScrollView (where rows will be cloned)")]
     public Transform profilesListContent;
 
-    [Tooltip("Drag the template button (will be cloned for each profile). It's hidden at start.")]
-    public Button profileButtonTemplate;
+    [Tooltip("Drag the BtnProfileTemplate GameObject. Must contain children: Btn_LoginProfile, InputEditName, Btn_EditProfile, Btn_DeleteProfile.")]
+    public GameObject profileButtonTemplate;
 
     [Tooltip("Optional: text shown when there are no saved profiles yet")]
     public GameObject noProfilesPlaceholder;
@@ -43,34 +41,59 @@ public class MainMenuManager_VR : MonoBehaviour
     public TMP_InputField inputFieldNewProfileID;
     public Button btnCreateProfile;
 
+    [Header("--- VR: Confirm Delete Popup ---")]
+    public GameObject confirmDeletePanel;
+    public TMP_Text txtConfirmMessage;
+    public Button btnConfirmYes;
+    public Button btnConfirmNo;
+
     [Header("--- VR: View History ---")]
     public Button btnViewHistory;
 
     [Tooltip("VR: Panel shown when user clicks 'View history' to choose which profile to inspect")]
     public GameObject historyProfileSelectorPanel;
 
-    [Tooltip("VR: Where history profile buttons will be cloned (similar to profile list)")]
+    [Tooltip("VR: Where history profile buttons will be cloned")]
     public Transform historyProfilesListContent;
 
     [Tooltip("VR: Template button for history profile selector")]
-    public Button historyProfileButtonTemplate;
+    public GameObject historyProfileButtonTemplate;
 
     [Tooltip("VR: Button to close the history profile selector and go back to login")]
     public Button btnCloseHistoryProfileSelector;
 
+    [Header("--- Steering Type Selection (LevelSelectionPanel) ---")]
+    [Tooltip("Button to select Front Steering (Frontal)")]
+    public Button btnSteeringFront;
+
+    [Tooltip("Button to select Rear Steering (Traseira)")]
+    public Button btnSteeringRear;
+
+    [Header("--- Steering Button Visual States ---")]
+    [Tooltip("Image color when the button IS the selected steering type")]
+    public Color steeringSelectedColor = new Color(0.376f, 0.647f, 0.980f, 0.314f); // azul subtil 80a
+
+    [Tooltip("Outline color when the button IS the selected steering type")]
+    public Color steeringSelectedOutlineColor = new Color(0.376f, 0.647f, 0.980f, 0.863f); // azul 220a
+
+    [Tooltip("Text color when the button IS the selected steering type")]
+    public Color steeringSelectedTextColor = Color.white;
+
+    [Tooltip("Image color when the button is NOT the selected steering type")]
+    public Color steeringUnselectedColor = new Color(1f, 1f, 1f, 0.078f); // branco 20a
+
+    [Tooltip("Outline color when the button is NOT the selected steering type")]
+    public Color steeringUnselectedOutlineColor = new Color(1f, 1f, 1f, 0.314f); // branco 80a
+
+    [Tooltip("Text color when the button is NOT the selected steering type")]
+    public Color steeringUnselectedTextColor = new Color(1f, 1f, 1f, 0.706f); // branco 180a
+
     [Header("--- History: Levels Panel ---")]
     public GameObject historyLevelsPanel;
     public Button btnCloseHistory;
-    [Tooltip("Drag the history level buttons here in order (Level 1, Level 2...)")]
     public Button[] historyLevelButtons;
-
-    [Tooltip("Subtitle text under 'HISTÓRICO DE SESSÕES' that shows the patient name dynamically")]
     public TMP_Text txtHistorySubtitle;
-
-    [Tooltip("Optional: Freestyle history button (shown separately under the level grid)")]
     public Button btnHistFreestyle;
-
-    [Tooltip("Optional: Text inside the freestyle history button that shows the number of sessions")]
     public TMP_Text txtHistFreestyleCount;
 
     [Header("--- History: Attempts Panel ---")]
@@ -97,9 +120,9 @@ public class MainMenuManager_VR : MonoBehaviour
     public Color historyHasRecordsColor = new Color(0.086f, 0.639f, 0.290f, 1f);
     public Color historyNoRecordsColor = new Color(0.32f, 0.32f, 0.32f, 0.5f);
 
-    // List of profile buttons currently spawned (so we can destroy them on refresh)
     private List<GameObject> spawnedProfileButtons = new List<GameObject>();
     private List<GameObject> spawnedHistoryProfileButtons = new List<GameObject>();
+    private string profileToDelete = null;
 
     private void Start()
     {
@@ -109,12 +132,13 @@ public class MainMenuManager_VR : MonoBehaviour
         if (historyLevelsPanel != null) historyLevelsPanel.SetActive(false);
         if (historyAttemptsPanel != null) historyAttemptsPanel.SetActive(false);
         if (historyProfileSelectorPanel != null) historyProfileSelectorPanel.SetActive(false);
+        if (confirmDeletePanel != null) confirmDeletePanel.SetActive(false);
 
-        // 2. Hide the profile button template (we only clone it, never show the original)
-        if (profileButtonTemplate != null) profileButtonTemplate.gameObject.SetActive(false);
-        if (historyProfileButtonTemplate != null) historyProfileButtonTemplate.gameObject.SetActive(false);
+        // 2. Hide button templates
+        if (profileButtonTemplate != null) profileButtonTemplate.SetActive(false);
+        if (historyProfileButtonTemplate != null) historyProfileButtonTemplate.SetActive(false);
 
-        // 3. Populate the profiles list with existing patients
+        // 3. Populate the profiles list
         PopulateProfilesList();
 
         // 4. Setup "Create new profile" button
@@ -126,21 +150,96 @@ public class MainMenuManager_VR : MonoBehaviour
         if (btnCloseHistory != null) btnCloseHistory.onClick.AddListener(CloseHistory);
         if (btnBackToHistLevels != null) btnBackToHistLevels.onClick.AddListener(BackToHistoryLevels);
 
-        // 6. Setup main game levels (stars, locks, click handlers)
+        // 6. Confirm delete popup buttons
+        if (btnConfirmYes != null) btnConfirmYes.onClick.AddListener(OnConfirmDeleteYes);
+        if (btnConfirmNo != null) btnConfirmNo.onClick.AddListener(OnConfirmDeleteNo);
+
+        // 7. Setup steering type selection buttons
+        if (btnSteeringFront != null)
+        {
+            btnSteeringFront.onClick.RemoveAllListeners();
+            btnSteeringFront.onClick.AddListener(() => OnSteeringSelected(WheelController.SteeringType.FrontSteering));
+        }
+        if (btnSteeringRear != null)
+        {
+            btnSteeringRear.onClick.RemoveAllListeners();
+            btnSteeringRear.onClick.AddListener(() => OnSteeringSelected(WheelController.SteeringType.RearSteering));
+        }
+        // Reflect current value visually (default: Front)
+        RefreshSteeringButtonsVisual();
+
+        // 8. Setup main game levels
         InitializeAllLevels();
+
+        // 9. Force recenter the VR canvas (with delay so the HMD pose is stable)
+        VRCanvasPositioner positioner = FindObjectOfType<VRCanvasPositioner>();
+        if (positioner != null)
+        {
+            positioner.RecenterCanvas();
+        }
     }
 
     // ==========================================
-    // VR PROFILE LIST (replaces dropdown)
+    // STEERING TYPE SELECTION
     // ==========================================
 
     /// <summary>
-    /// Clones the profile button template once for each saved profile.
-    /// Clicking a button logs in directly with that profile.
+    /// Called when the user clicks one of the steering buttons in the LevelSelectionPanel.
+    /// Updates the SteeringPreference (used by the level on scene load) and refreshes visuals.
     /// </summary>
+    public void OnSteeringSelected(WheelController.SteeringType steeringType)
+    {
+        SteeringPreference.SetSteering(steeringType);
+        RefreshSteeringButtonsVisual();
+    }
+
+    /// <summary>
+    /// Visually updates the two buttons to reflect which is currently selected.
+    /// </summary>
+    private void RefreshSteeringButtonsVisual()
+    {
+        bool frontSelected = SteeringPreference.CurrentSteering == WheelController.SteeringType.FrontSteering;
+        bool rearSelected = SteeringPreference.CurrentSteering == WheelController.SteeringType.RearSteering;
+
+        SetSteeringButtonVisual(btnSteeringFront, frontSelected);
+        SetSteeringButtonVisual(btnSteeringRear, rearSelected);
+    }
+
+    /// <summary>
+    /// Applies the "selected" or "unselected" visual style to a steering button.
+    /// </summary>
+    private void SetSteeringButtonVisual(Button button, bool isSelected)
+    {
+        if (button == null) return;
+
+        // Background image color
+        Image bgImage = button.GetComponent<Image>();
+        if (bgImage != null)
+        {
+            bgImage.color = isSelected ? steeringSelectedColor : steeringUnselectedColor;
+        }
+
+        // Outline color
+        Outline outline = button.GetComponent<Outline>();
+        if (outline != null)
+        {
+            outline.effectColor = isSelected ? steeringSelectedOutlineColor : steeringUnselectedOutlineColor;
+        }
+
+        // Text color
+        TMP_Text txt = button.GetComponentInChildren<TMP_Text>();
+        if (txt != null)
+        {
+            txt.color = isSelected ? steeringSelectedTextColor : steeringUnselectedTextColor;
+        }
+    }
+
+    // ==========================================
+    // VR PROFILE LIST WITH LOGIN / EDIT / DELETE
+    // ==========================================
+
     private void PopulateProfilesList()
     {
-        // Clean up previous buttons (in case we refresh)
         foreach (GameObject oldBtn in spawnedProfileButtons)
         {
             if (oldBtn != null) Destroy(oldBtn);
@@ -149,13 +248,15 @@ public class MainMenuManager_VR : MonoBehaviour
 
         if (profileButtonTemplate == null || profilesListContent == null)
         {
-            Debug.LogWarning("[MainMenuManager_VR] Profile button template or content reference missing.");
+            Debug.LogWarning("[MainMenuManager_VR] Profile template or content reference missing.");
             return;
         }
 
+        if (profileButtonTemplate.activeSelf)
+            profileButtonTemplate.SetActive(false);
+
         string[] savedIDs = SaveManager.GetAllProfileIDs();
 
-        // Show or hide "no profiles" placeholder
         if (noProfilesPlaceholder != null)
         {
             noProfilesPlaceholder.SetActive(savedIDs == null || savedIDs.Length == 0);
@@ -163,33 +264,74 @@ public class MainMenuManager_VR : MonoBehaviour
 
         if (savedIDs == null || savedIDs.Length == 0) return;
 
-        // Create one button per profile
         foreach (string profileID in savedIDs)
         {
-            GameObject newBtnObj = Instantiate(profileButtonTemplate.gameObject, profilesListContent);
-            newBtnObj.SetActive(true);
-            newBtnObj.name = "Btn_Profile_" + profileID;
+            GameObject newRow = Instantiate(profileButtonTemplate, profilesListContent);
+            newRow.SetActive(true);
+            newRow.name = "Row_Profile_" + profileID;
 
-            // Set the button text to the profile ID
-            TMP_Text btnText = newBtnObj.GetComponentInChildren<TMP_Text>();
-            if (btnText != null) btnText.text = profileID;
+            string capturedID = profileID;
 
-            // Hook up click to login
-            Button btn = newBtnObj.GetComponent<Button>();
-            if (btn != null)
+            Transform loginBtnT = newRow.transform.Find("Btn_LoginProfile");
+            Transform editBtnT = newRow.transform.Find("Btn_EditProfile");
+            Transform deleteBtnT = newRow.transform.Find("Btn_DeleteProfile");
+            Transform inputEditT = newRow.transform.Find("InputEditName");
+
+            Button loginBtn = null;
+            TMP_Text loginText = null;
+            if (loginBtnT != null)
             {
-                string capturedID = profileID; // capture for closure
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() => LoginWithProfile(capturedID));
+                loginBtn = loginBtnT.GetComponent<Button>();
+                loginText = loginBtnT.GetComponentInChildren<TMP_Text>();
+
+                if (loginText != null) loginText.text = profileID;
+
+                if (loginBtn != null)
+                {
+                    loginBtn.onClick.RemoveAllListeners();
+                    loginBtn.onClick.AddListener(() => LoginWithProfile(capturedID));
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[MainMenuManager_VR] Btn_LoginProfile not found in row '{newRow.name}'.");
             }
 
-            spawnedProfileButtons.Add(newBtnObj);
+            TMP_InputField editInput = null;
+            if (inputEditT != null)
+            {
+                editInput = inputEditT.GetComponent<TMP_InputField>();
+                inputEditT.gameObject.SetActive(false);
+            }
+
+            if (editBtnT != null)
+            {
+                Button editBtn = editBtnT.GetComponent<Button>();
+                if (editBtn != null && editInput != null && loginBtn != null)
+                {
+                    Button capturedLogin = loginBtn;
+                    TMP_InputField capturedInput = editInput;
+                    TMP_Text capturedLoginText = loginText;
+
+                    editBtn.onClick.RemoveAllListeners();
+                    editBtn.onClick.AddListener(() => StartRenameProfile(capturedID, capturedLogin, capturedInput, capturedLoginText));
+                }
+            }
+
+            if (deleteBtnT != null)
+            {
+                Button deleteBtn = deleteBtnT.GetComponent<Button>();
+                if (deleteBtn != null)
+                {
+                    deleteBtn.onClick.RemoveAllListeners();
+                    deleteBtn.onClick.AddListener(() => RequestDeleteProfile(capturedID));
+                }
+            }
+
+            spawnedProfileButtons.Add(newRow);
         }
     }
 
-    /// <summary>
-    /// Logs in directly with the given profile ID (called when user clicks an existing profile button).
-    /// </summary>
     public void LoginWithProfile(string profileID)
     {
         if (string.IsNullOrEmpty(profileID)) return;
@@ -202,7 +344,6 @@ public class MainMenuManager_VR : MonoBehaviour
         }
         else
         {
-            // Should not happen since we listed existing profiles, but just in case
             PlayerData newData = new PlayerData();
             newData.profileID = profileID;
             SaveManager.SaveProfile(newData);
@@ -214,11 +355,11 @@ public class MainMenuManager_VR : MonoBehaviour
 
         profileSelectionPanel.SetActive(false);
         levelSelectionPanel.SetActive(true);
+
+        // Make sure the steering buttons visual is up to date when this panel opens
+        RefreshSteeringButtonsVisual();
     }
 
-    /// <summary>
-    /// Called when the user types a new ID and presses "Create and Enter".
-    /// </summary>
     public void OnCreateProfileClicked()
     {
         if (inputFieldNewProfileID == null) return;
@@ -231,8 +372,8 @@ public class MainMenuManager_VR : MonoBehaviour
             return;
         }
 
-        // If profile already exists, just log in. If not, create.
         PlayerData loadedData = SaveManager.LoadProfile(typedID);
+        bool isNewProfile = (loadedData == null);
 
         if (loadedData != null)
         {
@@ -249,23 +390,144 @@ public class MainMenuManager_VR : MonoBehaviour
         if (txtCurrentProfile != null)
             txtCurrentProfile.text = ProfileManager.Instance.currentPlayer.profileID;
 
+        if (isNewProfile) PopulateProfilesList();
+
+        if (inputFieldNewProfileID != null) inputFieldNewProfileID.text = "";
+
         profileSelectionPanel.SetActive(false);
         levelSelectionPanel.SetActive(true);
+
+        RefreshSteeringButtonsVisual();
     }
 
     // ==========================================
-    // HISTORY: PROFILE SELECTOR (VR-specific)
+    // EDIT (RENAME) PROFILE
     // ==========================================
 
-    /// <summary>
-    /// Opens an intermediate panel where the user picks which patient's history they want to view.
-    /// (Replaces the PC's dropdown selection.)
-    /// </summary>
+    private void StartRenameProfile(string oldID, Button loginBtn, TMP_InputField editInput, TMP_Text loginText)
+    {
+        if (loginBtn == null || editInput == null) return;
+
+        loginBtn.gameObject.SetActive(false);
+        editInput.gameObject.SetActive(true);
+        editInput.text = oldID;
+
+        Transform row = loginBtn.transform.parent;
+        if (row != null)
+        {
+            Transform editBtnT = row.Find("Btn_EditProfile");
+            Transform deleteBtnT = row.Find("Btn_DeleteProfile");
+            if (editBtnT != null) editBtnT.gameObject.SetActive(false);
+            if (deleteBtnT != null) deleteBtnT.gameObject.SetActive(false);
+        }
+
+        editInput.Select();
+        editInput.ActivateInputField();
+
+        editInput.onEndEdit.RemoveAllListeners();
+        editInput.onEndEdit.AddListener((newName) =>
+        {
+            FinishRenameProfile(oldID, newName, loginBtn, editInput, loginText);
+        });
+    }
+
+    private void FinishRenameProfile(string oldID, string newName, Button loginBtn, TMP_InputField editInput, TMP_Text loginText)
+    {
+        if (editInput != null) editInput.gameObject.SetActive(false);
+        if (loginBtn != null) loginBtn.gameObject.SetActive(true);
+
+        if (loginBtn != null)
+        {
+            Transform row = loginBtn.transform.parent;
+            if (row != null)
+            {
+                Transform editBtnT = row.Find("Btn_EditProfile");
+                Transform deleteBtnT = row.Find("Btn_DeleteProfile");
+                if (editBtnT != null) editBtnT.gameObject.SetActive(true);
+                if (deleteBtnT != null) deleteBtnT.gameObject.SetActive(true);
+            }
+        }
+
+        string trimmed = newName != null ? newName.Trim() : "";
+
+        if (string.IsNullOrEmpty(trimmed) || trimmed == oldID) return;
+
+        bool success = SaveManager.RenameProfile(oldID, trimmed);
+
+        if (success)
+        {
+            PopulateProfilesList();
+        }
+        else
+        {
+            if (loginText != null) loginText.text = oldID;
+            Debug.LogWarning($"[MainMenuManager_VR] Failed to rename '{oldID}' to '{trimmed}'.");
+        }
+    }
+
+    // ==========================================
+    // DELETE PROFILE WITH CONFIRMATION
+    // ==========================================
+
+    public void RequestDeleteProfile(string profileID)
+    {
+        if (string.IsNullOrEmpty(profileID)) return;
+
+        profileToDelete = profileID;
+
+        if (confirmDeletePanel != null)
+        {
+            if (txtConfirmMessage != null)
+                txtConfirmMessage.text = $"Tem a certeza que quer apagar o perfil <b><color=#F87171>{profileID}</color></b>?\n\nEsta ação não pode ser desfeita.";
+            confirmDeletePanel.SetActive(true);
+        }
+        else
+        {
+            DeleteProfile(profileID);
+            profileToDelete = null;
+        }
+    }
+
+    public void OnConfirmDeleteYes()
+    {
+        if (!string.IsNullOrEmpty(profileToDelete))
+        {
+            DeleteProfile(profileToDelete);
+            profileToDelete = null;
+        }
+        if (confirmDeletePanel != null) confirmDeletePanel.SetActive(false);
+    }
+
+    public void OnConfirmDeleteNo()
+    {
+        profileToDelete = null;
+        if (confirmDeletePanel != null) confirmDeletePanel.SetActive(false);
+    }
+
+    private void DeleteProfile(string profileID)
+    {
+        if (string.IsNullOrEmpty(profileID)) return;
+
+        bool deleted = SaveManager.DeleteProfile(profileID);
+
+        if (deleted)
+        {
+            PopulateProfilesList();
+        }
+        else
+        {
+            Debug.LogWarning($"[MainMenuManager_VR] Failed to delete profile '{profileID}'.");
+        }
+    }
+
+    // ==========================================
+    // HISTORY: PROFILE SELECTOR
+    // ==========================================
+
     public void OpenHistoryProfileSelector()
     {
         if (historyProfileSelectorPanel == null)
         {
-            // If there's no separate selector panel, just open history with the first profile found
             string[] ids = SaveManager.GetAllProfileIDs();
             if (ids != null && ids.Length > 0)
             {
@@ -284,7 +546,6 @@ public class MainMenuManager_VR : MonoBehaviour
 
     private void PopulateHistoryProfilesList()
     {
-        // Clean up previous
         foreach (GameObject oldBtn in spawnedHistoryProfileButtons)
         {
             if (oldBtn != null) Destroy(oldBtn);
@@ -293,27 +554,45 @@ public class MainMenuManager_VR : MonoBehaviour
 
         if (historyProfileButtonTemplate == null || historyProfilesListContent == null) return;
 
+        if (historyProfileButtonTemplate.activeSelf)
+            historyProfileButtonTemplate.SetActive(false);
+
         string[] savedIDs = SaveManager.GetAllProfileIDs();
         if (savedIDs == null || savedIDs.Length == 0) return;
 
         foreach (string profileID in savedIDs)
         {
-            GameObject newBtnObj = Instantiate(historyProfileButtonTemplate.gameObject, historyProfilesListContent);
-            newBtnObj.SetActive(true);
-            newBtnObj.name = "Btn_HistProfile_" + profileID;
+            GameObject newRow = Instantiate(historyProfileButtonTemplate, historyProfilesListContent);
+            newRow.SetActive(true);
+            newRow.name = "Row_HistProfile_" + profileID;
 
-            TMP_Text btnText = newBtnObj.GetComponentInChildren<TMP_Text>();
-            if (btnText != null) btnText.text = profileID;
+            string capturedID = profileID;
 
-            Button btn = newBtnObj.GetComponent<Button>();
-            if (btn != null)
+            Transform selectBtnT = newRow.transform.Find("Btn_SelectProfile");
+
+            Button selectBtn = null;
+            TMP_Text selectText = null;
+
+            if (selectBtnT != null)
             {
-                string capturedID = profileID;
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() => OpenHistoryLevelsForProfile(capturedID));
+                selectBtn = selectBtnT.GetComponent<Button>();
+                selectText = selectBtnT.GetComponentInChildren<TMP_Text>();
+            }
+            else
+            {
+                selectBtn = newRow.GetComponent<Button>();
+                selectText = newRow.GetComponentInChildren<TMP_Text>();
             }
 
-            spawnedHistoryProfileButtons.Add(newBtnObj);
+            if (selectText != null) selectText.text = profileID;
+
+            if (selectBtn != null)
+            {
+                selectBtn.onClick.RemoveAllListeners();
+                selectBtn.onClick.AddListener(() => OpenHistoryLevelsForProfile(capturedID));
+            }
+
+            spawnedHistoryProfileButtons.Add(newRow);
         }
     }
 
@@ -325,12 +604,9 @@ public class MainMenuManager_VR : MonoBehaviour
     }
 
     // ==========================================
-    // HISTORY SYSTEM (same logic as PC version)
+    // HISTORY SYSTEM
     // ==========================================
 
-    /// <summary>
-    /// Opens the History Levels panel for the chosen profile.
-    /// </summary>
     public void OpenHistoryLevelsForProfile(string profileID)
     {
         PlayerData data = SaveManager.LoadProfile(profileID);
@@ -436,11 +712,11 @@ public class MainMenuManager_VR : MonoBehaviour
             if (hasFreestyleRecords)
             {
                 string label = freestyleCount == 1 ? "sessão registada" : "sessões registadas";
-                txtHistFreestyleCount.text = $"{freestyleCount} {label}";
+                txtHistFreestyleCount.text = $"MODO LIVRE — {freestyleCount} {label}";
             }
             else
             {
-                txtHistFreestyleCount.text = "Sem sessões registadas";
+                txtHistFreestyleCount.text = "MODO LIVRE — sem sessões registadas";
             }
         }
 
@@ -504,6 +780,9 @@ public class MainMenuManager_VR : MonoBehaviour
     {
         historyLevelsPanel.SetActive(false);
         profileSelectionPanel.SetActive(true);
+
+        PopulateProfilesList();
+
         if (mainTitle != null) mainTitle.SetActive(true);
     }
 
@@ -514,11 +793,13 @@ public class MainMenuManager_VR : MonoBehaviour
     }
 
     // ==========================================
-    // MAIN GAME LEVELS LOGIC (same as PC)
+    // MAIN GAME LEVELS LOGIC
     // ==========================================
 
     private void InitializeAllLevels()
     {
+        if (levelButtons == null || levelButtons.Length == 0) return;
+
         for (int i = 0; i < levelButtons.Length; i++)
         {
             if (levelButtons[i] == null) continue;
@@ -582,7 +863,7 @@ public class MainMenuManager_VR : MonoBehaviour
     public void LoadGameLevel(int levelNumber)
     {
         string sceneName = "Level" + levelNumber;
-        Debug.Log($"A carregar a cena: {sceneName}");
+        Debug.Log($"A carregar a cena: {sceneName} (Steering: {SteeringPreference.CurrentSteering})");
         SceneManager.LoadScene(sceneName);
     }
 

@@ -129,12 +129,6 @@ public class MainMenuManager_PC : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         StartCoroutine(KeepCursorVisible());
 
-        // === DEBUG ===
-        Debug.Log($"[DEBUG] profileButtonTemplate: {(profileButtonTemplate == null ? "NULL" : profileButtonTemplate.name)}");
-        Debug.Log($"[DEBUG] profilesListContent: {(profilesListContent == null ? "NULL" : profilesListContent.name)}");
-        Debug.Log($"[DEBUG] historyProfileButtonTemplate: {(historyProfileButtonTemplate == null ? "NULL" : historyProfileButtonTemplate.name)}");
-        Debug.Log($"[DEBUG] historyProfilesListContent: {(historyProfilesListContent == null ? "NULL" : historyProfilesListContent.name)}");
-        // === /DEBUG ===
 
         // 1. Setup Initial Panels Visibility
         if (profileSelectionPanel != null) profileSelectionPanel.SetActive(true);
@@ -199,9 +193,7 @@ public class MainMenuManager_PC : MonoBehaviour
         }
         spawnedProfileButtons.Clear();
 
-        // === DEBUG ===
-        Debug.Log($"[DEBUG PopulateProfilesList] template: {(profileButtonTemplate == null ? "NULL" : profileButtonTemplate.name)} | content: {(profilesListContent == null ? "NULL" : profilesListContent.name)}");
-        // === /DEBUG ===
+
 
         if (profileButtonTemplate == null || profilesListContent == null)
         {
@@ -221,13 +213,6 @@ public class MainMenuManager_PC : MonoBehaviour
             newRow.SetActive(true);
             newRow.name = "Row_Profile_" + profileID;
 
-            // === DEBUG ===
-            Debug.Log($"[DEBUG] Spawned row '{newRow.name}'. Children:");
-            foreach (Transform child in newRow.transform)
-            {
-                Debug.Log($"  → '{child.name}' (active: {child.gameObject.activeSelf})");
-            }
-            // === /DEBUG ===
 
             string capturedID = profileID;
 
@@ -279,9 +264,7 @@ public class MainMenuManager_PC : MonoBehaviour
                     editBtn.onClick.RemoveAllListeners();
                     editBtn.onClick.AddListener(() => StartRenameProfile(capturedID, capturedLogin, capturedInput, capturedLoginText));
 
-                    // === DEBUG ===
-                    Debug.Log($"[DEBUG] Edit listener ADDED to {capturedID}");
-                    // === /DEBUG ===
+
                 }
             }
 
@@ -600,13 +583,7 @@ public class MainMenuManager_PC : MonoBehaviour
             newRow.SetActive(true);
             newRow.name = "Row_HistProfile_" + profileID;
 
-            // === DEBUG ===
-            Debug.Log($"[DEBUG Hist] Spawned row '{newRow.name}'. Children:");
-            foreach (Transform child in newRow.transform)
-            {
-                Debug.Log($"  → '{child.name}' (active: {child.gameObject.activeSelf})");
-            }
-            // === /DEBUG ===
+
 
             string capturedID = profileID;
 
@@ -615,9 +592,7 @@ public class MainMenuManager_PC : MonoBehaviour
             Button selectBtn = null;
             TMP_Text selectText = null;
 
-            // === DEBUG ===
-            Debug.Log($"[DEBUG Hist] Btn_SelectProfile found: {selectBtnT != null}");
-            // === /DEBUG ===
+
 
             if (selectBtnT != null)
             {
@@ -637,15 +612,11 @@ public class MainMenuManager_PC : MonoBehaviour
                 selectBtn.onClick.RemoveAllListeners();
                 selectBtn.onClick.AddListener(() => OpenHistoryForProfile(capturedID));
 
-                // === DEBUG ===
-                Debug.Log($"[DEBUG Hist] Listener added to '{capturedID}'");
-                // === /DEBUG ===
+
             }
             else
             {
-                // === DEBUG ===
-                Debug.LogWarning($"[DEBUG Hist] No Button found for '{capturedID}'!");
-                // === /DEBUG ===
+
             }
 
             spawnedHistoryProfileButtons.Add(newRow);

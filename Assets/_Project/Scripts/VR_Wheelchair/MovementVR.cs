@@ -225,13 +225,20 @@ public class MovementVR : MonoBehaviour
     }
 
     private void InitializeLevelSettings()
+{
+    currentMode = startingSpeedMode;
+    if (wheelController != null)
     {
-        currentMode = startingSpeedMode;
-        if (wheelController != null)
-        {
-            wheelController.SetSteeringType(startingSteeringMode);
-        }
+        // If the user chose a steering type from the main menu, use that.
+        // Otherwise fall back to the level's own default.
+        WheelController.SteeringType chosenSteering = SteeringPreference.HasUserChosen
+            ? SteeringPreference.CurrentSteering
+            : startingSteeringMode;
+
+        wheelController.SetSteeringType(chosenSteering);
+        Debug.Log($"[MovementVR] Steering set to: {chosenSteering} (user chose: {SteeringPreference.HasUserChosen})");
     }
+}
 
     private void SetupCharacterController()
     {
@@ -754,4 +761,6 @@ public class MovementVR : MonoBehaviour
 
     public void LockInput() { inputLocked = true; }
     public void UnlockInput() { inputLocked = false; }
+
+    
 }
