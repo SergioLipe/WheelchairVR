@@ -14,6 +14,9 @@ using System; // Required to format the date
 /// - Delete button (with confirmation popup)
 /// 
 /// Generic "Ver Histórico" opens an intermediate panel where the user picks which patient to consult.
+/// 
+/// When returning from a level (active profile already set), automatically skips the login panel
+/// and opens the level selection panel.
 /// </summary>
 public class MainMenuManager_PC : MonoBehaviour
 {
@@ -129,10 +132,31 @@ public class MainMenuManager_PC : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         StartCoroutine(KeepCursorVisible());
 
-
         // 1. Setup Initial Panels Visibility
-        if (profileSelectionPanel != null) profileSelectionPanel.SetActive(true);
-        if (levelSelectionPanel != null) levelSelectionPanel.SetActive(false);
+        // If we already have an active profile (came back from a level), skip login
+        // and go straight to the level selection panel.
+        bool hasActiveProfile = ProfileManager.Instance != null
+                                && ProfileManager.Instance.currentPlayer != null
+                                && !string.IsNullOrEmpty(ProfileManager.Instance.currentPlayer.profileID);
+
+        if (hasActiveProfile)
+        {
+            if (profileSelectionPanel != null) profileSelectionPanel.SetActive(false);
+            if (levelSelectionPanel != null) levelSelectionPanel.SetActive(true);
+
+            // Update the "current profile" label
+            if (txtCurrentProfile != null)
+                txtCurrentProfile.text = ProfileManager.Instance.currentPlayer.profileID;
+
+            // Track this as the last selected profile (for the history feature)
+            lastSelectedProfileID = ProfileManager.Instance.currentPlayer.profileID;
+        }
+        else
+        {
+            if (profileSelectionPanel != null) profileSelectionPanel.SetActive(true);
+            if (levelSelectionPanel != null) levelSelectionPanel.SetActive(false);
+        }
+
         if (historyLevelsPanel != null) historyLevelsPanel.SetActive(false);
         if (historyAttemptsPanel != null) historyAttemptsPanel.SetActive(false);
         if (historyProfileSelectorPanel != null) historyProfileSelectorPanel.SetActive(false);
@@ -186,14 +210,11 @@ public class MainMenuManager_PC : MonoBehaviour
     /// </summary>
     private void PopulateProfilesList()
     {
-        // Clean up previous rows
         foreach (GameObject oldBtn in spawnedProfileButtons)
         {
             if (oldBtn != null) Destroy(oldBtn);
         }
         spawnedProfileButtons.Clear();
-
-
 
         if (profileButtonTemplate == null || profilesListContent == null)
         {
@@ -213,16 +234,13 @@ public class MainMenuManager_PC : MonoBehaviour
             newRow.SetActive(true);
             newRow.name = "Row_Profile_" + profileID;
 
-
             string capturedID = profileID;
 
-            // Find the four child elements by name
             Transform loginBtnT = newRow.transform.Find("Btn_LoginProfile");
             Transform editBtnT = newRow.transform.Find("Btn_EditProfile");
             Transform deleteBtnT = newRow.transform.Find("Btn_DeleteProfile");
             Transform inputEditT = newRow.transform.Find("InputEditName");
 
-            // Btn_LoginProfile: set name text and login click
             Button loginBtn = null;
             TMP_Text loginText = null;
             if (loginBtnT != null)
@@ -243,7 +261,6 @@ public class MainMenuManager_PC : MonoBehaviour
                 Debug.LogWarning($"[MainMenuManager_PC] Btn_LoginProfile not found in row '{newRow.name}'.");
             }
 
-            // InputEditName: hidden by default
             TMP_InputField editInput = null;
             if (inputEditT != null)
             {
@@ -251,7 +268,6 @@ public class MainMenuManager_PC : MonoBehaviour
                 inputEditT.gameObject.SetActive(false);
             }
 
-            // Btn_EditProfile: toggle edit mode
             if (editBtnT != null)
             {
                 Button editBtn = editBtnT.GetComponent<Button>();
@@ -263,12 +279,9 @@ public class MainMenuManager_PC : MonoBehaviour
 
                     editBtn.onClick.RemoveAllListeners();
                     editBtn.onClick.AddListener(() => StartRenameProfile(capturedID, capturedLogin, capturedInput, capturedLoginText));
-
-
                 }
             }
 
-            // Btn_DeleteProfile: open confirmation
             if (deleteBtnT != null)
             {
                 Button deleteBtn = deleteBtnT.GetComponent<Button>();
@@ -310,15 +323,25 @@ public class MainMenuManager_PC : MonoBehaviour
         if (levelSelectionPanel != null) levelSelectionPanel.SetActive(true);
     }
 
+    /// <summary>
+    /// Public method to go back from the level selection panel to the profile selection panel.
+    /// Hook this to a "Trocar perfil" / "← Voltar" button in the LevelSelectionPanel if desired.
+    /// </summary>
+    public void BackToProfileSelection()
+    {
+        if (levelSelectionPanel != null) levelSelectionPanel.SetActive(false);
+        if (profileSelectionPanel != null) profileSelectionPanel.SetActive(true);
+
+        // Refresh the profiles list
+        PopulateProfilesList();
+
+        if (inputFieldProfileID != null) inputFieldProfileID.text = "";
+    }
+
     // ==========================================
     // EDIT (RENAME) PROFILE
     // ==========================================
 
-    /// <summary>
-    /// Activates inline edit mode for a profile row.
-    /// Hides the login button (with the name) and shows the input field with the current name.
-    /// On submit (Enter or focus lost), renames the profile and refreshes the list.
-    /// </summary>
     private void StartRenameProfile(string oldID, Button loginBtn, TMP_InputField editInput, TMP_Text loginText)
     {
         if (loginBtn == null || editInput == null) return;
@@ -327,7 +350,6 @@ public class MainMenuManager_PC : MonoBehaviour
         editInput.gameObject.SetActive(true);
         editInput.text = oldID;
 
-        // Hide the edit and delete buttons during edit mode
         Transform row = loginBtn.transform.parent;
         if (row != null)
         {
@@ -340,20 +362,18 @@ public class MainMenuManager_PC : MonoBehaviour
         editInput.Select();
         editInput.ActivateInputField();
 
-        // Listen for Enter / submit
         editInput.onEndEdit.RemoveAllListeners();
         editInput.onEndEdit.AddListener((newName) =>
         {
             FinishRenameProfile(oldID, newName, loginBtn, editInput, loginText);
         });
     }
+
     private void FinishRenameProfile(string oldID, string newName, Button loginBtn, TMP_InputField editInput, TMP_Text loginText)
     {
-        // Restore visual state
         if (editInput != null) editInput.gameObject.SetActive(false);
         if (loginBtn != null) loginBtn.gameObject.SetActive(true);
 
-        // Restore the edit and delete buttons
         if (loginBtn != null)
         {
             Transform row = loginBtn.transform.parent;
@@ -368,10 +388,7 @@ public class MainMenuManager_PC : MonoBehaviour
 
         string trimmed = newName != null ? newName.Trim() : "";
 
-        if (string.IsNullOrEmpty(trimmed) || trimmed == oldID)
-        {
-            return;
-        }
+        if (string.IsNullOrEmpty(trimmed) || trimmed == oldID) return;
 
         bool success = SaveManager.RenameProfile(oldID, trimmed);
 
@@ -388,13 +405,11 @@ public class MainMenuManager_PC : MonoBehaviour
             Debug.LogWarning($"[MainMenuManager_PC] Failed to rename '{oldID}' to '{trimmed}'.");
         }
     }
+
     // ==========================================
     // DELETE PROFILE WITH CONFIRMATION
     // ==========================================
 
-    /// <summary>
-    /// Called when user clicks the trash icon. Shows the confirmation popup.
-    /// </summary>
     public void RequestDeleteProfile(string profileID)
     {
         if (string.IsNullOrEmpty(profileID)) return;
@@ -409,7 +424,6 @@ public class MainMenuManager_PC : MonoBehaviour
         }
         else
         {
-            // No popup configured — delete immediately
             DeleteProfile(profileID);
             profileToDelete = null;
         }
@@ -537,14 +551,8 @@ public class MainMenuManager_PC : MonoBehaviour
     // HISTORY: PROFILE SELECTOR (intermediate panel)
     // ==========================================
 
-    /// <summary>
-    /// Called when the user clicks the generic "Ver Histórico" button.
-    /// Opens an intermediate panel with the list of all profiles. The user picks one
-    /// and that opens the actual history.
-    /// </summary>
     public void OpenHistoryProfileSelector()
     {
-        // If no intermediate panel is configured, fall back to old behavior
         if (historyProfileSelectorPanel == null)
         {
             OpenHistoryLevels();
@@ -567,8 +575,6 @@ public class MainMenuManager_PC : MonoBehaviour
         }
         spawnedHistoryProfileButtons.Clear();
 
-        Debug.Log($"[DEBUG Hist] template: {(historyProfileButtonTemplate == null ? "NULL" : historyProfileButtonTemplate.name)} | content: {(historyProfilesListContent == null ? "NULL" : historyProfilesListContent.name)}");
-
         if (historyProfileButtonTemplate == null || historyProfilesListContent == null) return;
 
         if (historyProfileButtonTemplate.activeSelf)
@@ -583,16 +589,12 @@ public class MainMenuManager_PC : MonoBehaviour
             newRow.SetActive(true);
             newRow.name = "Row_HistProfile_" + profileID;
 
-
-
             string capturedID = profileID;
 
             Transform selectBtnT = newRow.transform.Find("Btn_SelectProfile");
 
             Button selectBtn = null;
             TMP_Text selectText = null;
-
-
 
             if (selectBtnT != null)
             {
@@ -611,17 +613,12 @@ public class MainMenuManager_PC : MonoBehaviour
             {
                 selectBtn.onClick.RemoveAllListeners();
                 selectBtn.onClick.AddListener(() => OpenHistoryForProfile(capturedID));
-
-
-            }
-            else
-            {
-
             }
 
             spawnedHistoryProfileButtons.Add(newRow);
         }
     }
+
     public void CloseHistoryProfileSelector()
     {
         if (historyProfileSelectorPanel != null) historyProfileSelectorPanel.SetActive(false);
@@ -629,9 +626,6 @@ public class MainMenuManager_PC : MonoBehaviour
         if (mainTitle != null) mainTitle.SetActive(true);
     }
 
-    /// <summary>
-    /// Opens the history for a SPECIFIC profile (called when user picks from the intermediate panel).
-    /// </summary>
     public void OpenHistoryForProfile(string profileID)
     {
         if (string.IsNullOrEmpty(profileID)) return;
@@ -648,10 +642,6 @@ public class MainMenuManager_PC : MonoBehaviour
     // HISTORY SYSTEM
     // ==========================================
 
-    /// <summary>
-    /// Legacy entry point: opens the history for the last selected profile (or first available).
-    /// Kept for backwards compatibility if no intermediate panel is configured.
-    /// </summary>
     public void OpenHistoryLevels()
     {
         string selectedID = null;
@@ -682,9 +672,6 @@ public class MainMenuManager_PC : MonoBehaviour
         OpenHistoryLevelsForData(data);
     }
 
-    /// <summary>
-    /// Shared implementation: takes the loaded PlayerData and shows the history levels panel.
-    /// </summary>
     private void OpenHistoryLevelsForData(PlayerData data)
     {
         if (data == null) return;

@@ -15,6 +15,9 @@ using System;
 /// 
 /// Level selection panel has a steering type toggle (Frontal / Traseira)
 /// which is stored in SteeringPreference and applied when entering each level.
+/// 
+/// When returning from a level (active profile already set), automatically skips the login panel
+/// and opens the level selection panel.
 /// </summary>
 public class MainMenuManager_VR : MonoBehaviour
 {
@@ -127,8 +130,27 @@ public class MainMenuManager_VR : MonoBehaviour
     private void Start()
     {
         // 1. Setup Initial Panels Visibility
-        if (profileSelectionPanel != null) profileSelectionPanel.SetActive(true);
-        if (levelSelectionPanel != null) levelSelectionPanel.SetActive(false);
+        // If we already have an active profile (came back from a level), skip login
+        // and go straight to the level selection panel.
+        bool hasActiveProfile = ProfileManager.Instance != null
+                                && ProfileManager.Instance.currentPlayer != null
+                                && !string.IsNullOrEmpty(ProfileManager.Instance.currentPlayer.profileID);
+
+        if (hasActiveProfile)
+        {
+            if (profileSelectionPanel != null) profileSelectionPanel.SetActive(false);
+            if (levelSelectionPanel != null) levelSelectionPanel.SetActive(true);
+
+            // Update the "current profile" label
+            if (txtCurrentProfile != null)
+                txtCurrentProfile.text = ProfileManager.Instance.currentPlayer.profileID;
+        }
+        else
+        {
+            if (profileSelectionPanel != null) profileSelectionPanel.SetActive(true);
+            if (levelSelectionPanel != null) levelSelectionPanel.SetActive(false);
+        }
+
         if (historyLevelsPanel != null) historyLevelsPanel.SetActive(false);
         if (historyAttemptsPanel != null) historyAttemptsPanel.SetActive(false);
         if (historyProfileSelectorPanel != null) historyProfileSelectorPanel.SetActive(false);
@@ -398,6 +420,21 @@ public class MainMenuManager_VR : MonoBehaviour
         levelSelectionPanel.SetActive(true);
 
         RefreshSteeringButtonsVisual();
+    }
+
+    /// <summary>
+    /// Public method to go back from the level selection panel to the profile selection panel.
+    /// Hook this to a "Trocar perfil" / "← Voltar" button in the LevelSelectionPanel if desired.
+    /// </summary>
+    public void BackToProfileSelection()
+    {
+        if (levelSelectionPanel != null) levelSelectionPanel.SetActive(false);
+        if (profileSelectionPanel != null) profileSelectionPanel.SetActive(true);
+
+        // Refresh the profiles list
+        PopulateProfilesList();
+
+        if (inputFieldNewProfileID != null) inputFieldNewProfileID.text = "";
     }
 
     // ==========================================
