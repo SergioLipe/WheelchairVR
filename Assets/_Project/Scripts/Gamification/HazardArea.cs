@@ -23,7 +23,7 @@ public class HazardArea : MonoBehaviour
     public TMP_Text warningTextVR;
     public GameObject hazardPanelVR;
     public Transform vrCamera;
-    
+
     [Header("=== VR Hand Manager ===")]
     [Tooltip("Drag the Camera Offset (HandVisibilityManager) here")]
     public HandVisibilityManager handVisibilityManager;
@@ -35,14 +35,14 @@ public class HazardArea : MonoBehaviour
 
     private void Start()
     {
-        isGameOver = false; 
+        isGameOver = false;
     }
 
     private void OnEnable()
     {
         if (allowSafeExitIfAlreadyInside)
         {
-            playerIsSafe = false; 
+            playerIsSafe = false;
 
             // Vamos buscar o BoxCollider específico em vez de um Collider genérico
             BoxCollider myBox = GetComponent<BoxCollider>();
@@ -50,7 +50,7 @@ public class HazardArea : MonoBehaviour
             {
                 // 1. Calcula o centro exato no mundo
                 Vector3 boxCenter = transform.TransformPoint(myBox.center);
-                
+
                 // 2. Calcula o tamanho exato, ignorando se a escala tem o sinal de menos (-)
                 Vector3 boxHalfExtents = Vector3.Scale(myBox.size, transform.lossyScale) * 0.5f;
                 boxHalfExtents = new Vector3(Mathf.Abs(boxHalfExtents.x), Mathf.Abs(boxHalfExtents.y), Mathf.Abs(boxHalfExtents.z));
@@ -61,7 +61,7 @@ public class HazardArea : MonoBehaviour
                 {
                     if (hit.CompareTag("Player"))
                     {
-                        playerIsSafe = true; 
+                        playerIsSafe = true;
                         break;
                     }
                 }
@@ -69,8 +69,11 @@ public class HazardArea : MonoBehaviour
         }
     }
 
-  private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
+        // Checks if the script component is enabled in the Inspector. If not, exit the function.
+        if (!this.enabled) return;
+
         if (isGameOver) return;
 
         if (other.CompareTag("Player"))
@@ -98,7 +101,7 @@ public class HazardArea : MonoBehaviour
             // 3. === LÓGICA DO PC ===
             if (warningTextPC != null) warningTextPC.text = hazardMessage;
             if (hazardPanelPC != null) hazardPanelPC.SetActive(true);
-            
+
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
@@ -109,12 +112,12 @@ public class HazardArea : MonoBehaviour
                 if (vrCamera != null)
                 {
                     Vector3 spawnPos = vrCamera.position + (vrCamera.forward * vrPanelDistance);
-                    spawnPos.y = vrCamera.position.y; 
+                    spawnPos.y = vrCamera.position.y;
                     hazardPanelVR.transform.position = spawnPos;
                     hazardPanelVR.transform.LookAt(vrCamera);
-                    hazardPanelVR.transform.Rotate(0, 180, 0); 
+                    hazardPanelVR.transform.Rotate(0, 180, 0);
                 }
-                
+
                 hazardPanelVR.SetActive(true);
 
                 if (handVisibilityManager != null)
