@@ -802,9 +802,25 @@ public class MainMenuManager_VR : MonoBehaviour
                 }
 
                 historyText += $"<color=#A0E4FF><b>TENTATIVA {attemptCount}</b></color>   <color=#AAAAAA>•   {formattedDate}</color>\n";
-                historyText += $"Tempo: <b>{record.completionTime:F1}s</b>   |   Colisões: <color=#EF4444><b>{record.totalCollisions}</b></color>   |   Deslizes: <color=#FCD34D><b>{record.totalSlides}</b></color>\n";
-                historyText += "<color=#333333>──────────────────────────────────────────</color>\n\n";
 
+                // For Freestyle runs, show stars instead of time/collisions
+                if (record.levelName == "Freestyle" || record.levelName == "Level11" || record.levelName == "FreestyleLevel")
+                {
+                    historyText += $"Estrelas: <color=#FCD34D><b>{record.starsCollected} / {record.starsTotal}</b></color>";
+
+                    if (record.starsTotal > 0 && record.starsCollected >= record.starsTotal)
+                    {
+                        historyText += $"   <color=#16A34A><b>✓ Completo!</b></color>";
+                    }
+
+                    historyText += "\n";
+                }
+                else
+                {
+                    historyText += $"Tempo: <b>{record.completionTime:F1}s</b>   |   Colisões: <color=#EF4444><b>{record.totalCollisions}</b></color>   |   Deslizes: <color=#FCD34D><b>{record.totalSlides}</b></color>\n";
+                }
+
+                historyText += "<color=#333333>──────────────────────────────────────────</color>\n\n";
                 attemptCount++;
             }
         }
