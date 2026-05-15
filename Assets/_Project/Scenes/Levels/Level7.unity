@@ -97797,13 +97797,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "MANTER DIST\xC2NCIA DAS PESSOAS"
   allowSafeExitIfAlreadyInside: 0
-  warningTextPC: {fileID: 0}
-  hazardPanelPC: {fileID: 0}
-  warningTextVR: {fileID: 0}
-  hazardPanelVR: {fileID: 0}
-  vrCamera: {fileID: 0}
-  handVisibilityManager: {fileID: 0}
-  vrPanelDistance: 1.5
+  warningTextPC: {fileID: 1046119195}
+  hazardPanelPC: {fileID: 1866393508}
+  warningTextVR: {fileID: 313870460}
+  hazardPanelVR: {fileID: 748120842}
+  vrCamera: {fileID: 253842757}
+  handVisibilityManager: {fileID: 1754602822}
+  vrPanelDistance: 1
 --- !u!136 &1157063265
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -133627,13 +133627,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HazardArea
   hazardMessage: "MANTER DIST\xC2NCIA DAS PESSOAS"
   allowSafeExitIfAlreadyInside: 0
-  warningTextPC: {fileID: 0}
-  hazardPanelPC: {fileID: 0}
-  warningTextVR: {fileID: 0}
-  hazardPanelVR: {fileID: 0}
-  vrCamera: {fileID: 0}
-  handVisibilityManager: {fileID: 0}
-  vrPanelDistance: 1.5
+  warningTextPC: {fileID: 1046119195}
+  hazardPanelPC: {fileID: 1866393508}
+  warningTextVR: {fileID: 313870460}
+  hazardPanelVR: {fileID: 748120842}
+  vrCamera: {fileID: 253842757}
+  handVisibilityManager: {fileID: 1754602822}
+  vrPanelDistance: 1
 --- !u!136 &1581241739
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -148169,12 +148169,44 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1607275091041769665, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
+      propertyPath: levelID
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607275091041769665, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
+      propertyPath: maxSlidesFor2Stars
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607275091041769665, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
+      propertyPath: maxSlidesFor3Stars
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1607275091041769665, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
+      propertyPath: maxCollisionsFor2Stars
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2276575595077529177, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
       propertyPath: startingSpeedMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2391644417717566159, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
       propertyPath: startingSpeedMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513821211942291185, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
+      propertyPath: levelID
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513821211942291185, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
+      propertyPath: maxSlidesFor2Stars
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513821211942291185, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
+      propertyPath: maxSlidesFor3Stars
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513821211942291185, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
+      propertyPath: maxCollisionsFor2Stars
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2723986331194464518, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
@@ -183344,23 +183376,27 @@ PrefabInstance:
     - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
       propertyPath: vrCamera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 253842757}
     - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
       propertyPath: hazardPanel
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
+      propertyPath: hazardMessage
+      value: "MANTER DIST\xC2NCIA DAS PESSOAS"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
       propertyPath: hazardPanelPC
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1866393508}
     - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
       propertyPath: hazardPanelVR
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 748120842}
     - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
       propertyPath: warningTextPC
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1046119195}
     - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
       propertyPath: warningTextUI
       value: 
@@ -183368,11 +183404,15 @@ PrefabInstance:
     - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
       propertyPath: warningTextVR
       value: 
+      objectReference: {fileID: 313870460}
+    - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
+      propertyPath: vrPanelDistance
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
       propertyPath: handVisibilityManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1754602822}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -183434,7 +183474,7 @@ PrefabInstance:
     - target: {fileID: 2624965547875923603, guid: 794c4d3d5dc6e0748b2764ee90bedfaa, type: 3}
       propertyPath: vrCamera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 253842757}
     - target: {fileID: 2624965547875923603, guid: 794c4d3d5dc6e0748b2764ee90bedfaa, type: 3}
       propertyPath: hazardPanel
       value: 
@@ -183442,15 +183482,15 @@ PrefabInstance:
     - target: {fileID: 2624965547875923603, guid: 794c4d3d5dc6e0748b2764ee90bedfaa, type: 3}
       propertyPath: hazardPanelPC
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1866393508}
     - target: {fileID: 2624965547875923603, guid: 794c4d3d5dc6e0748b2764ee90bedfaa, type: 3}
       propertyPath: hazardPanelVR
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 748120842}
     - target: {fileID: 2624965547875923603, guid: 794c4d3d5dc6e0748b2764ee90bedfaa, type: 3}
       propertyPath: warningTextPC
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1046119195}
     - target: {fileID: 2624965547875923603, guid: 794c4d3d5dc6e0748b2764ee90bedfaa, type: 3}
       propertyPath: warningTextUI
       value: 
@@ -183458,11 +183498,15 @@ PrefabInstance:
     - target: {fileID: 2624965547875923603, guid: 794c4d3d5dc6e0748b2764ee90bedfaa, type: 3}
       propertyPath: warningTextVR
       value: 
+      objectReference: {fileID: 313870460}
+    - target: {fileID: 2624965547875923603, guid: 794c4d3d5dc6e0748b2764ee90bedfaa, type: 3}
+      propertyPath: vrPanelDistance
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2624965547875923603, guid: 794c4d3d5dc6e0748b2764ee90bedfaa, type: 3}
       propertyPath: handVisibilityManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1754602822}
     - target: {fileID: 4365799397373381258, guid: 794c4d3d5dc6e0748b2764ee90bedfaa, type: 3}
       propertyPath: m_Radius
       value: 0.3
