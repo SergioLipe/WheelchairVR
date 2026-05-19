@@ -1,18 +1,26 @@
-# 3D Electric Wheelchair Mobility Simulator 👩‍🦼🏙️
+# VR Electric Wheelchair Driving Simulator
 
-A realistic 3D "Serious Game" developed in Unity, created in collaboration with the **Associação de Paralisia Cerebral de Braga (APCB)**. 
+A Virtual Reality simulator for safe electric wheelchair driving training.
 
-This simulator functions as an accessible digital tool focused on urban navigation, spatial awareness, and driving training for electric wheelchair users.
+## About
 
-## 🎯 Project Objectives
+This simulator provides a safe, immersive environment for practising electric wheelchair driving. Driving an electric wheelchair takes motor coordination, spatial awareness, and quick reactions to obstacles — skills that need time and repetition to build, yet real-world training isn't always practical, requiring large spaces, constant supervision, and a wheelchair that may not be available. Built for rehabilitation contexts, this simulator removes those barriers, letting users develop and refine their driving skills at their own pace, as many times as they need.
 
-* **Immersive Training:** Create an immersive and interactive virtual environment specifically designed for wheelchair driving training and spatial recognition.
-* **Accessible UX/UI:** Develop an interface adapted to the motor and cognitive limitations of the end-users, ensuring readability and clear feedback.
+## Features
 
-## ✨ Key Features
+- **10 progressive training levels** — Start with the fundamentals (straight-line driving, 90° and 180° turns, an obstacle course, reverse driving, and navigating a tight apartment), then move outdoors to real-world urban challenges: moving pedestrians, ramps, traffic lights, and pedestrian crossings.
+- **Freestyle mode** — Explore an open virtual city with no time limit. Roam the streets to discover collectible stars scattered across the city, perfect for consolidating skills in a relaxed setting.
+- **Two ways to play** — A fully immersive first-person VR experience on the Meta Quest 3, or a desktop version playable with keyboard and mouse.
+- **Realistic wheelchair physics** — Acceleration, braking, and turning behave like the real thing. The VR version also lets you choose between front-wheel and rear-wheel steering.
+- **Built-in gamification** — Earn one to three stars per level based on your performance, unlock levels as you progress, and get visual and audio rewards for clean runs.
+- **Performance tracking** — Each patient has their own profile. Every run records the completion time, frontal and rear collisions, and lateral slips, with a full session history so progress can be reviewed over time.
 
-* **Virtual Reality (VR) Integration:** Fully integrated VR support to provide an immersive and highly realistic training experience.
-* **Adaptive Hardware Support:** Compatible with joysticks for authentic driving practice.
-* **Gamification Elements:** Incorporates engaging game mechanics to motivate users, track progress, and make the learning process more enjoyable.
-* **Multisensory Feedback:** Provides immediate visual and audio cues during navigation and hazard detection to ensure a highly responsive experience.
-* **Dynamic Urban Environment:** Interactive streets populated with moving pedestrians, active car traffic, and realistic obstacles to simulate daily navigation challenges.
+## Built With
+
+- **Unity 3D** — game engine
+- **C#** — programming language
+- **Meta Quest 3** — VR headset support
+
+---
+
+Developed in Unity 3D in partnership with a rehabilitation institution, this project makes wheelchair driving training accessible to everyone who needs it — one practice run at a time.
