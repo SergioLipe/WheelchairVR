@@ -13,8 +13,6 @@ It runs both as a fully immersive **Virtual Reality experience on the Meta Quest
 
 ## Demo Video
 
-[![Watch the demo](https://img.youtube.com/vi/VZxXgHsz650/maxresdefault.jpg)](https://www.youtube.com/watch?v=VZxXgHsz650&t=86s)
-
 ▶️ **[Watch the full demo on YouTube](https://www.youtube.com/watch?v=VZxXgHsz650&t=86s)**
 
 ## Screenshots
@@ -48,7 +46,6 @@ You can download the simulator from the **[itch.io page](https://lipepipo.itch.i
 1. Go to the [itch.io page](https://lipepipo.itch.io/wheelchairsimulator) and download the **PC version** (`.zip` file).
 2. Extract the `.zip` file to a folder of your choice.
 3. Open the extracted folder and run **`WheelchairSimulator.exe`**.
-4. Use the keyboard and mouse to drive (see Controls below).
 
 ### Virtual Reality version (Meta Quest 3)
 
@@ -63,18 +60,6 @@ You can download the simulator from the **[itch.io page](https://lipepipo.itch.i
 
 > **Note:** Installing an `.apk` requires Developer Mode enabled on the Meta Quest. This needs a (free) Meta developer account.
 
-## Controls
-
-### PC / Desktop
-- **W / A / S / D** or **Arrow keys** — Move the wheelchair
-- **Mouse** — Look around
-- *(Add any other keys here — brake, pause, speed mode, etc.)*
-
-### VR (Meta Quest 3)
-- **Controller joystick** — Move the wheelchair
-- **Brake / Move** — As shown on the in-game virtual joystick
-- *(Add the remaining VR controls here)*
-
 ## Built With
 
 - **Unity 3D** — game engine
@@ -88,4 +73,4 @@ You can download the simulator from the **[itch.io page](https://lipepipo.itch.i
 
 ## Acknowledgements
 
-Developed in Unity 3D in partnership with a rehabilitation institution. This project makes wheelchair driving training accessible to everyone who needs it — one practice run at a time.
+Developed in Unity 3D in partnership with the [Associação de Paralisia Cerebral de Braga](http://www.apcb.pt/) (APCB). This project makes wheelchair driving training accessible to everyone who needs it — one practice run at a time.
