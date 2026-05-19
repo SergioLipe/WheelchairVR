@@ -17,14 +17,19 @@ It runs both as a fully immersive **Virtual Reality experience on the Meta Quest
 
 ## Screenshots
 
-### Indoor training — tight apartment navigation
-![Indoor level: navigating a bathroom](screenshots/01-indoor-bathroom.png)
+### Indoor
 
-### Outdoor training — pedestrian crossing
-![Outdoor level: pedestrian crossing](screenshots/02-outdoor-crossing.png)
+<p>
+  <img src="screenshots/interior-01.png" width="420" alt="Indoor training" />
+  <img src="screenshots/interior-02.png" width="420" alt="Indoor training - apartment" />
+</p>
 
-### Freestyle mode — open city exploration
-![Freestyle mode: exploring the virtual city](screenshots/03-freestyle-city.png)
+### Outdoor
+
+<p>
+  <img src="screenshots/exterior-01.png" width="420" alt="Outdoor training" />
+  <img src="screenshots/exterior-02.png" width="420" alt="Outdoor training - park" />
+</p>
 
 ## Features
 
