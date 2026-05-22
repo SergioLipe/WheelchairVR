@@ -1,14 +1,41 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FoveationManager : MonoBehaviour
 {
+    [Header("Foveation Settings")]
     [Tooltip("0=Off, 1=Low, 2=Medium, 3=High, 4=HighTop")]
     [Range(0, 4)]
-    public int foveationLevel = 3;
+    public int foveationLevel = 4;  // 4 = HighTop, mais agressiva
+
+    private static FoveationManager instance;
+
+    void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
     void Start()
     {
-        Debug.Log("[FoveationManager] Start - configuring foveation via OVRManager");
+        Debug.Log("[FoveationManager] Start - applying foveation");
+        ApplyFoveation();
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log($"[FoveationManager] Scene '{scene.name}' loaded - reapplying foveation");
         ApplyFoveation();
     }
 
@@ -22,17 +49,14 @@ public class FoveationManager : MonoBehaviour
         #if !UNITY_EDITOR && UNITY_ANDROID
         try
         {
-            // Fixed Foveated Rendering via OVRManager (Meta XR Core SDK)
             OVRManager.FixedFoveatedRenderingLevel level = (OVRManager.FixedFoveatedRenderingLevel)foveationLevel;
             OVRManager.fixedFoveatedRenderingLevel = level;
-            
-            // Confirma o que ficou
             var actual = OVRManager.fixedFoveatedRenderingLevel;
             Debug.Log($"[FoveationManager] Set FFR to {level}, OVRManager reports: {actual}");
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"[FoveationManager] Failed: {e.Message}\n{e.StackTrace}");
+            Debug.LogError($"[FoveationManager] Failed: {e.Message}");
         }
         #endif
     }

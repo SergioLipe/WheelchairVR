@@ -18,8 +18,8 @@ RenderSettings:
   m_FogColor: {r: 0.78431374, g: 0.8235294, b: 0.8627451, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
-  m_LinearFogStart: 50
-  m_LinearFogEnd: 90
+  m_LinearFogStart: 30
+  m_LinearFogEnd: 70
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -8734,7 +8734,7 @@ MonoBehaviour:
   extraVisibleLayers:
     serializedVersion: 2
     m_Bits: 0
-  dynamicCullingMask: 1
+  dynamicCullingMask: 0
   externalCompositionBackdropColorRift: {r: 0, g: 1, b: 0, a: 1}
   externalCompositionBackdropColorQuest: {r: 0, g: 0, b: 0, a: 0}
   capturingCameraDevice: 0
@@ -197465,7 +197465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7010759004351645406, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
       propertyPath: far clip plane
-      value: 100
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 7053706660467431325, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
       propertyPath: m_Name

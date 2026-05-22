@@ -1660,6 +1660,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62276983}
   m_CullTransparentMesh: 1
+--- !u!1 &67327268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 67327269}
+  m_Layer: 2
+  m_Name: MenuSeatTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &67327269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67327268}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.318, z: -0.017}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1481039153}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &76332996
 GameObject:
   m_ObjectHideFlags: 0
@@ -27378,7 +27409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0.3764706, g: 0.64705884, b: 0.98039216, a: 0.8627451}
+  m_EffectColor: {r: 0.8627451, g: 0.14901961, b: 0.14901961, a: 0.8627451}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
 --- !u!114 &1065128183
@@ -35740,7 +35771,7 @@ PrefabInstance:
     - target: {fileID: 7150454979758387702, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: seatCenter
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 67327269}
     - target: {fileID: 7150454979758387702, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: warningText
       value: 
@@ -35794,9 +35825,13 @@ PrefabInstance:
       value: Wheelchair_VR
       objectReference: {fileID: 0}
     - target: {fileID: 8864660255013471715, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864660255013471715, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: seatTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 67327269}
     - target: {fileID: 8926193015752642927, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -35819,8 +35854,51 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5270989495543095939, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 580923150}
-    m_AddedComponents: []
+    - targetCorrespondingSourceObject: {fileID: 1820659843255286021, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 67327269}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 791866969771498384, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1481039156}
   m_SourcePrefab: {fileID: 100100000, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+--- !u!4 &1481039153 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1820659843255286021, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+  m_PrefabInstance: {fileID: 1481039152}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1481039154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 791866969771498384, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+  m_PrefabInstance: {fileID: 1481039152}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1481039155 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5704449137230921962, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+  m_PrefabInstance: {fileID: 1481039152}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481039154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.CoreUtils::Unity.XR.CoreUtils.XROrigin
+--- !u!114 &1481039156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481039154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 334fa4c4a56cfca40884a329304c7baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VRMenuCalibrator
+  xrOrigin: {fileID: 1481039155}
+  headCamera: {fileID: 2140042863}
+  menuTarget: {fileID: 67327269}
+  recenterAction: {fileID: 2906449369840628376, guid: da803d4aa849f234d9ed6cbd213f2b73, type: 3}
 --- !u!1 &1487089590
 GameObject:
   m_ObjectHideFlags: 0
