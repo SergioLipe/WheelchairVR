@@ -45,6 +45,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("C:/Unity/WheelchairVR_Prototype/.utmp/RelWithDebInfo/5pw3k2v4/arm64-v8a/GameActivity/cmake_install.cmake")
+  include("C:/Unity/WheelchairVR_Prototype/.utmp/RelWithDebInfo/5pw3k2v4/arm64-v8a/FramePacing/cmake_install.cmake")
 
 endif()
 
