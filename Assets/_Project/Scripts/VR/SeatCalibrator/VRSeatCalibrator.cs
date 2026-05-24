@@ -1,45 +1,61 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 using Unity.XR.CoreUtils;
 
+/// <summary>
+/// Snaps the VR player into the wheelchair seat position with correct orientation.
+/// Auto-calibrates on Start with a delay, and supports manual recentering via button.
+/// Meta VRC compliant (recenter feature required by Meta Store).
+/// </summary>
 public class VRSeatCalibrator : MonoBehaviour
 {
-    // --- VARIABLES ---
-
     [Header("Core References")]
-    [SerializeField] private XROrigin xrOrigin; // The root of the VR player that moves the whole room
-    [SerializeField] private Transform headCamera; // The player's actual VR headset position/rotation
-    [SerializeField] private Transform seatTarget; // The exact physical spot the player should be sitting
+    [SerializeField] private XROrigin xrOrigin;
+    [SerializeField] private Transform headCamera;
+    [SerializeField] private Transform seatTarget;
 
     [Header("Startup Settings")]
-    // Exactly how many seconds to wait before auto-clicking recenter. Set to 3 for your 3-second delay.
+    [Tooltip("Seconds to wait before auto-calibrating on scene start")]
     [SerializeField] private float startDelay = 3.0f;
 
     [Header("Input Setup")]
-    // The physical controller button (e.g., Right Thumbstick Click) used to trigger manual recentering
+    [Tooltip("Button to manually trigger recenter (e.g. Right Thumbstick Click or B button)")]
     [SerializeField] private InputActionReference recenterAction;
 
-    // --- EVENTS ---
+    [Header("Anti-Spam")]
+    [Tooltip("Minimum time between recenter actions (seconds)")]
+    [SerializeField] private float recenterCooldown = 0.5f;
 
-    // Tells the Enforcer script (and any other scripts listening) that we just recentered.
-    // This is how the two scripts communicate without directly interfering with each other.
+    [Header("Feedback (Optional)")]
+    [Tooltip("Audio source to play recenter feedback")]
+    [SerializeField] private AudioSource feedbackAudio;
+    [Tooltip("Sound to play when recentered")]
+    [SerializeField] private AudioClip recenterSound;
+
+    [Header("Haptic Feedback (Optional)")]
+    [SerializeField] private InputActionReference leftHapticAction;
+    [SerializeField] private InputActionReference rightHapticAction;
+    [Range(0f, 1f)]
+    [SerializeField] private float hapticIntensity = 0.2f;
+    [SerializeField] private float hapticDuration = 0.1f;
+
+    // Event that fires when recentered (other scripts can subscribe)
     public System.Action OnCalibrated;
 
-    // --- UNITY LIFECYCLE METHODS ---
+    private float lastRecenterTime = -999f;
 
     private void OnEnable()
     {
-        // When this script is turned on, start listening for the recenter button press
         if (recenterAction != null && recenterAction.action != null)
         {
             recenterAction.action.Enable();
-            recenterAction.action.performed += OnRecenter; // Call 'OnRecenter' when pressed
+            recenterAction.action.performed += OnRecenter;
         }
     }
 
     private void OnDisable()
     {
-        // Stop listening for the button when the script is turned off to prevent errors
         if (recenterAction != null && recenterAction.action != null)
         {
             recenterAction.action.performed -= OnRecenter;
@@ -48,55 +64,69 @@ public class VRSeatCalibrator : MonoBehaviour
 
     private void Start()
     {
-        // Print a message so you know the countdown actually started
-        Debug.Log($"[VRSeatCalibrator] Timer started! Auto-recentering in {startDelay} seconds...");
-
-        // This literally just calls the Calibrate() function after the exact delay you set.
-        // It acts exactly the same as you pressing the physical button, just automatically after X seconds.
+        Debug.Log($"[VRSeatCalibrator] Auto-calibrating in {startDelay} seconds...");
         Invoke(nameof(Calibrate), startDelay);
     }
 
-    // --- INPUT CALLBACKS ---
-
-    // This method is triggered whenever the player presses the designated recenter button
     private void OnRecenter(InputAction.CallbackContext ctx)
     {
         Calibrate();
     }
 
-    // --- CORE LOGIC ---
-
-    // The main function that magically snaps the player into the wheelchair
     public void Calibrate()
     {
-        // Safety check: if we forgot to drag the objects in the Inspector, stop here to avoid a crash
-        if (xrOrigin == null || headCamera == null || seatTarget == null) return;
+        // Anti-spam protection
+        if (Time.time - lastRecenterTime < recenterCooldown) return;
+        lastRecenterTime = Time.time;
 
-        // --- 1. Align Rotation ---
-        // Calculate the difference in the Y-axis (left/right turning) between where the headset 
-        // is looking and where the wheelchair is facing.
+        // Safety check
+        if (xrOrigin == null || headCamera == null || seatTarget == null)
+        {
+            Debug.LogWarning("[VRSeatCalibrator] Missing references — cannot calibrate.");
+            return;
+        }
+
+        // 1. Align Rotation
         float yawDiff = seatTarget.eulerAngles.y - headCamera.eulerAngles.y;
-
-        // Rotate the entire VR room (XR Origin) AROUND the player's head. 
-        // This ensures the player's physical head stays in the same spot while the world spins to align.
         xrOrigin.transform.RotateAround(headCamera.position, Vector3.up, yawDiff);
-
-        // Force Unity's physics engine to instantly update positions after the sudden rotation
         Physics.SyncTransforms();
 
-        // --- 2. Align Position (The "Glue") ---
-        // Calculate the exact world distance from the current headset position to the perfect seat position
+        // 2. Align Position
         Vector3 posDiff = seatTarget.position - headCamera.position;
-
-
-        // Move the whole world (XR Origin) by that exact distance so the headset lands perfectly on the seat
         xrOrigin.transform.position += posDiff;
 
-        // --- 3. Fire the Event ---
-        // Shout out to the Enforcer script: "Hey, I moved the player! Update your boundaries!"
+        // 3. Feedback
+        PlayRecenterFeedback();
+
+        // 4. Fire event
         OnCalibrated?.Invoke();
 
-        // Print a confirmation message in the Unity Console for debugging
         Debug.Log("[VRSeatCalibrator] Snapped perfectly to the Wheelchair Seat!");
+    }
+
+    private void PlayRecenterFeedback()
+    {
+        // Audio
+        if (feedbackAudio != null && recenterSound != null)
+        {
+            feedbackAudio.PlayOneShot(recenterSound);
+        }
+
+        // Haptics
+        SendHaptic(leftHapticAction);
+        SendHaptic(rightHapticAction);
+    }
+
+    private void SendHaptic(InputActionReference hapticRef)
+    {
+        if (hapticRef == null || hapticRef.action == null) return;
+        foreach (var control in hapticRef.action.controls)
+        {
+            if (control.device is XRControllerWithRumble rumble)
+            {
+                rumble.SendImpulse(hapticIntensity, hapticDuration);
+                return;
+            }
+        }
     }
 }

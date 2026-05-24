@@ -2,9 +2,8 @@ using UnityEngine;
 
 /// <summary>
 /// Acts as a "Lane Magnet" for straight roads. 
-/// Gently pulls cars sideways to the exact center line of the lane to fix positional drift.
-/// Uses a Dot Product filter to ignore cross-traffic at intersections.
-/// Also resets the car's teleport timer so the traffic system knows the car is safely on a road.
+/// Gently pulls cars sideways to the center of the lane.
+/// Uses Dot Product filter to ignore cross-traffic at intersections.
 /// </summary>
 public class RoadLaneAligner : MonoBehaviour
 {
@@ -14,40 +13,58 @@ public class RoadLaneAligner : MonoBehaviour
     [Tooltip("How aligned the car must be to the road to be pulled (0.8 = roughly 36 degrees tolerance).")]
     public float requiredAlignment = 0.8f;
 
+    [Header("=== Optimization ===")]
+    [Tooltip("Skip alignment every N FixedUpdates. 1=every, 2=half rate, 3=third")]
+    [Range(1, 5)]
+    public int updateFrequency = 2;
+
+    // [OPT] Cache de transform
+    private Transform myTransform;
+    private int frameCounter = 0;
+
+    void Awake()
+    {
+        myTransform = transform;
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        // Attempt to find the CarCityMovement script on the object that entered the trigger
-        CarCityMovement car = other.GetComponentInParent<CarCityMovement>();
+        // [OPT] Throttle — não alinha cada FixedUpdate
+        frameCounter++;
+        if (frameCounter % updateFrequency != 0) return;
 
-        // Proceed ONLY if it is a valid car
-        if (car != null) 
+        // [OPT] GetComponentInParent is expensive — try GetComponent first
+        CarCityMovement car = other.GetComponent<CarCityMovement>();
+        if (car == null)
         {
-            // --- FAILSAFE RESET ---
-            // Tell the car it is safely inside a lane, preventing the 5-second teleport failsafe from triggering
-            car.timeOffMagnet = 0f;
+            car = other.GetComponentInParent<CarCityMovement>();
+            if (car == null) return;
+        }
 
-            // We DO NOT align them if they are in the middle of a forced intersection turn
-            if (!car.isTurning)
-            {
-                // --- DIRECTIONAL FILTER (Cross-Traffic Protection) ---
-                // Compare the magnet's forward direction (Z-axis) with the car's forward direction.
-                // This returns 1 if parallel, 0 if perpendicular (crossing), and -1 if backwards.
-                float directionMatch = Vector3.Dot(transform.forward, car.transform.forward);
+        // Failsafe reset
+        car.timeOffMagnet = 0f;
 
-                // Only pull the car if it is driving in the same general direction as the magnet.
-                // Cross-traffic will have a directionMatch near 0, so they will be completely ignored!
-                if (directionMatch >= requiredAlignment)
-                {
-                    // 1. Convert the car's world position into the road's local space
-                    Vector3 localCarPos = transform.InverseTransformPoint(car.transform.position);
+        if (car.isTurning) return;
 
-                    // 2. In local space, X is left/right. We smoothly Lerp the X position to 0 (the exact center of the road)
-                    localCarPos.x = Mathf.Lerp(localCarPos.x, 0f, Time.deltaTime * alignmentSpeed);
+        // [OPT] cache transform properties
+        Transform carTransform = car.transform;
+        Vector3 myForward = myTransform.forward;
+        Vector3 carForward = carTransform.forward;
 
-                    // 3. Convert the position back to world space and apply it to the car
-                    car.transform.position = transform.TransformPoint(localCarPos);
-                }
-            }
+        // Directional filter
+        float directionMatch = Vector3.Dot(myForward, carForward);
+
+        if (directionMatch >= requiredAlignment)
+        {
+            // [OPT] cache car position
+            Vector3 carWorldPos = carTransform.position;
+
+            Vector3 localCarPos = myTransform.InverseTransformPoint(carWorldPos);
+            
+            // [OPT] cache deltaTime — FixedUpdate so we use fixedDeltaTime
+            localCarPos.x = Mathf.Lerp(localCarPos.x, 0f, Time.fixedDeltaTime * alignmentSpeed * updateFrequency);
+
+            carTransform.position = myTransform.TransformPoint(localCarPos);
         }
     }
 }

@@ -2,65 +2,58 @@ using UnityEngine;
 
 /// <summary>
 /// Controls city traffic with straight-line driving and curve-turning at intersections.
-/// Features: Stop Zones, NonStop Zones, Player Detection, Failsafes, Auto-Teleport Recovery, Stationary Failsafe, External Trigger-based Turning, and Two-Clip Engine Audio.
+/// Features: Stop Zones, NonStop Zones, Player Detection, Failsafes, Auto-Teleport Recovery,
+/// Stationary Failsafe, External Trigger-based Turning, and Two-Clip Engine Audio.
+/// Optimized for Meta Quest 3 VR performance.
 /// </summary>
 public class CarCityMovement : MonoBehaviour
 {
     [Header("=== Movement Settings ===")]
-    [Tooltip("How fast the car moves forward on a straight road.")]
     public float speed = 10f;
-
-    [Tooltip("Controlled by the Traffic Light. True = Green Light (Go), False = Red Light (Stop).")]
     public bool canMove = true;
 
     [Header("=== Zone Settings ===")]
-    [Tooltip("The Tag this car looks for to stop at red lights.")]
     public string targetStopZoneTag = "StopZone";
-
-    [Tooltip("The Tag for areas where the car MUST NOT stop for red lights, like the middle of an intersection.")]
     public string neverStopZoneTag = "NonStopZone";
 
     [Header("=== Collision Sensor Settings ===")]
-    [Tooltip("Pushes the sensor origin forward to the front bumper so the car doesn't overlap before stopping.")]
     public float sensorFrontOffset = 1.4f;
-    [Tooltip("How far the main forward sensor looks ahead (in meters).")]
     public float frontSensorLength = 4.5f;
-
-    [Tooltip("How far the oblique (angled) sensors look ahead.")]
     public float obliqueSensorLength = 4f;
-
-    [Tooltip("The angle (in degrees) for the oblique sensors to point left and right.")]
     public float obliqueSensorAngle = 25f;
 
+    [Header("=== Sensor Optimization ===")]
+    [Tooltip("Layers the sensors should detect. Set to only relevant layers (Cars, Player) for big performance gains!")]
+    public LayerMask sensorLayerMask = ~0;
+
+    [Tooltip("Skip sensor checks every N frames. 1 = every frame, 2 = every other frame, 3 = every 3rd frame.")]
+    [Range(1, 5)]
+    public int sensorUpdateFrequency = 2;
+
     [Header("=== Stuck Failsafe Settings ===")]
-    [Tooltip("How many seconds to wait behind a side obstacle before ignoring it.")]
     public float maxWaitTime = 5f;
 
     [Header("=== Teleport Recovery Settings ===")]
-    [Tooltip("How many seconds the car can be off a magnet before it respawns.")]
     public float maxTimeOffMagnet = 5f;
-
-    [Tooltip("How many seconds the car can be completely stationary/blocked before it respawns.")]
     public float maxStationaryTime = 15f;
 
     [HideInInspector]
-    public float timeOffMagnet = 0f; // Tracked by RoadLaneAligner
+    public float timeOffMagnet = 0f;
 
     [Header("=== Audio Settings ===")]
-    [Tooltip("Drag the sound for when the car is stopped here.")]
     public AudioClip idleSound;
-    [Tooltip("Drag the sound for when the car is driving here.")]
     public AudioClip movingSound;
-    [Tooltip("Default volume for the engine.")]
     public float engineVolume = 0.3f;
 
-    // The AudioSource is now private. The script will create it automatically!
-    private AudioSource engineAudio;
+    [Header("=== Debug ===")]
+    [Tooltip("Draw sensor rays in Scene view (Editor only — auto-disabled in builds)")]
+    public bool drawDebugRays = false;
 
-    // We need this to remember what the car was doing in the last frame
+    // Private audio
+    private AudioSource engineAudio;
     private bool wasMoving = false;
 
-    // --- Internal State Tracking ---
+    // Internal State
     private bool isInStopZone = false;
     private bool isInNeverStopZone = false;
     private float stuckTimer = 0f;
@@ -68,42 +61,57 @@ public class CarCityMovement : MonoBehaviour
     private float recoveryTimer = 0f;
 
     [HideInInspector]
-    public bool isYielding = false; // True when waiting for a player at a crosswalk
+    public bool isYielding = false;
 
-    // --- Stationary Failsafe Tracking ---
+    // Stationary Failsafe
     private float stationaryTimer = 0f;
     private Vector3 lastPosition;
 
-    // --- Turning Logic Tracking ---
+    // Turning Logic
     [HideInInspector] public bool isTurning = false;
     private float degreesTurned = 0f;
     private float currentTargetAngle = 0f;
     private float turnDirection = 1f;
-
-    // Variables provided by the external ConditionalTurnZone
     private float currentTurnSpeed = 120f;
     private float currentSpeedDuringTurn = 3f;
 
+    // [OPT] Cache de transform
+    private Transform myTransform;
+
+    // [OPT] Pre-allocated buffer para Physics queries (zero garbage!)
+    private static readonly RaycastHit[] s_RaycastBuffer = new RaycastHit[8];
+
+    // [OPT] Cache do instance ID (não muda nunca)
+    private int cachedInstanceID;
+
+    // [OPT] Cache dos resultados dos sensores (não recalcula todos os frames)
+    private bool cachedCenterBlocked = false;
+    private bool cachedObliqueBlocked = false;
+    private int frameCounter = 0;
+
+    // [OPT] Cache do offset vertical do sensor (não muda nunca)
+    private static readonly Vector3 SENSOR_HEIGHT_OFFSET = new Vector3(0f, 0.5f, 0f);
+
+    void Awake()
+    {
+        myTransform = transform;
+        cachedInstanceID = gameObject.GetInstanceID();
+    }
+
     void Start()
     {
-        // Store the initial position as soon as the game starts
-        lastPosition = transform.position;
+        lastPosition = myTransform.position;
 
-        // --- AUTO-GENERATE AUDIO SOURCE ---
+        // Auto-generate AudioSource
         if (idleSound != null && movingSound != null)
         {
             engineAudio = gameObject.AddComponent<AudioSource>();
             engineAudio.loop = true;
-            engineAudio.spatialBlend = 1f; // Full 3D Sound
-
-            // --- 3D AUDIO---
-            engineAudio.rolloffMode = AudioRolloffMode.Linear; // Forces sound to drop evenly to 0
-            engineAudio.minDistance = 2f;  // Sound is at max volume within 2 meters
-            engineAudio.maxDistance = 15f; // Sound goes completely SILENT at 20 meters
-
+            engineAudio.spatialBlend = 1f;
+            engineAudio.rolloffMode = AudioRolloffMode.Linear;
+            engineAudio.minDistance = 2f;
+            engineAudio.maxDistance = 15f;
             engineAudio.volume = engineVolume;
-
-            // Start the car with the idle sound
             engineAudio.clip = idleSound;
             engineAudio.Play();
             wasMoving = false;
@@ -116,87 +124,90 @@ public class CarCityMovement : MonoBehaviour
 
     void Update()
     {
-        // 1. Check sensors separately for Front and Oblique obstacles
-        bool centerBlocked;
-        bool obliqueBlocked;
-        CheckSensors(out centerBlocked, out obliqueBlocked);
+        // [OPT] cache deltaTime once
+        float dt = Time.deltaTime;
 
-        // 2. Check legal movement (green light OR outside of a red light stop zone)
-        // AND ensure the car is not yielding to a pedestrian.
+        // [OPT] Throttle sensor checks (carros não precisam checar cada frame)
+        // Cada carro tem um offset diferente baseado no instance ID — evita todos a checar no mesmo frame
+        frameCounter++;
+        bool shouldCheckSensors = (frameCounter % sensorUpdateFrequency) == (cachedInstanceID % sensorUpdateFrequency);
+
+        if (shouldCheckSensors)
+        {
+            CheckSensors(out cachedCenterBlocked, out cachedObliqueBlocked);
+        }
+
+        bool centerBlocked = cachedCenterBlocked;
+        bool obliqueBlocked = cachedObliqueBlocked;
+
+        // 2. Check legal movement
         bool wantsToMove = (canMove || !isInStopZone) && !isYielding;
 
         // 3. NON-STOP ZONE OVERRIDE
         if (isInNeverStopZone)
         {
-            // Force the car to ignore Red Lights to clear the intersection.
-            // Sensors remain active to prevent hitting the player.
             wantsToMove = !isYielding;
         }
 
-        // --- 4. TELEPORT FAILSAFE TIMER (Off Magnet) ---
-        // We pause the timer if the car is legally waiting at a red light or crosswalk
+        // 4. TELEPORT FAILSAFE TIMER (Off Magnet)
         if (isInStopZone || !canMove || isYielding)
         {
             timeOffMagnet = 0f;
         }
         else
         {
-            timeOffMagnet += Time.deltaTime;
+            timeOffMagnet += dt;
             if (timeOffMagnet >= maxTimeOffMagnet)
             {
                 TeleportToNextSpawn();
-                return; // Stop running code for this frame
+                return;
             }
         }
 
-        // --- 5. STATIONARY FAILSAFE TIMER (15 Seconds Blocked) ---
-        // Check if the distance the car moved since the last frame is practically zero
-        if (Vector3.Distance(transform.position, lastPosition) < 0.01f)
-        {
-            // The car is physically stopped.
-            // Only start the timer if it is NOT legally waiting at a red light or crosswalk.
-            bool isLegallyWaiting = (isInStopZone && !canMove) || isYielding;
+        // 5. STATIONARY FAILSAFE TIMER (uses sqrMagnitude — faster than Distance)
+        Vector3 currentPos = myTransform.position;
+        Vector3 posDelta = currentPos - lastPosition;
+        bool isPhysicallyStopped = posDelta.sqrMagnitude < 0.0001f; // 0.01^2
 
+        if (isPhysicallyStopped)
+        {
+            bool isLegallyWaiting = (isInStopZone && !canMove) || isYielding;
             if (!isLegallyWaiting)
             {
-                stationaryTimer += Time.deltaTime;
+                stationaryTimer += dt;
                 if (stationaryTimer >= maxStationaryTime)
                 {
                     Debug.Log($"[Traffic System] Car blocked for {maxStationaryTime}s! Teleporting...");
                     TeleportToNextSpawn();
-                    return; // Stop running code for this frame
+                    return;
                 }
             }
             else
             {
-                stationaryTimer = 0f; // Reset because it is legally waiting
+                stationaryTimer = 0f;
             }
         }
         else
         {
-            stationaryTimer = 0f; // Reset because the car moved
+            stationaryTimer = 0f;
         }
 
-        // Store current position to compare in the next frame
-        lastPosition = transform.position;
+        lastPosition = currentPos;
 
-        // --- 6. SAFETY SENSOR & OBSTACLES LOGIC ---
+        // 6. SAFETY SENSOR & OBSTACLES LOGIC
         if (centerBlocked)
         {
-            // A car or player is directly in front. Halt movement immediately.
             stuckTimer = 0f;
             ignoreObliqueCars = false;
             recoveryTimer = 0f;
         }
         else if (obliqueBlocked && !ignoreObliqueCars)
         {
-            // Obstacle only on the sides. Apply the failsafe timer.
             if (wantsToMove)
             {
-                stuckTimer += Time.deltaTime;
+                stuckTimer += dt;
                 if (stuckTimer >= maxWaitTime)
                 {
-                    // Timer reached: ignore the side obstacle so traffic can flow.
                     ignoreObliqueCars = true;
                     recoveryTimer = 0f;
                 }
@@ -204,17 +215,15 @@ public class CarCityMovement : MonoBehaviour
         }
         else if (!centerBlocked && !obliqueBlocked)
         {
-            // The path is clear. Reset timer and flags.
             stuckTimer = 0f;
             ignoreObliqueCars = false;
             recoveryTimer = 0f;
         }
 
-        // --- 7. SENSOR RECOVERY ---
-        // Reset side sensors after bypassing an obstacle for 2 seconds
+        // 7. SENSOR RECOVERY
         if (ignoreObliqueCars && wantsToMove)
         {
-            recoveryTimer += Time.deltaTime;
+            recoveryTimer += dt;
             if (recoveryTimer >= 2.0f)
             {
                 ignoreObliqueCars = false;
@@ -223,30 +232,27 @@ public class CarCityMovement : MonoBehaviour
             }
         }
 
-        // --- 8. APPLY MOVEMENT AND AUDIO ---
-        // Check if the car is physically allowed to move right now
+        // 8. APPLY MOVEMENT AND AUDIO
         bool isActuallyMoving = wantsToMove && !centerBlocked && (!obliqueBlocked || ignoreObliqueCars);
 
         if (isActuallyMoving)
         {
-            ApplyMovementAndTurning();
+            ApplyMovementAndTurning(dt);
         }
 
-        // --- 9. TWO-CLIP ENGINE AUDIO CONTROL ---
+        // 9. AUDIO STATE CHANGE
         if (engineAudio != null)
         {
-            // If the car just started moving this exact frame
             if (isActuallyMoving && !wasMoving)
             {
                 engineAudio.clip = movingSound;
-                engineAudio.Play(); // Play the driving sound
+                engineAudio.Play();
                 wasMoving = true;
             }
-            // If the car just stopped moving this exact frame
             else if (!isActuallyMoving && wasMoving)
             {
                 engineAudio.clip = idleSound;
-                engineAudio.Play(); // Play the stopped sound
+                engineAudio.Play();
                 wasMoving = false;
             }
         }
@@ -254,73 +260,72 @@ public class CarCityMovement : MonoBehaviour
 
     /// <summary>
     /// Handles driving straight and smoothly curving when forced to turn.
-    /// Uses a slower forward speed during the turn to ensure the curve is tight enough.
-    /// Includes Anti-Drift Snapping.
     /// </summary>
-    private void ApplyMovementAndTurning()
+    private void ApplyMovementAndTurning(float dt)
     {
         float currentForwardSpeed = speed;
 
         if (isTurning)
         {
             currentForwardSpeed = currentSpeedDuringTurn;
-            float step = currentTurnSpeed * Time.deltaTime;
+            float step = currentTurnSpeed * dt;
 
-            // Prevent the car from over-turning past the exact target angle
             if (degreesTurned + step >= currentTargetAngle)
             {
                 step = currentTargetAngle - degreesTurned;
-                transform.Rotate(Vector3.up, step * turnDirection);
+                myTransform.Rotate(Vector3.up, step * turnDirection);
                 isTurning = false;
 
-                // --- ANTI-DRIFT ANGLE SNAPPING ---
-                // Unity's math leaves tiny micro-decimals. We round the Y axis 
-                // to the nearest whole number so the car drives perfectly straight forever.
-                Vector3 cleanRotation = transform.eulerAngles;
+                // Anti-drift snapping
+                Vector3 cleanRotation = myTransform.eulerAngles;
                 cleanRotation.y = Mathf.Round(cleanRotation.y);
-                transform.eulerAngles = cleanRotation;
+                myTransform.eulerAngles = cleanRotation;
             }
             else
             {
-                // Apply rotation 
-                transform.Rotate(Vector3.up, step * turnDirection);
+                myTransform.Rotate(Vector3.up, step * turnDirection);
                 degreesTurned += step;
             }
         }
 
-        // Apply forward movement
-        transform.Translate(Vector3.forward * currentForwardSpeed * Time.deltaTime);
+        // [OPT] Translate uses cached transform
+        myTransform.Translate(Vector3.forward * currentForwardSpeed * dt);
     }
 
     /// <summary>
-    /// Checks the front and oblique sensors and outputs their specific states.
-    /// Uses a 5-Raycast Fan system to eliminate blind spots.
+    /// Checks the front and oblique sensors. 5-ray fan system.
     /// </summary>
     private void CheckSensors(out bool centerBlocked, out bool obliqueBlocked)
     {
-        // Slightly elevate the sensor so it doesn't hit the physical road
-        Vector3 sensorStartPos = transform.position + (transform.forward * sensorFrontOffset) + new Vector3(0, 0.5f, 0);
+        // [OPT] cache transform properties (cada acesso é nativo!)
+        Vector3 pos = myTransform.position;
+        Vector3 forwardDir = myTransform.forward;
 
-        Vector3 forwardDir = transform.forward;
+        Vector3 sensorStartPos = pos + (forwardDir * sensorFrontOffset) + SENSOR_HEIGHT_OFFSET;
 
-        // Outer Angles
-        Vector3 outerLeftDir = Quaternion.AngleAxis(-obliqueSensorAngle, Vector3.up) * transform.forward;
-        Vector3 outerRightDir = Quaternion.AngleAxis(obliqueSensorAngle, Vector3.up) * transform.forward;
+        // [OPT] inline rotation calculations (Quaternion.AngleAxis allocations)
+        float angleRad = obliqueSensorAngle * Mathf.Deg2Rad;
+        float innerAngleRad = (obliqueSensorAngle * 0.5f) * Mathf.Deg2Rad;
 
-        // Inner Angles 
-        float innerAngle = obliqueSensorAngle / 2f;
-        Vector3 innerLeftDir = Quaternion.AngleAxis(-innerAngle, Vector3.up) * transform.forward;
-        Vector3 innerRightDir = Quaternion.AngleAxis(innerAngle, Vector3.up) * transform.forward;
+        float sinOuter = Mathf.Sin(angleRad);
+        float cosOuter = Mathf.Cos(angleRad);
+        float sinInner = Mathf.Sin(innerAngleRad);
+        float cosInner = Mathf.Cos(innerAngleRad);
 
-        // Check Front (Wall of 3 lasers)
+        // Rotate forwardDir manually around Y axis
+        Vector3 outerLeftDir = new Vector3(forwardDir.x * cosOuter - forwardDir.z * sinOuter, forwardDir.y, forwardDir.x * sinOuter + forwardDir.z * cosOuter);
+        Vector3 outerRightDir = new Vector3(forwardDir.x * cosOuter + forwardDir.z * sinOuter, forwardDir.y, -forwardDir.x * sinOuter + forwardDir.z * cosOuter);
+        Vector3 innerLeftDir = new Vector3(forwardDir.x * cosInner - forwardDir.z * sinInner, forwardDir.y, forwardDir.x * sinInner + forwardDir.z * cosInner);
+        Vector3 innerRightDir = new Vector3(forwardDir.x * cosInner + forwardDir.z * sinInner, forwardDir.y, -forwardDir.x * sinInner + forwardDir.z * cosInner);
+
+        // Front (3 rays)
         bool centerHit = CheckSingleRay(sensorStartPos, forwardDir, frontSensorLength);
         bool innerLeftHit = CheckSingleRay(sensorStartPos, innerLeftDir, frontSensorLength);
         bool innerRightHit = CheckSingleRay(sensorStartPos, innerRightDir, frontSensorLength);
 
-        // If ANY of the 3 front lasers hit something, the center is blocked
         centerBlocked = centerHit || innerLeftHit || innerRightHit;
 
-        // Check Sides (Outer lasers for the failsafe)
+        // Sides (2 rays)
         bool outerLeftHit = CheckSingleRay(sensorStartPos, outerLeftDir, obliqueSensorLength);
         bool outerRightHit = CheckSingleRay(sensorStartPos, outerRightDir, obliqueSensorLength);
 
@@ -328,62 +333,69 @@ public class CarCityMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// Helper method to fire a single raycast. Ignores trigger zones.
-    /// Stops for Players globally. Inside a NonStopZone, ignores other cars.
+    /// Fires a single raycast. Uses RaycastNonAlloc to avoid garbage collection.
     /// </summary>
     private bool CheckSingleRay(Vector3 startPos, Vector3 direction, float length)
     {
-        RaycastHit[] hits = Physics.RaycastAll(startPos, direction, length, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
+        // [OPT] RaycastNonAlloc em vez de RaycastAll (zero garbage!)
+        int hitCount = Physics.RaycastNonAlloc(startPos, direction, s_RaycastBuffer, length, sensorLayerMask, QueryTriggerInteraction.Ignore);
 
-        foreach (RaycastHit hit in hits)
+        for (int i = 0; i < hitCount; i++)
         {
+            RaycastHit hit = s_RaycastBuffer[i];
+
             // 1. CHECK FOR THE PLAYER
-            bool isPlayer = hit.collider.CompareTag("Player") || hit.collider.transform.root.CompareTag("Player");
-            if (isPlayer)
+            // [OPT] CompareTag em vez de tag ==
+            if (hit.collider.CompareTag("Player") || hit.collider.transform.root.CompareTag("Player"))
             {
-                Debug.DrawRay(startPos, direction * hit.distance, Color.red);
+                #if UNITY_EDITOR
+                if (drawDebugRays) Debug.DrawRay(startPos, direction * hit.distance, Color.red);
+                #endif
                 return true;
             }
 
             // 2. CHECK FOR OTHER CARS
             CarCityMovement otherCar = hit.collider.GetComponentInParent<CarCityMovement>();
-            if (otherCar != null && otherCar.gameObject != this.gameObject)
+            if (otherCar != null && otherCar.cachedInstanceID != cachedInstanceID)
             {
                 if (isInNeverStopZone)
                 {
-                    // Ignore cars while in an intersection
                     continue;
                 }
                 else
                 {
-                    // --- TIE-BREAKER FOR PILED UP CARS ---
-                    // If cars got stacked in the intersection, they unstack one by one based on ID.
-                    float distance = Vector3.Distance(transform.position, otherCar.transform.position);
-                    if (distance < 3.5f)
+                    // [OPT] sqrMagnitude em vez de Distance (evita sqrt)
+                    float sqrDistance = (myTransform.position - otherCar.myTransform.position).sqrMagnitude;
+                    if (sqrDistance < 12.25f) // 3.5^2
                     {
-                        if (this.gameObject.GetInstanceID() > otherCar.gameObject.GetInstanceID())
+                        if (cachedInstanceID > otherCar.cachedInstanceID)
                         {
-                            Debug.DrawRay(startPos, direction * hit.distance, Color.red);
-                            return true; // Higher ID waits
+                            #if UNITY_EDITOR
+                            if (drawDebugRays) Debug.DrawRay(startPos, direction * hit.distance, Color.red);
+                            #endif
+                            return true;
                         }
                         else
                         {
-                            continue; // Lower ID drives off
+                            continue;
                         }
                     }
 
-                    // Stop for cars on regular roads
-                    Debug.DrawRay(startPos, direction * hit.distance, Color.red);
+                    #if UNITY_EDITOR
+                    if (drawDebugRays) Debug.DrawRay(startPos, direction * hit.distance, Color.red);
+                    #endif
                     return true;
                 }
             }
         }
 
-        Debug.DrawRay(startPos, direction * length, Color.green);
+        #if UNITY_EDITOR
+        if (drawDebugRays) Debug.DrawRay(startPos, direction * length, Color.green);
+        #endif
         return false;
     }
 
-    // --- TRIGGER EVENTS FOR ZONES ---
+    // ===== TRIGGER EVENTS =====
 
     private void OnTriggerEnter(Collider other)
     {
@@ -391,10 +403,13 @@ public class CarCityMovement : MonoBehaviour
         else if (other.CompareTag(neverStopZoneTag)) isInNeverStopZone = true;
     }
 
+    // [OPT] OnTriggerStay é caro — só precisas se houver casos onde Enter é missed
+    // Mantemos como fallback mas com early-exit
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag(targetStopZoneTag)) isInStopZone = true;
-        else if (other.CompareTag(neverStopZoneTag)) isInNeverStopZone = true;
+        // [OPT] Só reativa se estiver false (evita writes constantes)
+        if (!isInStopZone && other.CompareTag(targetStopZoneTag)) isInStopZone = true;
+        else if (!isInNeverStopZone && other.CompareTag(neverStopZoneTag)) isInNeverStopZone = true;
     }
 
     private void OnTriggerExit(Collider other)
@@ -414,7 +429,6 @@ public class CarCityMovement : MonoBehaviour
             degreesTurned = 0f;
             currentTargetAngle = Mathf.Abs(customAngle);
             turnDirection = Mathf.Sign(customAngle);
-
             currentTurnSpeed = customTurnSpeed;
             currentSpeedDuringTurn = customSpeedDuringTurn;
         }
@@ -425,28 +439,22 @@ public class CarCityMovement : MonoBehaviour
     /// </summary>
     private void TeleportToNextSpawn()
     {
-        // Safety check: ensure you actually placed spawn zones in the map!
         if (TrafficSpawnZone.allSpawnZones.Count == 0)
         {
             Debug.LogWarning("[Traffic System] No TrafficSpawnZones found! Please add them to the map.");
-            timeOffMagnet = 0f; // Reset timer so it doesn't spam errors
+            timeOffMagnet = 0f;
             return;
         }
 
-        // Pick a completely random spawn zone from the master list
         int randomIndex = Random.Range(0, TrafficSpawnZone.allSpawnZones.Count);
         TrafficSpawnZone chosenSpawn = TrafficSpawnZone.allSpawnZones[randomIndex];
 
-        // 1. Apply the position from the Spawn object
-        transform.position = chosenSpawn.transform.position;
+        myTransform.position = chosenSpawn.transform.position;
+        myTransform.rotation = Quaternion.Euler(chosenSpawn.customCarRotation);
 
-        // 2. Apply the MANUAL rotation you typed in the inspector of that Spawn
-        transform.rotation = Quaternion.Euler(chosenSpawn.customCarRotation);
-
-        // 3. Reset ALL timers and error states
         timeOffMagnet = 0f;
         stationaryTimer = 0f;
-        lastPosition = transform.position; // Prevent the car from thinking it's stuck at the new location
+        lastPosition = myTransform.position;
         isTurning = false;
         ignoreObliqueCars = false;
         stuckTimer = 0f;

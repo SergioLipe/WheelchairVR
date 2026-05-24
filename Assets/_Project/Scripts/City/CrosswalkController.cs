@@ -2,32 +2,42 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
-/// Manages player waiting areas and car stopping areas.
-/// Allows cars that have already entered the crosswalk (Player Zone) to keep moving.
-/// Requires the player to wait in the zone for a specific time before cars stop.
+/// Manages player waiting areas and car stopping areas at crosswalks.
+/// Optimized: uses NonAlloc, throttling, and reused buffers.
 /// </summary>
 public class CrosswalkController : MonoBehaviour
 {
     [Header("=== Zone Setup ===")]
-    [Tooltip("The BoxColliders covering the sidewalks and the crosswalk.")]
     public BoxCollider[] playerZones;
-
-    [Tooltip("The BoxColliders on the roads where the cars must stop.")]
     public BoxCollider[] carZones;
 
     [Header("=== Advanced Stopping Logic ===")]
-    [Tooltip("How far (in meters) the car must be inside the Player Zone to keep going.\n0 = exactly on the edge.\nNegative values (e.g., -1.5) account for the car's front bumper if the pivot is at the rear wheels.")]
     public float crosswalkEntryMargin = 0f;
-
-    [Tooltip("How many seconds the player must stay in the zone before cars stop.")]
     public float timeToWaitBeforeStopping = 3f;
 
-    // Keeps track of cars we have stopped
-    private List<CarCityMovement> yieldingCars = new List<CarCityMovement>();
+    [Header("=== Optimization ===")]
+    [Tooltip("Layers that contain player and cars. Filtering = huge perf gain")]
+    public LayerMask detectionLayerMask = ~0;
 
-    // Timer variables
+    [Tooltip("How often to update (per second). Lower = better performance")]
+    [Range(2, 30)]
+    public int updatesPerSecond = 10;
+
+    // [OPT] Pre-allocated buffer (zero garbage)
+    private static readonly Collider[] s_OverlapBuffer = new Collider[16];
+
+    // [OPT] Reused lists (não cria novas todos os frames)
+    private readonly List<CarCityMovement> yieldingCars = new List<CarCityMovement>(16);
+    private readonly List<CarCityMovement> carsCurrentlyInZone = new List<CarCityMovement>(16);
+
     private float playerWaitTimer = 0f;
-    private bool isPlayerCurrentlyInZone = false;
+    private float lastUpdateTime = 0f;
+    private float updateInterval;
+
+    void Start()
+    {
+        updateInterval = 1f / updatesPerSecond;
+    }
 
     void Update()
     {
@@ -36,42 +46,47 @@ public class CrosswalkController : MonoBehaviour
             return;
         }
 
+        // [OPT] Throttle — não checa cada frame
+        if (Time.time - lastUpdateTime < updateInterval) return;
+        float dt = Time.time - lastUpdateTime;
+        lastUpdateTime = Time.time;
+
         bool playerDetected = CheckForPlayer();
 
-        // --- TIMER LOGIC ---
         if (playerDetected)
         {
-            playerWaitTimer += Time.deltaTime;
+            playerWaitTimer += dt;
         }
         else
         {
-            playerWaitTimer = 0f; // Reset timer if player leaves
+            playerWaitTimer = 0f;
         }
 
-        isPlayerCurrentlyInZone = playerDetected;
-
-        // Cars only stop if the player has been in the zone long enough
         bool shouldStopCars = playerWaitTimer >= timeToWaitBeforeStopping;
 
         ControlCars(shouldStopCars);
     }
 
-    /// <summary>
-    /// Scans all player zone colliders to see if the wheelchair is inside any of them.
-    /// </summary>
     private bool CheckForPlayer()
     {
-        foreach (BoxCollider pZone in playerZones)
+        for (int i = 0; i < playerZones.Length; i++)
         {
+            BoxCollider pZone = playerZones[i];
             if (pZone == null) continue;
 
-            Vector3 boxCenter = pZone.transform.TransformPoint(pZone.center);
-            Vector3 boxHalfExtents = Vector3.Scale(pZone.size, pZone.transform.lossyScale) * 0.5f;
+            // [OPT] cache transform calls
+            Transform pZoneTr = pZone.transform;
+            Vector3 boxCenter = pZoneTr.TransformPoint(pZone.center);
+            Vector3 boxHalfExtents = Vector3.Scale(pZone.size, pZoneTr.lossyScale) * 0.5f;
 
-            Collider[] hits = Physics.OverlapBox(boxCenter, boxHalfExtents, pZone.transform.rotation);
-            
-            foreach (Collider hit in hits)
+            // [OPT] OverlapBoxNonAlloc — zero garbage
+            int hitCount = Physics.OverlapBoxNonAlloc(
+                boxCenter, boxHalfExtents, s_OverlapBuffer,
+                pZoneTr.rotation, detectionLayerMask);
+
+            for (int j = 0; j < hitCount; j++)
             {
+                Collider hit = s_OverlapBuffer[j];
                 if (hit.CompareTag("Player") || hit.transform.root.CompareTag("Player"))
                 {
                     return true;
@@ -81,65 +96,70 @@ public class CrosswalkController : MonoBehaviour
         return false;
     }
 
-    /// <summary>
-    /// Scans all car zone colliders and stops cars UNLESS they are already inside the Player Zone.
-    /// </summary>
     private void ControlCars(bool shouldStop)
     {
-        List<CarCityMovement> carsCurrentlyInZone = new List<CarCityMovement>();
+        // [OPT] Clear reused list (não cria nova)
+        carsCurrentlyInZone.Clear();
 
-        foreach (BoxCollider cZone in carZones)
+        for (int i = 0; i < carZones.Length; i++)
         {
+            BoxCollider cZone = carZones[i];
             if (cZone == null) continue;
 
-            Vector3 boxCenter = cZone.transform.TransformPoint(cZone.center);
-            Vector3 boxHalfExtents = Vector3.Scale(cZone.size, cZone.transform.lossyScale) * 0.5f;
+            Transform cZoneTr = cZone.transform;
+            Vector3 boxCenter = cZoneTr.TransformPoint(cZone.center);
+            Vector3 boxHalfExtents = Vector3.Scale(cZone.size, cZoneTr.lossyScale) * 0.5f;
 
-            Collider[] hits = Physics.OverlapBox(boxCenter, boxHalfExtents, cZone.transform.rotation);
-            
-            foreach (Collider hit in hits)
+            int hitCount = Physics.OverlapBoxNonAlloc(
+                boxCenter, boxHalfExtents, s_OverlapBuffer,
+                cZoneTr.rotation, detectionLayerMask);
+
+            for (int j = 0; j < hitCount; j++)
             {
-                CarCityMovement car = hit.GetComponentInParent<CarCityMovement>();
-                
-                if (car != null && !carsCurrentlyInZone.Contains(car))
+                Collider hit = s_OverlapBuffer[j];
+
+                // [OPT] GetComponent first (faster than GetComponentInParent)
+                CarCityMovement car = hit.GetComponent<CarCityMovement>();
+                if (car == null) car = hit.GetComponentInParent<CarCityMovement>();
+                if (car == null) continue;
+
+                // [OPT] Contains numa lista pequena é rápido, mantemos
+                if (carsCurrentlyInZone.Contains(car)) continue;
+
+                carsCurrentlyInZone.Add(car);
+
+                bool forceStop = shouldStop;
+
+                if (forceStop)
                 {
-                    carsCurrentlyInZone.Add(car);
-
-                    bool forceStop = shouldStop;
-
-                    // --- CROSSWALK ENTRY CHECK ---
-                    // If the crosswalk is triggered, check if the car is ALREADY inside the crosswalk
-                    if (forceStop)
+                    // Check if car already inside crosswalk
+                    for (int k = 0; k < playerZones.Length; k++)
                     {
-                        foreach (BoxCollider pZone in playerZones)
+                        BoxCollider pZone = playerZones[k];
+                        if (pZone == null) continue;
+
+                        Transform pZoneTr = pZone.transform;
+                        Vector3 localPos = pZoneTr.InverseTransformPoint(car.transform.position);
+                        Vector3 extents = pZone.size * 0.5f;
+
+                        float checkX = Mathf.Max(0, extents.x - crosswalkEntryMargin);
+                        float checkZ = Mathf.Max(0, extents.z - crosswalkEntryMargin);
+
+                        if (Mathf.Abs(localPos.x) <= checkX &&
+                            Mathf.Abs(localPos.y) <= extents.y + 2f &&
+                            Mathf.Abs(localPos.z) <= checkZ)
                         {
-                            if (pZone == null) continue;
-
-                            // Convert car position to the player zone's local space
-                            Vector3 localPos = pZone.transform.InverseTransformPoint(car.transform.position);
-                            Vector3 extents = pZone.size * 0.5f;
-
-                            // Calculate the effective boundary using your margin
-                            float checkX = Mathf.Max(0, extents.x - crosswalkEntryMargin);
-                            float checkZ = Mathf.Max(0, extents.z - crosswalkEntryMargin);
-
-                            // If the car is inside this boundary, it has entered the crosswalk!
-                            if (Mathf.Abs(localPos.x) <= checkX && 
-                                Mathf.Abs(localPos.y) <= extents.y + 2f && 
-                                Mathf.Abs(localPos.z) <= checkZ)
-                            {
-                                forceStop = false; // Let it pass!
-                                break; 
-                            }
+                            forceStop = false;
+                            break;
                         }
                     }
+                }
 
-                    car.isYielding = forceStop;
-                    
-                    if (forceStop && !yieldingCars.Contains(car))
-                    {
-                        yieldingCars.Add(car);
-                    }
+                car.isYielding = forceStop;
+
+                if (forceStop && !yieldingCars.Contains(car))
+                {
+                    yieldingCars.Add(car);
                 }
             }
         }
@@ -148,8 +168,8 @@ public class CrosswalkController : MonoBehaviour
         for (int i = yieldingCars.Count - 1; i >= 0; i--)
         {
             CarCityMovement pastCar = yieldingCars[i];
-            
-            if (pastCar == null) 
+
+            if (pastCar == null)
             {
                 yieldingCars.RemoveAt(i);
                 continue;

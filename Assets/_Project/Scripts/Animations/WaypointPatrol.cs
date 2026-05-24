@@ -1,28 +1,56 @@
 using UnityEngine;
 
+/// <summary>
+/// Waypoint patrol for pedestrians with player detection.
+/// Optimized for VR: throttled raycasts, cached transforms, no debug overhead in builds.
+/// </summary>
 public class WaypointPatrol : MonoBehaviour
 {
     [Header("=== Path Settings ===")]
     public Transform[] waypoints;
     public float speed = 1.2f;
     public float rotationSpeed = 5.0f;
-    
+
     [Header("=== Safety Sensors ===")]
-    [Tooltip("How far the pedestrian looks straight ahead.")]
-    public float frontDetectionDistance = 2.0f; 
-    
-    [Tooltip("How far the pedestrian looks to the sides.")]
+    public float frontDetectionDistance = 2.0f;
     public float obliqueDetectionDistance = 1.2f;
-    
-    [Tooltip("The angle (in degrees) for the side sensors.")]
     public float obliqueSensorAngle = 30f;
-    
-    [Tooltip("The tag assigned to the player/wheelchair.")]
     public string playerTag = "Player";
+
+    [Header("=== Optimization ===")]
+    [Tooltip("Layers to detect (Player layer recommended).")]
+    public LayerMask detectionLayerMask = ~0;
+
+    [Tooltip("How often to check for player (per second). 5-10 is plenty.")]
+    [Range(2, 30)]
+    public int sensorChecksPerSecond = 8;
+
+    [Tooltip("Draw debug rays in Scene view (auto-disabled in builds)")]
+    public bool drawDebugRays = false;
 
     private int currentWaypointIndex = 0;
     private Animator anim;
     private bool isWaiting = false;
+
+    // [OPT] Cache de transform
+    private Transform myTransform;
+    private float lastSensorCheck = 0f;
+    private float sensorInterval;
+
+    // [OPT] Pre-allocated buffer for raycast
+    private static readonly RaycastHit[] s_RaycastBuffer = new RaycastHit[4];
+
+    // [OPT] Pre-calculated sensor directions (recalcula no Awake/quando rotates)
+    private float lastForwardAngle = float.MaxValue;
+    private Vector3 cachedForward;
+    private Vector3 cachedLeftOblique;
+    private Vector3 cachedRightOblique;
+
+    void Awake()
+    {
+        myTransform = transform;
+        sensorInterval = 1f / sensorChecksPerSecond;
+    }
 
     void Start()
     {
@@ -33,37 +61,44 @@ public class WaypointPatrol : MonoBehaviour
     {
         if (waypoints.Length == 0) return;
 
-        CheckForPlayer();
+        // [OPT] Throttle sensor check (não precisa cada frame)
+        if (Time.time - lastSensorCheck >= sensorInterval)
+        {
+            CheckForPlayer();
+            lastSensorCheck = Time.time;
+        }
 
         if (isWaiting)
         {
-            // Pause animation and stop moving
-            if (anim != null) anim.speed = 0f; 
-            return; 
+            if (anim != null) anim.speed = 0f;
+            return;
         }
         else
         {
-            // Resume animation
             if (anim != null) anim.speed = 1f;
         }
 
-        // Normal movement logic
+        // [OPT] cache transform
+        Vector3 myPos = myTransform.position;
         Transform target = waypoints[currentWaypointIndex];
-        
-        Vector3 direction = target.position - transform.position;
-        direction.y = 0; 
+        Vector3 targetPos = target.position;
 
-        if (direction.magnitude > 0.1f)
+        Vector3 direction = targetPos - myPos;
+        direction.y = 0;
+
+        // [OPT] sqrMagnitude em vez de magnitude
+        if (direction.sqrMagnitude > 0.01f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            myTransform.rotation = Quaternion.Slerp(myTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, transform.position.y, target.position.z), speed * Time.deltaTime);
+        Vector3 targetPosFlat = new Vector3(targetPos.x, myPos.y, targetPos.z);
+        myTransform.position = Vector3.MoveTowards(myPos, targetPosFlat, speed * Time.deltaTime);
 
-        float distance = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(target.position.x, 0, target.position.z));
-        
-        if (distance < 0.2f)
+        // [OPT] sqrMagnitude para distance check
+        Vector3 flatDelta = new Vector3(myTransform.position.x - targetPos.x, 0f, myTransform.position.z - targetPos.z);
+        if (flatDelta.sqrMagnitude < 0.04f) // 0.2^2
         {
             currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
         }
@@ -71,19 +106,35 @@ public class WaypointPatrol : MonoBehaviour
 
     private void CheckForPlayer()
     {
-        // Shoot raycasts from chest height (1 meter up)
-        Vector3 origin = transform.position + Vector3.up * 1.0f; 
-        
-        Vector3 forwardDir = transform.forward;
-        Vector3 leftObliqueDir = Quaternion.AngleAxis(-obliqueSensorAngle, Vector3.up) * transform.forward;
-        Vector3 rightObliqueDir = Quaternion.AngleAxis(obliqueSensorAngle, Vector3.up) * transform.forward;
-        
-        // Draws yellow lines in the Scene view so you can see the sensor fan!
-        Debug.DrawRay(origin, forwardDir * frontDetectionDistance, Color.yellow);
-        Debug.DrawRay(origin, leftObliqueDir * obliqueDetectionDistance, Color.yellow);
-        Debug.DrawRay(origin, rightObliqueDir * obliqueDetectionDistance, Color.yellow);
+        Vector3 origin = myTransform.position + Vector3.up;
+        Vector3 forwardDir = myTransform.forward;
 
-        // If ANY of the 3 lasers hit the player, the pedestrian stops
+        // [OPT] Inline rotation math (em vez de Quaternion.AngleAxis × 2)
+        float angleRad = obliqueSensorAngle * Mathf.Deg2Rad;
+        float sin = Mathf.Sin(angleRad);
+        float cos = Mathf.Cos(angleRad);
+
+        Vector3 leftObliqueDir = new Vector3(
+            forwardDir.x * cos - forwardDir.z * sin,
+            forwardDir.y,
+            forwardDir.x * sin + forwardDir.z * cos
+        );
+
+        Vector3 rightObliqueDir = new Vector3(
+            forwardDir.x * cos + forwardDir.z * sin,
+            forwardDir.y,
+            -forwardDir.x * sin + forwardDir.z * cos
+        );
+
+        #if UNITY_EDITOR
+        if (drawDebugRays)
+        {
+            Debug.DrawRay(origin, forwardDir * frontDetectionDistance, Color.yellow);
+            Debug.DrawRay(origin, leftObliqueDir * obliqueDetectionDistance, Color.yellow);
+            Debug.DrawRay(origin, rightObliqueDir * obliqueDetectionDistance, Color.yellow);
+        }
+        #endif
+
         if (CheckSingleRay(origin, forwardDir, frontDetectionDistance) ||
             CheckSingleRay(origin, leftObliqueDir, obliqueDetectionDistance) ||
             CheckSingleRay(origin, rightObliqueDir, obliqueDetectionDistance))
@@ -98,11 +149,13 @@ public class WaypointPatrol : MonoBehaviour
 
     private bool CheckSingleRay(Vector3 origin, Vector3 direction, float distance)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(origin, direction, out hit, distance))
+        // [OPT] RaycastNonAlloc (zero garbage)
+        int hitCount = Physics.RaycastNonAlloc(origin, direction, s_RaycastBuffer, distance, detectionLayerMask);
+
+        for (int i = 0; i < hitCount; i++)
         {
-            // Check if the hit object or its root parent has the Player tag
-            if (hit.collider.CompareTag(playerTag) || hit.collider.transform.root.CompareTag(playerTag))
+            Collider col = s_RaycastBuffer[i].collider;
+            if (col.CompareTag(playerTag) || col.transform.root.CompareTag(playerTag))
             {
                 return true;
             }

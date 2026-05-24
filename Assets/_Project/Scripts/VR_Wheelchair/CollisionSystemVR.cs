@@ -19,46 +19,37 @@ public class CollisionSystemVR : MonoBehaviour
     [SerializeField] private bool backBlocked = false;
     [SerializeField] private bool wallSliding = false;
 
-    // Stats for collision tracking
     public int TotalCollisions { get; private set; } = 0;
     public int TotalSlides { get; private set; } = 0;
 
     private bool wasInCollisionState = false;
     private bool wasSlidingState = false;
-
     private float lastSlideCountTime = 0f;
     private float lastCollisionCountTime = 0f;
 
     [Header("=== Debug Settings ===")]
-    [Tooltip("Enable to print exactly WHAT you hit to the Unity Console")]
     public bool enableCollisionDebug = true;
 
     [Header("=== Front Sensor ===")]
-    [Tooltip("Enable the proactive front sensor for footrests")]
     public bool useFrontSensor = true;
     public float frontSensorLength = 0.2f;
     public Vector3 frontSensorBoxSize = new Vector3(0.38f, 0.2f, 0.1f);
     public Vector3 frontSensorOffset = new Vector3(0f, 0.3f, 0.4f);
 
     [Header("=== Back Sensor ===")]
-    [Tooltip("Enable the proactive back sensor for reversing")]
     public bool useBackSensor = true;
     public float backSensorLength = 0.2f;
     public Vector3 backSensorBoxSize = new Vector3(0.8f, 0.2f, 0.1f);
     public Vector3 backSensorOffset = new Vector3(0f, 0.3f, -0.45f);
 
     [Header("=== Back Wheel Visual Sensors ===")]
-    [Tooltip("Sensors that flash and trigger slide audio when rear wheels scrape a wall.")]
     public bool useBackWheelVisualSensors = true;
-    [Tooltip("How far the sensor extends LATERALLY from the wheel")]
     public float backWheelSensorLength = 0.2f;
-    [Tooltip("Size of the detection box. Y = height, Z = length along wheelchair forward")]
     public Vector3 backWheelSensorBoxSize = new Vector3(0.15f, 0.2f, 0.3f);
     public Vector3 backLeftWheelOffset = new Vector3(-0.35f, 0.3f, -0.45f);
     public Vector3 backRightWheelOffset = new Vector3(0.35f, 0.3f, -0.45f);
 
     [Header("=== General Sensor Settings ===")]
-    [Tooltip("Layers the sensors should detect as obstacles")]
     public LayerMask obstacleLayerMask = ~0;
 
     [Header("=== Detection Settings ===")]
@@ -93,6 +84,13 @@ public class CollisionSystemVR : MonoBehaviour
     private bool wasLeftWheelBlockedLastFrame = false;
     private bool wasRightWheelBlockedLastFrame = false;
 
+    // [OPT] Pre-allocated buffers para Physics queries (evita GC todos os frames!)
+    private static readonly RaycastHit[] s_RaycastBuffer = new RaycastHit[8];
+    private static readonly Collider[] s_ColliderBuffer = new Collider[8];
+
+    // [OPT] Cache do Transform root para evitar acesso repetido
+    private Transform wheelchairRoot;
+
     private void OnEnable()
     {
         enableTime = Time.time;
@@ -103,10 +101,11 @@ public class CollisionSystemVR : MonoBehaviour
         wasRightWheelBlockedLastFrame = false;
     }
 
-    public void Initialize(CharacterController characterController, Transform transform)
+    public void Initialize(CharacterController characterController, Transform tr)
     {
         this.controller = characterController;
-        this.wheelchairTransform = transform;
+        this.wheelchairTransform = tr;
+        this.wheelchairRoot = tr.root; // [OPT] Cache root uma vez
 
         flashEffect = GetComponent<CollisionFlashEffectVR>();
         if (flashEffect == null)
@@ -118,7 +117,6 @@ public class CollisionSystemVR : MonoBehaviour
 
     public void Update()
     {
-        // Ignora tremores da física nos primeiros instantes após o script ligar
         if (Time.time - enableTime < startupGracePeriod) return;
 
         UpdateBlockingTimers();
@@ -155,22 +153,32 @@ public class CollisionSystemVR : MonoBehaviour
     {
         if (wheelchairTransform == null) return;
 
-        Vector3 scaledOffset = Vector3.Scale(frontSensorOffset, wheelchairTransform.lossyScale);
-        float scaledLength = frontSensorLength * wheelchairTransform.lossyScale.z;
-        Vector3 scaledBoxSize = Vector3.Scale(frontSensorBoxSize, wheelchairTransform.lossyScale);
+        // [OPT] Cache transform properties (cada acesso é uma chamada nativa)
+        Vector3 wcPos = wheelchairTransform.position;
+        Vector3 wcForward = wheelchairTransform.forward;
+        Vector3 wcUp = wheelchairTransform.up;
+        Vector3 wcRight = wheelchairTransform.right;
+        Quaternion wcRot = wheelchairTransform.rotation;
+        Vector3 wcScale = wheelchairTransform.lossyScale;
 
-        Vector3 startPos = wheelchairTransform.position +
-                           wheelchairTransform.forward * scaledOffset.z +
-                           wheelchairTransform.up * scaledOffset.y +
-                           wheelchairTransform.right * scaledOffset.x;
+        Vector3 scaledOffset = Vector3.Scale(frontSensorOffset, wcScale);
+        float scaledLength = frontSensorLength * wcScale.z;
+        Vector3 scaledBoxSize = Vector3.Scale(frontSensorBoxSize, wcScale);
 
-        Vector3 halfExtents = scaledBoxSize / 2f;
+        Vector3 startPos = wcPos +
+                           wcForward * scaledOffset.z +
+                           wcUp * scaledOffset.y +
+                           wcRight * scaledOffset.x;
+
+        Vector3 halfExtents = scaledBoxSize * 0.5f; // [OPT] mul é mais rápida que div
         bool hitObstacle = false;
 
-        RaycastHit[] hits = Physics.BoxCastAll(startPos, halfExtents, wheelchairTransform.forward, wheelchairTransform.rotation, scaledLength, obstacleLayerMask);
+        // [OPT] BoxCastNonAlloc em vez de BoxCastAll (zero garbage!)
+        int hitCount = Physics.BoxCastNonAlloc(startPos, halfExtents, wcForward, s_RaycastBuffer, wcRot, scaledLength, obstacleLayerMask);
 
-        foreach (RaycastHit hit in hits)
+        for (int i = 0; i < hitCount; i++)
         {
+            ref RaycastHit hit = ref s_RaycastBuffer[i];
             if (ShouldIgnoreSensorHit(hit)) continue;
 
             hitObstacle = true;
@@ -209,22 +217,31 @@ public class CollisionSystemVR : MonoBehaviour
     {
         if (wheelchairTransform == null) return;
 
-        Vector3 scaledOffset = Vector3.Scale(backSensorOffset, wheelchairTransform.lossyScale);
-        float scaledLength = backSensorLength * wheelchairTransform.lossyScale.z;
-        Vector3 scaledBoxSize = Vector3.Scale(backSensorBoxSize, wheelchairTransform.lossyScale);
+        Vector3 wcPos = wheelchairTransform.position;
+        Vector3 wcForward = wheelchairTransform.forward;
+        Vector3 wcUp = wheelchairTransform.up;
+        Vector3 wcRight = wheelchairTransform.right;
+        Quaternion wcRot = wheelchairTransform.rotation;
+        Vector3 wcScale = wheelchairTransform.lossyScale;
 
-        Vector3 startPos = wheelchairTransform.position +
-                           wheelchairTransform.forward * scaledOffset.z +
-                           wheelchairTransform.up * scaledOffset.y +
-                           wheelchairTransform.right * scaledOffset.x;
+        Vector3 scaledOffset = Vector3.Scale(backSensorOffset, wcScale);
+        float scaledLength = backSensorLength * wcScale.z;
+        Vector3 scaledBoxSize = Vector3.Scale(backSensorBoxSize, wcScale);
 
-        Vector3 halfExtents = scaledBoxSize / 2f;
+        Vector3 startPos = wcPos +
+                           wcForward * scaledOffset.z +
+                           wcUp * scaledOffset.y +
+                           wcRight * scaledOffset.x;
+
+        Vector3 halfExtents = scaledBoxSize * 0.5f;
         bool hitObstacle = false;
 
-        RaycastHit[] hits = Physics.BoxCastAll(startPos, halfExtents, -wheelchairTransform.forward, wheelchairTransform.rotation, scaledLength, obstacleLayerMask);
+        // [OPT] NonAlloc
+        int hitCount = Physics.BoxCastNonAlloc(startPos, halfExtents, -wcForward, s_RaycastBuffer, wcRot, scaledLength, obstacleLayerMask);
 
-        foreach (RaycastHit hit in hits)
+        for (int i = 0; i < hitCount; i++)
         {
+            ref RaycastHit hit = ref s_RaycastBuffer[i];
             if (ShouldIgnoreSensorHit(hit)) continue;
 
             hitObstacle = true;
@@ -263,40 +280,53 @@ public class CollisionSystemVR : MonoBehaviour
     {
         if (wheelchairTransform == null) return;
 
-        bool leftHit = ProcessWheelVisualSensor(backLeftWheelOffset, "Left", wasLeftWheelBlockedLastFrame);
-        bool rightHit = ProcessWheelVisualSensor(backRightWheelOffset, "Right", wasRightWheelBlockedLastFrame);
+        bool leftHit = ProcessWheelVisualSensor(backLeftWheelOffset, true, wasLeftWheelBlockedLastFrame);
+        bool rightHit = ProcessWheelVisualSensor(backRightWheelOffset, false, wasRightWheelBlockedLastFrame);
 
         wasLeftWheelBlockedLastFrame = leftHit;
         wasRightWheelBlockedLastFrame = rightHit;
     }
 
-    private bool ProcessWheelVisualSensor(Vector3 offset, string sideName, bool wasBlockedLastFrame)
+    // [OPT] sideName string → bool isLeft (evita string comparison)
+    private bool ProcessWheelVisualSensor(Vector3 offset, bool isLeft, bool wasBlockedLastFrame)
     {
-        Vector3 scaledOffset = Vector3.Scale(offset, wheelchairTransform.lossyScale);
-        float scaledLength = backWheelSensorLength * wheelchairTransform.lossyScale.x;
-        Vector3 scaledBoxSize = Vector3.Scale(backWheelSensorBoxSize, wheelchairTransform.lossyScale);
+        Vector3 wcPos = wheelchairTransform.position;
+        Vector3 wcForward = wheelchairTransform.forward;
+        Vector3 wcUp = wheelchairTransform.up;
+        Vector3 wcRight = wheelchairTransform.right;
+        Quaternion wcRot = wheelchairTransform.rotation;
+        Vector3 wcScale = wheelchairTransform.lossyScale;
 
-        Vector3 startPos = wheelchairTransform.position +
-                           wheelchairTransform.forward * scaledOffset.z +
-                           wheelchairTransform.up * scaledOffset.y +
-                           wheelchairTransform.right * scaledOffset.x;
+        Vector3 scaledOffset = Vector3.Scale(offset, wcScale);
+        float scaledLength = backWheelSensorLength * wcScale.x;
+        Vector3 scaledBoxSize = Vector3.Scale(backWheelSensorBoxSize, wcScale);
 
-        Vector3 sideDir = (sideName == "Left") ? -wheelchairTransform.right : wheelchairTransform.right;
-        Vector3 boxCenter = startPos + (sideDir * (scaledLength / 2f));
-        Vector3 halfExtents = scaledBoxSize / 2f;
+        Vector3 startPos = wcPos +
+                           wcForward * scaledOffset.z +
+                           wcUp * scaledOffset.y +
+                           wcRight * scaledOffset.x;
 
-        Collider[] hits = Physics.OverlapBox(boxCenter, halfExtents, wheelchairTransform.rotation, obstacleLayerMask);
+        Vector3 sideDir = isLeft ? -wcRight : wcRight;
+        Vector3 boxCenter = startPos + (sideDir * (scaledLength * 0.5f));
+        Vector3 halfExtents = scaledBoxSize * 0.5f;
 
-        foreach (Collider hitCollider in hits)
+        // [OPT] OverlapBoxNonAlloc em vez de OverlapBox (zero garbage!)
+        int hitCount = Physics.OverlapBoxNonAlloc(boxCenter, halfExtents, s_ColliderBuffer, wcRot, obstacleLayerMask);
+
+        for (int i = 0; i < hitCount; i++)
         {
-            if (hitCollider.transform.root == wheelchairTransform.root) continue;
+            Collider hitCollider = s_ColliderBuffer[i];
+
+            // [OPT] usar wheelchairRoot cached
+            if (hitCollider.transform.root == wheelchairRoot) continue;
             if (hitCollider.isTrigger) continue;
             if (hitCollider.GetComponent<Terrain>() != null) continue;
 
+            // [OPT] CompareTag é mais rápido que tag ==
             bool ignore = false;
-            foreach (string tag in ignoreTags)
+            for (int t = 0; t < ignoreTags.Length; t++)
             {
-                if (hitCollider.tag == tag) { ignore = true; break; }
+                if (hitCollider.CompareTag(ignoreTags[t])) { ignore = true; break; }
             }
             if (ignore) continue;
 
@@ -304,21 +334,22 @@ public class CollisionSystemVR : MonoBehaviour
 
             if (flashEffect != null && !wasBlockedLastFrame)
             {
-                if (sideName == "Left") flashEffect.LeftSideFlash();
+                if (isLeft) flashEffect.LeftSideFlash();
                 else flashEffect.RightSideFlash();
             }
 
             if (enableCollisionDebug && !wasBlockedLastFrame)
             {
-                Debug.Log($"<color=yellow>[{sideName.ToUpper()} WHEEL SCRAPE]</color> <b>{hitCollider.gameObject.name}</b>");
+                Debug.Log($"<color=yellow>[{(isLeft ? "LEFT" : "RIGHT")} WHEEL SCRAPE]</color> <b>{hitCollider.gameObject.name}</b>");
             }
 
-            // Ativa o slide se a cadeira estiver efetivamente em movimento!
-            if (Mathf.Abs(controller.velocity.magnitude) > 0.1f)
+            // [OPT] sqrMagnitude é mais rápido que magnitude
+            Vector3 vel = controller.velocity;
+            if (vel.sqrMagnitude > 0.01f)
             {
-                float movementSign = Vector3.Dot(controller.velocity, wheelchairTransform.forward) >= 0 ? 1f : -1f;
-                slideDirection = wheelchairTransform.forward * movementSign;
-                
+                float movementSign = Vector3.Dot(vel, wcForward) >= 0 ? 1f : -1f;
+                slideDirection = wcForward * movementSign;
+
                 wallSliding = true;
                 slideTimer = 0.25f;
                 inCollision = true;
@@ -333,7 +364,8 @@ public class CollisionSystemVR : MonoBehaviour
 
     private bool ShouldIgnoreSensorHit(RaycastHit hit)
     {
-        if (hit.collider.transform.root == wheelchairTransform.root) return true;
+        // [OPT] usar wheelchairRoot cached
+        if (hit.collider.transform.root == wheelchairRoot) return true;
 
         float collisionHeight = hit.point.y - wheelchairTransform.position.y;
         if (collisionHeight < minCollisionHeight) return true;
@@ -341,12 +373,12 @@ public class CollisionSystemVR : MonoBehaviour
         float angleWithUp = Vector3.Angle(hit.normal, Vector3.up);
         if (angleWithUp < maxGroundAngle) return true;
 
-        foreach (string tag in ignoreTags)
+        // [OPT] CompareTag em loop
+        for (int t = 0; t < ignoreTags.Length; t++)
         {
-            if (hit.collider.tag == tag) return true;
+            if (hit.collider.CompareTag(ignoreTags[t])) return true;
         }
 
-        // CORREÇÃO: hit.collider.gameObject.layer está perfeito
         if (ignoreLayerMask != 0 && ((ignoreLayerMask.value & (1 << hit.collider.gameObject.layer)) != 0)) return true;
         if (hit.collider.GetComponent<Terrain>() != null) return true;
         if (hit.collider.isTrigger) return true;
@@ -410,7 +442,6 @@ public class CollisionSystemVR : MonoBehaviour
 
     public void ProcessCollision(ControllerColliderHit hit, float currentSpeed, ref float currentSpeedRef)
     {
-        // O Grace Period: Ignora o embate físico no milissegundo em que o script acorda
         if (!isActiveAndEnabled || Time.time - enableTime < startupGracePeriod) return;
 
         if (ShouldIgnoreCollision(hit)) return;
@@ -469,11 +500,12 @@ public class CollisionSystemVR : MonoBehaviour
         float angleWithUp = Vector3.Angle(hit.normal, Vector3.up);
         if (angleWithUp < maxGroundAngle) return true;
 
-        if (ignoreTags != null && ignoreTags.Length > 0 && !string.IsNullOrEmpty(hit.gameObject.tag))
+        // [OPT] CompareTag em loop
+        if (ignoreTags != null && ignoreTags.Length > 0)
         {
-            foreach (string tag in ignoreTags)
+            for (int t = 0; t < ignoreTags.Length; t++)
             {
-                if (hit.gameObject.tag == tag) return true;
+                if (hit.gameObject.CompareTag(ignoreTags[t])) return true;
             }
         }
 
@@ -511,10 +543,11 @@ public class CollisionSystemVR : MonoBehaviour
         Vector3 projection = Vector3.Project(wheelchairTransform.forward, collisionNormal);
         slideDirection = (wheelchairTransform.forward - projection).normalized;
 
-        if (Mathf.Abs(controller.velocity.magnitude) > 0.1f)
+        // [OPT] sqrMagnitude
+        if (controller.velocity.sqrMagnitude > 0.01f)
         {
             wallSliding = true;
-            slideTimer = 0.5f; 
+            slideTimer = 0.5f;
         }
 
         float side = Vector3.Dot(wheelchairTransform.right, impactDirection);
@@ -553,6 +586,8 @@ public class CollisionSystemVR : MonoBehaviour
         slideTimer = 0f;
     }
 
+    // [OPT] Gizmos só em editor — não corre em build, mas o método é compilado
+    #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Transform t = wheelchairTransform != null ? wheelchairTransform : transform;
@@ -563,14 +598,11 @@ public class CollisionSystemVR : MonoBehaviour
             float scaledLengthF = frontSensorLength * t.lossyScale.z;
             Vector3 scaledBoxSizeF = Vector3.Scale(frontSensorBoxSize, t.lossyScale);
 
-            Vector3 startPosF = t.position +
-                                t.forward * scaledOffsetF.z +
-                                t.up * scaledOffsetF.y +
-                                t.right * scaledOffsetF.x;
+            Vector3 startPosF = t.position + t.forward * scaledOffsetF.z + t.up * scaledOffsetF.y + t.right * scaledOffsetF.x;
 
             Gizmos.color = new Color(1f, 0.5f, 0f, 0.5f);
             Gizmos.matrix = Matrix4x4.TRS(startPosF, t.rotation, Vector3.one);
-            Gizmos.DrawWireCube(Vector3.forward * (scaledLengthF / 2f), new Vector3(scaledBoxSizeF.x, scaledBoxSizeF.y, scaledLengthF));
+            Gizmos.DrawWireCube(Vector3.forward * (scaledLengthF * 0.5f), new Vector3(scaledBoxSizeF.x, scaledBoxSizeF.y, scaledLengthF));
         }
 
         if (enableCollisionDebug && useBackSensor)
@@ -579,14 +611,11 @@ public class CollisionSystemVR : MonoBehaviour
             float scaledLengthB = backSensorLength * t.lossyScale.z;
             Vector3 scaledBoxSizeB = Vector3.Scale(backSensorBoxSize, t.lossyScale);
 
-            Vector3 startPosB = t.position +
-                                t.forward * scaledOffsetB.z +
-                                t.up * scaledOffsetB.y +
-                                t.right * scaledOffsetB.x;
+            Vector3 startPosB = t.position + t.forward * scaledOffsetB.z + t.up * scaledOffsetB.y + t.right * scaledOffsetB.x;
 
             Gizmos.color = new Color(1f, 0f, 1f, 0.5f);
             Gizmos.matrix = Matrix4x4.TRS(startPosB, t.rotation, Vector3.one);
-            Gizmos.DrawWireCube(Vector3.back * (scaledLengthB / 2f), new Vector3(scaledBoxSizeB.x, scaledBoxSizeB.y, scaledLengthB));
+            Gizmos.DrawWireCube(Vector3.back * (scaledLengthB * 0.5f), new Vector3(scaledBoxSizeB.x, scaledBoxSizeB.y, scaledLengthB));
         }
 
         if (enableCollisionDebug && useBackWheelVisualSensors)
@@ -599,14 +628,15 @@ public class CollisionSystemVR : MonoBehaviour
             Vector3 scaledOffsetBL = Vector3.Scale(backLeftWheelOffset, t.lossyScale);
             Vector3 startPosBL = t.position + t.forward * scaledOffsetBL.z + t.up * scaledOffsetBL.y + t.right * scaledOffsetBL.x;
             Gizmos.matrix = Matrix4x4.TRS(startPosBL, t.rotation, Vector3.one);
-            Gizmos.DrawWireCube(Vector3.left * (scaledLengthBL / 2f), new Vector3(scaledLengthBL, scaledBoxSizeBL.y, scaledBoxSizeBL.z));
+            Gizmos.DrawWireCube(Vector3.left * (scaledLengthBL * 0.5f), new Vector3(scaledLengthBL, scaledBoxSizeBL.y, scaledBoxSizeBL.z));
 
             Vector3 scaledOffsetBR = Vector3.Scale(backRightWheelOffset, t.lossyScale);
             Vector3 startPosBR = t.position + t.forward * scaledOffsetBR.z + t.up * scaledOffsetBR.y + t.right * scaledOffsetBR.x;
             Gizmos.matrix = Matrix4x4.TRS(startPosBR, t.rotation, Vector3.one);
-            Gizmos.DrawWireCube(Vector3.right * (scaledLengthBL / 2f), new Vector3(scaledLengthBL, scaledBoxSizeBL.y, scaledBoxSizeBL.z));
+            Gizmos.DrawWireCube(Vector3.right * (scaledLengthBL * 0.5f), new Vector3(scaledLengthBL, scaledBoxSizeBL.y, scaledBoxSizeBL.z));
         }
     }
+    #endif
 
     public bool IsFrontBlocked => frontBlocked;
     public bool IsBackBlocked => backBlocked;

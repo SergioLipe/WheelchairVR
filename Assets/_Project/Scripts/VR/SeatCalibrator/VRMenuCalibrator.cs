@@ -7,7 +7,8 @@ public class VRMenuCalibrator : MonoBehaviour
     [Header("Core References")]
     [SerializeField] private XROrigin xrOrigin;
     [SerializeField] private Transform headCamera;
-    [SerializeField] private Transform menuTarget;
+    [SerializeField] private Transform menuTarget; // O ponto onde o jogador "senta"
+    [SerializeField] private Transform canvasUI;   // <--- NOVO: O alvo para onde ele tem de olhar!
 
     [Header("Input Setup")]
     [SerializeField] private InputActionReference recenterAction;
@@ -34,24 +35,21 @@ public class VRMenuCalibrator : MonoBehaviour
 
     private void OnRecenter(InputAction.CallbackContext ctx) => CalibrateMenu();
 
-   public void CalibrateMenu()
+    public void CalibrateMenu()
     {
-        if (xrOrigin == null || headCamera == null || menuTarget == null) return;
+        if (xrOrigin == null || headCamera == null || menuTarget == null || canvasUI == null) return;
 
-        // 1. ROTAÇÃO PERFEITA (O caminho mais curto)
-        // O Mathf.DeltaAngle impede que o Unity se confunda entre 0 e 360 graus
-        float yawDiff = Mathf.DeltaAngle(headCamera.eulerAngles.y, menuTarget.eulerAngles.y);
+        // 1. POSIÇÃO (Move o jogador para o sítio primeiro, mantendo a altura)
+        Vector3 alturaTrancada = new Vector3(menuTarget.position.x, headCamera.position.y, menuTarget.position.z);
+        xrOrigin.MoveCameraToWorldLocation(alturaTrancada);
+
+        // 2. MATEMÁTICA PURA (Calcula a linha reta exata até ao centro do Canvas)
+        Vector3 direcaoParaCanvas = canvasUI.position - headCamera.position;
+        direcaoParaCanvas.y = 0f; // Garante que ficas a olhar de frente, e não para o chão ou teto
+
+        // 3. ROTAÇÃO (Obriga o Unity a apontar a cabeça exatamente para essa linha)
+        xrOrigin.MatchOriginUpCameraForward(Vector3.up, direcaoParaCanvas.normalized);
         
-        // Roda o mundo usando a TUA CABEÇA como o centro do pião (adeus órbitas!)
-        xrOrigin.transform.RotateAround(headCamera.position, Vector3.up, yawDiff);
-
-        // 2. POSIÇÃO (Trancando a altura)
-        Vector3 posDiff = menuTarget.position - headCamera.position;
-        posDiff.y = 0f; // Bloqueia a altura para não ires parar ao chão
-
-        // Move a sala para te colar ao menu
-        xrOrigin.transform.position += posDiff;
-        
-        Debug.Log("[VRMenuCalibrator] Fixo! O jogador está no centro e a olhar em frente.");
+        Debug.Log("[VRMenuCalibrator] Recentrado com Matemática! Adeus ilusões de ótica!");
     }
 }

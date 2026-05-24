@@ -1684,12 +1684,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67327268}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.318, z: -0.017}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.16700006, z: -5.1587315}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1481039153}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &76332996
 GameObject:
@@ -35652,6 +35652,10 @@ PrefabInstance:
       propertyPath: idleTimeout
       value: 999999
       objectReference: {fileID: 0}
+    - target: {fileID: 2253751230965831131, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: rightSide.handObject
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2292707065534805637, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -35749,6 +35753,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5564720188673816471, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: seatCalibrator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564720188673816471, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: 'objectsToHide.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
@@ -35774,6 +35782,10 @@ PrefabInstance:
       objectReference: {fileID: 67327269}
     - target: {fileID: 7150454979758387702, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: warningText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7150454979758387702, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: seatCalibrator
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7150454979758387702, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
@@ -35838,6 +35850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2235615828938866990, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+    - {fileID: 8864660255013471715, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
     m_RemovedGameObjects:
     - {fileID: 7655540893208236385, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
     - {fileID: 4039710108250068203, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
@@ -35847,6 +35860,7 @@ PrefabInstance:
     - {fileID: 8041914398961281308, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
     - {fileID: 3852959995354942772, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
     - {fileID: 1699709140248740460, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+    - {fileID: 4588618619823840155, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5270989495543095939, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       insertIndex: -1
@@ -35854,19 +35868,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5270989495543095939, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 580923150}
-    - targetCorrespondingSourceObject: {fileID: 1820659843255286021, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 67327269}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 791866969771498384, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1481039156}
   m_SourcePrefab: {fileID: 100100000, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
---- !u!4 &1481039153 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1820659843255286021, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
-  m_PrefabInstance: {fileID: 1481039152}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1481039154 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 791866969771498384, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
@@ -35898,6 +35904,7 @@ MonoBehaviour:
   xrOrigin: {fileID: 1481039155}
   headCamera: {fileID: 2140042863}
   menuTarget: {fileID: 67327269}
+  canvasUI: {fileID: 671818784}
   recenterAction: {fileID: 2906449369840628376, guid: da803d4aa849f234d9ed6cbd213f2b73, type: 3}
 --- !u!1 &1487089590
 GameObject:
@@ -50197,3 +50204,4 @@ SceneRoots:
   - {fileID: 741394752}
   - {fileID: 857118437}
   - {fileID: 103109391}
+  - {fileID: 67327269}

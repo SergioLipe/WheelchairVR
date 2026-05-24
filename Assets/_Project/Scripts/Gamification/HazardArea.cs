@@ -8,11 +8,10 @@ using TMPro;
 public class HazardArea : MonoBehaviour
 {
     [Header("=== Hazard Settings ===")]
-    [Tooltip("The exact message to show when hitting this specific hazard")]
     [TextArea]
     public string hazardMessage = "Warning";
 
-    [Tooltip("CHECK THIS FOR CROSSWALKS: If the player is already inside when this turns on, they won't die.")]
+    [Tooltip("CHECK THIS FOR CROSSWALKS: If player is already inside when this turns on, they won't die.")]
     public bool allowSafeExitIfAlreadyInside = false;
 
     [Header("=== UI References (PC) ===")]
@@ -25,13 +24,21 @@ public class HazardArea : MonoBehaviour
     public Transform vrCamera;
 
     [Header("=== VR Hand Manager ===")]
-    [Tooltip("Drag the Camera Offset (HandVisibilityManager) here")]
     public HandVisibilityManager handVisibilityManager;
-
     public float vrPanelDistance = 1.5f;
+
+    [Header("=== Optimization ===")]
+    [Tooltip("Layer where the player is. Reduces OverlapBox cost massively.")]
+    public LayerMask playerLayerMask = ~0;
+
+    [Tooltip("Enable verbose debug logs (disable for production builds)")]
+    public bool enableDebugLogs = false;
 
     private static bool isGameOver = false;
     private bool playerIsSafe = false;
+
+    // [OPT] Pre-allocated buffer
+    private static readonly Collider[] s_OverlapBuffer = new Collider[8];
 
     private void Start()
     {
@@ -44,22 +51,27 @@ public class HazardArea : MonoBehaviour
         {
             playerIsSafe = false;
 
-            // Vamos buscar o BoxCollider específico em vez de um Collider genérico
             BoxCollider myBox = GetComponent<BoxCollider>();
             if (myBox != null)
             {
-                // 1. Calcula o centro exato no mundo
-                Vector3 boxCenter = transform.TransformPoint(myBox.center);
+                // [OPT] cache transform
+                Transform t = transform;
+                Vector3 boxCenter = t.TransformPoint(myBox.center);
+                Vector3 boxHalfExtents = Vector3.Scale(myBox.size, t.lossyScale) * 0.5f;
 
-                // 2. Calcula o tamanho exato, ignorando se a escala tem o sinal de menos (-)
-                Vector3 boxHalfExtents = Vector3.Scale(myBox.size, transform.lossyScale) * 0.5f;
-                boxHalfExtents = new Vector3(Mathf.Abs(boxHalfExtents.x), Mathf.Abs(boxHalfExtents.y), Mathf.Abs(boxHalfExtents.z));
+                // Abs values (negative scale fix)
+                boxHalfExtents.x = Mathf.Abs(boxHalfExtents.x);
+                boxHalfExtents.y = Mathf.Abs(boxHalfExtents.y);
+                boxHalfExtents.z = Mathf.Abs(boxHalfExtents.z);
 
-                // 3. Procura o jogador com precisão absoluta
-                Collider[] hits = Physics.OverlapBox(boxCenter, boxHalfExtents, transform.rotation);
-                foreach (Collider hit in hits)
+                // [OPT] OverlapBoxNonAlloc + LayerMask
+                int hitCount = Physics.OverlapBoxNonAlloc(
+                    boxCenter, boxHalfExtents, s_OverlapBuffer,
+                    t.rotation, playerLayerMask);
+
+                for (int i = 0; i < hitCount; i++)
                 {
-                    if (hit.CompareTag("Player"))
+                    if (s_OverlapBuffer[i].CompareTag("Player"))
                     {
                         playerIsSafe = true;
                         break;
@@ -71,51 +83,52 @@ public class HazardArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Checks if the script component is enabled in the Inspector. If not, exit the function.
         if (!this.enabled) return;
-
         if (isGameOver) return;
 
         if (other.CompareTag("Player"))
         {
-            // === A LINHA DETETIVE ===
-            Debug.Log("<color=red>HAZARD ATIVADO PELO OBJETO: </color>" + other.gameObject.name);
+            // [OPT] Debug log toggleável
+            if (enableDebugLogs)
+            {
+                Debug.Log($"<color=red>HAZARD activated by:</color> {other.gameObject.name}");
+            }
 
             if (allowSafeExitIfAlreadyInside && playerIsSafe)
             {
                 return;
             }
 
-            // --- GAME OVER LOGIC ---
+            // GAME OVER LOGIC
             isGameOver = true;
-
-            // 1. Pára o tempo (Impede qualquer cadeira de andar)
             Time.timeScale = 0f;
 
-            // 2. BLOQUEIA O MENU DE PAUSA!
             if (LevelManagerVR.Instance != null)
             {
                 LevelManagerVR.Instance.isLevelActive = false;
             }
 
-            // 3. === LÓGICA DO PC ===
+            // PC UI
             if (warningTextPC != null) warningTextPC.text = hazardMessage;
             if (hazardPanelPC != null) hazardPanelPC.SetActive(true);
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            // 4. === LÓGICA DO VR ===
+            // VR UI
             if (warningTextVR != null) warningTextVR.text = hazardMessage;
             if (hazardPanelVR != null)
             {
                 if (vrCamera != null)
                 {
-                    Vector3 spawnPos = vrCamera.position + (vrCamera.forward * vrPanelDistance);
-                    spawnPos.y = vrCamera.position.y;
-                    hazardPanelVR.transform.position = spawnPos;
-                    hazardPanelVR.transform.LookAt(vrCamera);
-                    hazardPanelVR.transform.Rotate(0, 180, 0);
+                    Vector3 camPos = vrCamera.position;
+                    Vector3 spawnPos = camPos + (vrCamera.forward * vrPanelDistance);
+                    spawnPos.y = camPos.y;
+                    
+                    Transform panelT = hazardPanelVR.transform;
+                    panelT.position = spawnPos;
+                    panelT.LookAt(vrCamera);
+                    panelT.Rotate(0, 180, 0);
                 }
 
                 hazardPanelVR.SetActive(true);
@@ -127,6 +140,7 @@ public class HazardArea : MonoBehaviour
             }
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
