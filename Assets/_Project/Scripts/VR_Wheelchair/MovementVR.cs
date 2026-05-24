@@ -213,6 +213,9 @@ public class MovementVR : MonoBehaviour
         InitializeLevelSettings();
         PreloadSounds();
         CacheRumbleDevices();
+        
+
+        
     }
 
     private void PreloadSounds()
