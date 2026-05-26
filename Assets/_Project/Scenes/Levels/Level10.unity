@@ -28480,7 +28480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c34c5e897d112f4a834e1aadd56e0ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoveationManager
-  renderScale: 0.8
+  renderScale: 0.85
   foveationLevel: 4
   targetRefreshRate: 72
 --- !u!4 &318745201
@@ -193599,6 +193599,10 @@ PrefabInstance:
     - target: {fileID: 6257433604969637312, guid: e496402cd368f094b9f734cb06fe7a8e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7005505454622056913, guid: e496402cd368f094b9f734cb06fe7a8e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7102173447288284340, guid: e496402cd368f094b9f734cb06fe7a8e, type: 3}
       propertyPath: m_AnchorMax.y

@@ -8,8 +8,8 @@ public class ProfileManager : MonoBehaviour
     // The currently active patient playing the game
     public PlayerData currentPlayer;
 
-    // The name of our default profile
-    private const string DefaultProfileName = "Default";
+    // The ID of our default profile (kept in English for the file system)
+    private const string DefaultProfileId = "Guest";
 
     void Awake()
     {
@@ -31,27 +31,33 @@ public class ProfileManager : MonoBehaviour
 
     private void InitializeDefaultProfile()
     {
-        // Ask the SaveManager to try loading the "Default" profile
-        PlayerData defaultProfile = SaveManager.LoadProfile(DefaultProfileName);
+        // Ask the SaveManager to try loading the "Guest" profile
+        PlayerData defaultProfile = SaveManager.LoadProfile(DefaultProfileId);
 
         // If it returns null, the file doesn't exist yet
         if (defaultProfile == null)
         {
             // Create a new PlayerData instance
             defaultProfile = new PlayerData();
-            defaultProfile.profileID = DefaultProfileName;
-            defaultProfile.profileName = "Default User";
+            defaultProfile.profileID = DefaultProfileId;
+            
+            // The name in PT-PT for the UI to display
+            defaultProfile.profileName = "Visitante";
 
             // Save it to disk using your SaveManager
             SaveManager.SaveProfile(defaultProfile);
-            Debug.Log("Default profile created successfully!");
+            Debug.Log("Guest profile created successfully!");
         }
-
-        // Automatically set "Default" as the active profile on startup
-        SetActiveProfile(defaultProfile);
+        else
+        {
+            Debug.Log("Guest profile already exists. Skipping creation.");
+        }
+        
+        // Notice: The line SetActiveProfile(defaultProfile) was removed!
+        // The game will no longer auto-login to this profile.
     }
 
-    // Call this when logging in or creating a new profile
+    // Call this when logging in or creating a new profile via the UI menus
     public void SetActiveProfile(PlayerData data)
     {
         currentPlayer = data;

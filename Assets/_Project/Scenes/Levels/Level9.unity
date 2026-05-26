@@ -123875,6 +123875,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 724992408}
     m_Modifications:
+    - target: {fileID: 8108176217233697768, guid: 2275d423fa626c14bafec057af480da2, type: 3}
+      propertyPath: walkDuration
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
+      propertyPath: hazardPanel
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
+      propertyPath: warningTextUI
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1441525330016004, guid: c0f44381dd01e904c87fad2431087f45, type: 3}
       propertyPath: m_Name
       value: Character_BusinessWoman
@@ -123931,18 +123943,6 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 66d36fffcbdccba47ab93fce4533eb26, type: 2}
-    - target: {fileID: 8108176217233697768, guid: 2275d423fa626c14bafec057af480da2, type: 3}
-      propertyPath: walkDuration
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
-      propertyPath: hazardPanel
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8388134048499692919, guid: 2275d423fa626c14bafec057af480da2, type: 3}
-      propertyPath: warningTextUI
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -178588,7 +178588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c34c5e897d112f4a834e1aadd56e0ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoveationManager
-  renderScale: 0.8
+  renderScale: 0.85
   foveationLevel: 4
   targetRefreshRate: 72
 --- !u!4 &1681370166
@@ -217160,6 +217160,10 @@ PrefabInstance:
     - target: {fileID: 7370093398495273063, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7391734914587498987, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7392436627705484016, guid: edaefb9fecd595a44b8fdeea30f8e527, type: 3}
       propertyPath: m_Layer

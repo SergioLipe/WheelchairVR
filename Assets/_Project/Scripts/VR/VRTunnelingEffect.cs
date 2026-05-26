@@ -80,7 +80,7 @@ public class VRTunnelingEffect : MonoBehaviour
 
     private void Start()
     {
-        GenerateVignetteTexture();
+        
 
         if (wheelchairMovement != null)
         {

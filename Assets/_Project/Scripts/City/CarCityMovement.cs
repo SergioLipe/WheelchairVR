@@ -30,6 +30,10 @@ public class CarCityMovement : MonoBehaviour
     [Range(1, 5)]
     public int sensorUpdateFrequency = 2;
 
+    [Header("=== Player Detection Settings ===")]
+    [Tooltip("Tempo (segundos) que o carro espera antes de arrancar depois de deixar de detectar o Player")]
+    public float playerResumeDelay = 1.5f;
+
     [Header("=== Stuck Failsafe Settings ===")]
     public float maxWaitTime = 5f;
 
@@ -59,6 +63,11 @@ public class CarCityMovement : MonoBehaviour
     private float stuckTimer = 0f;
     private bool ignoreObliqueCars = false;
     private float recoveryTimer = 0f;
+
+    // Player detection timing
+    private bool playerDetectedThisFrame = false;
+    private bool playerDetectedLastFrame = false;
+    private float playerClearTimer = 0f;
 
     [HideInInspector]
     public bool isYielding = false;
@@ -139,6 +148,28 @@ public class CarCityMovement : MonoBehaviour
 
         bool centerBlocked = cachedCenterBlocked;
         bool obliqueBlocked = cachedObliqueBlocked;
+
+        // ==== Player detection delay logic ====
+        if (shouldCheckSensors)
+        {
+            if (playerDetectedThisFrame)
+            {
+                // Está a ver o Player AGORA
+                playerClearTimer = 0f;
+                playerDetectedLastFrame = true;
+            }
+            else if (playerDetectedLastFrame)
+            {
+                // Deixou de ver o Player — começa a contar
+                playerClearTimer += dt * sensorUpdateFrequency; // compensa skip de frames
+                if (playerClearTimer >= playerResumeDelay)
+                {
+                    // Cooldown completo — limpa flag
+                    playerDetectedLastFrame = false;
+                    playerClearTimer = 0f;
+                }
+            }
+        }
 
         // 2. Check legal movement
         bool wantsToMove = (canMove || !isInStopZone) && !isYielding;
@@ -233,7 +264,9 @@ public class CarCityMovement : MonoBehaviour
         }
 
         // 8. APPLY MOVEMENT AND AUDIO
-        bool isActuallyMoving = wantsToMove && !centerBlocked && (!obliqueBlocked || ignoreObliqueCars);
+        // Adicionado: durante o cooldown do Player, não anda mesmo sem obstáculos
+        bool inPlayerCooldown = playerDetectedLastFrame && playerClearTimer < playerResumeDelay;
+        bool isActuallyMoving = wantsToMove && !centerBlocked && (!obliqueBlocked || ignoreObliqueCars) && !inPlayerCooldown;
 
         if (isActuallyMoving)
         {
@@ -297,6 +330,9 @@ public class CarCityMovement : MonoBehaviour
     /// </summary>
     private void CheckSensors(out bool centerBlocked, out bool obliqueBlocked)
     {
+        // Reset player detection flag para este sensor sweep
+        playerDetectedThisFrame = false;
+
         // [OPT] cache transform properties (cada acesso é nativo!)
         Vector3 pos = myTransform.position;
         Vector3 forwardDir = myTransform.forward;
@@ -348,6 +384,7 @@ public class CarCityMovement : MonoBehaviour
             // [OPT] CompareTag em vez de tag ==
             if (hit.collider.CompareTag("Player") || hit.collider.transform.root.CompareTag("Player"))
             {
+                playerDetectedThisFrame = true; // Sinaliza que vi o Player neste check
                 #if UNITY_EDITOR
                 if (drawDebugRays) Debug.DrawRay(startPos, direction * hit.distance, Color.red);
                 #endif
