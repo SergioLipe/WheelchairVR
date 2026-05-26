@@ -106,7 +106,7 @@ public class WaypointPatrol : MonoBehaviour
 
     private void CheckForPlayer()
     {
-        Vector3 origin = myTransform.position + Vector3.up;
+        Vector3 origin = myTransform.position + Vector3.up * 0.6f;
         Vector3 forwardDir = myTransform.forward;
 
         // [OPT] Inline rotation math (em vez de Quaternion.AngleAxis × 2)

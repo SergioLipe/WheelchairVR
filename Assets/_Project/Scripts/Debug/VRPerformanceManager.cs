@@ -6,7 +6,7 @@ public class VRPerformanceManager : MonoBehaviour
 {
     [Header("Render Scale")]
     [Range(0.3f, 1.5f)]
-    public float renderScale = 0.8f;
+    public float renderScale = 0.9f;
 
     [Header("Foveation")]
     [Range(0, 4)]

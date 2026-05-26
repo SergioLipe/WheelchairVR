@@ -7099,42 +7099,13 @@ PrefabInstance:
     - {fileID: 64779963395387362, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 93975272}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
 --- !u!4 &93975270 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 423272, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
   m_PrefabInstance: {fileID: 93975269}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &93975271 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-  m_PrefabInstance: {fileID: 93975269}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &93975272
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 93975271}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2360382, y: 4.6763105, z: 1.5402756}
-  m_Center: {x: 0.3990345, y: 2.3381553, z: 0.07284927}
 --- !u!1001 &95427570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9795,9 +9766,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -10612,9 +10583,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -14285,9 +14256,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -15078,42 +15049,13 @@ PrefabInstance:
     - {fileID: 64779963395387362, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 173718470}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
 --- !u!4 &173718468 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 423272, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
   m_PrefabInstance: {fileID: 173718467}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &173718469 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-  m_PrefabInstance: {fileID: 173718467}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &173718470
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 173718469}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2360382, y: 4.6763105, z: 1.5402756}
-  m_Center: {x: 0.3990345, y: 2.3381553, z: 0.07284927}
 --- !u!1001 &173924522
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19549,9 +19491,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -22008,9 +21950,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -27695,42 +27637,13 @@ PrefabInstance:
     - {fileID: 64490695649506118, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 309716172}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
 --- !u!4 &309716170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 419742, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
   m_PrefabInstance: {fileID: 309716169}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &309716171 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-  m_PrefabInstance: {fileID: 309716169}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &309716172
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309716171}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.8658562, y: 4.208103, z: 2.5111847}
-  m_Center: {x: 0.42354965, y: 2.1040516, z: 0.29199982}
 --- !u!1001 &309766984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31929,9 +31842,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -39221,42 +39134,13 @@ PrefabInstance:
     - {fileID: 64779963395387362, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 424551522}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
 --- !u!4 &424551520 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 423272, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
   m_PrefabInstance: {fileID: 424551519}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &424551521 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-  m_PrefabInstance: {fileID: 424551519}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &424551522
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 424551521}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2360382, y: 4.6763105, z: 1.5402756}
-  m_Center: {x: 0.3990345, y: 2.3381553, z: 0.07284927}
 --- !u!1001 &424692333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44100,9 +43984,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -45642,42 +45526,13 @@ PrefabInstance:
     - {fileID: 64490695649506118, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 498186664}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
 --- !u!4 &498186662 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 419742, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
   m_PrefabInstance: {fileID: 498186661}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &498186663 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-  m_PrefabInstance: {fileID: 498186661}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &498186664
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498186663}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.8658562, y: 4.208103, z: 2.5111847}
-  m_Center: {x: 0.42354965, y: 2.1040516, z: 0.29199982}
 --- !u!1001 &500881376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46005,9 +45860,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -47323,42 +47178,13 @@ PrefabInstance:
     - {fileID: 64267419333019320, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 129346, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 524592425}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
 --- !u!4 &524592423 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 427308, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
   m_PrefabInstance: {fileID: 524592422}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &524592424 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 129346, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
-  m_PrefabInstance: {fileID: 524592422}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &524592425
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 524592424}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2172852, y: 3.845337, z: 1.8942871}
-  m_Center: {x: 0.27416992, y: 1.9226685, z: 0.12158203}
 --- !u!1001 &524670745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50712,9 +50538,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -57416,42 +57242,13 @@ PrefabInstance:
     - {fileID: 64490695649506118, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 625613691}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
 --- !u!4 &625613689 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 419742, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
   m_PrefabInstance: {fileID: 625613688}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &625613690 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-  m_PrefabInstance: {fileID: 625613688}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &625613691
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625613690}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.8658562, y: 4.208103, z: 2.5111847}
-  m_Center: {x: 0.42354965, y: 2.1040516, z: 0.29199982}
 --- !u!1001 &625731560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60672,42 +60469,13 @@ PrefabInstance:
     - {fileID: 64779963395387362, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 675352216}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
 --- !u!4 &675352214 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 423272, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
   m_PrefabInstance: {fileID: 675352213}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &675352215 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-  m_PrefabInstance: {fileID: 675352213}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &675352216
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 675352215}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2360382, y: 4.6763105, z: 1.5402756}
-  m_Center: {x: 0.3990345, y: 2.3381553, z: 0.07284927}
 --- !u!1001 &676192444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63527,9 +63295,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -69552,9 +69320,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -79548,9 +79316,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -95845,42 +95613,13 @@ PrefabInstance:
     - {fileID: 64267419333019320, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 129346, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1088558489}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
 --- !u!4 &1088558487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 427308, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
   m_PrefabInstance: {fileID: 1088558486}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1088558488 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 129346, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
-  m_PrefabInstance: {fileID: 1088558486}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1088558489
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088558488}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2172852, y: 3.845337, z: 1.8942871}
-  m_Center: {x: 0.27416992, y: 1.9226685, z: 0.12158203}
 --- !u!1001 &1088951499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99958,9 +99697,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -100117,42 +99856,13 @@ PrefabInstance:
     - {fileID: 64490695649506118, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1133339864}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
 --- !u!4 &1133339862 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 419742, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
   m_PrefabInstance: {fileID: 1133339861}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1133339863 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-  m_PrefabInstance: {fileID: 1133339861}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1133339864
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133339863}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.8658562, y: 4.208103, z: 2.5111847}
-  m_Center: {x: 0.42354965, y: 2.1040516, z: 0.29199982}
 --- !u!1001 &1135068116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -102047,9 +101757,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -105131,9 +104841,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -108260,9 +107970,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -109979,9 +109689,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -111361,9 +111071,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -113041,9 +112751,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -114836,9 +114546,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -115158,9 +114868,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -117105,9 +116815,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -118908,42 +118618,13 @@ PrefabInstance:
     - {fileID: 64779963395387362, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1336096967}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
 --- !u!4 &1336096965 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 423272, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
   m_PrefabInstance: {fileID: 1336096964}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1336096966 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-  m_PrefabInstance: {fileID: 1336096964}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1336096967
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336096966}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2360382, y: 4.6763105, z: 1.5402756}
-  m_Center: {x: 0.3990345, y: 2.3381553, z: 0.07284927}
 --- !u!1001 &1337270326
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120232,42 +119913,13 @@ PrefabInstance:
     - {fileID: 64779963395387362, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1355901635}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
 --- !u!4 &1355901633 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 423272, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
   m_PrefabInstance: {fileID: 1355901632}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1355901634 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-  m_PrefabInstance: {fileID: 1355901632}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1355901635
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355901634}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2360382, y: 4.6763105, z: 1.5402756}
-  m_Center: {x: 0.3990345, y: 2.3381553, z: 0.07284927}
 --- !u!1 &1359237163
 GameObject:
   m_ObjectHideFlags: 0
@@ -125581,42 +125233,13 @@ PrefabInstance:
     - {fileID: 64490695649506118, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1412093661}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
 --- !u!4 &1412093659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 419742, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
   m_PrefabInstance: {fileID: 1412093658}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1412093660 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-  m_PrefabInstance: {fileID: 1412093658}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1412093661
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1412093660}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.8658562, y: 4.208103, z: 2.5111847}
-  m_Center: {x: 0.42354965, y: 2.1040516, z: 0.29199982}
 --- !u!1001 &1413043201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -127902,9 +127525,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -131027,9 +130650,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -134359,9 +133982,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -134636,9 +134259,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -137512,9 +137135,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -144473,9 +144096,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -145478,42 +145101,13 @@ PrefabInstance:
     - {fileID: 64779963395387362, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1627367226}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
 --- !u!4 &1627367224 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 423272, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
   m_PrefabInstance: {fileID: 1627367223}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1627367225 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-  m_PrefabInstance: {fileID: 1627367223}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1627367226
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627367225}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2360382, y: 4.6763105, z: 1.5402756}
-  m_Center: {x: 0.3990345, y: 2.3381553, z: 0.07284927}
 --- !u!1001 &1628565515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146194,9 +145788,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -146254,9 +145848,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -146855,42 +146449,13 @@ PrefabInstance:
     - {fileID: 64490695649506118, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1645326360}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
 --- !u!4 &1645326358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 419742, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
   m_PrefabInstance: {fileID: 1645326357}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1645326359 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-  m_PrefabInstance: {fileID: 1645326357}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1645326360
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645326359}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.8658562, y: 4.208103, z: 2.5111847}
-  m_Center: {x: 0.42354965, y: 2.1040516, z: 0.29199982}
 --- !u!1001 &1647006683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147142,9 +146707,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -149216,9 +148781,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -149681,9 +149246,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -150068,42 +149633,13 @@ PrefabInstance:
     - {fileID: 64779963395387362, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1676512137}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
 --- !u!4 &1676512135 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 423272, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
   m_PrefabInstance: {fileID: 1676512134}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1676512136 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-  m_PrefabInstance: {fileID: 1676512134}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1676512137
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676512136}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2360382, y: 4.6763105, z: 1.5402756}
-  m_Center: {x: 0.3990345, y: 2.3381553, z: 0.07284927}
 --- !u!1001 &1677527461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -152146,9 +151682,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -153406,42 +152942,13 @@ PrefabInstance:
     - {fileID: 64490695649506118, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1708213816}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
 --- !u!4 &1708213814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 419742, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
   m_PrefabInstance: {fileID: 1708213813}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1708213815 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 189882, guid: ee6af68a3d2c1864ebc6cfc3be82d851, type: 3}
-  m_PrefabInstance: {fileID: 1708213813}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1708213816
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708213815}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.8658562, y: 4.208103, z: 2.5111847}
-  m_Center: {x: 0.42354965, y: 2.1040516, z: 0.29199982}
 --- !u!1001 &1708822836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153990,9 +153497,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -154077,9 +153584,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -155172,42 +154679,13 @@ PrefabInstance:
     - {fileID: 64267419333019320, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 129346, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1722177077}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
 --- !u!4 &1722177075 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 427308, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
   m_PrefabInstance: {fileID: 1722177074}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1722177076 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 129346, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
-  m_PrefabInstance: {fileID: 1722177074}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1722177077
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722177076}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2172852, y: 3.845337, z: 1.8942871}
-  m_Center: {x: 0.27416992, y: 1.9226685, z: 0.12158203}
 --- !u!1001 &1722818824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -160120,42 +159598,13 @@ PrefabInstance:
     - {fileID: 64779963395387362, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1770283300}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
 --- !u!4 &1770283298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 423272, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
   m_PrefabInstance: {fileID: 1770283297}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1770283299 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-  m_PrefabInstance: {fileID: 1770283297}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1770283300
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1770283299}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2360382, y: 4.6763105, z: 1.5402756}
-  m_Center: {x: 0.3990345, y: 2.3381553, z: 0.07284927}
 --- !u!1001 &1771046400
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -161971,9 +161420,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -162983,42 +162432,13 @@ PrefabInstance:
     - {fileID: 64779963395387362, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1799129392}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
 --- !u!4 &1799129390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 423272, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
   m_PrefabInstance: {fileID: 1799129389}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1799129391 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-  m_PrefabInstance: {fileID: 1799129389}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1799129392
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799129391}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2360382, y: 4.6763105, z: 1.5402756}
-  m_Center: {x: 0.3990345, y: 2.3381553, z: 0.07284927}
 --- !u!1001 &1801148262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165816,9 +165236,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -166611,42 +166031,13 @@ PrefabInstance:
     - {fileID: 64267419333019320, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 129346, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1836605689}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
 --- !u!4 &1836605687 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 427308, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
   m_PrefabInstance: {fileID: 1836605686}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1836605688 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 129346, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
-  m_PrefabInstance: {fileID: 1836605686}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1836605689
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836605688}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2172852, y: 3.845337, z: 1.8942871}
-  m_Center: {x: 0.27416992, y: 1.9226685, z: 0.12158203}
 --- !u!1001 &1836729591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -176516,9 +175907,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -176738,9 +176129,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -180901,9 +180292,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -183564,9 +182955,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -189962,9 +189353,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -190217,9 +189608,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -191773,42 +191164,13 @@ PrefabInstance:
     - {fileID: 64779963395387362, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2122690583}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
 --- !u!4 &2122690581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 423272, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
   m_PrefabInstance: {fileID: 2122690580}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2122690582 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 131094, guid: d93817f79a1e01242b20f7081cbfa384, type: 3}
-  m_PrefabInstance: {fileID: 2122690580}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &2122690583
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122690582}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2360382, y: 4.6763105, z: 1.5402756}
-  m_Center: {x: 0.3990345, y: 2.3381553, z: 0.07284927}
 --- !u!1001 &2123343623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -192414,9 +191776,9 @@ MonoBehaviour:
   targetStopZoneTag: StopZone
   neverStopZoneTag: NonStopZone
   sensorFrontOffset: 1.4
-  frontSensorLength: 4.5
+  frontSensorLength: 5
   obliqueSensorLength: 4
-  obliqueSensorAngle: 25
+  obliqueSensorAngle: 40
   sensorLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -193323,42 +192685,13 @@ PrefabInstance:
     - {fileID: 64267419333019320, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 129346, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2140574918}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
 --- !u!4 &2140574916 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 427308, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
   m_PrefabInstance: {fileID: 2140574915}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2140574917 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 129346, guid: c50789636e1fc5c4b8a37e2700e4a3c1, type: 3}
-  m_PrefabInstance: {fileID: 2140574915}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &2140574918
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2140574917}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.2172852, y: 3.845337, z: 1.8942871}
-  m_Center: {x: 0.27416992, y: 1.9226685, z: 0.12158203}
 --- !u!1001 &2142040181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -194138,6 +193471,30 @@ PrefabInstance:
     - target: {fileID: 3827926720998950637, guid: e496402cd368f094b9f734cb06fe7a8e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211112979921392364, guid: e496402cd368f094b9f734cb06fe7a8e, type: 3}
+      propertyPath: fadeSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211112979921392364, guid: e496402cd368f094b9f734cb06fe7a8e, type: 3}
+      propertyPath: speedThreshold
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211112979921392364, guid: e496402cd368f094b9f734cb06fe7a8e, type: 3}
+      propertyPath: turnSpeedThreshold
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211112979921392364, guid: e496402cd368f094b9f734cb06fe7a8e, type: 3}
+      propertyPath: maxSpeedForFullEffect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211112979921392364, guid: e496402cd368f094b9f734cb06fe7a8e, type: 3}
+      propertyPath: maxTurnSpeedForFullEffect
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903214019751378116, guid: e496402cd368f094b9f734cb06fe7a8e, type: 3}
+      propertyPath: far clip plane
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 4921316635105828375, guid: e496402cd368f094b9f734cb06fe7a8e, type: 3}
       propertyPath: m_AnchorMax.y
