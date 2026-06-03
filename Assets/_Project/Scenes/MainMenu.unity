@@ -18081,6 +18081,7 @@ GameObject:
   - component: {fileID: 671818785}
   - component: {fileID: 671818788}
   - component: {fileID: 671818789}
+  - component: {fileID: 671818790}
   m_Layer: 5
   m_Name: Canvas_VR
   m_TagString: Untagged
@@ -18096,7 +18097,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 671818783}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 682.3318}
+  m_LocalPosition: {x: 0, y: 0, z: -3.999979}
   m_LocalScale: {x: 0.0015, y: 0.0015, z: 0.0015}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18107,7 +18108,7 @@ RectTransform:
   - {fileID: 731874370}
   - {fileID: 359572569}
   - {fileID: 316858074}
-  m_Father: {fileID: 1383539595}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -18203,7 +18204,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 671818783}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 504807ad128a0df4ab16690e11d4edfe, type: 3}
   m_Name: 
@@ -18216,6 +18217,26 @@ MonoBehaviour:
   keepLevelTilt: 1
   positionOnceOnEnable: 1
   framesToWaitBeforePositioning: 3
+--- !u!114 &671818790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671818783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9270d7b3fc51b4c84a5345166ee10d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VRMenuFollower
+  headCamera: {fileID: 2140042863}
+  menuTransform: {fileID: 0}
+  distance: 1.4
+  heightOffset: -0.2
+  followThreshold: 35
+  followSpeed: 0.5
+  alwaysFollow: 0
+  startupDelay: 0.5
 --- !u!1 &688691906
 GameObject:
   m_ObjectHideFlags: 0
@@ -35737,6 +35758,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5374505468835582650, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: handTransform
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374505468835582650, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: joystickAnchor
       value: 
       objectReference: {fileID: 0}
@@ -35775,6 +35800,10 @@ PrefabInstance:
     - target: {fileID: 7150454979758387702, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: fadeImage
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7150454979758387702, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7150454979758387702, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       propertyPath: seatCenter
@@ -35864,9 +35893,6 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5270989495543095939, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 671818784}
-    - targetCorrespondingSourceObject: {fileID: 5270989495543095939, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 580923150}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 791866969771498384, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
@@ -35896,7 +35922,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1481039154}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 334fa4c4a56cfca40884a329304c7baa, type: 3}
   m_Name: 
@@ -50205,3 +50231,4 @@ SceneRoots:
   - {fileID: 857118437}
   - {fileID: 103109391}
   - {fileID: 67327269}
+  - {fileID: 671818784}
