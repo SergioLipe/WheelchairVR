@@ -283,6 +283,8 @@ public class LevelManager_PC : MonoBehaviour
         }
 
         string saveKey = "Level_" + levelID + "_Stars";
+
+        
         int currentBest = PlayerPrefs.GetInt(saveKey, 0);
 
         if (stars > currentBest)

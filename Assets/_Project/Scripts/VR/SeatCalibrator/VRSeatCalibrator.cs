@@ -62,9 +62,14 @@ public class VRSeatCalibrator : MonoBehaviour
         }
     }
 
-    private void Start()
+   private void Start()
     {
-        Debug.Log($"[VRSeatCalibrator] Auto-calibrating in {startDelay} seconds...");
+        // 1. Immediate snap right when the scene/countdown starts
+        Debug.Log("[VRSeatCalibrator] Immediate calibration for countdown start!");
+        Calibrate();
+
+        // 2. Delayed snap (kept as requested to ensure tracking is stable)
+        Debug.Log($"[VRSeatCalibrator] Auto-calibrating again in {startDelay} seconds...");
         Invoke(nameof(Calibrate), startDelay);
     }
 
