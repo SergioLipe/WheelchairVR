@@ -72,10 +72,21 @@ providers = {
 		priority = 210
 		defaultAction = null
 	}
+	at = {
+		active = true
+		priority = 100
+		defaultAction = null
+	}
+	st = {
+		active = true
+		priority = 100
+		defaultAction = null
+	}
 }
 objectSelectors = {
 }
 recentSearches = [
+	"st: modo liv"
 	"distinct{select{a:assets, @type}}"
 	"count{p:a:allassets -is:nested}"
 	"count{p:a:assets}"

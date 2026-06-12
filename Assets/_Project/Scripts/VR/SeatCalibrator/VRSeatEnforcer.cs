@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Localization.Settings;   // <-- NOVO: localização
 
 public class VRSeatEnforcer : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class VRSeatEnforcer : MonoBehaviour
 
     [Header("Warning Text")]
     [SerializeField] private TMP_Text warningText;
-    [SerializeField] private string warningHeader = "Foste longe de mais."; 
+    [SerializeField] private string warningHeader = "Foste longe de mais.";
     [SerializeField] private string warningMessage = "Volta para a cadeira!\n\nCarrega no botão do analógico\npara recentrar";
     [SerializeField] private Color warningColor = new Color(0.2f, 0.8f, 1f);
     [SerializeField] private float warningPulseSpeed = 2f;
@@ -46,6 +47,21 @@ public class VRSeatEnforcer : MonoBehaviour
     private float calibratedLocalHeight = 0f;
     private bool heightCalibrated = false;
 
+    // === [LOCALIZAÇÃO] Cache das strings traduzidas ===
+    private const string TABLE = "GameText";
+    private string lblSafetyWarning = "[ AVISO DE SEGURANÇA ]";
+    private string lblOops = "Oops!";
+
+    private string L(string key, string fallback)
+    {
+        try
+        {
+            string v = LocalizationSettings.StringDatabase.GetLocalizedString(TABLE, key);
+            return string.IsNullOrEmpty(v) ? fallback : v;
+        }
+        catch { return fallback; }
+    }
+
     // --- UNITY LIFECYCLE METHODS ---
 
     private void Awake()
@@ -64,6 +80,10 @@ public class VRSeatEnforcer : MonoBehaviour
         {
             seatCalibrator.OnCalibrated += ResetHeightCalibration;
         }
+
+        // [LOCALIZAÇÃO] recarregar traduções se o idioma mudar
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+        RefreshTranslations();
     }
 
     private void OnDisable()
@@ -72,6 +92,23 @@ public class VRSeatEnforcer : MonoBehaviour
         {
             seatCalibrator.OnCalibrated -= ResetHeightCalibration;
         }
+
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+    }
+
+    // [LOCALIZAÇÃO] chamado quando o idioma muda
+    private void OnLocaleChanged(UnityEngine.Localization.Locale newLocale)
+    {
+        RefreshTranslations();
+    }
+
+    // [LOCALIZAÇÃO] busca todas as traduções e guarda nas variáveis
+    private void RefreshTranslations()
+    {
+        warningHeader   = L("seat_warning_header",  warningHeader);
+        warningMessage  = L("seat_warning_message", warningMessage);
+        lblSafetyWarning = L("seat_safety_warning", lblSafetyWarning);
+        lblOops         = L("seat_oops", lblOops);
     }
 
     private void Start()
@@ -107,17 +144,17 @@ public class VRSeatEnforcer : MonoBehaviour
 
         // --- BULLETPROOF POSITION MATH ---
         Vector3 worldOffset = headCamera.position - seatCenter.position;
-        
+
         float currentZ = Vector3.Dot(worldOffset, seatCenter.forward);
         float currentX = Vector3.Dot(worldOffset, seatCenter.right);
         float currentY = Vector3.Dot(worldOffset, seatCenter.up);
-        
+
         float heightDelta = currentY - calibratedLocalHeight;
 
         // --- DYNAMIC BACK LIMIT CALCULATION ---
         Vector3 headForwardLevel = Vector3.ProjectOnPlane(headCamera.forward, seatCenter.up).normalized;
         Vector3 seatForwardLevel = Vector3.ProjectOnPlane(seatCenter.forward, seatCenter.up).normalized;
-        
+
         float headTurnAngle = Vector3.Angle(seatForwardLevel, headForwardLevel);
 
         float turnRatio = Mathf.Clamp01((headTurnAngle - 30f) / 60f);
@@ -128,7 +165,7 @@ public class VRSeatEnforcer : MonoBehaviour
 
         if (currentZ > 0) violation = Mathf.Max(violation, FadeRatio(currentZ, maxForward));
         if (currentZ < 0) violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(currentZ), dynamicMaxBack));
-        
+
         violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(currentX), maxSide));
         if (heightDelta > 0) violation = Mathf.Max(violation, FadeRatio(heightDelta, maxUp));
         if (heightDelta < 0) violation = Mathf.Max(violation, FadeRatio(Mathf.Abs(heightDelta), maxDown));
@@ -149,13 +186,11 @@ public class VRSeatEnforcer : MonoBehaviour
         if (isWarningActive)
         {
             ShowWarning();
-            
-            // SE o jogador está a ver o aviso E a cabeça dele está para trás do centro (Z negativo)
+
             if (currentZ < -0.05f)
             {
                 SetObjectsVisibility(false);
             }
-            // SE ele está muito para a frente, lados ou cima, os objetos continuam visíveis
             else
             {
                 SetObjectsVisibility(true);
@@ -164,8 +199,6 @@ public class VRSeatEnforcer : MonoBehaviour
         else
         {
             HideWarning();
-            
-            // Garante que os objetos voltam quando ele volta a estar seguro
             SetObjectsVisibility(true);
         }
     }
@@ -195,13 +228,14 @@ public class VRSeatEnforcer : MonoBehaviour
     private void ShowWarning()
     {
         if (warningText == null) return;
-        
+
         float pulse = Mathf.Lerp(0.7f, 1f, (Mathf.Sin(Time.unscaledTime * warningPulseSpeed) + 1f) / 2f);
         string hex = ColorUtility.ToHtmlStringRGBA(warningColor);
 
         // --- ADVANCED RICH TEXT FORMATTING ---
-        string headerPart = $"<color=#{hex}><size=140%><b>[ AVISO DE SEGURANÇA ]</b></size></color>";
-        string oopsPart = $"<color=#FFFFFF><size=110%><b>Oops! {warningHeader}</b></size></color>";
+        // [LOCALIZAÇÃO] usa as variáveis traduzidas
+        string headerPart = $"<color=#{hex}><size=140%><b>[ {lblSafetyWarning} ]</b></size></color>";
+        string oopsPart = $"<color=#FFFFFF><size=110%><b>{lblOops} {warningHeader}</b></size></color>";
         string messagePart = $"<color=#CCCCCC><size=80%>{warningMessage}</size></color>";
 
         warningText.text = $"{headerPart}\n\n{oopsPart}\n\n{messagePart}";

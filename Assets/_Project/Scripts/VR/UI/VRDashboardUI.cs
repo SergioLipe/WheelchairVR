@@ -1,11 +1,16 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.Localization.Settings;   // <-- NOVO: para localização
 
 /// <summary>
 /// Professional VR Dashboard UI Controller
 /// Manages the Left Tablet (Stats: Time, Collisions, Slides) 
 /// and the Right Tablet (Mode, Speed, replaced dynamically by Emergency Brake).
 /// Uses TextMeshPro Rich Text for a clean, modern, and readable layout.
+/// 
+/// [LOCALIZAÇÃO] As labels (Colisões, Deslizes, TRAVÃO, INTERIOR, etc.) são
+/// carregadas da String Table "GameText" uma vez (no início e quando o idioma
+/// muda), e guardadas em variáveis para o Update não perder performance.
 /// </summary>
 public class VRDashboardUI : MonoBehaviour
 {
@@ -24,17 +29,29 @@ public class VRDashboardUI : MonoBehaviour
 
     [Header("=== Right Dashboard (Mode, Speed & Brake) ===")]
     public TextMeshProUGUI modeText;
-    
-    // --- NOVO: Referência para a Velocidade ---
+
     [Tooltip("Drag the new TextMeshPro for Speed here")]
-    public TextMeshProUGUI speedText; 
-    
+    public TextMeshProUGUI speedText;
+
     [Tooltip("Format for the speed number. '0.0' for one decimal, '0' for whole numbers.")]
     public string speedFormat = "0.0";
 
     // --- Custom Timer Variables ---
     private float timeElapsed = 0f;
     private bool isTimerRunning = false;
+
+    // ==========================================================
+    // [LOCALIZAÇÃO] Cache das strings traduzidas
+    // Buscadas uma vez (não a cada frame) para não perder performance
+    // ==========================================================
+    private const string TABLE = "GameText";   // nome da tua String Table
+
+    private string lblColisoes  = "Colisões";   // fallback caso a tabela falhe
+    private string lblDeslizes  = "Deslizes";
+    private string lblTravao    = "TRAVÃO";
+    private string lblInterior  = "INTERIOR";
+    private string lblExterior  = "EXTERIOR";
+    private string lblDesligado = "DESLIGADO";
 
     private void OnEnable()
     {
@@ -45,21 +62,58 @@ public class VRDashboardUI : MonoBehaviour
         }
         else
         {
-            // Fallback: If no countdown script is assigned, start immediately
             isTimerRunning = true;
         }
+
+        // [LOCALIZAÇÃO] Carregar as labels traduzidas e re-carregar se o idioma mudar
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+        RefreshLabels();
     }
 
     private void OnDisable()
     {
-        // Stop listening to prevent errors
         if (countdownScript != null)
         {
             countdownScript.OnCountdownFinished -= StartTimer;
         }
+
+        // [LOCALIZAÇÃO] Deixar de ouvir mudanças de idioma
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
     }
 
-    // Function called by the event when countdown finishes
+    // [LOCALIZAÇÃO] Chamado automaticamente quando o jogador/sistema muda de idioma
+    private void OnLocaleChanged(UnityEngine.Localization.Locale newLocale)
+    {
+        RefreshLabels();
+    }
+
+    // [LOCALIZAÇÃO] Vai buscar cada label à String Table e guarda em variável
+    private void RefreshLabels()
+    {
+        // GetLocalizedString devolve o texto no idioma atualmente selecionado.
+        // Se a key não existir, o Unity devolve um aviso mas não rebenta.
+        lblColisoes  = SafeGet("colisoes",  lblColisoes);
+        lblDeslizes  = SafeGet("deslizes",  lblDeslizes);
+        lblTravao    = SafeGet("travao",    lblTravao);
+        lblInterior  = SafeGet("interior",  lblInterior);
+        lblExterior  = SafeGet("exterior",  lblExterior);
+        lblDesligado = SafeGet("desligado", lblDesligado);
+    }
+
+    // Helper: busca uma string da tabela; se falhar, devolve o fallback
+    private string SafeGet(string key, string fallback)
+    {
+        try
+        {
+            string v = LocalizationSettings.StringDatabase.GetLocalizedString(TABLE, key);
+            return string.IsNullOrEmpty(v) ? fallback : v;
+        }
+        catch
+        {
+            return fallback;
+        }
+    }
+
     private void StartTimer()
     {
         isTimerRunning = true;
@@ -67,22 +121,17 @@ public class VRDashboardUI : MonoBehaviour
 
     void Update()
     {
-        // Prevent errors if references are not assigned in the Inspector
         if (wheelchairController == null || collisionSystem == null) return;
 
         UpdateTimerDisplay();
         UpdateStatsDisplay();
-        UpdateRightDashboardDisplay(); // Atualizado para tratar do modo E da velocidade
+        UpdateRightDashboardDisplay();
     }
 
-    /// <summary>
-    /// Updates the digital clock showing time since the level started.
-    /// </summary>
     private void UpdateTimerDisplay()
     {
         if (timeText == null) return;
-        
-        // Only increment the timer if the countdown is finished
+
         if (isTimerRunning)
         {
             timeElapsed += Time.deltaTime;
@@ -90,53 +139,46 @@ public class VRDashboardUI : MonoBehaviour
 
         int minutes = Mathf.FloorToInt(timeElapsed / 60f);
         int seconds = Mathf.FloorToInt(timeElapsed % 60f);
-        
-        // Formats time as "00:00" and makes it bigger and bold
+
+        // O tempo "00:00" não se traduz (números universais)
         timeText.text = $"<size=130%><b>{minutes:00}:{seconds:00}</b></size>";
     }
 
-    /// <summary>
-    /// Updates the collision and slide counters with custom colors.
-    /// </summary>
     private void UpdateStatsDisplay()
     {
-        if (collisionsText != null) 
+        if (collisionsText != null)
         {
-            // Uses Rich Text (Hex color) to make the number stand out
-            collisionsText.text = $"Colisões: <color=#FF4D4D><b>{collisionSystem.TotalCollisions}</b></color>";
+            // [LOCALIZAÇÃO] usa a label traduzida + o número
+            collisionsText.text = $"{lblColisoes}: <color=#FF4D4D><b>{collisionSystem.TotalCollisions}</b></color>";
         }
 
-        if (slidesText != null) 
+        if (slidesText != null)
         {
-            slidesText.text = $"Deslizes: <color=#FFB84D><b>{collisionSystem.TotalSlides}</b></color>";
+            slidesText.text = $"{lblDeslizes}: <color=#FFB84D><b>{collisionSystem.TotalSlides}</b></color>";
         }
     }
 
-    /// <summary>
-    /// Handles the right tablet logic. Shows the driving mode AND current speed, 
-    /// but completely overrides BOTH with a warning if the brake is held.
-    /// </summary>
     private void UpdateRightDashboardDisplay()
     {
         // --- CÁLCULO DA VELOCIDADE ---
         float currentKmh = Mathf.Abs(wheelchairController.GetCurrentSpeed()) * 3.6f;
-        string speedString = $"{currentKmh.ToString(speedFormat)} km/h";
+        string speedString = $"{currentKmh.ToString(speedFormat)} km/h"; // km/h não se traduz
 
         // 1. Check if the emergency brake is active first
         if (wheelchairController.IsEmergencyBraking())
         {
             if (modeText != null)
             {
-                modeText.text = "<size=150%><b>TRAVÃO</b></size>";
-                modeText.color = new Color(1f, 0.2f, 0.2f, 1f); // Strong Red
+                // [LOCALIZAÇÃO] TRAVÃO traduzido
+                modeText.text = $"<size=150%><b>{lblTravao}</b></size>";
+                modeText.color = new Color(1f, 0.2f, 0.2f, 1f);
             }
-            
-            // Opcional: Se quiseres que a velocidade desapareça ou diga "0.0 km/h" enquanto travas
+
             if (speedText != null)
             {
-                speedText.text = "0.0 km/h"; 
+                speedText.text = "0.0 km/h";
             }
-            return; // Stops the function here so the normal text doesn't overwrite it
+            return;
         }
 
         // 2. If no brake is applied, show the current speed mode
@@ -148,16 +190,17 @@ public class VRDashboardUI : MonoBehaviour
             switch (wheelchairController.currentMode)
             {
                 case MovementVR.SpeedMode.Slow:
-                    modeString = "<size=150%><b>INTERIOR</b></size>";
-                    modeColor = new Color(1f, 0.9f, 0.5f, 1f); // Yellowish
+                    // [LOCALIZAÇÃO] INTERIOR traduzido
+                    modeString = $"<size=150%><b>{lblInterior}</b></size>";
+                    modeColor = new Color(1f, 0.9f, 0.5f, 1f);
                     break;
                 case MovementVR.SpeedMode.Normal:
-                    modeString = "<size=150%><b>EXTERIOR</b></size>";
-                    modeColor = new Color(0.6f, 1f, 0.7f, 1f); // Greenish
+                    modeString = $"<size=150%><b>{lblExterior}</b></size>";
+                    modeColor = new Color(0.6f, 1f, 0.7f, 1f);
                     break;
                 case MovementVR.SpeedMode.Off:
-                    modeString = "<size=150%><b>DESLIGADO</b></size>";
-                    modeColor = new Color(0.6f, 0.6f, 0.6f, 1f); // Gray
+                    modeString = $"<size=150%><b>{lblDesligado}</b></size>";
+                    modeColor = new Color(0.6f, 0.6f, 0.6f, 1f);
                     break;
             }
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.Localization.Settings;   // <-- NOVO
 
 public class VRCountdownUI : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class VRCountdownUI : MonoBehaviour
     [Header("--- Target Scripts to Disable ---")]
     [Tooltip("Drag the object with MovementVR here")]
     [SerializeField] private MovementVR movementScript;
-    
+
     [Tooltip("Drag the object with CollisionSystemVR here")]
     [SerializeField] private CollisionSystemVR collisionSystem;
 
@@ -27,8 +28,8 @@ public class VRCountdownUI : MonoBehaviour
 
     [Header("Visibility Control")]
     [Tooltip("Add all the GameObjects you want to hide during the countdown")]
-    [SerializeField] private GameObject[] objectsToHide; 
-    
+    [SerializeField] private GameObject[] objectsToHide;
+
     [Tooltip("Drag the object with the VRSeatCalibrator script here to sync the appearance")]
     [SerializeField] private VRSeatCalibrator seatCalibrator;
 
@@ -54,61 +55,66 @@ public class VRCountdownUI : MonoBehaviour
     private bool isCounting = false;
     private bool showingFinal = false;
     private float finalTimer = 0f;
-    
-    // Variável para garantir que o som só toca uma vez por cada segundo
+
     private int lastSecondPlayed = -1;
+
+    // === [LOCALIZAÇÃO] ===
+    private const string TABLE = "GameText";
 
     private void OnEnable()
     {
         if (seatCalibrator != null)
-        {
             seatCalibrator.OnCalibrated += ShowHiddenObjects;
-        }
     }
 
     private void OnDisable()
     {
         if (seatCalibrator != null)
-        {
             seatCalibrator.OnCalibrated -= ShowHiddenObjects;
-        }
     }
 
     private void Start()
     {
+        // [LOCALIZAÇÃO] Substituir as mensagens pelas versões traduzidas
+        topMessage = SafeGet("countdown_sit", topMessage);
+        finalMessage = SafeGet("countdown_go", finalMessage);
+
         foreach (GameObject obj in objectsToHide)
         {
             if (obj != null)
-            {
                 obj.SetActive(false);
-            }
         }
 
-        // Desligar os scripts por completo no início
         if (movementScript != null)
-        {
             movementScript.enabled = false;
-        }
 
         if (collisionSystem != null)
-        {
             collisionSystem.enabled = false;
-        }
 
-        // Força o Canvas a aparecer
         if (handManager != null)
-        {
             handManager.currentMode = HandVisibilityManager.GameMode.Countdown;
-        }
 
         timer = countdownTime;
         isCounting = true;
-        
-        // Força o primeiro som a tocar mal o script arranca
+
         lastSecondPlayed = Mathf.CeilToInt(countdownTime) + 1;
 
         if (countdownText != null)
             countdownText.alignment = TextAlignmentOptions.Center;
+    }
+
+    // [LOCALIZAÇÃO] Helper que busca da tabela com fallback
+    private string SafeGet(string key, string fallback)
+    {
+        try
+        {
+            string v = LocalizationSettings.StringDatabase.GetLocalizedString(TABLE, key);
+            return string.IsNullOrEmpty(v) ? fallback : v;
+        }
+        catch
+        {
+            return fallback;
+        }
     }
 
     private void ShowHiddenObjects()
@@ -116,9 +122,7 @@ public class VRCountdownUI : MonoBehaviour
         foreach (GameObject obj in objectsToHide)
         {
             if (obj != null)
-            {
                 obj.SetActive(true);
-            }
         }
     }
 
@@ -136,22 +140,14 @@ public class VRCountdownUI : MonoBehaviour
                     countdownText.gameObject.SetActive(false);
                 }
 
-                // LIGA OS SCRIPTS DE VOLTA QUANDO ACABA O COUNTDOWN
                 if (movementScript != null)
-                {
                     movementScript.enabled = true;
-                }
 
                 if (collisionSystem != null)
-                {
                     collisionSystem.enabled = true;
-                }
 
-                // Volta ao normal (esconde o Canvas)
                 if (handManager != null)
-                {
                     handManager.currentMode = HandVisibilityManager.GameMode.PlayingLevel;
-                }
 
                 OnCountdownFinished?.Invoke();
             }
@@ -166,13 +162,10 @@ public class VRCountdownUI : MonoBehaviour
         {
             int seconds = Mathf.CeilToInt(timer);
 
-            // ---> LÓGICA DO ÁUDIO PARA OS NÚMEROS (3, 2, 1) <---
             if (seconds != lastSecondPlayed)
             {
                 if (audioSource != null && beepSound != null)
-                {
                     audioSource.PlayOneShot(beepSound);
-                }
                 lastSecondPlayed = seconds;
             }
 
@@ -194,11 +187,8 @@ public class VRCountdownUI : MonoBehaviour
         }
         else
         {
-            // ---> LÓGICA DO ÁUDIO PARA O COMEÇO DO NÍVEL (Vamos lá!) <---
             if (audioSource != null && goSound != null)
-            {
                 audioSource.PlayOneShot(goSound);
-            }
 
             isCounting = false;
             showingFinal = true;

@@ -5,19 +5,11 @@ using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Localization.Settings;   // <-- NOVO: localização
 
 /// <summary>
 /// VR version of the Main Menu Manager.
-/// Each profile row has:
-/// - Login (click on the name)
-/// - Edit button (rename inline, uses Quest virtual keyboard)
-/// - Delete button (with confirmation popup)
-/// 
-/// Level selection panel has a steering type toggle (Frontal / Traseira)
-/// which is stored in SteeringPreference and applied when entering each level.
-/// 
-/// When returning from a level (active profile already set), automatically skips the login panel
-/// and opens the level selection panel.
+/// (localização integrada: textos dinâmicos vêm da String Table "GameText")
 /// </summary>
 public class MainMenuManager_VR : MonoBehaviour
 {
@@ -127,11 +119,21 @@ public class MainMenuManager_VR : MonoBehaviour
     private List<GameObject> spawnedHistoryProfileButtons = new List<GameObject>();
     private string profileToDelete = null;
 
+    // === [LOCALIZAÇÃO] Helper para buscar strings da tabela com fallback ===
+    private const string TABLE = "GameText";
+    private string L(string key, string fallback)
+    {
+        try
+        {
+            string v = LocalizationSettings.StringDatabase.GetLocalizedString(TABLE, key);
+            return string.IsNullOrEmpty(v) ? fallback : v;
+        }
+        catch { return fallback; }
+    }
+
     private void Start()
     {
         // 1. Setup Initial Panels Visibility
-        // If we already have an active profile (came back from a level), skip login
-        // and go straight to the level selection panel.
         bool hasActiveProfile = ProfileManager.Instance != null
                                 && ProfileManager.Instance.currentPlayer != null
                                 && !string.IsNullOrEmpty(ProfileManager.Instance.currentPlayer.profileID);
@@ -141,7 +143,6 @@ public class MainMenuManager_VR : MonoBehaviour
             if (profileSelectionPanel != null) profileSelectionPanel.SetActive(false);
             if (levelSelectionPanel != null) levelSelectionPanel.SetActive(true);
 
-            // Update the "current profile" label
             if (txtCurrentProfile != null)
                 txtCurrentProfile.text = ProfileManager.Instance.currentPlayer.profileID;
         }
@@ -187,13 +188,12 @@ public class MainMenuManager_VR : MonoBehaviour
             btnSteeringRear.onClick.RemoveAllListeners();
             btnSteeringRear.onClick.AddListener(() => OnSteeringSelected(WheelController.SteeringType.RearSteering));
         }
-        // Reflect current value visually (default: Front)
         RefreshSteeringButtonsVisual();
 
         // 8. Setup main game levels
         InitializeAllLevels();
 
-        // 9. Force recenter the VR canvas (with delay so the HMD pose is stable)
+        // 9. Force recenter the VR canvas
         VRCanvasPositioner positioner = FindObjectOfType<VRCanvasPositioner>();
         if (positioner != null)
         {
@@ -205,19 +205,12 @@ public class MainMenuManager_VR : MonoBehaviour
     // STEERING TYPE SELECTION
     // ==========================================
 
-    /// <summary>
-    /// Called when the user clicks one of the steering buttons in the LevelSelectionPanel.
-    /// Updates the SteeringPreference (used by the level on scene load) and refreshes visuals.
-    /// </summary>
     public void OnSteeringSelected(WheelController.SteeringType steeringType)
     {
         SteeringPreference.SetSteering(steeringType);
         RefreshSteeringButtonsVisual();
     }
 
-    /// <summary>
-    /// Visually updates the two buttons to reflect which is currently selected.
-    /// </summary>
     private void RefreshSteeringButtonsVisual()
     {
         bool frontSelected = SteeringPreference.CurrentSteering == WheelController.SteeringType.FrontSteering;
@@ -227,28 +220,22 @@ public class MainMenuManager_VR : MonoBehaviour
         SetSteeringButtonVisual(btnSteeringRear, rearSelected);
     }
 
-    /// <summary>
-    /// Applies the "selected" or "unselected" visual style to a steering button.
-    /// </summary>
     private void SetSteeringButtonVisual(Button button, bool isSelected)
     {
         if (button == null) return;
 
-        // Background image color
         Image bgImage = button.GetComponent<Image>();
         if (bgImage != null)
         {
             bgImage.color = isSelected ? steeringSelectedColor : steeringUnselectedColor;
         }
 
-        // Outline color
         Outline outline = button.GetComponent<Outline>();
         if (outline != null)
         {
             outline.effectColor = isSelected ? steeringSelectedOutlineColor : steeringUnselectedOutlineColor;
         }
 
-        // Text color
         TMP_Text txt = button.GetComponentInChildren<TMP_Text>();
         if (txt != null)
         {
@@ -378,7 +365,6 @@ public class MainMenuManager_VR : MonoBehaviour
         profileSelectionPanel.SetActive(false);
         levelSelectionPanel.SetActive(true);
 
-        // Make sure the steering buttons visual is up to date when this panel opens
         RefreshSteeringButtonsVisual();
     }
 
@@ -422,16 +408,11 @@ public class MainMenuManager_VR : MonoBehaviour
         RefreshSteeringButtonsVisual();
     }
 
-    /// <summary>
-    /// Public method to go back from the level selection panel to the profile selection panel.
-    /// Hook this to a "Trocar perfil" / "← Voltar" button in the LevelSelectionPanel if desired.
-    /// </summary>
     public void BackToProfileSelection()
     {
         if (levelSelectionPanel != null) levelSelectionPanel.SetActive(false);
         if (profileSelectionPanel != null) profileSelectionPanel.SetActive(true);
 
-        // Refresh the profiles list
         PopulateProfilesList();
 
         if (inputFieldNewProfileID != null) inputFieldNewProfileID.text = "";
@@ -515,7 +496,13 @@ public class MainMenuManager_VR : MonoBehaviour
         if (confirmDeletePanel != null)
         {
             if (txtConfirmMessage != null)
-                txtConfirmMessage.text = $"Tem a certeza que quer apagar o perfil <b><color=#F87171>{profileID}</color></b>?\n\nEsta ação não pode ser desfeita.";
+            {
+                // [LOCALIZAÇÃO] mensagem de confirmação traduzida
+                // key: confirm_delete_profile  (usa {0} para o nome do perfil)
+                string template = L("confirm_delete_profile",
+                    "Tem a certeza que quer apagar o perfil <b><color=#F87171>{0}</color></b>?\n\nEsta ação não pode ser desfeita.");
+                txtConfirmMessage.text = string.Format(template, profileID);
+            }
             confirmDeletePanel.SetActive(true);
         }
         else
@@ -523,6 +510,8 @@ public class MainMenuManager_VR : MonoBehaviour
             DeleteProfile(profileID);
             profileToDelete = null;
         }
+
+        
     }
 
     public void OnConfirmDeleteYes()
@@ -657,7 +646,10 @@ public class MainMenuManager_VR : MonoBehaviour
 
         if (txtHistorySubtitle != null)
         {
-            txtHistorySubtitle.text = $"Escolhe um nível para ver as tentativas de <color=#FCD34D>{profileID}</color>";
+            // [LOCALIZAÇÃO] key: history_choose_level  (usa {0} para o nome do perfil)
+            string template = L("history_choose_level",
+                "Escolhe um nível para ver as tentativas de <color=#FCD34D>{0}</color>");
+            txtHistorySubtitle.text = string.Format(template, profileID);
         }
 
         for (int i = 0; i < historyLevelButtons.Length; i++)
@@ -692,13 +684,17 @@ public class MainMenuManager_VR : MonoBehaviour
                 {
                     if (hasPlayedThisLevel)
                     {
-                        string label = attemptsCount == 1 ? "Tentativa" : "Tentativas";
+                        // [LOCALIZAÇÃO] singular/plural de "Tentativa(s)"
+                        string label = attemptsCount == 1
+                            ? L("attempt_sing", "Tentativa")
+                            : L("attempt_plur", "Tentativas");
                         attemptsText.text = $"{attemptsCount} {label}";
                         attemptsText.color = new Color(1f, 1f, 1f, 0.85f);
                     }
                     else
                     {
-                        attemptsText.text = "sem registos";
+                        // [LOCALIZAÇÃO] "sem registos"
+                        attemptsText.text = L("no_records", "sem registos");
                         attemptsText.color = new Color(1f, 1f, 1f, 0.4f);
                     }
                 }
@@ -748,12 +744,19 @@ public class MainMenuManager_VR : MonoBehaviour
         {
             if (hasFreestyleRecords)
             {
-                string label = freestyleCount == 1 ? "sessão registada" : "sessões registadas";
-                txtHistFreestyleCount.text = $"MODO LIVRE — {freestyleCount} {label}";
+                // [LOCALIZAÇÃO] "MODO LIVRE — X sessão/sessões registada(s)"
+                string freeMode = L("free_mode_label", "MODO LIVRE");
+                string label = freestyleCount == 1
+                    ? L("session_sing", "sessão registada")
+                    : L("session_plur", "sessões registadas");
+                txtHistFreestyleCount.text = $"{freeMode} — {freestyleCount} {label}";
             }
             else
             {
-                txtHistFreestyleCount.text = "MODO LIVRE — sem sessões registadas";
+                // [LOCALIZAÇÃO] "MODO LIVRE — sem sessões registadas"
+                string freeMode = L("free_mode_label", "MODO LIVRE");
+                string noSessions = L("no_sessions", "sem sessões registadas");
+                txtHistFreestyleCount.text = $"{freeMode} — {noSessions}";
             }
         }
 
@@ -781,9 +784,20 @@ public class MainMenuManager_VR : MonoBehaviour
 
         if (txtAttemptsCount != null)
         {
-            string label = totalAttempts == 1 ? "Tentativa registada" : "Tentativas registadas";
+            // [LOCALIZAÇÃO] singular/plural "Tentativa(s) registada(s)"
+            string label = totalAttempts == 1
+                ? L("attempt_rec_sing", "Tentativa registada")
+                : L("attempt_rec_plur", "Tentativas registadas");
             txtAttemptsCount.text = $"{totalAttempts} {label}";
         }
+
+        // [LOCALIZAÇÃO] labels reutilizadas dentro do loop
+        string lblAttempt   = L("attempt_num", "TENTATIVA");
+        string lblStars     = L("stars_label", "Estrelas");
+        string lblComplete  = L("complete_label", "Completo!");
+        string lblTime      = L("time_label", "Tempo");
+        string lblColisoes  = L("colisoes", "Colisões");
+        string lblDeslizes  = L("deslizes", "Deslizes");
 
         string historyText = "";
         int attemptCount = 1;
@@ -798,26 +812,27 @@ public class MainMenuManager_VR : MonoBehaviour
                 string formattedDate = record.sessionDate;
                 if (DateTime.TryParse(record.sessionDate, out DateTime parsedDate))
                 {
+                    // nota: 'às' fica fixo; se quiseres traduzir o "às" diz-me
                     formattedDate = parsedDate.ToString("dd/MM/yyyy 'às' HH:mm");
                 }
 
-                historyText += $"<color=#A0E4FF><b>TENTATIVA {attemptCount}</b></color>   <color=#AAAAAA>•   {formattedDate}</color>\n";
+                historyText += $"<color=#A0E4FF><b>{lblAttempt} {attemptCount}</b></color>   <color=#AAAAAA>•   {formattedDate}</color>\n";
 
                 // For Freestyle runs, show stars instead of time/collisions
                 if (record.levelName == "Freestyle" || record.levelName == "Level11" || record.levelName == "FreestyleLevel")
                 {
-                    historyText += $"Estrelas: <color=#FCD34D><b>{record.starsCollected} / {record.starsTotal}</b></color>";
+                    historyText += $"{lblStars}: <color=#FCD34D><b>{record.starsCollected} / {record.starsTotal}</b></color>";
 
                     if (record.starsTotal > 0 && record.starsCollected >= record.starsTotal)
                     {
-                        historyText += $"   <color=#16A34A><b>✓ Completo!</b></color>";
+                        historyText += $"   <color=#16A34A><b>✓ {lblComplete}</b></color>";
                     }
 
                     historyText += "\n";
                 }
                 else
                 {
-                    historyText += $"Tempo: <b>{record.completionTime:F1}s</b>   |   Colisões: <color=#EF4444><b>{record.totalCollisions}</b></color>   |   Deslizes: <color=#FCD34D><b>{record.totalSlides}</b></color>\n";
+                    historyText += $"{lblTime}: <b>{record.completionTime:F1}s</b>   |   {lblColisoes}: <color=#EF4444><b>{record.totalCollisions}</b></color>   |   {lblDeslizes}: <color=#FCD34D><b>{record.totalSlides}</b></color>\n";
                 }
 
                 historyText += "<color=#333333>──────────────────────────────────────────</color>\n\n";
