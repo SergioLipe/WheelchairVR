@@ -9,6 +9,33 @@ using System.Collections.Generic;
 /// </summary>
 public class MovementPC : MonoBehaviour
 {
+    public enum InputMode { Teclado, RatoRock, Comando }
+
+    [Header("=== Modo de Input ===")]
+    public InputMode inputMode = InputMode.Teclado;
+
+
+    [Header("=== Joystick (Rato/Rock) ===")]
+    public float joystickGain = 4f;     // forca do empurrao (sobe se custar a chegar ao maximo)
+    public float joystickReturn = 8f;   // rapidez a voltar a zero ao largar (maior = para mais depressa)
+    public float joystickDeadzone = 0.05f;
+    private float joyAxisV = 0f;
+    private float joyAxisH = 0f;
+
+    public float turnStrength = 0.7f;   // 1 = normal, mais baixo = vira menos
+
+    public float turnSharpness = 4f;   // menor = mais suave (mais atraso); maior = mais direto
+
+    [Header("=== Comando / Joystick HID ===")]
+    public string comandoAxisDrive = "Vertical";    // eixo de andar (frente/tras)
+    public string comandoAxisTurn = "Horizontal";  // eixo de virar
+    public bool invertDrive = false;
+    public bool invertTurn = false;
+    public float comandoDeadzone = 0.15f;            // comandos reais pedem deadzone maior
+    public float comandoSensitivity = 1f;   // multiplicador da sensibilidade do comando
+
+
+
     [Header("=== Interface Settings ===")]
     [Tooltip("Show the debug controls on screen?")]
     public bool showInterface = true;
@@ -25,7 +52,7 @@ public class MovementPC : MonoBehaviour
 
     [Header("=== Acceleration Settings ===")]
     [Tooltip("Time to reach maximum speed (seconds)")]
-    public float accelerationTime = 2f;
+    public float accelerationTime = 3.5f;
 
     [Tooltip("Time to stop completely (seconds)")]
     public float brakingTime = 1.5f;
@@ -111,6 +138,13 @@ public class MovementPC : MonoBehaviour
     // Speed before collision (captured each frame for collision sound check)
     private float speedBeforeCollision = 0f;
 
+    private float ScaledDeadzone(float value, float dz)
+    {
+        float a = Mathf.Abs(value);
+        if (a <= dz) return 0f;
+        return Mathf.Sign(value) * (a - dz) / (1f - dz);   // entra do 0, sem degrau
+    }
+
     public enum SpeedMode
     {
         Slow,
@@ -126,6 +160,13 @@ public class MovementPC : MonoBehaviour
         InitializeCache();
         InitializeLevelSettings();
         PreloadSounds();
+
+        ApplyInputSettings();
+        if (inputMode == InputMode.RatoRock)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     private void InitializeLevelSettings()
@@ -304,14 +345,48 @@ public class MovementPC : MonoBehaviour
 
     void ProcessRealisticInput()
     {
-        float verticalInput = Input.GetAxis("Vertical");
-        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput, horizontalInput;
+
+        if (inputMode == InputMode.RatoRock)
+        {
+            float mY = Input.GetAxis("Mouse Y");
+            float mX = Input.GetAxis("Mouse X");
+
+
+
+            // auto-centragem: volta a zero quando nao ha movimento
+            joyAxisV = Mathf.MoveTowards(joyAxisV, 0f, joystickReturn * Time.deltaTime);
+            joyAxisH = Mathf.MoveTowards(joyAxisH, 0f, joystickReturn * Time.deltaTime);
+
+            // acumula o movimento atual (transforma "andou um bocadinho" em "esta empurrado")
+            joyAxisV = Mathf.Clamp(joyAxisV + mY * joystickGain, -1f, 1f);
+            joyAxisH = Mathf.Clamp(joyAxisH + mX * joystickGain, -1f, 1f);
+
+            verticalInput = ScaledDeadzone(joyAxisV, joystickDeadzone);
+            horizontalInput = ScaledDeadzone(joyAxisH, joystickDeadzone) * turnStrength;
+        }
+        else if (inputMode == InputMode.Comando)
+        {
+            float gy = Input.GetAxisRaw(comandoAxisDrive);
+            float gx = Input.GetAxisRaw(comandoAxisTurn);
+            if (invertDrive) gy = -gy;
+            if (invertTurn) gx = -gx;
+            verticalInput = Mathf.Clamp(ScaledDeadzone(gy, comandoDeadzone) * comandoSensitivity, -1f, 1f);
+            horizontalInput = Mathf.Clamp(ScaledDeadzone(gx, comandoDeadzone) * comandoSensitivity * turnStrength, -1f, 1f);
+        }
+        else  // keyboard input
+        {
+            verticalInput = Input.GetAxis("Vertical");
+            horizontalInput = Input.GetAxis("Horizontal");
+        }
 
         playerIsAccelerating = (Mathf.Abs(verticalInput) > 0.1f);
 
         float smoothing = 3f;
         smoothedVerticalInput = Mathf.Lerp(smoothedVerticalInput, verticalInput, smoothing * Time.deltaTime);
-        smoothedHorizontalInput = Mathf.Lerp(smoothedHorizontalInput, horizontalInput, smoothing * Time.deltaTime);
+
+        float turnT = 1f - Mathf.Exp(-turnSharpness * Time.deltaTime);   // filtro estavel a qualquer framerate
+        smoothedHorizontalInput = Mathf.Lerp(smoothedHorizontalInput, horizontalInput, turnT);
 
         float maxSpeed = currentMode == SpeedMode.Slow ? maxSpeedSlow : maxSpeedNormal;
 
@@ -459,6 +534,29 @@ public class MovementPC : MonoBehaviour
                 multiplier *= -1f;
             }
         }
+    }
+
+    public void ApplyInputSettings()
+    {
+        // Sem perfil ativo? Mantem os valores do Inspector (omissao).
+        if (ProfileManager.Instance == null) return;
+        PlayerData p = ProfileManager.Instance.currentPlayer;
+        if (p == null || p.inputSettings == null) return;
+
+        InputSettings s = p.inputSettings;
+
+        inputMode = (InputMode)s.inputMode;   // int -> enum
+
+        // Rato/Rock
+        joystickGain = s.rockSensitivity;
+        joystickDeadzone = s.rockDeadzone;
+
+        // Comando
+        comandoSensitivity = s.comandoSensitivity;
+        comandoDeadzone = s.comandoDeadzone;
+
+        // turnStrength e por-modo: usa o do modo ativo
+        turnStrength = (inputMode == InputMode.Comando) ? s.comandoTurnStrength : s.rockTurnStrength;
     }
 
     void ApplyRealisticMovement()
@@ -628,7 +726,7 @@ public class MovementPC : MonoBehaviour
         // ===== RIGHT - CONTROLS =====
         float rightX = Screen.width - 240 - 15;
 
-        GUI.Box(new Rect(rightX, 15, 240, 120), "", boxStyle);
+        GUI.Box(new Rect(rightX, 15, 240, 145), "", boxStyle);
 
         headerStyle.normal.textColor = new Color(0.6f, 1f, 0.7f, 1f);
         GUI.Label(new Rect(rightX + 15, 22, 200, 25), "CONTROLOS", headerStyle);
@@ -664,6 +762,18 @@ public class MovementPC : MonoBehaviour
         keyStyle.normal.textColor = new Color(1f, 0.7f, 0.7f, 1f);
         GUI.Label(new Rect(rightX + 20, y, 100, 18), "ESPAÇO", keyStyle);
         GUI.Label(new Rect(rightX + 125, y, 110, 18), "Travão", descStyle);
+
+        // Modo de controlo atual
+        y += lineH + 4;
+        string modoInput =
+            inputMode == InputMode.RatoRock ? "Rato" :
+            inputMode == InputMode.Comando ? "Joystick" :
+                                              "Teclado";
+
+        keyStyle.normal.textColor = new Color(0.6f, 0.9f, 1f, 1f);
+        GUI.Label(new Rect(rightX + 20, y, 100, 18), "Controlo", keyStyle);
+        descStyle.normal.textColor = new Color(1f, 1f, 1f, 1f);
+        GUI.Label(new Rect(rightX + 125, y, 110, 18), modoInput, descStyle);
     }
 
     private Texture2D MakeTex(int width, int height, Color col)

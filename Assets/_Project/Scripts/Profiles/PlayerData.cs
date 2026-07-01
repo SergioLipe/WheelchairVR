@@ -36,4 +36,24 @@ public class PlayerData
 
     // List containing all past sessions for this patient
     public List<SessionRecord> sessionHistory = new List<SessionRecord>();
+
+    // Definicoes de input/calibracao desta pessoa
+    public InputSettings inputSettings = new InputSettings();
+}
+
+[System.Serializable]
+public class InputSettings
+{
+    // 0 = Teclado, 1 = Rato/Rock, 2 = Comando
+    public int inputMode = 0;
+
+    // --- Calibracao do modo Rato/Rock ---
+    public float rockSensitivity = 4f;     // o joystickGain
+    public float rockTurnStrength = 0.7f;
+    public float rockDeadzone = 0.05f;
+
+    // --- Calibracao do modo Comando ---
+    public float comandoSensitivity = 1f;  // multiplicador novo nos eixos
+    public float comandoTurnStrength = 0.7f;
+    public float comandoDeadzone = 0.15f;
 }

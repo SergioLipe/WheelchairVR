@@ -86,6 +86,9 @@ public class LevelManager : MonoBehaviour
     [Tooltip("The Next Level Button (Drag here to hide it automatically on last level)")]
     public GameObject nextLevelButton;
 
+    [Header("--- Calibração ---")]
+public GameObject calibrationPanel;
+
     /// <summary>
     /// Helper: returns true if we are currently in the Main Menu scene.
     /// In that case, this manager should not touch the cursor at all.
@@ -341,4 +344,10 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void Button_OpenCalibration()
+{
+    if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
+    if (calibrationPanel != null) calibrationPanel.SetActive(true);
+}
 }

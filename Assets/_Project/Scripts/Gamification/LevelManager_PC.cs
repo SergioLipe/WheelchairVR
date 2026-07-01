@@ -65,6 +65,10 @@ public class LevelManager_PC : MonoBehaviour
     [Tooltip("Reference to the End Game Panel (Must be disabled at start)")]
     public GameObject endGamePanel;
 
+    [Header("--- Calibração ---")]
+    [Tooltip("Painel de calibração do input (começa desativado)")]
+    public GameObject calibrationPanel;
+
     [Header("--- End Game Panel Elements ---")]
     [Tooltip("Text to display final time in the report card")]
     public TMP_Text finalTimeText;
@@ -98,6 +102,15 @@ public class LevelManager_PC : MonoBehaviour
         return sceneName == "MainMenu" || sceneName.Contains("Menu");
     }
 
+    // So o modo Rato/Rock (inputMode == 1) precisa do cursor preso.
+    private bool ModoUsaCursorPreso()
+    {
+        if (ProfileManager.Instance == null) return false;
+        if (ProfileManager.Instance.currentPlayer == null) return false;
+        if (ProfileManager.Instance.currentPlayer.inputSettings == null) return false;
+        return ProfileManager.Instance.currentPlayer.inputSettings.inputMode == 1;
+    }
+
     private void Awake()
     {
         // Singleton Pattern
@@ -129,6 +142,7 @@ public class LevelManager_PC : MonoBehaviour
         if (gameHUDPanel != null) gameHUDPanel.SetActive(true);
         if (endGamePanel != null) endGamePanel.SetActive(false);
         if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
+        if (calibrationPanel != null) calibrationPanel.SetActive(false);
 
         ResumeGame();
 
@@ -198,13 +212,24 @@ public class LevelManager_PC : MonoBehaviour
         // CRITICAL FIX: Never lock/hide cursor if we're in the Main Menu
         if (IsInMainMenu())
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            if (ModoUsaCursorPreso())
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = false;   // livre, mas escondido durante o jogo
+            }
             return;
         }
 
         isPaused = false;
         Time.timeScale = 1f;
+
+        // Fecha tambem o painel de calibracao, caso tenha ficado aberto
+        if (calibrationPanel != null) calibrationPanel.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -284,7 +309,7 @@ public class LevelManager_PC : MonoBehaviour
 
         string saveKey = "Level_" + levelID + "_Stars";
 
-        
+
         int currentBest = PlayerPrefs.GetInt(saveKey, 0);
 
         if (stars > currentBest)
@@ -389,5 +414,17 @@ public class LevelManager_PC : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    // ====== CALIBRACAO ======
+
+    /// <summary>
+    /// Abre o painel de calibracao a partir do menu de pausa.
+    /// Liga este metodo ao OnClick do botao "Calibracao" do PausePanel.
+    /// </summary>
+    public void Button_OpenCalibration()
+    {
+        if (pauseMenuPanel != null) pauseMenuPanel.SetActive(false);
+        if (calibrationPanel != null) calibrationPanel.SetActive(true);
     }
 }
