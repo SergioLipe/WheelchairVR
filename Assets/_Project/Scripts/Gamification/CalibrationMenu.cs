@@ -119,8 +119,8 @@ public class CalibrationMenu : MonoBehaviour
         InputSettings s = GetSettings();
         if (s == null) return;
         WriteSlidersTo(s);
-
         UpdateValueLabels();
+        SaveAndApply();      // <-- é esta linha que aplica ao carro
     }
 
     private void WriteSlidersTo(InputSettings s)
