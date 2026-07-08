@@ -5,20 +5,24 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Manages switching between completely separate PC and VR player rigs.
 /// Must be placed on an independent GameObject (like GameManager), NOT inside the rigs.
+/// [FOG] Also disables the fog on PC and keeps it on VR.
 /// </summary>
 public class PlayerRigManager : MonoBehaviour
 {
     [Header("=== Player Rigs ===")]
     [Tooltip("Drag the Wheelchair_PC object here")]
     public GameObject wheelchairPC;
-
     [Tooltip("Drag the Wheelchair_VR object here")]
     public GameObject wheelchairVR;
 
-    /// <summary>
-    /// Helper: returns true if we are currently in the Main Menu scene.
-    /// In that case, we must NOT lock/hide the cursor (player needs it for the UI).
-    /// </summary>
+    [Header("=== Fog Settings ===")]
+    [Tooltip("If true, fog is disabled on PC and kept on VR")]
+    public bool disableFogOnPC = true;
+
+    // Guarda o estado inicial do fog (ligado no projeto) para o VR
+    private bool initialFogState;
+    private bool fogStateCached = false;
+
     private bool IsInMainMenu()
     {
         string sceneName = SceneManager.GetActiveScene().name;
@@ -27,18 +31,25 @@ public class PlayerRigManager : MonoBehaviour
 
     void Start()
     {
+        // Guardar o estado do fog tal como está definido no projeto (para o VR)
+        if (!fogStateCached)
+        {
+            initialFogState = RenderSettings.fog;
+            fogStateCached = true;
+        }
+
         UpdateRigMode();
     }
 
     void Update()
     {
-        // Continuously check if VR headset is put on or taken off
         UpdateRigMode();
     }
 
     private void UpdateRigMode()
     {
         bool isVRActive = XRSettings.isDeviceActive;
+
         if (isVRActive)
         {
             // VR is ON: Activate VR Rig, deactivate PC Rig
@@ -50,6 +61,9 @@ public class PlayerRigManager : MonoBehaviour
             {
                 wheelchairPC.SetActive(false);
             }
+
+            // [FOG] Em VR, mantém o fog tal como estava no projeto
+            RenderSettings.fog = initialFogState;
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -66,8 +80,16 @@ public class PlayerRigManager : MonoBehaviour
                 wheelchairVR.SetActive(false);
             }
 
-            // CRITICAL FIX: Only lock the cursor during gameplay, never in the Main Menu.
-            // In the menu the player needs the mouse visible to click buttons.
+            // [FOG] No PC, desliga o fog (se a opção estiver ativa)
+            if (disableFogOnPC)
+            {
+                RenderSettings.fog = false;
+            }
+            else
+            {
+                RenderSettings.fog = initialFogState;
+            }
+
             if (IsInMainMenu())
             {
                 Cursor.lockState = CursorLockMode.None;

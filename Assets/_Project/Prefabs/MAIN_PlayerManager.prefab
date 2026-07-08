@@ -5058,12 +5058,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VRTunnelingEffect
   wheelchairMovement: {fileID: 1360434326547168059}
   vignetteImage: {fileID: 6697709102260959176}
-  fadeSpeed: 5
   maxDarkness: 1
+  idleDarkness: 0
   speedThreshold: 0.2
-  turnSpeedThreshold: 15
   maxSpeedForFullEffect: 2
+  turnSpeedThreshold: 15
   maxTurnSpeedForFullEffect: 60
+  fadeSpeed: 5
+  intensityCurve: 0.7
+  combineMotionAndRotation: 1
+  vignetteResolution: 256
+  vignetteRadius: 0.35
+  vignetteSmoothness: 0.45
+  showDebug: 0
+  debugSpeed: 0
+  debugTurn: 0
+  debugIntensity: 0
 --- !u!4 &1731726218053949597 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5270989495543095939, guid: e4752d420f9501d478fb3a5af716bce3, type: 3}
