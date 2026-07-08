@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Localization.Components;
 
 /// <summary>
 /// Painel de calibracao do input (PC).
@@ -48,9 +49,21 @@ public class CalibrationMenu : MonoBehaviour
     private bool isLoading = false;
 
     // Chamado pelo botao "Calibracao" do menu de pausa (via LevelManager) ou ao ativar o painel
+    // Chamado pelo botao "Calibracao" do menu de pausa ou ao ativar o painel
     void OnEnable()
     {
         LoadFromProfile();
+        RefreshLocalizedTexts();   // [LOCALIZAÇÃO] força os textos a reaplicar o idioma atual
+    }
+
+    // [LOCALIZAÇÃO] Percorre todos os Localize String Event deste painel e força refresh
+    private void RefreshLocalizedTexts()
+    {
+        LocalizeStringEvent[] localizers = GetComponentsInChildren<LocalizeStringEvent>(true);
+        foreach (LocalizeStringEvent loc in localizers)
+        {
+            if (loc != null) loc.RefreshString();
+        }
     }
 
     private InputSettings GetSettings()
