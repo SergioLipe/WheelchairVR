@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Localization.Settings;   // <-- NOVO: localização
 
 /// <summary>
 /// Electric wheelchair movement controller - PC Version (Keyboard Only)
-/// Responsible for: input, speed, acceleration, rotation and physics
-/// Sound effects play immediately on collision impact, not delayed by frame order
+/// [LOCALIZAÇÃO] O HUD (OnGUI) usa labels traduzidas da String Table "GameText",
+/// carregadas em cache para não perder performance.
 /// </summary>
 public class MovementPC : MonoBehaviour
 {
@@ -14,27 +15,23 @@ public class MovementPC : MonoBehaviour
     [Header("=== Modo de Input ===")]
     public InputMode inputMode = InputMode.Teclado;
 
-
     [Header("=== Joystick (Rato/Rock) ===")]
-    public float joystickGain = 4f;     // forca do empurrao (sobe se custar a chegar ao maximo)
-    public float joystickReturn = 8f;   // rapidez a voltar a zero ao largar (maior = para mais depressa)
+    public float joystickGain = 4f;
+    public float joystickReturn = 8f;
     public float joystickDeadzone = 0.05f;
     private float joyAxisV = 0f;
     private float joyAxisH = 0f;
 
-    public float turnStrength = 0.7f;   // 1 = normal, mais baixo = vira menos
-
-    public float turnSharpness = 4f;   // menor = mais suave (mais atraso); maior = mais direto
+    public float turnStrength = 0.7f;
+    public float turnSharpness = 4f;
 
     [Header("=== Comando / Joystick HID ===")]
-    public string comandoAxisDrive = "Vertical";    // eixo de andar (frente/tras)
-    public string comandoAxisTurn = "Horizontal";  // eixo de virar
+    public string comandoAxisDrive = "Vertical";
+    public string comandoAxisTurn = "Horizontal";
     public bool invertDrive = false;
     public bool invertTurn = false;
-    public float comandoDeadzone = 0.15f;            // comandos reais pedem deadzone maior
-    public float comandoSensitivity = 1f;   // multiplicador da sensibilidade do comando
-
-
+    public float comandoDeadzone = 0.15f;
+    public float comandoSensitivity = 1f;
 
     [Header("=== Interface Settings ===")]
     [Tooltip("Show the debug controls on screen?")]
@@ -123,26 +120,80 @@ public class MovementPC : MonoBehaviour
     private float smoothedHorizontalInput = 0f;
     private float tryingToTurnTime = 0f;
 
-    // Public variable for sound script to know if player is accelerating
     [HideInInspector]
     public bool playerIsAccelerating = false;
 
-    // Cache for sounds
     private string steeringTypeCache = "Frontal";
     private bool wasSlidingLastFrame = false;
 
-    // Sound cooldown timers
     private float lastCollisionSoundTime = -10f;
     private float lastSlideSoundTime = -10f;
 
-    // Speed before collision (captured each frame for collision sound check)
     private float speedBeforeCollision = 0f;
+
+    // ==========================================================
+    // [LOCALIZAÇÃO] Cache das strings do HUD (não ir à tabela a cada OnGUI)
+    // ==========================================================
+    private const string TABLE = "GameText";
+
+    private string lblWheelchair   = "CADEIRA DE RODAS";
+    private string lblInterior     = "Interior";
+    private string lblExterior     = "Exterior";
+    private string lblDesligado    = "Desligado";
+    private string lblMode         = "Modo:";
+    private string lblSpeed        = "Veloc:";
+    private string lblSteering     = "Direção:";
+    private string lblFrontal      = "Frontal";
+    private string lblTraseira     = "Traseira";
+    private string lblEmergencyBrake = "TRAVÃO DE EMERGÊNCIA";
+    private string lblControls     = "CONTROLOS";
+    private string lblMove         = "Mover";
+    private string lblSpeedMode    = "Modo Lento/Normal";
+    private string lblChangeSteering = "Mudar Direção";
+    private string lblBrake        = "Travão";
+    private string lblControl      = "Controlo";
+    private string lblKeyboard     = "Teclado";
+    private string lblMouse        = "Rato";
+    private string lblJoystick     = "Joystick";
+
+    private string L(string key, string fallback)
+    {
+        try
+        {
+            string v = LocalizationSettings.StringDatabase.GetLocalizedString(TABLE, key);
+            return string.IsNullOrEmpty(v) ? fallback : v;
+        }
+        catch { return fallback; }
+    }
+
+    private void RefreshHudLabels()
+    {
+        lblWheelchair     = L("hud_wheelchair", lblWheelchair);
+        lblInterior       = L("interior", lblInterior);       // reutiliza keys existentes
+        lblExterior       = L("exterior", lblExterior);
+        lblDesligado      = L("desligado", lblDesligado);
+        lblMode           = L("hud_mode", lblMode);
+        lblSpeed          = L("hud_speed", lblSpeed);
+        lblSteering       = L("hud_steering", lblSteering);
+        lblFrontal        = L("frontal", lblFrontal);         // reutiliza
+        lblTraseira       = L("traseira", lblTraseira);       // reutiliza
+        lblEmergencyBrake = L("hud_emergency_brake", lblEmergencyBrake);
+        lblControls       = L("hud_controls", lblControls);
+        lblMove           = L("hud_move", lblMove);
+        lblSpeedMode      = L("hud_speed_mode", lblSpeedMode);
+        lblChangeSteering = L("hud_change_steering", lblChangeSteering);
+        lblBrake          = L("travao", lblBrake);            // nota: 'travao' na tabela é "TRAVÃO" (maiúsc). Ver nota abaixo.
+        lblControl        = L("hud_control", lblControl);
+        lblKeyboard       = L("hud_keyboard", lblKeyboard);
+        lblMouse          = L("hud_mouse", lblMouse);
+        lblJoystick       = L("hud_joystick", lblJoystick);
+    }
 
     private float ScaledDeadzone(float value, float dz)
     {
         float a = Mathf.Abs(value);
         if (a <= dz) return 0f;
-        return Mathf.Sign(value) * (a - dz) / (1f - dz);   // entra do 0, sem degrau
+        return Mathf.Sign(value) * (a - dz) / (1f - dz);
     }
 
     public enum SpeedMode
@@ -162,11 +213,26 @@ public class MovementPC : MonoBehaviour
         PreloadSounds();
 
         ApplyInputSettings();
+
+        // [LOCALIZAÇÃO] carregar labels e reagir a mudanças de idioma
+        RefreshHudLabels();
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+
         if (inputMode == InputMode.RatoRock)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+    }
+
+    private void OnDestroy()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+    }
+
+    private void OnLocaleChanged(UnityEngine.Localization.Locale newLocale)
+    {
+        RefreshHudLabels();
     }
 
     private void InitializeLevelSettings()
@@ -240,15 +306,12 @@ public class MovementPC : MonoBehaviour
 
     void Update()
     {
-
-        // Pause handling (also unlocks cursor and shows it when paused)
         if (Time.timeScale == 0)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             return;
         }
-        // Save speed BEFORE collision processing so we can check it for sounds
         speedBeforeCollision = Mathf.Abs(currentSpeed);
 
         UpdateSteeringState();
@@ -285,15 +348,10 @@ public class MovementPC : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Only handles slide sounds. Collision sounds are handled in OnControllerColliderHit
-    /// for instant response (no frame delay).
-    /// </summary>
     private void ProcessSlideSound()
     {
         bool slidingNow = collisionSystem.IsWallSliding;
 
-        // Play slide sound when sliding starts
         if (slidingNow && !wasSlidingLastFrame)
         {
             if (Time.time - lastSlideSoundTime > slideSoundCooldown)
@@ -316,7 +374,6 @@ public class MovementPC : MonoBehaviour
 
     void ManageModes()
     {
-        // Speed mode switching (Keys 1 and 2)
         if (Input.GetKeyDown(KeyCode.Alpha1) && currentMode != SpeedMode.Slow)
         {
             currentMode = SpeedMode.Slow;
@@ -328,7 +385,6 @@ public class MovementPC : MonoBehaviour
             PlaySound(modeChangeSound);
         }
 
-        // Emergency Brake (Space - hold)
         bool brakeIsHeld = Input.GetKey(KeyCode.Space);
 
         if (brakeIsHeld && currentMode != SpeedMode.Off)
@@ -352,13 +408,9 @@ public class MovementPC : MonoBehaviour
             float mY = Input.GetAxis("Mouse Y");
             float mX = Input.GetAxis("Mouse X");
 
-
-
-            // auto-centragem: volta a zero quando nao ha movimento
             joyAxisV = Mathf.MoveTowards(joyAxisV, 0f, joystickReturn * Time.deltaTime);
             joyAxisH = Mathf.MoveTowards(joyAxisH, 0f, joystickReturn * Time.deltaTime);
 
-            // acumula o movimento atual (transforma "andou um bocadinho" em "esta empurrado")
             joyAxisV = Mathf.Clamp(joyAxisV + mY * joystickGain, -1f, 1f);
             joyAxisH = Mathf.Clamp(joyAxisH + mX * joystickGain, -1f, 1f);
 
@@ -374,7 +426,7 @@ public class MovementPC : MonoBehaviour
             verticalInput = Mathf.Clamp(ScaledDeadzone(gy, comandoDeadzone) * comandoSensitivity, -1f, 1f);
             horizontalInput = Mathf.Clamp(ScaledDeadzone(gx, comandoDeadzone) * comandoSensitivity * turnStrength, -1f, 1f);
         }
-        else  // keyboard input
+        else
         {
             verticalInput = Input.GetAxis("Vertical");
             horizontalInput = Input.GetAxis("Horizontal");
@@ -385,7 +437,7 @@ public class MovementPC : MonoBehaviour
         float smoothing = 3f;
         smoothedVerticalInput = Mathf.Lerp(smoothedVerticalInput, verticalInput, smoothing * Time.deltaTime);
 
-        float turnT = 1f - Mathf.Exp(-turnSharpness * Time.deltaTime);   // filtro estavel a qualquer framerate
+        float turnT = 1f - Mathf.Exp(-turnSharpness * Time.deltaTime);
         smoothedHorizontalInput = Mathf.Lerp(smoothedHorizontalInput, horizontalInput, turnT);
 
         float maxSpeed = currentMode == SpeedMode.Slow ? maxSpeedSlow : maxSpeedNormal;
@@ -538,24 +590,20 @@ public class MovementPC : MonoBehaviour
 
     public void ApplyInputSettings()
     {
-        // Sem perfil ativo? Mantem os valores do Inspector (omissao).
         if (ProfileManager.Instance == null) return;
         PlayerData p = ProfileManager.Instance.currentPlayer;
         if (p == null || p.inputSettings == null) return;
 
         InputSettings s = p.inputSettings;
 
-        inputMode = (InputMode)s.inputMode;   // int -> enum
+        inputMode = (InputMode)s.inputMode;
 
-        // Rato/Rock
         joystickGain = s.rockSensitivity;
         joystickDeadzone = s.rockDeadzone;
 
-        // Comando
         comandoSensitivity = s.comandoSensitivity;
         comandoDeadzone = s.comandoDeadzone;
 
-        // turnStrength e por-modo: usa o do modo ativo
         turnStrength = (inputMode == InputMode.Comando) ? s.comandoTurnStrength : s.rockTurnStrength;
     }
 
@@ -608,10 +656,6 @@ public class MovementPC : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    /// Collision sounds are played HERE
-    /// </summary>
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         collisionSystem.ProcessCollision(hit, currentSpeed, ref currentSpeed);
@@ -638,7 +682,6 @@ public class MovementPC : MonoBehaviour
     {
         if (effectsAudio != null && clip != null)
         {
-            // Check cooldown specifically for collision sound
             if (clip == hardCollisionSound)
             {
                 if (Time.time - lastCollisionSoundTime < collisionSoundCooldown) return;
@@ -649,7 +692,7 @@ public class MovementPC : MonoBehaviour
         }
     }
 
-    // ===== GRAPHICAL INTERFACE (PT-PT) =====
+    // ===== GRAPHICAL INTERFACE (localizada) =====
 
     void OnGUI()
     {
@@ -675,34 +718,34 @@ public class MovementPC : MonoBehaviour
         // ===== LEFT - INFO =====
         GUI.Box(new Rect(15, 15, 240, 110), "", boxStyle);
 
-        GUI.Label(new Rect(30, 22, 200, 25), "CADEIRA DE RODAS", headerStyle);
+        GUI.Label(new Rect(30, 22, 200, 25), lblWheelchair, headerStyle);
 
         GUI.color = new Color(0.5f, 0.95f, 1f, 0.6f);
         GUI.DrawTexture(new Rect(30, 48, 195, 2), Texture2D.whiteTexture);
         GUI.color = Color.white;
 
-        string modeText = currentMode == SpeedMode.Slow ? "Interior" :
-                         (currentMode == SpeedMode.Off ? "Desligado" : "Exterior");
+        string modeText = currentMode == SpeedMode.Slow ? lblInterior :
+                         (currentMode == SpeedMode.Off ? lblDesligado : lblExterior);
 
         Color modeColor = currentMode == SpeedMode.Slow ? new Color(1f, 0.9f, 0.5f, 1f) :
                          (currentMode == SpeedMode.Off ? new Color(1f, 0.6f, 0.6f, 1f) : new Color(0.6f, 1f, 0.7f, 1f));
 
         labelStyle.normal.textColor = new Color(0.9f, 0.9f, 0.9f, 1f);
-        GUI.Label(new Rect(30, 58, 90, 22), "Modo:", labelStyle);
+        GUI.Label(new Rect(30, 58, 90, 22), lblMode, labelStyle);
         valueStyle.normal.textColor = modeColor;
         GUI.Label(new Rect(120, 58, 120, 22), modeText, valueStyle);
 
         float maxDisplaySpeed = currentMode == SpeedMode.Slow ? 3f : 8f;
         string speedText = $"{(currentSpeed * 3.6f):F1}/{maxDisplaySpeed:F0} km/h";
         labelStyle.normal.textColor = new Color(0.9f, 0.9f, 0.9f, 1f);
-        GUI.Label(new Rect(30, 78, 90, 22), "Veloc:", labelStyle);
+        GUI.Label(new Rect(30, 78, 90, 22), lblSpeed, labelStyle);
         valueStyle.normal.textColor = Color.white;
         GUI.Label(new Rect(120, 78, 120, 22), speedText, valueStyle);
 
-        string steeringText = currentSteeringType.Contains("Rear") ? "Traseira" : "Frontal";
+        string steeringText = currentSteeringType.Contains("Rear") ? lblTraseira : lblFrontal;
         Color steeringColor = currentSteeringType.Contains("Rear") ? new Color(1f, 0.75f, 1f, 1f) : new Color(0.65f, 0.95f, 1f, 1f);
         labelStyle.normal.textColor = new Color(0.9f, 0.9f, 0.9f, 1f);
-        GUI.Label(new Rect(30, 96, 90, 22), "Direção:", labelStyle);
+        GUI.Label(new Rect(30, 96, 90, 22), lblSteering, labelStyle);
         valueStyle.normal.textColor = steeringColor;
         GUI.Label(new Rect(120, 96, 120, 22), steeringText, valueStyle);
 
@@ -720,7 +763,7 @@ public class MovementPC : MonoBehaviour
             warningStyle.alignment = TextAnchor.MiddleCenter;
             warningStyle.normal.textColor = Color.white;
 
-            GUI.Label(new Rect(Screen.width / 2 - 150, 22, 300, 26), "TRAVÃO DE EMERGÊNCIA", warningStyle);
+            GUI.Label(new Rect(Screen.width / 2 - 150, 22, 300, 26), lblEmergencyBrake, warningStyle);
         }
 
         // ===== RIGHT - CONTROLS =====
@@ -729,7 +772,7 @@ public class MovementPC : MonoBehaviour
         GUI.Box(new Rect(rightX, 15, 240, 145), "", boxStyle);
 
         headerStyle.normal.textColor = new Color(0.6f, 1f, 0.7f, 1f);
-        GUI.Label(new Rect(rightX + 15, 22, 200, 25), "CONTROLOS", headerStyle);
+        GUI.Label(new Rect(rightX + 15, 22, 200, 25), lblControls, headerStyle);
 
         GUI.color = new Color(0.6f, 1f, 0.7f, 0.6f);
         GUI.DrawTexture(new Rect(rightX + 15, 48, 210, 2), Texture2D.whiteTexture);
@@ -748,30 +791,29 @@ public class MovementPC : MonoBehaviour
         int lineH = 18;
 
         GUI.Label(new Rect(rightX + 20, y, 100, 18), "WASD/Setas", keyStyle);
-        GUI.Label(new Rect(rightX + 125, y, 110, 18), "Mover", descStyle);
+        GUI.Label(new Rect(rightX + 125, y, 110, 18), lblMove, descStyle);
         y += lineH;
 
         GUI.Label(new Rect(rightX + 20, y, 100, 18), "1 / 2", keyStyle);
-        GUI.Label(new Rect(rightX + 125, y, 110, 18), "Modo Lento/Normal", descStyle);
+        GUI.Label(new Rect(rightX + 125, y, 110, 18), lblSpeedMode, descStyle);
         y += lineH;
 
         GUI.Label(new Rect(rightX + 20, y, 100, 18), "T", keyStyle);
-        GUI.Label(new Rect(rightX + 125, y, 110, 18), "Mudar Direção", descStyle);
+        GUI.Label(new Rect(rightX + 125, y, 110, 18), lblChangeSteering, descStyle);
         y += lineH;
 
         keyStyle.normal.textColor = new Color(1f, 0.7f, 0.7f, 1f);
         GUI.Label(new Rect(rightX + 20, y, 100, 18), "ESPAÇO", keyStyle);
-        GUI.Label(new Rect(rightX + 125, y, 110, 18), "Travão", descStyle);
+        GUI.Label(new Rect(rightX + 125, y, 110, 18), lblBrake, descStyle);
 
-        // Modo de controlo atual
         y += lineH + 4;
         string modoInput =
-            inputMode == InputMode.RatoRock ? "Rato" :
-            inputMode == InputMode.Comando ? "Joystick" :
-                                              "Teclado";
+            inputMode == InputMode.RatoRock ? lblMouse :
+            inputMode == InputMode.Comando ? lblJoystick :
+                                              lblKeyboard;
 
         keyStyle.normal.textColor = new Color(0.6f, 0.9f, 1f, 1f);
-        GUI.Label(new Rect(rightX + 20, y, 100, 18), "Controlo", keyStyle);
+        GUI.Label(new Rect(rightX + 20, y, 100, 18), lblControl, keyStyle);
         descStyle.normal.textColor = new Color(1f, 1f, 1f, 1f);
         GUI.Label(new Rect(rightX + 125, y, 110, 18), modoInput, descStyle);
     }
