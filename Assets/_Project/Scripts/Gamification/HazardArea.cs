@@ -1,15 +1,17 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
 
 /// <summary>
-/// Universal hazard zone. Stops the player, shows a custom message, 
+/// Universal hazard zone. Stops the player, shows a custom (localized) message, 
 /// and activates the Game Over panel for both PC and VR.
 /// </summary>
 public class HazardArea : MonoBehaviour
 {
     [Header("=== Hazard Settings ===")]
-    [TextArea]
-    public string hazardMessage = "Warning";
+    [Tooltip("Escolhe a Tabela + Entrada deste hazard (ex: GameText / nao_vas_para_a_relva)")]
+    public LocalizedString hazardMessage;
 
     [Tooltip("CHECK THIS FOR CROSSWALKS: If player is already inside when this turns on, they won't die.")]
     public bool allowSafeExitIfAlreadyInside = false;
@@ -81,6 +83,32 @@ public class HazardArea : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Aplica a mensagem localizada deste hazard ao texto indicado.
+    /// Se o texto tiver um Localize String Event, redireciona-o para a entrada
+    /// deste hazard (mantendo a tradução). Caso contrário, escreve o texto resolvido.
+    /// IMPORTANTE: chamar ANTES de ativar o painel.
+    /// </summary>
+    private void ApplyHazardMessage(TMP_Text textComponent)
+    {
+        if (textComponent == null) return;
+
+        LocalizeStringEvent localize = textComponent.GetComponent<LocalizeStringEvent>();
+
+        if (localize != null)
+        {
+            // Redireciona o Localize String Event para a entrada deste hazard.
+            // Quando o painel for ativado, o localize vai usar ESTA referência.
+            localize.StringReference = hazardMessage;
+            localize.RefreshString();
+        }
+        else if (!hazardMessage.IsEmpty)
+        {
+            // Sem Localize String Event: escreve o texto já traduzido.
+            textComponent.text = hazardMessage.GetLocalizedString();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!this.enabled) return;
@@ -88,7 +116,6 @@ public class HazardArea : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            // [OPT] Debug log toggleável
             if (enableDebugLogs)
             {
                 Debug.Log($"<color=red>HAZARD activated by:</color> {other.gameObject.name}");
@@ -108,15 +135,15 @@ public class HazardArea : MonoBehaviour
                 LevelManagerVR.Instance.isLevelActive = false;
             }
 
-            // PC UI
-            if (warningTextPC != null) warningTextPC.text = hazardMessage;
+            // PC UI  --> definir a mensagem ANTES de ativar o painel
+            ApplyHazardMessage(warningTextPC);
             if (hazardPanelPC != null) hazardPanelPC.SetActive(true);
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            // VR UI
-            if (warningTextVR != null) warningTextVR.text = hazardMessage;
+            // VR UI  --> definir a mensagem ANTES de ativar o painel
+            ApplyHazardMessage(warningTextVR);
             if (hazardPanelVR != null)
             {
                 if (vrCamera != null)
@@ -124,7 +151,7 @@ public class HazardArea : MonoBehaviour
                     Vector3 camPos = vrCamera.position;
                     Vector3 spawnPos = camPos + (vrCamera.forward * vrPanelDistance);
                     spawnPos.y = camPos.y;
-                    
+
                     Transform panelT = hazardPanelVR.transform;
                     panelT.position = spawnPos;
                     panelT.LookAt(vrCamera);
